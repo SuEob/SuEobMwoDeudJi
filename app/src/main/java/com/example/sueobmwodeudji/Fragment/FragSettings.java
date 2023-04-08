@@ -15,6 +15,6 @@ public class FragSettings extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.settings, container, false);
+        return inflater.inflate(R.layout.activity_settings, container, false);
     }
 }

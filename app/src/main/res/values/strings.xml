@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">SuEobMwoDeudJi</string>
+    <string name="navi_home">홈</string>
+    <string name="navi_time">시간표</string>
+    <string name="navi_community">커뮤니티</string>
+    <string name="navi_good">평가</string>
+    <string name="navi_setting">설정</string>
 </resources>

@@ -15,6 +15,6 @@ public class FragGood extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.good, container, false);
+        return inflater.inflate(R.layout.activity_good, container, false);
     }
 }
