@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/naviHome"
+        android:enabled="true"
+        android:title="홈"
+        android:icon="@drawable/navi_home"/>
+    <item
+        android:id="@+id/naviTime"
+        android:enabled="true"
+        android:title="시간표"
+        android:icon="@drawable/navi_time"/>
+    <item
+        android:id="@+id/naviCommunity"
+        android:enabled="true"
+        android:title="커뮤니티"
+        android:icon="@drawable/navi_community"/>
+    <item
+        android:id="@+id/naviGood"
+        android:enabled="true"
+        android:title="평가"
+        android:icon="@drawable/navi_good"/>
+    <item
+        android:id="@+id/naviSetting"
+        android:enabled="true"
+        android:title="설정"
+        android:icon="@drawable/navi_settings"/>
+</menu>

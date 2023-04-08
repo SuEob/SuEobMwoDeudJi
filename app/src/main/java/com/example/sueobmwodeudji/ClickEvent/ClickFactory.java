@@ -1,8 +1,7 @@
-package com.example.sueobmwodeudji;
+package com.example.sueobmwodeudji.ClickEvent;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.LinearLayout;
 
 public class ClickFactory {
     private final Context context;
@@ -11,7 +10,7 @@ public class ClickFactory {
         this.context = context;
     }
 
-    public View.OnClickListener getCreateFirstView(){
+    public View.OnClickListener createFirstView(){
         return new CreateFirstView(context);
     }
 }

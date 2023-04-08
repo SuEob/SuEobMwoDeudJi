@@ -1,8 +1,12 @@
-package com.example.sueobmwodeudji;
+package com.example.sueobmwodeudji.ClickEvent;
 
 import android.content.Context;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import com.example.sueobmwodeudji.MainActivity;
+import com.example.sueobmwodeudji.R;
+import com.example.sueobmwodeudji.ViewFactory;
 
 public class CreateFirstView implements View.OnClickListener{
     private final Context context;
