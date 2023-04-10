@@ -10,10 +10,10 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.sueobmwodeudji.MainActivity;
 import com.example.sueobmwodeudji.R;
 
-public class MovePage implements View.OnClickListener{
+public class MoveFragmentPage implements View.OnClickListener{
     MainActivity m;
     Fragment movePage;
-    MovePage(Context context, Fragment _movePage){
+    MoveFragmentPage(Context context, Fragment _movePage){
         m = (MainActivity) context;
         movePage = _movePage;
     }

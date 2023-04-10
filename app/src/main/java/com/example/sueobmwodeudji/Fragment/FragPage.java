@@ -11,10 +11,17 @@ import androidx.fragment.app.Fragment;
 
 import com.example.sueobmwodeudji.R;
 
-public class FragCommunity extends Fragment {
+public class FragPage extends Fragment {
+
+    private final int navigation_item_layout;
+
+    public FragPage(int navigation_item_layout){
+        this.navigation_item_layout = navigation_item_layout;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_community, container, false);
+        return inflater.inflate(navigation_item_layout, container, false);
     }
 }
