@@ -8,8 +8,11 @@
     <color name="black">#FF000000</color>
     <color name="black_12">#FF121212</color>
     <color name="grey_900">#FF212121</color>
+    <color name="grey_cc">#FFCCCCCC</color>
     <color name="white">#FFFFFFFF</color>
     <color name="secondaryBlue">#FF5686E1</color>
-    <color name="errorRed_1">#FFFF5449</color>
-    <color name="errorRed_2">#FFFF3B30</color>
+    <color name="errorRed_1">#FFFF3B30</color>
+    <color name="errorRed_2">#FFFF5449</color>
+    <color name="background">#FFF7F7F7</color>
+    <color name="border">#FF8866FF</color>
 </resources>
