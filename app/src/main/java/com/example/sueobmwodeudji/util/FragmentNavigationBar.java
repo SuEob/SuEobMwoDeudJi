@@ -9,7 +9,7 @@ public class FragmentNavigationBar {
     Context context;
     int[] navigation_item_id, navigation_item_layout;
 
-    FragmentNavigationBar(Context _context){
+    public FragmentNavigationBar(Context _context){
         context = _context;
     }
 
@@ -17,7 +17,8 @@ public class FragmentNavigationBar {
         MoveFragmentPageEvent mpe = new MoveFragmentPageEvent(context);
         MainActivity mainActivity = (MainActivity) context;
 
-        for(int i = 0; i<=navigation_item_id.length; i++){
+        for(int i = 0; i<navigation_item_id.length; i++){
+            System.out.println("씨발 : "+i + navigation_item_id[i] + "??" + navigation_item_layout[i]);
             mainActivity.findViewById(navigation_item_id[i])
                     .setOnClickListener(mpe.movePage(navigation_item_layout[i]));
         }
