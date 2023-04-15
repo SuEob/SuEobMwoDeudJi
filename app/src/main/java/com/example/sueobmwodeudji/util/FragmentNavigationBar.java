@@ -14,14 +14,15 @@ public class FragmentNavigationBar {
     }
 
     public void addEventToNavigationBar(){
+        /*
         MoveFragmentPageEvent mpe = new MoveFragmentPageEvent(context);
         MainActivity mainActivity = (MainActivity) context;
 
         for(int i = 0; i<navigation_item_id.length; i++){
-            System.out.println("씨발 : "+i + navigation_item_id[i] + "??" + navigation_item_layout[i]);
             mainActivity.findViewById(navigation_item_id[i])
                     .setOnClickListener(mpe.movePage(navigation_item_layout[i]));
         }
+         */
     }
 
     public void setNavigationItem(int[] navigation_item_id, int[] navigation_item_layout) {
