@@ -38,6 +38,6 @@ public class NavigationVeiwListener implements NavigationBarView.OnItemSelectedL
                 mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.navigationBarTest, new FragPage(R.layout.activity_settings)).commit();
                 break;
         }
-        return false;
+        return true;
     }
 }
