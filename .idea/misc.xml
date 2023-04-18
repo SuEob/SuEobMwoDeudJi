@@ -4,14 +4,20 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/drawable-v24/community.xml" value="0.1175" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/drawable-v24/icon.xml" value="0.116" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/drawable-v24/search.xml" value="0.125" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/activity_community.xml" value="0.17806484295845998" />
-        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_community.xml" value="0.1" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_home.xml" value="0.17806484295845998" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_profile.xml" value="0.1539855072463768" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_rating.xml" value="0.17806484295845998" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_ratings.xml" value="0.35280797101449274" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_search.xml" value="0.21" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_time_table.xml" value="0.35280797101449274" />
-        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/menu/bottom_navigation.xml" value="0.36614583333333334" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_top_nav.xml" value="0.33" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/menu/bottom_navigation.xml" value="0.25" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/menu/top_navigation.xml" value="0.22239583333333332" />
       </map>
     </option>
   </component>

@@ -10,13 +10,10 @@
         android:id="@+id/community"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintVertical_weight="1"
-        app:layout_constraintHorizontal_weight="1"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
-
         android:text="Community"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
