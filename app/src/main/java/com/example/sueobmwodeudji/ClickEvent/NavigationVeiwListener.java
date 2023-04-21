@@ -5,12 +5,10 @@ import android.content.Context;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 
 import com.example.sueobmwodeudji.Fragment.FragPage;
 import com.example.sueobmwodeudji.MainActivity;
 import com.example.sueobmwodeudji.R;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class NavigationVeiwListener implements NavigationBarView.OnItemSelectedListener {
@@ -22,20 +20,20 @@ public class NavigationVeiwListener implements NavigationBarView.OnItemSelectedL
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.naviHome:
-                mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.navigationBarTest, new FragPage(R.layout.activity_home)).commit();
+            case R.id.navigation_home:
+                mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.mainActivity, new FragPage(R.layout.frag_home)).commit();
                 break;
-            case R.id.naviTime:
-                mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.navigationBarTest, new FragPage(R.layout.activity_time)).commit();
+            case R.id.navigation_time_table:
+                mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.mainActivity, new FragPage(R.layout.frag_time_table)).commit();
                 break;
-            case R.id.naviCommunity:
-                mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.navigationBarTest, new FragPage(R.layout.activity_community)).commit();
+            case R.id.navigation_community:
+                mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.mainActivity, new FragPage(R.layout.frag_community)).commit();
                 break;
-            case R.id.naviGood:
-                mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.navigationBarTest, new FragPage(R.layout.activity_good)).commit();
+            case R.id.navigation_ratings:
+                mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.mainActivity, new FragPage(R.layout.frag_ratings)).commit();
                 break;
-            case R.id.naviSetting:
-                mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.navigationBarTest, new FragPage(R.layout.activity_settings)).commit();
+            case R.id.navigation_settings:
+                mainActivity.getSupportFragmentManager().beginTransaction().replace(R.id.mainActivity, new FragPage(R.layout.fragment_settings)).commit();
                 break;
         }
         return true;
