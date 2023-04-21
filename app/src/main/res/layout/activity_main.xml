@@ -9,7 +9,7 @@
 
 
     <FrameLayout
-        android:id="@+id/frame"
+        android:id="@+id/containers"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_nav_view"
