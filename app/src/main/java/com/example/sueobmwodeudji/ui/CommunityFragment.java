@@ -27,4 +27,5 @@ public class CommunityFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 }

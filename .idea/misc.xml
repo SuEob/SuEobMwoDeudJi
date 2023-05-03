@@ -10,13 +10,19 @@
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/drawable-v24/settings.xml" value="0.2105" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/drawable-v24/time.xml" value="0.2105" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/drawable/round_border.xml" value="0.117" />
-        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/activity_main.xml" value="0.14" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/basic_frame_item.xml" value="0.33" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_community.xml" value="0.2234375" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_home_item_list.xml" value="0.23324275362318841" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_ratings.xml" value="0.2234375" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_settings.xml" value="0.2234375" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_time_table.xml" value="0.2234375" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_basic_frame.xml" value="0.36614583333333334" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/menu/bottom_nav_bar.xml" value="0.36614583333333334" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/menu/bottom_navigation.xml" value="0.2234375" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2245" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2245" />
       </map>
     </option>
   </component>

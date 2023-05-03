@@ -27,4 +27,5 @@ public class TimeTableFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 }

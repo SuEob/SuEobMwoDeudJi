@@ -27,4 +27,5 @@ public class SettingsFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 }

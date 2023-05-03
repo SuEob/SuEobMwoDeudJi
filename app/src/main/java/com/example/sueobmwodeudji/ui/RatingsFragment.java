@@ -27,4 +27,5 @@ public class RatingsFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 }

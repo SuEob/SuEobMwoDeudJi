@@ -6,19 +6,22 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.sueobmwodeudji.adapter.BasicFrame;
+import com.example.sueobmwodeudji.adapter.BasicFrameAdapter;
 import com.example.sueobmwodeudji.databinding.FragmentHomeBinding;
 
-public class HomeFragment extends Fragment {
+import java.util.ArrayList;
 
+public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
+    private ArrayList<BasicFrame> arrayList = new ArrayList<BasicFrame>();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-
+        HomeItemView();
         return binding.getRoot();
     }
 
@@ -28,4 +31,10 @@ public class HomeFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+    private void HomeItemView() {
+        binding.homeFragment.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.homeFragment.setAdapter(new BasicFrameAdapter(getActivity(), arrayList));
+    }
+
 }
