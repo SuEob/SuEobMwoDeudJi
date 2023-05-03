@@ -13,10 +13,12 @@ import com.example.sueobmwodeudji.adapter.BasicFrameAdapter;
 import com.example.sueobmwodeudji.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
-    private ArrayList<BasicFrame> arrayList = new ArrayList<BasicFrame>();
+    private List<BasicFrame> list = new ArrayList<BasicFrame>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -33,8 +35,11 @@ public class HomeFragment extends Fragment {
     }
 
     private void HomeItemView() {
+        list = Arrays.asList(
+                new BasicFrame("CEX")
+        );
         binding.homeFragment.setLayoutManager(new LinearLayoutManager(getActivity()));
-        binding.homeFragment.setAdapter(new BasicFrameAdapter(getActivity(), arrayList));
+        binding.homeFragment.setAdapter(new BasicFrameAdapter(getActivity(), list));
     }
 
 }

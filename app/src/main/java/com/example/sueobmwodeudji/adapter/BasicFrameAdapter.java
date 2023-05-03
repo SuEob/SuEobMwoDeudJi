@@ -10,13 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.databinding.ItemBasicFrameBinding;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class BasicFrameAdapter extends RecyclerView.Adapter<BasicFrameAdapter.BasicFrameViewHolder> {
     private Context context;
-    private ArrayList<BasicFrame> basicFrame = new ArrayList<>();
+    private List<BasicFrame> basicFrame;
 
-    public BasicFrameAdapter(Context context, ArrayList<BasicFrame> basicFrame) {
+    public BasicFrameAdapter(Context context, List<BasicFrame> basicFrame) {
         this.context = context;
         this.basicFrame = basicFrame;
     }
