@@ -26,14 +26,13 @@ public class BasicFrameAdapter extends RecyclerView.Adapter<BasicFrameAdapter.Ba
     public BasicFrameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ItemBasicFrameBinding binding = ItemBasicFrameBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         BasicFrameViewHolder viewHolder = new BasicFrameViewHolder(binding);
-
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull BasicFrameViewHolder holder, int position) {
+//        holder.homeBind(basicFrame.get(position));
         holder.title.setText(basicFrame.get(position).title);
-        // holder.bind(basicFrame.get(position));
     }
 
     @Override
@@ -51,10 +50,9 @@ public class BasicFrameAdapter extends RecyclerView.Adapter<BasicFrameAdapter.Ba
             title = binding.basicFrameTitle;
         }
 
-        public void bind(@NonNull BasicFrame basicFrame) {
-            binding.basicFrameTitle.setText(basicFrame.title);
-            // binding.basicFrameContent.setBackgroundColor(basicFrame.frameLayout.getB);
-        }
+//        private void homeBind(@NonNull BasicFrame basicFrame) {
+//            binding.basicFrameTitle.setText(basicFrame.title);
+//        }
     }
 
 }

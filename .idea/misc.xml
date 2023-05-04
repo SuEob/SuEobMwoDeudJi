@@ -6,9 +6,12 @@
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/drawable-nodpi/_bg__home_shape.xml" value="0.2105" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/drawable-v24/community.xml" value="0.1435" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/drawable-v24/home.xml" value="0.1435" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/drawable-v24/ratings.xml" value="0.206" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/drawable-v24/search.xml" value="0.2105" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/drawable-v24/settings.xml" value="0.2105" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/drawable-v24/time.xml" value="0.2105" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/drawable/add.xml" value="0.206" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/drawable/ic_baseline_mode_comment_24.xml" value="0.206" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/drawable/round_border.xml" value="0.117" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/basic_frame_item.xml" value="0.33" />
@@ -18,7 +21,9 @@
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_ratings.xml" value="0.2234375" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_settings.xml" value="0.2234375" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_time_table.xml" value="0.2234375" />
-        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_basic_frame.xml" value="0.25" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_basic_frame.xml" value="0.11147540983606558" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_list.xml" value="0.67" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_top_bar.xml" value="0.3651041666666667" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/menu/bottom_nav_bar.xml" value="0.36614583333333334" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/menu/bottom_navigation.xml" value="0.2234375" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2245" />
