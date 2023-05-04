@@ -12,11 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.adapter.BasicFrame;
 import com.example.sueobmwodeudji.adapter.BasicFrameAdapter;
 import com.example.sueobmwodeudji.databinding.FragmentHomeBinding;
-import com.example.sueobmwodeudji.ui.sub_ui.CommunityListFragment;
+import com.example.sueobmwodeudji.ui.sub_ui.HomeSub2Fragment;
+import com.example.sueobmwodeudji.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,7 +38,7 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         HomeItemView();
         // 시발 도와줘
-        getChildFragmentManager().beginTransaction().replace(R.id.homeSubFragment, new CommunityListFragment()).addToBackStack(null).commit();
+        getChildFragmentManager().beginTransaction().replace(R.id.basic_frame_content, new HomeSub2Fragment()).addToBackStack(null).commit();
         return binding.getRoot();
     }
 
@@ -54,8 +54,7 @@ public class HomeFragment extends Fragment {
         list = Arrays.asList(
                 new BasicFrame("CEX")
         );
-        binding.homeFragment.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-        // binding.homeFragment.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.homeFragment.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.homeFragment.setAdapter(new BasicFrameAdapter(context, list));
         Log.e("getActivity(HomeFregment)", String.valueOf(getActivity()));
     }

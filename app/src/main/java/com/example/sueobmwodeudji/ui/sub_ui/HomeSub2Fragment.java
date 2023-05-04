@@ -16,17 +16,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.adapter.BasicFrame;
 import com.example.sueobmwodeudji.adapter.BasicFrameAdapter;
-import com.example.sueobmwodeudji.databinding.ItemBasicFrameBinding;
+import com.example.sueobmwodeudji.databinding.FragmentHomeSub2Binding;
+import com.example.sueobmwodeudji.ui.HomeFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CommunityListFragment extends Fragment {
+public class HomeSub2Fragment extends Fragment {
     private RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
-    private ItemBasicFrameBinding binding;
+    private FragmentHomeSub2Binding binding;
     private List<BasicFrame> list = new ArrayList<BasicFrame>();
     private Context context;
+    public HomeFragment homeFragment;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -37,7 +39,7 @@ public class CommunityListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = ItemBasicFrameBinding.inflate(inflater, container, false);
+        binding = FragmentHomeSub2Binding.inflate(inflater, container, false);
         SubCommunityItemView();
         return binding.getRoot();
     }
@@ -54,8 +56,8 @@ public class CommunityListFragment extends Fragment {
                 new BasicFrame("1학년 대화방", "글제목"),
                 new BasicFrame("3학년 대화방", "글제목")
         );
-        binding.homeSubFragment.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
-        binding.homeSubFragment.setAdapter(new BasicFrameAdapter(context, list));
+        binding.homeSub2Fragment.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+        binding.homeSub2Fragment.setAdapter(new BasicFrameAdapter(context, list));
         // binding.subFragment.setRecycledViewPool(viewPool);
         Log.e("getActivity(CommunityListFragment)", String.valueOf(getActivity()));
     }
