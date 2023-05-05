@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.sueobmwodeudji.adapter.BasicFrameAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityMainBinding;
 import com.example.sueobmwodeudji.ui.CommunityFragment;
 import com.example.sueobmwodeudji.ui.HomeFragment;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     SettingsFragment settingsFragment;
 
     private ActivityMainBinding binding;
+    public BasicFrameAdapter basicFrameAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

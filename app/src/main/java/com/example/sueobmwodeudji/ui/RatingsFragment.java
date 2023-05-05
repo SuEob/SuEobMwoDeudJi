@@ -16,7 +16,6 @@ import com.example.sueobmwodeudji.databinding.FragmentRatingsBinding;
 import com.example.sueobmwodeudji.model.BasicFrameModel;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class RatingsFragment extends Fragment {
@@ -45,10 +44,10 @@ public class RatingsFragment extends Fragment {
     }
 
     private void RatingsItemView() {
-        list = Arrays.asList(
-                new BasicFrameModel("나의 수업", mainBinding.containers),
-                new BasicFrameModel("최근 수강평", mainBinding.containers)
-        );
+//        list = Arrays.asList(
+//                new BasicFrameModel("나의 수업", mainBinding.containers),
+//                new BasicFrameModel("최근 수강평", mainBinding.containers)
+//        );
         binding.ratingsFragment.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.ratingsFragment.setAdapter(new BasicFrameAdapter(getContext(), list));
     }

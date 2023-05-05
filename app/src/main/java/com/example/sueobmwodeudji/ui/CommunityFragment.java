@@ -16,7 +16,6 @@ import com.example.sueobmwodeudji.databinding.FragmentCommunityBinding;
 import com.example.sueobmwodeudji.model.BasicFrameModel;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CommunityFragment extends Fragment {
@@ -45,10 +44,10 @@ public class CommunityFragment extends Fragment {
     }
 
     private void CommunityItemView() {
-        list = Arrays.asList(
-                new BasicFrameModel("분류", mainBinding.containers),
-                new BasicFrameModel("최근 작성된 글", mainBinding.containers)
-        );
+//        list = Arrays.asList(
+//                new BasicFrameModel("분류", mainBinding.containers),
+//                new BasicFrameModel("최근 작성된 글", mainBinding.containers)
+//        );
         binding.communityFragment.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.communityFragment.setAdapter(new BasicFrameAdapter(getContext(), list));
     }

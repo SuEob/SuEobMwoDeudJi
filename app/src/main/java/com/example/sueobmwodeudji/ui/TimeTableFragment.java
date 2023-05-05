@@ -16,7 +16,6 @@ import com.example.sueobmwodeudji.databinding.FragmentTimeTableBinding;
 import com.example.sueobmwodeudji.model.BasicFrameModel;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TimeTableFragment extends Fragment {
@@ -45,10 +44,10 @@ public class TimeTableFragment extends Fragment {
     }
 
     private void TimeTableItemView() {
-        list = Arrays.asList(
-                new BasicFrameModel("시간표", mainBinding.containers),
-                new BasicFrameModel("수강학점", mainBinding.containers)
-        );
+//        list = Arrays.asList(
+//                new BasicFrameModel("시간표", mainBinding.containers),
+//                new BasicFrameModel("수강학점", mainBinding.containers)
+//        );
         binding.timeTableFragment.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.timeTableFragment.setAdapter(new BasicFrameAdapter(getContext(), list));
     }

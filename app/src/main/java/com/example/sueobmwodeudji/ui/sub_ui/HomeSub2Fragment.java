@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.adapter.BasicFrameAdapter;
 import com.example.sueobmwodeudji.databinding.FragmentHomeSub2Binding;
 import com.example.sueobmwodeudji.model.BasicFrameModel;
@@ -24,25 +22,22 @@ import java.util.List;
 public class HomeSub2Fragment extends Fragment {
     private RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
     private FragmentHomeSub2Binding binding;
-    FrameLayout frameLayout;
     private List<BasicFrameModel> list = new ArrayList<BasicFrameModel>();
 
-
-    public static HomeSub2Fragment getInstance(int num) {
-        HomeSub2Fragment homeSub2Fragment = new HomeSub2Fragment();
+    public static HomeSub2Fragment getInstance(int no) {
+        HomeSub2Fragment fragment = new HomeSub2Fragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("num", num);
-        homeSub2Fragment.setArguments(bundle);
-        return homeSub2Fragment;
+        bundle.putInt("ARG_NO", no);
+        fragment.setArguments(bundle);
+        return fragment;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.item_fragment_home_sub_2, container, false);
         binding = FragmentHomeSub2Binding.inflate(inflater, container, false);
         SubCommunityItemView();
-        return view;
+        return binding.getRoot();
     }
 
     @Override
@@ -59,6 +54,5 @@ public class HomeSub2Fragment extends Fragment {
 //        );
         binding.homeSub2Fragment.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.homeSub2Fragment.setAdapter(new BasicFrameAdapter(getContext(), list));
-        // binding.subFragment.setRecycledViewPool(viewPool);
     }
 }

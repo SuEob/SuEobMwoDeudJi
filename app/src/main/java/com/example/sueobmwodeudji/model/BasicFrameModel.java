@@ -1,13 +1,14 @@
 package com.example.sueobmwodeudji.model;
 
-import android.widget.FrameLayout;
+import androidx.fragment.app.Fragment;
 
 public class BasicFrameModel {
     public String title;
-    public FrameLayout frameLayout;
+    public Fragment fragment;
+    public Integer iasd;
 
-    public BasicFrameModel(String title, FrameLayout frameLayout) {
+    public BasicFrameModel(String title, Fragment fragment) {
         this.title = title;
-        this.frameLayout = frameLayout;
+        this.fragment = fragment;
     }
 }
