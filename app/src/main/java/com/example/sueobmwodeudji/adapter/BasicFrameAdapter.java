@@ -8,51 +8,47 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sueobmwodeudji.databinding.ItemBasicFrameBinding;
+import com.example.sueobmwodeudji.databinding.ItemFragmentBinding;
+import com.example.sueobmwodeudji.model.BasicFrameModel;
 
 import java.util.List;
 
 public class BasicFrameAdapter extends RecyclerView.Adapter<BasicFrameAdapter.BasicFrameViewHolder> {
     private Context context;
-    private List<BasicFrame> basicFrame;
+    private List<BasicFrameModel> basicFrameModel;
 
-    public BasicFrameAdapter(Context context, List<BasicFrame> basicFrame) {
+    public BasicFrameAdapter(Context context, List<BasicFrameModel> basicFrameModel) {
         this.context = context;
-        this.basicFrame = basicFrame;
+        this.basicFrameModel = basicFrameModel;
     }
 
     @NonNull
     @Override
     public BasicFrameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemBasicFrameBinding binding = ItemBasicFrameBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        ItemFragmentBinding binding = ItemFragmentBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         BasicFrameViewHolder viewHolder = new BasicFrameViewHolder(binding);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull BasicFrameViewHolder holder, int position) {
-//        holder.homeBind(basicFrame.get(position));
-        holder.title.setText(basicFrame.get(position).title);
+        holder.title.setText(basicFrameModel.get(position).title);
     }
 
     @Override
     public int getItemCount() {
-        return basicFrame.size();
+        return basicFrameModel.size();
     }
 
     public static class BasicFrameViewHolder extends RecyclerView.ViewHolder {
-        private ItemBasicFrameBinding binding;
+        private ItemFragmentBinding binding;
         public TextView title;
 
-        public BasicFrameViewHolder(@NonNull ItemBasicFrameBinding binding) {
+        public BasicFrameViewHolder(@NonNull ItemFragmentBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
             title = binding.basicFrameTitle;
         }
-
-//        private void homeBind(@NonNull BasicFrame basicFrame) {
-//            binding.basicFrameTitle.setText(basicFrame.title);
-//        }
     }
 
 }
