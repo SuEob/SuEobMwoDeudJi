@@ -58,10 +58,6 @@ public class BasicFrameAdapter extends RecyclerView.Adapter<BasicFrameAdapter.Ba
             this.binding = binding;
             title = binding.basicFrameTitle;
             frameLayout = binding.basicFrameContent;
-
-
         }
-
     }
-
 }

@@ -48,10 +48,6 @@ public class HomeSub2Fragment extends Fragment {
 
     @SuppressLint("LongLogTag")
     private void SubCommunityItemView() {
-//        list = Arrays.asList(
-//                new BasicFrameModel("1학년 대화방", "글제목"),
-//                new BasicFrameModel("3학년 대화방", "글제목")
-//        );
         binding.homeSub2Fragment.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.homeSub2Fragment.setAdapter(new BasicFrameAdapter(getContext(), list));
     }
