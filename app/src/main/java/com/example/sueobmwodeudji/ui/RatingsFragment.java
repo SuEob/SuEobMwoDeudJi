@@ -10,23 +10,21 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.adapter.BasicFrameAdapter;
-import com.example.sueobmwodeudji.databinding.ActivityMainBinding;
 import com.example.sueobmwodeudji.databinding.FragmentRatingsBinding;
 import com.example.sueobmwodeudji.model.BasicFrameModel;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class RatingsFragment extends Fragment {
     private FragmentRatingsBinding binding;
-    private ActivityMainBinding mainBinding;
-    private List<BasicFrameModel> list = new ArrayList<BasicFrameModel>();
+    private List<BasicFrameModel> list = new LinkedList<BasicFrameModel>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mainBinding = ActivityMainBinding.inflate(inflater);
         binding = FragmentRatingsBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -44,10 +42,8 @@ public class RatingsFragment extends Fragment {
     }
 
     private void RatingsItemView() {
-//        list = Arrays.asList(
-//                new BasicFrameModel("나의 수업", mainBinding.containers),
-//                new BasicFrameModel("최근 수강평", mainBinding.containers)
-//        );
+        list.add(new BasicFrameModel("나의 수업", R.layout.item_ratings_sub_1));
+        list.add(new BasicFrameModel("최근 수강평", R.layout.item_ratings_sub_2));
         binding.ratingsFragment.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.ratingsFragment.setAdapter(new BasicFrameAdapter(getContext(), list));
     }

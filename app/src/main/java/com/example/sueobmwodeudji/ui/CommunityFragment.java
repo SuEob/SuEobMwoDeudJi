@@ -10,23 +10,21 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.adapter.BasicFrameAdapter;
-import com.example.sueobmwodeudji.databinding.ActivityMainBinding;
 import com.example.sueobmwodeudji.databinding.FragmentCommunityBinding;
 import com.example.sueobmwodeudji.model.BasicFrameModel;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class CommunityFragment extends Fragment {
     private FragmentCommunityBinding binding;
-    private ActivityMainBinding mainBinding;
-    private List<BasicFrameModel> list = new ArrayList<BasicFrameModel>();
+    private List<BasicFrameModel> list = new LinkedList<BasicFrameModel>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mainBinding = ActivityMainBinding.inflate(inflater);
         binding = FragmentCommunityBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -44,10 +42,8 @@ public class CommunityFragment extends Fragment {
     }
 
     private void CommunityItemView() {
-//        list = Arrays.asList(
-//                new BasicFrameModel("분류", mainBinding.containers),
-//                new BasicFrameModel("최근 작성된 글", mainBinding.containers)
-//        );
+        list.add(new BasicFrameModel("게시글", R.layout.item_community_sub_1));
+        list.add(new BasicFrameModel("최근 작성된 글", R.layout.item_community_sub_2));
         binding.communityFragment.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.communityFragment.setAdapter(new BasicFrameAdapter(getContext(), list));
     }

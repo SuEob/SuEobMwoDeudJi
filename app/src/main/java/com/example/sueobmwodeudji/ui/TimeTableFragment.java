@@ -10,23 +10,21 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.adapter.BasicFrameAdapter;
-import com.example.sueobmwodeudji.databinding.ActivityMainBinding;
 import com.example.sueobmwodeudji.databinding.FragmentTimeTableBinding;
 import com.example.sueobmwodeudji.model.BasicFrameModel;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class TimeTableFragment extends Fragment {
     private FragmentTimeTableBinding binding;
-    private ActivityMainBinding mainBinding;
-    private List<BasicFrameModel> list = new ArrayList<BasicFrameModel>();
+    private List<BasicFrameModel> list = new LinkedList<BasicFrameModel>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mainBinding = ActivityMainBinding.inflate(inflater);
         binding = FragmentTimeTableBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -44,10 +42,8 @@ public class TimeTableFragment extends Fragment {
     }
 
     private void TimeTableItemView() {
-//        list = Arrays.asList(
-//                new BasicFrameModel("시간표", mainBinding.containers),
-//                new BasicFrameModel("수강학점", mainBinding.containers)
-//        );
+        list.add(new BasicFrameModel("시간표", R.layout.item_time_table_sub_1));
+        list.add(new BasicFrameModel("수강학점", R.layout.item_time_table_sub_2));
         binding.timeTableFragment.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.timeTableFragment.setAdapter(new BasicFrameAdapter(getContext(), list));
     }
