@@ -22,6 +22,10 @@ public class RatingsFragment extends Fragment {
     private FragmentRatingsBinding binding;
     private List<BasicFrameModel> list = new LinkedList<BasicFrameModel>();
 
+    public static RatingsFragment getInstance() {
+        return new RatingsFragment();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

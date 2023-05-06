@@ -22,6 +22,10 @@ public class CommunityFragment extends Fragment {
     private FragmentCommunityBinding binding;
     private List<BasicFrameModel> list = new LinkedList<BasicFrameModel>();
 
+    public static CommunityFragment getInstance() {
+        return new CommunityFragment();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

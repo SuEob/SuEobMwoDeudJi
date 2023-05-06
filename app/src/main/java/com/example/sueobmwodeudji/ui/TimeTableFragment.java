@@ -22,6 +22,10 @@ public class TimeTableFragment extends Fragment {
     private FragmentTimeTableBinding binding;
     private List<BasicFrameModel> list = new LinkedList<BasicFrameModel>();
 
+    public static TimeTableFragment getInstance() {
+        return new TimeTableFragment();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
