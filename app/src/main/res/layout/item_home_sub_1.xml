@@ -3,4 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <view
+        android:id="@+id/basic_frame_board_title"
+        class="com.example.sueobmwodeudji.custom_view.HomeSubTimeTable"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
