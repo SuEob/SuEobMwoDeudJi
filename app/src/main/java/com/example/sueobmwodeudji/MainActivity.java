@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.sueobmwodeudji.adapter.BasicFrameAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityMainBinding;
 
 import com.example.sueobmwodeudji.ui.CommunityFragment;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private ActivityMainBinding binding;
+    public BasicFrameAdapter basicFrameAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +30,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         BottomNavBar();
-        
+
     }
 
     private void BottomNavBar() {
         // 기본화면 설정(홈 화면)
-        getSupportFragmentManager().beginTransaction().replace(R.id.containers, new HomeFragment()).commitAllowingStateLoss();
+        getSupportFragmentManager().beginTransaction().replace(R.id.containers, new HomeFragment()).commit();
 
         // 화면 바뀜
         binding.bottomNavView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -41,19 +43,19 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, new HomeFragment()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, new HomeFragment()).addToBackStack("home").commit();
                         return true;
                     case R.id.navigation_time_table:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.containers,  new TimeTableFragment()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.containers,  new TimeTableFragment()).addToBackStack("time_table").commit();
                         return true;
                     case R.id.navigation_community:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.containers,  new CommunityFragment()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.containers,  new CommunityFragment()).addToBackStack("community").commit();
                         return true;
                     case R.id.navigation_ratings:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, new RatingsFragment()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, new RatingsFragment()).addToBackStack("ratings").commit();
                         return true;
                     case R.id.navigation_settings:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, new SettingsFragment()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, new SettingsFragment()).addToBackStack("settings").commit();
                         return true;
                 }
                 return false;
