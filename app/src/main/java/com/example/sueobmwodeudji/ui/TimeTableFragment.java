@@ -36,19 +36,11 @@ public class TimeTableFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(binding.getRoot(), savedInstanceState);
-        TimeTableItemView();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-    }
-
-    private void TimeTableItemView() {
-        list.add(new BasicFrameModel("시간표", R.layout.item_time_table_sub_1));
-        list.add(new BasicFrameModel("수강학점", R.layout.item_time_table_sub_2));
-        binding.timeTableFragment.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.timeTableFragment.setAdapter(new BasicFrameAdapter(getContext(), list));
     }
 }

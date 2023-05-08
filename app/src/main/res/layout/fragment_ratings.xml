@@ -74,96 +74,12 @@
             android:layout_marginBottom="4dp"
             android:gravity="center"
             >
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="6"
-                android:orientation="vertical"
-                android:gravity="center|left"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="인공지능 시스템"
-                    android:textColor="@color/black"
-                    android:textSize="24dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="조범석"
-                    android:textColor="@color/black"
-                    android:textSize="10dp"
-                    android:layout_marginLeft="16dp"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="모바일 응용 캡스.."
-                    android:textColor="@color/black"
-                    android:textSize="24dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="김지심"
-                    android:textColor="@color/black"
-                    android:textSize="10dp"
-                    android:layout_marginLeft="16dp"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="캡스톤 디자인"
-                    android:textColor="@color/black"
-                    android:textSize="24dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="심한뫼"
-                    android:textColor="@color/black"
-                    android:textSize="10dp"
-                    android:layout_marginLeft="16dp"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:orientation="vertical"
-                android:gravity="center"
-                >
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#4384FF"
-                    android:textSize="20dp"
-                    android:layout_marginVertical="10dp"
-                    android:text="평가하기"/>
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#4384FF"
-                    android:textSize="20dp"
-                    android:layout_marginVertical="10dp"
-                    android:text="평가하기"/>
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#4384FF"
-                    android:textSize="20dp"
-                    android:layout_marginVertical="10dp"
-                    android:text="평가하기"/>
-
-            </LinearLayout>
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            />
 
         </LinearLayout>
 
@@ -244,7 +160,7 @@
                 android:layout_height="wrap_content"
                 android:text="매 수업마다 ppt자료를 가져와서 수업을 이해하는데 많이 도움이 됨 어쩌고 저쩌고..."
                 android:textColor="@color/black"
-                android:textSizeg="14dp"
+                android:textSize="14dp"
                 android:layout_marginLeft="16dp"
                 />
         </LinearLayout>

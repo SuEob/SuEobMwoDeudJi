@@ -36,20 +36,12 @@ public class CommunityFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(binding.getRoot(), savedInstanceState);
-        CommunityItemView();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-    }
-
-    private void CommunityItemView() {
-        list.add(new BasicFrameModel("게시글", R.layout.item_community_sub_1));
-        list.add(new BasicFrameModel("최근 작성된 글", R.layout.item_community_sub_2));
-        binding.communityFragment.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.communityFragment.setAdapter(new BasicFrameAdapter(getContext(), list));
     }
 
 }
