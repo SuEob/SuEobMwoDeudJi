@@ -1,35 +1,75 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <PreferenceCategory
+        app:key="info_title"
+        app:title="내 정보"
+        app:iconSpaceReserved="false">
+
+        <Preference
+            android:id="@+id/info_content"
+            app:key="info_content"
+            android:layout="@layout/preferences_my_info"
+            android:fragment="com.example.sueobmwodeudji.ui.preferences_ui.MyInfoFragment">
+        </Preference>
+
+    </PreferenceCategory>
 
     <PreferenceCategory
-        app:title="내정보">
+        app:key="account"
+        app:title="계정"
+        app:iconSpaceReserved="false">
+
         <Preference
-            android:layout="@layout/item_settings_my_info"
+            app:key="root_school"
+            app:title="학교인증"
+            app:iconSpaceReserved="false"
+            android:fragment="com.example.sueobmwodeudji.ui.preferences_ui.SchoolFragment">
+        </Preference>
 
-            />
+        <Preference
+            app:key="root_password"
+            app:title="비밀번호 변경"
+            app:iconSpaceReserved="false"
+            android:fragment="com.example.sueobmwodeudji.ui.preferences_ui.PasswordFragment">
+        </Preference>
 
+        <Preference
+            app:key="root_logout"
+            app:title="로그아웃"
+            app:iconSpaceReserved="false"
+            android:fragment="com.example.sueobmwodeudji.ui.preferences_ui.LogoutFragment">
+        </Preference>
+
+        <Preference
+            app:key="root_withdrawal"
+            app:title="회원탈퇴"
+            app:iconSpaceReserved="false"
+            android:fragment="com.example.sueobmwodeudji.ui.preferences_ui.WithdrawalFragment">
+        </Preference>
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="계정">
-
-
-    </PreferenceCategory>
-
-
-    <PreferenceCategory app:title="@string/sync_header">
+    <PreferenceCategory
+        app:title="앱 설정"
+        app:iconSpaceReserved="false">
 
         <SwitchPreferenceCompat
-            app:key="sync"
-            app:title="@string/sync_title" />
+            app:key="root_dark"
+            app:title="다크 모드"
+            app:iconSpaceReserved="false"/>
 
         <SwitchPreferenceCompat
-            app:dependency="sync"
-            app:key="attachment"
-            app:summaryOff="@string/attachment_summary_off"
-            app:summaryOn="@string/attachment_summary_on"
-            app:title="@string/attachment_title" />
+            app:key="root_alert"
+            app:title="알림 수신(가장 나중에 만들거라 제외 가능!)"
+            app:iconSpaceReserved="false"/>
+
+        <Preference
+            app:key="root_lock"
+            app:title="잠금"
+            app:iconSpaceReserved="false"
+            android:fragment="com.example.sueobmwodeudji.ui.preferences_ui.LockFragment">
+        </Preference>
 
     </PreferenceCategory>
 

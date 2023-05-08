@@ -26,8 +26,13 @@
         </activity>
         <activity
             android:name=".SettingsActivity"
+            android:exported="true"
             android:parentActivityName=".MainActivity">
-
+        </activity>
+        <activity
+            android:name=".SettingsSubActivity"
+            android:exported="true"
+            android:parentActivityName=".SettingsActivity">
         </activity>
     </application>
 

@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -47,19 +46,34 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, new HomeFragment()).addToBackStack("home").commit();
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.containers, new HomeFragment())
+                                .addToBackStack("home")
+                                .commit();
                         return true;
                     case R.id.navigation_time_table:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.containers,  new TimeTableFragment()).addToBackStack("time_table").commit();
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.containers,  new TimeTableFragment())
+                                .addToBackStack("time_table")
+                                .commit();
                         return true;
                     case R.id.navigation_community:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.containers,  new CommunityFragment()).addToBackStack("community").commit();
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.containers,  new CommunityFragment())
+                                .addToBackStack("community")
+                                .commit();
                         return true;
                     case R.id.navigation_ratings:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, new RatingsFragment()).addToBackStack("ratings").commit();
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.containers, new RatingsFragment())
+                                .addToBackStack("ratings")
+                                .commit();
                         return true;
                     case R.id.navigation_settings:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, new SettingsFragment()).addToBackStack("settings").commit();
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.containers, new SettingsFragment())
+                                .addToBackStack("settings")
+                                .commit();
                         return true;
                 }
                 return false;
