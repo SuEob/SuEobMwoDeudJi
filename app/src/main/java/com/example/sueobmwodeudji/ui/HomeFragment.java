@@ -39,10 +39,6 @@ public class HomeFragment extends Fragment {
     }
 
     public void HomeItemView() {
-        list.add(new BasicFrameModel("오늘 시간표", R.layout.item_home_sub_1));
-        list.add(new BasicFrameModel("인기 게시글", R.layout.item_home_sub_2));
-        binding.homeFragment.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.homeFragment.setAdapter(new BasicFrameAdapter(getContext(), list));
     }
 
 }

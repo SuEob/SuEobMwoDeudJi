@@ -75,99 +75,116 @@
             android:gravity="center"
             android:orientation="vertical"
             >
-
-            <LinearLayout
-                android:layout_width="379dp"
-                android:layout_height="0dp"
-                android:layout_marginBottom="4dp"
-                android:layout_weight="1"
-                android:elevation="4dp"
-                android:gravity="center|bottom">
-
-                <Button
-                    android:layout_width="0dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/subLeftGuide1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="32dp"
+                    />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/subRightGuide1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="32dp"
+                    />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/subContentStartGuide1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_begin="16dp"
+                    />
+                <Button
+                    android:id="@+id/class1_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:drawableTop="@drawable/class1"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
                     android:text="1학년 대화방"
                     android:textColor="@color/black_12"
-                    android:textSize="10dp" />
-
+                    android:textSize="10dp"
+                    app:layout_constraintTop_toTopOf="@id/subContentStartGuide1"
+                    app:layout_constraintLeft_toLeftOf="@id/subLeftGuide1"
+                    />
                 <Button
-                    android:layout_width="0dp"
+                    android:id="@+id/class2_btn"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:drawableTop="@drawable/class2"
-                    android:text="1학년 대화방"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:text="2학년 대화방"
                     android:textColor="@color/black_12"
-                    android:textSize="10dp" />
-
+                    android:textSize="10dp"
+                    app:layout_constraintTop_toTopOf="@id/subContentStartGuide1"
+                    app:layout_constraintLeft_toRightOf="@id/class1_btn"
+                    />
                 <Button
-                    android:layout_width="0dp"
+                    android:id="@+id/class3_btn"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:drawableTop="@drawable/class3"
-                    android:text="1학년 대화방"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:text="3학년 게시판"
                     android:textColor="@color/black_12"
-                    android:textSize="10dp" />
-
+                    android:textSize="10dp"
+                    app:layout_constraintTop_toTopOf="@id/subContentStartGuide1"
+                    app:layout_constraintLeft_toRightOf="@id/class2_btn"
+                    />
                 <Button
-                    android:layout_width="0dp"
+                    android:id="@+id/game_btn"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:drawableTop="@drawable/game"
-                    android:text="1학년 대화방"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:text="게임 게시판"
                     android:textColor="@color/black_12"
-                    android:textSize="10dp" />
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:elevation="4dp"
-                android:layout_marginBottom="4dp"
-                android:gravity="center|top"
-                >
+                    android:textSize="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/class1_btn"
+                    app:layout_constraintLeft_toLeftOf="@id/class1_btn"
+                    />
                 <Button
+                    android:id="@+id/book_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:drawableTop="@drawable/book"
-                    android:text="1학년 대화방"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:text="공부 게시판"
                     android:textColor="@color/black_12"
-                    android:textSize="10dp" />
+                    android:textSize="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/class2_btn"
+                    app:layout_constraintLeft_toLeftOf="@id/class2_btn"
+                    />
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:drawableTop="@drawable/cart"
-                    android:text="1학년 대화방"
-                    android:textColor="@color/black_12"
-                    android:textSize="10dp" />
-                <Button
+                    android:id="@+id/anchor_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:drawableTop="@drawable/anchor"
-                    android:text="1학년 대화방"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:text="운동 게시판"
                     android:textColor="@color/black_12"
-                    android:textSize="10dp" />
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:drawableTop="@drawable/textms"
-                    android:text="1학년 대화방"
-                    android:textColor="@color/black_12"
-                    android:textSize="10dp" />
+                    android:textSize="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/class3_btn"
+                    app:layout_constraintLeft_toLeftOf="@id/class3_btn"
+                    />
 
-            </LinearLayout>
-
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
     </LinearLayout>
