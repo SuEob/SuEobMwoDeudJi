@@ -6,16 +6,66 @@
     android:layout_height="match_parent"
     tools:context=".ui.TimeTableFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/timeTable_Fragment"
+    <TextView
+        android:id="@+id/yearSemesterText"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:textSize="25dp"
+        android:text="xxxx년 oo학기"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+    <TextView
+        android:id="@+id/tableNametext"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:textSize="30dp"
+        android:text="시간표 1"
+        app:layout_constraintTop_toBottomOf="@id/yearSemesterText"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <Button
+        android:id="@+id/add_class"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:drawableTop="@drawable/add"
+        android:backgroundTint="#4384ff"
+        app:layout_constraintRight_toLeftOf="@id/table_setting"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/table_setting"
+        android:layout_margin="10dp"
+        android:drawableTop="@drawable/settings"
+        android:backgroundTint="#4384ff"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/table_list"/>
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/table_list"
+        android:layout_margin="10dp"
+        android:drawableTop="@drawable/community"
+        android:backgroundTint="#4384ff"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tableNametext"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:ignore="MissingConstraints">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_fragment" >
+        tools:ignore="MissingConstraints">
+        <include layout="@layout/item_time_table_sub_1" />
 
-    </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
