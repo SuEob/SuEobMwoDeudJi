@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sueobmwodeudji.adapter.BasicFrameAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityMainBinding;
+
 import com.example.sueobmwodeudji.ui.CommunityFragment;
 import com.example.sueobmwodeudji.ui.HomeFragment;
 import com.example.sueobmwodeudji.ui.RatingsFragment;
@@ -17,11 +18,6 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
 
-    HomeFragment homeFragment;
-    TimeTableFragment timeTableFragment;
-    CommunityFragment communityFragment;
-    RatingsFragment ratingsFragment;
-    SettingsFragment settingsFragment;
 
     private ActivityMainBinding binding;
     public BasicFrameAdapter basicFrameAdapter;
