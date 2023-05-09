@@ -46,5 +46,14 @@
         app:layout_constraintTop_toBottomOf="@+id/class_tv"
         app:layout_constraintLeft_toLeftOf="@+id/leftGuide1"
         />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toTopOf="@id/contentStartGuide1"
+        app:layout_constraintLeft_toLeftOf="@id/leftGuide1"
+        app:layout_constraintRight_toRightOf="@id/rightGuide1"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

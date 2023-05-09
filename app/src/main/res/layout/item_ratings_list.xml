@@ -12,14 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="16dp"
+        app:layout_constraintGuide_begin="12dp"
         />
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/rightGuide1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="16dp"
+        app:layout_constraintGuide_end="12dp"
         />
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/contentStartGuide1"
@@ -32,18 +32,86 @@
         android:id="@+id/title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
         android:text="평가 제목"
         android:textSize="24dp"
         android:textColor="@color/black_12"
         app:layout_constraintTop_toTopOf="@id/contentStartGuide1"
         app:layout_constraintLeft_toLeftOf="@id/leftGuide1"/>
+
     <TextView
+        android:id="@+id/sub_title_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="평가 내용평가 내용평가 내용평가 내용평가 내용평가 내용평가 내용평가 내용평가 내용평가 내용"
+        android:textSize="14dp"
+        android:lines="2"
+        android:ellipsize="end"
+        app:layout_constraintWidth_percent="0.6"
+        app:layout_constraintLeft_toLeftOf="@id/leftGuide1"
+        app:layout_constraintTop_toBottomOf="@+id/title_tv" />
+
+    <ImageView
+        android:id="@+id/difficulty_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="평가 내용"
-        android:textSize="14dp"
-        android:layout_marginLeft="12dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_tv"/>
+        android:src="@drawable/hard"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toLeftOf="@id/type_iv"
+        app:layout_constraintTop_toTopOf="@id/contentStartGuide1"
+        />
+    <ImageView
+        android:id="@+id/type_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/handouts"
+        android:layout_marginTop="4dp"
+        app:layout_constraintRight_toLeftOf="@id/rightGuide1"
+        app:layout_constraintTop_toTopOf="@id/contentStartGuide1"
+        />
+    <ImageView
+        android:id="@+id/ratings_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ratings"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toLeftOf="@+id/like_tv"
+        app:layout_constraintTop_toBottomOf="@id/sub_title_tv"
+        app:tint="#FF3B30" />
+
+    <TextView
+        android:id="@+id/like_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:layout_marginRight="8dp"
+        android:textSize="12dp"
+        android:textColor="#FF3B30"
+        app:layout_constraintTop_toBottomOf="@+id/sub_title_tv"
+        app:layout_constraintRight_toLeftOf="@+id/chatings_iv"
+        />
+
+    <ImageView
+        android:id="@+id/chatings_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/chatings"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toLeftOf="@id/comment_tv"
+        app:layout_constraintTop_toBottomOf="@id/sub_title_tv"
+        app:tint="#8866FF" />
+
+    <TextView
+        android:id="@+id/comment_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:layout_marginRight="8dp"
+        android:textSize="12dp"
+        android:textColor="#8866FF"
+        app:layout_constraintTop_toBottomOf="@+id/sub_title_tv"
+        app:layout_constraintRight_toLeftOf="@id/rightGuide1"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
