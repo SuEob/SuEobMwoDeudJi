@@ -11,7 +11,6 @@ public class MyInfoFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.my_info_preferences, rootKey);
-
     }
 
 }

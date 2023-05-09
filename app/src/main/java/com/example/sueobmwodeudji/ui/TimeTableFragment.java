@@ -8,19 +8,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.sueobmwodeudji.R;
-import com.example.sueobmwodeudji.adapter.BasicFrameAdapter;
 import com.example.sueobmwodeudji.databinding.FragmentTimeTableBinding;
-import com.example.sueobmwodeudji.model.BasicFrameModel;
 
-import java.util.LinkedList;
-import java.util.List;
 
 public class TimeTableFragment extends Fragment {
     private FragmentTimeTableBinding binding;
-    private List<BasicFrameModel> list = new LinkedList<BasicFrameModel>();
 
     public static TimeTableFragment getInstance() {
         return new TimeTableFragment();

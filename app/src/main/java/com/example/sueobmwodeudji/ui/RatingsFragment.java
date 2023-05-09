@@ -1,7 +1,6 @@
 package com.example.sueobmwodeudji.ui;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,22 +8,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
-import com.example.sueobmwodeudji.R;
-import com.example.sueobmwodeudji.adapter.BasicFrameAdapter;
 import com.example.sueobmwodeudji.adapter.ViewPagerAdapter;
 import com.example.sueobmwodeudji.databinding.FragmentRatingsBinding;
 import com.example.sueobmwodeudji.dto.RatingMyClassData;
-import com.example.sueobmwodeudji.model.BasicFrameModel;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 public class RatingsFragment extends Fragment {
     private FragmentRatingsBinding binding;
-    private List<BasicFrameModel> list = new LinkedList<BasicFrameModel>();
 
     public static RatingsFragment getInstance() {
         return new RatingsFragment();
@@ -41,7 +32,7 @@ public class RatingsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(binding.getRoot(), savedInstanceState);
 
-        RatingsItemView();
+        ratingsItemView();
     }
 
     @Override
@@ -50,7 +41,7 @@ public class RatingsFragment extends Fragment {
         binding = null;
     }
 
-    public void RatingsItemView() {
+    private void ratingsItemView() {
         ArrayList<ArrayList<RatingMyClassData>> listData = new ArrayList<>();
         ArrayList<RatingMyClassData> list1 = new ArrayList<>();
         list1.add(new RatingMyClassData("인공지능", "조범석"));

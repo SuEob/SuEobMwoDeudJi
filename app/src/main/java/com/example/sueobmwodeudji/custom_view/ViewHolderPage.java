@@ -1,5 +1,6 @@
 package com.example.sueobmwodeudji.custom_view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sueobmwodeudji.RatingsActivity;
 import com.example.sueobmwodeudji.databinding.ItemRatingsSub1Binding;
 import com.example.sueobmwodeudji.dto.RatingMyClassData;
 
@@ -16,9 +18,11 @@ import java.util.ArrayList;
 
 public class ViewHolderPage extends RecyclerView.ViewHolder {
     private ItemRatingsSub1Binding binding;
+    private Context context;
 
-    public ViewHolderPage(View itemView) {
+    public ViewHolderPage(View itemView, Context _context) {
         super(itemView);
+        this.context = _context;
         binding = ItemRatingsSub1Binding.bind(itemView);
     }
 
@@ -31,10 +35,24 @@ public class ViewHolderPage extends RecyclerView.ViewHolder {
 
         for (int i = 0; i < 3; i++) {
             if (list.size() <= i) break;
+
             String id = list.get(i).getClass_name();
+            String class_str = list.get(i).getClass_name();
+            String teacher_str = list.get(i).getTeacher_name();
+
             constraintLayouts[i].setVisibility(View.VISIBLE);
-            class_name[i].setText(list.get(i).getClass_name());
-            teacher_name[i].setText(list.get(i).getTeacher_name());
+            class_name[i].setText(class_str);
+            class_name[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, RatingsActivity.class);
+                    intent.putExtra("class_name", class_str);
+                    intent.putExtra("teacher_name", teacher_str);
+
+                    context.startActivity(intent);
+                }
+            });
+            teacher_name[i].setText(teacher_str);
             btn[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

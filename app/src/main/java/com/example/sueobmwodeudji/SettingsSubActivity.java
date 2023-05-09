@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sueobmwodeudji.ui.preferences_ui.MyInfoFragment;
 
+
 public class SettingsSubActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
