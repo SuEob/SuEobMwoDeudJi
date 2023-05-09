@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         BottomNavBar();
-
     }
 
     private void BottomNavBar() {

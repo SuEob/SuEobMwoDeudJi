@@ -33,6 +33,7 @@
             android:exported="true"
             android:parentActivityName=".SettingsActivity">
         </activity>
+        <activity android:name=".CommunityActivity" />
     </application>
 
 </manifest>

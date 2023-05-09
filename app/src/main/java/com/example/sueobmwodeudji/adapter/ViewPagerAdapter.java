@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.R;
@@ -33,7 +34,6 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewHolderPage> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolderPage holder, int position) {
         holder.onBind(listData.get(position), position);
-        Log.d("a","aaaaaa");
     }
 
     @Override
