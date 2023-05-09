@@ -28,6 +28,11 @@ public class TimeTableSecondActivity extends AppCompatActivity {
     private void TimeTableItemView() {
         list.add(new SmallFrameModel("시간표 이름1", R.layout.item_ratings_sub_1));
         list.add(new SmallFrameModel("시간표 이름2", R.layout.item_ratings_sub_1));
+        list.add(new SmallFrameModel("시간표 이름3", R.layout.item_ratings_sub_1));
+        list.add(new SmallFrameModel("시간표 이름4", R.layout.item_ratings_sub_1));
+        list.add(new SmallFrameModel("시간표 이름5", R.layout.item_ratings_sub_1));
+        list.add(new SmallFrameModel("시간표 이름6", R.layout.item_ratings_sub_1));
+        list.add(new SmallFrameModel("시간표 이름7", R.layout.item_ratings_sub_1));
         SmallFrameAdapter adapter = new SmallFrameAdapter(this, list);
         binding.timeTableFragment.setAdapter(adapter);
     }

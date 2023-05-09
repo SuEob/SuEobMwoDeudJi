@@ -31,7 +31,6 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/time_table_text"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:listitem="@layout/item_fragment_small" />
+        tools:listitem="@layout/item_time_table_list"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
