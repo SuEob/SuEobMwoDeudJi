@@ -23,29 +23,37 @@
         <Preference
             app:key="root_school"
             app:title="학교인증"
-            app:iconSpaceReserved="false"
-            android:fragment="com.example.sueobmwodeudji.ui.preferences_ui.SchoolFragment">
+            app:iconSpaceReserved="false">
+            <intent
+                android:targetPackage="com.example.sueobmwodeudji"
+                android:targetClass="com.example.sueobmwodeudji.SettingsActivity" />
         </Preference>
 
         <Preference
             app:key="root_password"
             app:title="비밀번호 변경"
-            app:iconSpaceReserved="false"
-            android:fragment="com.example.sueobmwodeudji.ui.preferences_ui.PasswordFragment">
+            app:iconSpaceReserved="false">
+            <intent
+                android:targetPackage="com.example.sueobmwodeudji"
+                android:targetClass="com.example.sueobmwodeudji.SettingsActivity" />
         </Preference>
 
         <Preference
             app:key="root_logout"
             app:title="로그아웃"
-            app:iconSpaceReserved="false"
-            android:fragment="com.example.sueobmwodeudji.ui.preferences_ui.LogoutFragment">
+            app:iconSpaceReserved="false">
+            <intent
+                android:targetPackage="com.example.sueobmwodeudji"
+                android:targetClass="com.example.sueobmwodeudji.SettingsActivity" />
         </Preference>
 
         <Preference
             app:key="root_withdrawal"
             app:title="회원탈퇴"
-            app:iconSpaceReserved="false"
-            android:fragment="com.example.sueobmwodeudji.ui.preferences_ui.WithdrawalFragment">
+            app:iconSpaceReserved="false">
+            <intent
+                android:targetPackage="com.example.sueobmwodeudji"
+                android:targetClass="com.example.sueobmwodeudji.SettingsActivity" />
         </Preference>
 
     </PreferenceCategory>
@@ -67,8 +75,7 @@
         <Preference
             app:key="root_lock"
             app:title="잠금"
-            app:iconSpaceReserved="false"
-            android:fragment="com.example.sueobmwodeudji.ui.preferences_ui.LockFragment">
+            app:iconSpaceReserved="false">
         </Preference>
 
     </PreferenceCategory>
