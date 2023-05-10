@@ -1,6 +1,8 @@
 package com.example.sueobmwodeudji;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -13,6 +15,11 @@ import com.example.sueobmwodeudji.ui.RatingsFragment;
 import com.example.sueobmwodeudji.ui.SettingsFragment;
 import com.example.sueobmwodeudji.ui.TimeTableFragment;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        BottomNavBar();
     }
 
 
