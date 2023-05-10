@@ -5,8 +5,8 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CommunityCommentCommentViewHolder extends RecyclerView.ViewHolder{
-    public CommunityCommentCommentViewHolder(@NonNull View itemView) {
+public class CommunitySubCommentCommentViewHolder extends RecyclerView.ViewHolder{
+    public CommunitySubCommentCommentViewHolder(@NonNull View itemView) {
         super(itemView);
     }
 }

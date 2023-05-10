@@ -1,9 +1,9 @@
 package com.example.sueobmwodeudji.model;
 
-public class CommunityListModel {
+public class CommunitySubListModel {
     private String title;
 
-    public CommunityListModel(String title) {
+    public CommunitySubListModel(String title) {
         this.title = title;
     }
 

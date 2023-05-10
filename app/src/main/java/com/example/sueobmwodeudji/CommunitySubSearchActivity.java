@@ -6,13 +6,13 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.sueobmwodeudji.adapter.CommunitySearchAdapter;
+import com.example.sueobmwodeudji.adapter.CommunitySubSearchAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityCommunitySearchBinding;
-import com.example.sueobmwodeudji.model.CommunitySearchModel;
+import com.example.sueobmwodeudji.model.CommunitySubSearchModel;
 
 import java.util.LinkedList;
 
-public class CommunitySearchActivity extends AppCompatActivity {
+public class CommunitySubSearchActivity extends AppCompatActivity {
     ActivityCommunitySearchBinding binding;
 
     @Override
@@ -29,12 +29,12 @@ public class CommunitySearchActivity extends AppCompatActivity {
         String result_text = intent.getStringExtra("query");
         result_text = "'"+result_text + "' 검색결과";
         binding.searchTv.setText(result_text);
-        LinkedList<CommunitySearchModel> list = new LinkedList<>();
-        list.add(new CommunitySearchModel("a"));
-        list.add(new CommunitySearchModel("a"));
-        list.add(new CommunitySearchModel("a"));
+        LinkedList<CommunitySubSearchModel> list = new LinkedList<>();
+        list.add(new CommunitySubSearchModel("a"));
+        list.add(new CommunitySubSearchModel("a"));
+        list.add(new CommunitySubSearchModel("a"));
 
-        CommunitySearchAdapter adapter = new CommunitySearchAdapter(this, list);
+        CommunitySubSearchAdapter adapter = new CommunitySubSearchAdapter(this, list);
         binding.recyclerView.setAdapter(adapter);
     }
 }

@@ -5,8 +5,8 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CommunitySearchViewHolder extends RecyclerView.ViewHolder {
-    public CommunitySearchViewHolder(@NonNull View itemView) {
+public class CommunitySubSearchViewHolder extends RecyclerView.ViewHolder {
+    public CommunitySubSearchViewHolder(@NonNull View itemView) {
         super(itemView);
     }
 }

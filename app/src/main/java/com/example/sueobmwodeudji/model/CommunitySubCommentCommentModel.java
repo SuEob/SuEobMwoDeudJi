@@ -1,9 +1,9 @@
 package com.example.sueobmwodeudji.model;
 
-public class CommunityCommentModel {
+public class CommunitySubCommentCommentModel {
     private String title;
 
-    public CommunityCommentModel(String title) {
+    public CommunitySubCommentCommentModel(String title) {
         this.title = title;
     }
 

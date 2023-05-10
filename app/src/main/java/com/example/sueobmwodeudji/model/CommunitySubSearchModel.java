@@ -1,9 +1,9 @@
 package com.example.sueobmwodeudji.model;
 
-public class CommunitySearchModel {
+public class CommunitySubSearchModel {
     private String title;
 
-    public CommunitySearchModel(String title) {
+    public CommunitySubSearchModel(String title) {
         this.title = title;
     }
 

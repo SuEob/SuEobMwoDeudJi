@@ -6,13 +6,13 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.sueobmwodeudji.adapter.CommunityCommentAdapter;
+import com.example.sueobmwodeudji.adapter.CommunitySubCommentAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityCommunityPostBinding;
-import com.example.sueobmwodeudji.model.CommunityCommentModel;
+import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
 
 import java.util.LinkedList;
 
-public class CommunityPostActivity extends AppCompatActivity {
+public class CommunitySubPostActivity extends AppCompatActivity {
     ActivityCommunityPostBinding binding;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,12 +28,12 @@ public class CommunityPostActivity extends AppCompatActivity {
         String subject = intent.getStringExtra("subject");
         binding.subjectTv.setText(subject);
 
-        LinkedList<CommunityCommentModel> list = new LinkedList<>();
-        list.add(new CommunityCommentModel("s"));
-        list.add(new CommunityCommentModel("s"));
-        list.add(new CommunityCommentModel("s"));
+        LinkedList<CommunitySubCommentModel> list = new LinkedList<>();
+        list.add(new CommunitySubCommentModel("s"));
+        list.add(new CommunitySubCommentModel("s"));
+        list.add(new CommunitySubCommentModel("s"));
 
-        CommunityCommentAdapter adapter = new CommunityCommentAdapter(this, list);
+        CommunitySubCommentAdapter adapter = new CommunitySubCommentAdapter(this, list);
         binding.recyclerView.setAdapter(adapter);
     }
 }

@@ -34,10 +34,10 @@
             android:parentActivityName=".SettingsActivity">
         </activity>
         <activity android:name=".CommunityActivity" />
-        <activity android:name=".CommunityPostActivity" />
-        <activity android:name=".CommunitySearchActivity" />
+        <activity android:name=".CommunitySubPostActivity" />
+        <activity android:name=".CommunitySubSearchActivity" />
         <activity android:name=".RatingsActivity" />
-        <activity android:name=".TimeTableSecondActivity" />
+        <activity android:name=".TimeTableSubActivity" />
     </application>
 
 </manifest>

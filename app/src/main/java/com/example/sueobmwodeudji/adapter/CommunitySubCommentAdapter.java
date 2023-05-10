@@ -9,31 +9,31 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.R;
-import com.example.sueobmwodeudji.custom_view.CommunityCommentViewHolder;
-import com.example.sueobmwodeudji.model.CommunityCommentModel;
+import com.example.sueobmwodeudji.custom_view.CommunitySubCommentViewHolder;
+import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
 
 import java.util.List;
 
-public class CommunityCommentAdapter extends RecyclerView.Adapter<CommunityCommentViewHolder>{
-    private Context context;
-    private List<CommunityCommentModel> commentModels;
+public class CommunitySubCommentAdapter extends RecyclerView.Adapter<CommunitySubCommentViewHolder>{
+    private final Context context;
+    private final List<CommunitySubCommentModel> commentModels;
 
-    public CommunityCommentAdapter(Context context, List<CommunityCommentModel> commentModels) {
+    public CommunitySubCommentAdapter(Context context, List<CommunitySubCommentModel> commentModels) {
         this.context = context;
         this.commentModels = commentModels;
     }
 
     @NonNull
     @Override
-    public CommunityCommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CommunitySubCommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_community_comment, parent, false);
 
-        return new CommunityCommentViewHolder(context, view);
+        return new CommunitySubCommentViewHolder(context, view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CommunityCommentViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CommunitySubCommentViewHolder holder, int position) {
         holder.onBind(commentModels.get(position));
     }
 
