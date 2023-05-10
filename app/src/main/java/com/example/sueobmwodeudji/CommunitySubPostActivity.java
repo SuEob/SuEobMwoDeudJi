@@ -7,17 +7,17 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sueobmwodeudji.adapter.CommunitySubCommentAdapter;
-import com.example.sueobmwodeudji.databinding.ActivityCommunityPostBinding;
+import com.example.sueobmwodeudji.databinding.ActivityCommunitySubPostBinding;
 import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
 
 import java.util.LinkedList;
 
 public class CommunitySubPostActivity extends AppCompatActivity {
-    ActivityCommunityPostBinding binding;
+    ActivityCommunitySubPostBinding binding;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityCommunityPostBinding.inflate(getLayoutInflater());
+        binding = ActivityCommunitySubPostBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         showItem();

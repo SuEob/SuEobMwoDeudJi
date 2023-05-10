@@ -7,18 +7,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sueobmwodeudji.adapter.CommunitySubSearchAdapter;
-import com.example.sueobmwodeudji.databinding.ActivityCommunitySearchBinding;
+import com.example.sueobmwodeudji.databinding.ActivityCommunitySubSearchBinding;
 import com.example.sueobmwodeudji.model.CommunitySubSearchModel;
 
 import java.util.LinkedList;
 
 public class CommunitySubSearchActivity extends AppCompatActivity {
-    ActivityCommunitySearchBinding binding;
+    ActivityCommunitySubSearchBinding binding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityCommunitySearchBinding.inflate(getLayoutInflater());
+        binding = ActivityCommunitySubSearchBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         showItem();

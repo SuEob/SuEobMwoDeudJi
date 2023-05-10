@@ -7,18 +7,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sueobmwodeudji.adapter.RatingsSubListAdapter;
-import com.example.sueobmwodeudji.databinding.ActivityRatingsListBinding;
+import com.example.sueobmwodeudji.databinding.ActivityRatingsSubListBinding;
 import com.example.sueobmwodeudji.decoration.RatingsRecyclerViewDecoration;
 import com.example.sueobmwodeudji.model.RatingsSubListModel;
 
 import java.util.LinkedList;
 
 public class RatingsActivity extends AppCompatActivity {
-    private ActivityRatingsListBinding binding;
+    private ActivityRatingsSubListBinding binding;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityRatingsListBinding.inflate(getLayoutInflater());
+        binding = ActivityRatingsSubListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         showItem();

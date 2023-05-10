@@ -7,18 +7,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sueobmwodeudji.adapter.CommunitySubListAdapter;
-import com.example.sueobmwodeudji.databinding.ActivityCommunityListBinding;
+import com.example.sueobmwodeudji.databinding.ActivityCommunitySubListBinding;
 import com.example.sueobmwodeudji.decoration.RatingsRecyclerViewDecoration;
 import com.example.sueobmwodeudji.model.CommunitySubListModel;
 
 import java.util.LinkedList;
 
 public class CommunityActivity extends AppCompatActivity {
-    private ActivityCommunityListBinding binding;
+    private ActivityCommunitySubListBinding binding;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityCommunityListBinding.inflate(getLayoutInflater());
+        binding = ActivityCommunitySubListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         showItem();
