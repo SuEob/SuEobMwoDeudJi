@@ -1,0 +1,39 @@
+package com.example.sueobmwodeudji;
+
+import android.content.Intent;
+import android.os.Bundle;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.sueobmwodeudji.adapter.CommunitySubCommentAdapter;
+import com.example.sueobmwodeudji.databinding.ActivityCommunityPostBinding;
+import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
+
+import java.util.LinkedList;
+
+public class CommunitySubPostActivity extends AppCompatActivity {
+    ActivityCommunityPostBinding binding;
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = ActivityCommunityPostBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        showItem();
+    }
+
+    private void showItem(){
+        Intent intent = getIntent();
+        String subject = intent.getStringExtra("subject");
+        binding.subjectTv.setText(subject);
+
+        LinkedList<CommunitySubCommentModel> list = new LinkedList<>();
+        list.add(new CommunitySubCommentModel("s"));
+        list.add(new CommunitySubCommentModel("s"));
+        list.add(new CommunitySubCommentModel("s"));
+
+        CommunitySubCommentAdapter adapter = new CommunitySubCommentAdapter(this, list);
+        binding.recyclerView.setAdapter(adapter);
+    }
+}

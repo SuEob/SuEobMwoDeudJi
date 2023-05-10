@@ -11,19 +11,19 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.RatingsActivity;
-import com.example.sueobmwodeudji.databinding.ItemRatingsSub1Binding;
+import com.example.sueobmwodeudji.databinding.ItemRatingsMyClassListBinding;
 import com.example.sueobmwodeudji.dto.RatingMyClassData;
 
 import java.util.ArrayList;
 
 public class ViewHolderPage extends RecyclerView.ViewHolder {
-    private final ItemRatingsSub1Binding binding;
+    private final ItemRatingsMyClassListBinding binding;
     private final Context context;
 
     public ViewHolderPage(Context _context, View itemView) {
         super(itemView);
         this.context = _context;
-        binding = ItemRatingsSub1Binding.bind(itemView);
+        binding = ItemRatingsMyClassListBinding.bind(itemView);
     }
 
     public void onBind(ArrayList<RatingMyClassData> list, int position) {

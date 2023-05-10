@@ -9,9 +9,11 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
 import com.example.sueobmwodeudji.CommunityActivity;
+import com.example.sueobmwodeudji.CommunitySubSearchActivity;
 import com.example.sueobmwodeudji.databinding.FragmentCommunityBinding;
 
 
@@ -33,6 +35,7 @@ public class CommunityFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(binding.getRoot(), savedInstanceState);
         addCategoryButtonEvent();
+        addSearchViewEvent();
     }
 
     @Override
@@ -41,7 +44,7 @@ public class CommunityFragment extends Fragment {
         binding = null;
     }
 
-    public void addCategoryButtonEvent() {
+    private void addCategoryButtonEvent() {
         Button[] buttons = { binding.class1Btn, binding.class2Btn, binding.class3Btn,
                 binding.gameBtn, binding.bookBtn, binding.anchorBtn};
         for (Button button : buttons) {
@@ -56,6 +59,23 @@ public class CommunityFragment extends Fragment {
             });
 
         }
+    }
+
+    private void addSearchViewEvent(){
+        binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent(getActivity(), CommunitySubSearchActivity.class);
+                intent.putExtra("query", query);
+                startActivity(intent);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
 
 }
