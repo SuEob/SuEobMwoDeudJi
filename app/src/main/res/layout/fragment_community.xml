@@ -28,7 +28,7 @@
         app:layout_constraintGuide_begin="60dp"
         />
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
+        android:id="@+id/search_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintRight_toLeftOf="@+id/myProfile"

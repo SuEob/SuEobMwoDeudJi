@@ -1,13 +1,11 @@
 package com.example.sueobmwodeudji.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.R;
@@ -27,7 +25,7 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewHolderPage> {
     @Override
     public ViewHolderPage onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
-        View view = LayoutInflater.from(context).inflate(R.layout.item_ratings_sub_1, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_ratings_my_class_list, parent, false);
         return new ViewHolderPage(context, view);
     }
 

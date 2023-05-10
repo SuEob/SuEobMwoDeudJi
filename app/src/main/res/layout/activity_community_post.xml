@@ -38,6 +38,7 @@
         app:layout_constraintLeft_toLeftOf="@+id/leftGuide1"
         />
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/content_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/contentStartGuide1"
@@ -91,7 +92,68 @@
             app:layout_constraintLeft_toLeftOf="parent"
             />
 
+        <ImageView
+            android:id="@+id/ratings_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ratings"
+            android:layout_marginTop="12dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/content_tv"
+            app:tint="#FF3B30" />
 
+        <TextView
+            android:id="@+id/like_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:layout_marginLeft="8dp"
+            android:textSize="12dp"
+            android:textColor="#FF3B30"
+            app:layout_constraintTop_toTopOf="@+id/ratings_iv"
+            app:layout_constraintBottom_toBottomOf="@+id/ratings_iv"
+            app:layout_constraintLeft_toRightOf="@+id/ratings_iv"
+            />
+
+        <ImageView
+            android:id="@+id/chatings_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/chatings"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintLeft_toRightOf="@+id/like_tv"
+            app:layout_constraintTop_toTopOf="@+id/ratings_iv"
+            app:tint="#8866FF" />
+        <TextView
+            android:id="@+id/comment_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:layout_marginLeft="8dp"
+            android:textSize="12dp"
+            android:textColor="#8866FF"
+            app:layout_constraintTop_toTopOf="@+id/ratings_iv"
+            app:layout_constraintBottom_toBottomOf="@+id/ratings_iv"
+            app:layout_constraintLeft_toRightOf="@+id/chatings_iv" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/hr"
+        android:layout_width="match_parent"
+        android:layout_height="4px"
+        android:layout_marginTop="32px"
+        android:background="@color/grey_cc"
+        app:layout_constraintTop_toBottomOf="@+id/content_layout"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32px"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@+id/hr"
+        app:layout_constraintLeft_toLeftOf="@id/leftGuide1"
+        app:layout_constraintRight_toRightOf="@id/rightGuide1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

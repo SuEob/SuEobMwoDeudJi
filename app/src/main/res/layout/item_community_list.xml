@@ -12,43 +12,94 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="16dp"
+        app:layout_constraintGuide_begin="12dp"
         />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/rightGuide1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="16dp"
+        app:layout_constraintGuide_end="12dp"
+        />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/contentStartGuide1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="8dp"
         />
     <TextView
         android:id="@+id/title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="글 제목"
+        android:layout_marginLeft="4dp"
+        android:text="게시글 제목"
+        android:textSize="24dp"
+        android:textColor="@color/black_12"
+        app:layout_constraintTop_toTopOf="@id/contentStartGuide1"
+        app:layout_constraintLeft_toLeftOf="@id/leftGuide1"/>
+
+    <TextView
+        android:id="@+id/sub_title_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용 게시글 내용"
         android:textSize="14dp"
+        android:lines="2"
+        android:ellipsize="end"
         app:layout_constraintLeft_toLeftOf="@id/leftGuide1"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintRight_toRightOf="@+id/rightGuide1"
+        app:layout_constraintTop_toBottomOf="@+id/title_tv" />
+    <ImageView
+        android:id="@+id/ratings_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ratings"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toLeftOf="@+id/like_tv"
+        app:layout_constraintTop_toBottomOf="@id/sub_title_tv"
+        app:tint="#FF3B30" />
 
     <TextView
         android:id="@+id/like_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="좋아요 수"
-        android:textSize="14dp"
-        app:layout_constraintRight_toLeftOf="@+id/comment_tv"
-        app:layout_constraintTop_toTopOf="parent"
+        android:text="0"
+        android:layout_marginRight="8dp"
+        android:textSize="12dp"
+        android:textColor="#FF3B30"
+        app:layout_constraintTop_toBottomOf="@+id/sub_title_tv"
+        app:layout_constraintRight_toLeftOf="@+id/chatings_iv"
         />
+
+    <ImageView
+        android:id="@+id/chatings_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/chatings"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toLeftOf="@id/comment_tv"
+        app:layout_constraintTop_toBottomOf="@id/sub_title_tv"
+        app:tint="#8866FF" />
+
     <TextView
         android:id="@+id/comment_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="댓글 수"
-        android:textSize="14dp"
-        app:layout_constraintRight_toRightOf="@id/rightGuide1"
-        app:layout_constraintTop_toTopOf="parent"
+        android:text="0"
+        android:layout_marginRight="8dp"
+        android:textSize="12dp"
+        android:textColor="#8866FF"
+        app:layout_constraintTop_toBottomOf="@+id/sub_title_tv"
+        app:layout_constraintRight_toLeftOf="@id/rightGuide1"
         />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4px"
+        android:layout_marginTop="16px"
+        android:background="@color/grey_cc"
+        app:layout_constraintTop_toBottomOf="@+id/ratings_iv"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,9 +20,9 @@ public class CommunityListAdapter extends RecyclerView.Adapter<CommunityListView
     private Context context;
     private List<CommunityListModel> communityListModels;
 
-    public CommunityListAdapter(Context context, List<CommunityListModel> ratingsListModel) {
+    public CommunityListAdapter(Context context, List<CommunityListModel> communityListModels) {
         this.context = context;
-        this.communityListModels = ratingsListModel;
+        this.communityListModels = communityListModels;
     }
 
     @NonNull

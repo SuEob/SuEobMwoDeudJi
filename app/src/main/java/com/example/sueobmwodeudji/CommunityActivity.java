@@ -38,22 +38,6 @@ public class CommunityActivity extends AppCompatActivity {
         list.add(new CommunityListModel("제목3"));
         list.add(new CommunityListModel("제목3"));
         list.add(new CommunityListModel("제목3"));
-        list.add(new CommunityListModel("제목3"));
-        list.add(new CommunityListModel("제목3"));
-        list.add(new CommunityListModel("제목3"));
-        list.add(new CommunityListModel("제목3"));
-        list.add(new CommunityListModel("제목3"));
-        list.add(new CommunityListModel("제목3"));
-        list.add(new CommunityListModel("제목3"));
-        list.add(new CommunityListModel("제목3"));
-        list.add(new CommunityListModel("제목3"));
-        list.add(new CommunityListModel("제목3"));
-        list.add(new CommunityListModel("제목3"));
-        list.add(new CommunityListModel("제목3"));
-        list.add(new CommunityListModel("제목3"));
-        list.add(new CommunityListModel("제목3"));
-        list.add(new CommunityListModel("제목3"));
-        list.add(new CommunityListModel("제목3"));
 
         CommunityListAdapter adapter = new CommunityListAdapter(this, list);
         binding.recyclerView.setAdapter(adapter);

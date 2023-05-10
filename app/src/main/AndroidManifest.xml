@@ -35,6 +35,7 @@
         </activity>
         <activity android:name=".CommunityActivity" />
         <activity android:name=".CommunityPostActivity" />
+        <activity android:name=".CommunitySearchActivity" />
         <activity android:name=".RatingsActivity" />
         <activity android:name=".TimeTableSecondActivity" />
     </application>
