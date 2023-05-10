@@ -17,10 +17,10 @@ import com.example.sueobmwodeudji.dto.RatingMyClassData;
 import java.util.ArrayList;
 
 public class ViewHolderPage extends RecyclerView.ViewHolder {
-    private ItemRatingsSub1Binding binding;
-    private Context context;
+    private final ItemRatingsSub1Binding binding;
+    private final Context context;
 
-    public ViewHolderPage(View itemView, Context _context) {
+    public ViewHolderPage(Context _context, View itemView) {
         super(itemView);
         this.context = _context;
         binding = ItemRatingsSub1Binding.bind(itemView);

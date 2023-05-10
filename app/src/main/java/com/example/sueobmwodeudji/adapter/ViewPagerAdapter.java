@@ -28,7 +28,7 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewHolderPage> {
     public ViewHolderPage onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         View view = LayoutInflater.from(context).inflate(R.layout.item_ratings_sub_1, parent, false);
-        return new ViewHolderPage(view, context);
+        return new ViewHolderPage(context, view);
     }
 
     @Override

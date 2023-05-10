@@ -31,7 +31,7 @@ public class CommunityListAdapter extends RecyclerView.Adapter<CommunityListView
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_community_list, parent, false);
 
-        return new CommunityListViewHolder(view);
+        return new CommunityListViewHolder(context, view);
     }
 
     @Override
