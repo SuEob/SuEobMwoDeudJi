@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sueobmwodeudji.databinding.ActivityMainBinding;
-
 import com.example.sueobmwodeudji.ui.CommunityFragment;
 import com.example.sueobmwodeudji.ui.HomeFragment;
 import com.example.sueobmwodeudji.ui.RatingsFragment;
@@ -25,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         BottomNavBar();
     }
+
 
     private void BottomNavBar() {
         // 기본화면 설정(홈 화면)
