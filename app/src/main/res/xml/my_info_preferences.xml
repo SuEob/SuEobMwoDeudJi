@@ -14,7 +14,6 @@
         <Preference
             app:key="info_profile"
             app:title="프로필 이미지 변경"
-            app:fragment="com.example.sueobmwodeudji.ui.preferences_ui.ProfileFragment"
             app:iconSpaceReserved="false"
             />
 
