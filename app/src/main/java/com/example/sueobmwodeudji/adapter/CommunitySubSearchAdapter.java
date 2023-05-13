@@ -30,7 +30,7 @@ public class CommunitySubSearchAdapter extends RecyclerView.Adapter<CommunitySub
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_community_search_list, parent, false);
 
-        return new CommunitySubSearchViewHolder(view);
+        return new CommunitySubSearchViewHolder(context, view);
     }
 
     @Override

@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.RatingsActivity;
+import com.example.sueobmwodeudji.RatingsSubFormActivity;
 import com.example.sueobmwodeudji.databinding.ItemRatingsMyClassListBinding;
 import com.example.sueobmwodeudji.dto.RatingMyClassData;
 
@@ -56,6 +57,11 @@ public class ViewHolderPage extends RecyclerView.ViewHolder {
             btn[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent intent = new Intent(context, RatingsSubFormActivity.class);
+                    intent.putExtra("class_name", class_str);
+                    intent.putExtra("teacher_name", teacher_str);
+
+                    context.startActivity(intent);
                 }
             });
         }

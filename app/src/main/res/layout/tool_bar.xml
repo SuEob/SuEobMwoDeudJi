@@ -7,5 +7,5 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:title="@string/app_name"
     app:titleTextColor="@color/white"
-    android:background="@color/secondaryBlue"
+    android:background="@color/secondary_blue"
     app:menu="@menu/tool_bar" />

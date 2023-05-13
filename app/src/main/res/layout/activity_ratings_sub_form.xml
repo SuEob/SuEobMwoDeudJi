@@ -9,55 +9,255 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="16dp"
-        />
+        app:layout_constraintGuide_begin="16dp" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/rightGuide1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="16dp"
-        />
+        app:layout_constraintGuide_end="16dp" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/contentStartGuide1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="60dp"
-        />
+        app:layout_constraintGuide_begin="60dp" />
+
     <TextView
         android:id="@+id/class_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="수업 이름"
         android:textColor="@color/black_12"
         android:textSize="24dp"
         android:textStyle="bold"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="@+id/leftGuide1"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/teacher_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="수업 이름"
         android:textSize="18dp"
-        app:layout_constraintTop_toBottomOf="@+id/class_tv"
         app:layout_constraintLeft_toLeftOf="@+id/leftGuide1"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/class_tv" />
 
     <TextView
         android:id="@+id/submit_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="평가하기"
-        android:textColor="@color/secondaryBlue"
+        android:textColor="@color/secondary_blue"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/contentStartGuide1"
         app:layout_constraintRight_toRightOf="@id/rightGuide1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/sub_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintLeft_toLeftOf="@id/leftGuide1"
+        app:layout_constraintRight_toRightOf="@id/rightGuide1"
+        app:layout_constraintTop_toTopOf="@id/contentStartGuide1">
+
+        <TextView
+            android:id="@+id/difficulty_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이 수업의 난이도는?"
+            android:textColor="@color/grey_800"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/difficulty_rg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/difficulty_tv"
+            app:layout_constraintWidth_percent="0.7">
+
+            <RadioButton
+                android:id="@+id/difficulty_hard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_radio_button"
+                android:button="@null"
+                android:gravity="center"
+                android:text="상"
+                android:textColor="@drawable/selector_radio_text"/>
+
+            <RadioButton
+                android:id="@+id/difficulty_normal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_radio_button"
+                android:button="@null"
+                android:gravity="center"
+                android:text="중"
+                android:textColor="@drawable/selector_radio_text"/>
+
+            <RadioButton
+                android:id="@+id/difficulty_eazy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector_radio_button"
+                android:button="@null"
+                android:gravity="center"
+                android:text="하"
+                android:textColor="@drawable/selector_radio_text"/>
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="이 수업의 방식은?"
+            android:textColor="@color/grey_800"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/difficulty_rg" />
+
+        <RadioGroup
+            android:id="@+id/type_rg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/type_tv">
+
+            <RadioButton
+                android:id="@+id/type_ppt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/selector_radio_button"
+                android:button="@null"
+                android:gravity="center"
+                android:text="ppt 위주"
+                android:textColor="@drawable/selector_radio_text"/>
+
+            <RadioButton
+                android:id="@+id/type_book"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/selector_radio_button"
+                android:button="@null"
+                android:gravity="center"
+                android:text="교과서 위주"
+                android:textColor="@drawable/selector_radio_text"/>
+
+            <RadioButton
+                android:id="@+id/type_handout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/selector_radio_button"
+                android:button="@null"
+                android:gravity="center"
+                android:text="유인물 위주"
+                android:textColor="@drawable/selector_radio_text"/>
+
+            <RadioButton
+                android:id="@+id/type_etc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector_radio_button"
+                android:button="@null"
+                android:gravity="center"
+                android:text="기타 방식"
+                android:textColor="@drawable/selector_radio_text"/>
+        </RadioGroup>
+
+        <View
+            android:id="@+id/in_br"
+            android:layout_width="match_parent"
+            android:layout_height="4px"
+            android:layout_marginTop="36px"
+            android:background="@color/grey_cc"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/type_rg" />
+
+        <EditText
+            android:id="@+id/title_et"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:hint="해당 수업에 대한 한 줄평을 작성해주세요."
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/in_br" />
+
+        <EditText
+            android:id="@+id/content_et"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:background="@null"
+            android:hint="해당 수업에 대한 상세한 내용을 작성해주세요."
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_et" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/br"
+        android:layout_width="0dp"
+        android:layout_height="4px"
+        android:layout_marginTop="82px"
+        android:background="@color/black_12"
+        app:layout_constraintLeft_toLeftOf="@id/leftGuide1"
+        app:layout_constraintRight_toRightOf="@id/rightGuide1"
+        app:layout_constraintTop_toBottomOf="@+id/sub_1" />
+
+    <TextView
+        android:id="@+id/honey_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이 수업에 꿀을 첨가하시나요?"
+        android:textColor="@color/grey_800"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/br"
+        app:layout_constraintLeft_toLeftOf="@id/leftGuide1"
         />
+
+    <ImageView
+        android:id="@+id/honey_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/honey"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/honey_tv"
+        app:layout_constraintLeft_toLeftOf="@id/leftGuide1"
+        app:layout_constraintRight_toRightOf="@id/rightGuide1"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

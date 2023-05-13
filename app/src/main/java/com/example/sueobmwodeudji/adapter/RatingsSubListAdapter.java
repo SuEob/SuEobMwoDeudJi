@@ -28,7 +28,7 @@ public class RatingsSubListAdapter extends RecyclerView.Adapter<RatingsSubListVi
     public RatingsSubListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_ratings_list, parent, false);
-        RatingsSubListViewHolder viewHolder = new RatingsSubListViewHolder(view);
+        RatingsSubListViewHolder viewHolder = new RatingsSubListViewHolder(context, view);
 
         return viewHolder;
     }

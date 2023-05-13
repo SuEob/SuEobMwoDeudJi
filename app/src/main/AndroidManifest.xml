@@ -36,7 +36,10 @@
         <activity android:name=".CommunityActivity" />
         <activity android:name=".CommunitySubPostActivity" />
         <activity android:name=".CommunitySubSearchActivity" />
+        <activity android:name=".CommunitySubFormActivity" />
         <activity android:name=".RatingsActivity" />
+        <activity android:name=".RatingsSubPostActivity" />
+        <activity android:name=".RatingsSubFormActivity" />
         <activity android:name=".TimeTableSubActivity" />
     </application>
 

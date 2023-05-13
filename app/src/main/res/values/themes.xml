@@ -5,8 +5,8 @@
 <!--        <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item> -->
-        <item name="colorPrimary">@color/secondaryBlue</item>
-        <item name="colorPrimaryVariant">@color/secondaryBlueVariant</item>
+        <item name="colorPrimary">@color/secondary_blue</item>
+        <item name="colorPrimaryVariant">@color/secondary_blue_variant</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
