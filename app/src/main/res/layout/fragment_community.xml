@@ -42,7 +42,6 @@
         android:layout_marginTop="8dp"
         android:src="@drawable/account"
         app:layout_constraintEnd_toStartOf="@+id/rightGuide1"
-        app:layout_constraintLeft_toRightOf="@+id/searchView"
         app:layout_constraintTop_toTopOf="parent" />
 
 

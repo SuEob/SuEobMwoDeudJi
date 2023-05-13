@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.sueobmwodeudji.adapter.CommunitySubSearchAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityCommunitySubSearchBinding;
@@ -20,6 +21,10 @@ public class CommunitySubSearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityCommunitySubSearchBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        Toolbar toolbar = binding.toolBar.mainToolBar;
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         showItem();
     }

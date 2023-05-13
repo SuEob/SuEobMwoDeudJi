@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.sueobmwodeudji.adapter.CommunitySubCommentAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityCommunitySubPostBinding;
@@ -20,6 +21,10 @@ public class CommunitySubPostActivity extends AppCompatActivity {
         binding = ActivityCommunitySubPostBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        Toolbar toolbar = binding.toolBar.mainToolBar;
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         showItem();
     }
 
@@ -27,6 +32,8 @@ public class CommunitySubPostActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String subject = intent.getStringExtra("subject");
         binding.subjectTv.setText(subject);
+        getSupportActionBar().setTitle(subject);
+
 
         LinkedList<CommunitySubCommentModel> list = new LinkedList<>();
         list.add(new CommunitySubCommentModel("s"));

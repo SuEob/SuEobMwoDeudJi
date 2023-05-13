@@ -38,6 +38,10 @@
         <activity android:name=".CommunitySubSearchActivity" />
         <activity android:name=".RatingsActivity" />
         <activity android:name=".TimeTableSubActivity" />
+        <activity
+            android:name=".SearchActivity"
+            android:exported="true"
+            android:parentActivityName=".MainActivity"/>
     </application>
 
 </manifest>
