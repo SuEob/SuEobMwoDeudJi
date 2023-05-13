@@ -30,18 +30,6 @@
         android:id="@+id/tool_bar"
         layout="@layout/tool_bar" />
 
-    <TextView
-        android:id="@+id/subject_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="게시판이름"
-        android:textColor="@color/black_12"
-        android:textSize="24dp"
-        android:textStyle="bold"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="@+id/leftGuide1"
-        />
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/content_layout"
         android:layout_width="0dp"

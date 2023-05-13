@@ -6,14 +6,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
-import com.example.sueobmwodeudji.CommunityActivity;
+import com.example.sueobmwodeudji.CommunitySubListActivity;
 import com.example.sueobmwodeudji.CommunitySubSearchActivity;
+import com.example.sueobmwodeudji.MainActivity;
+import com.example.sueobmwodeudji.R;
+import com.example.sueobmwodeudji.databinding.ActivityMainBinding;
 import com.example.sueobmwodeudji.databinding.FragmentCommunityBinding;
 
 
@@ -28,6 +32,10 @@ public class CommunityFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentCommunityBinding.inflate(inflater, container, false);
+
+        String tool_bar_title = "커뮤니티";
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle(tool_bar_title);
+
         return binding.getRoot();
     }
 
@@ -35,7 +43,7 @@ public class CommunityFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(binding.getRoot(), savedInstanceState);
         addCategoryButtonEvent();
-        addSearchViewEvent();
+        //addSearchViewEvent();
     }
 
     @Override
@@ -51,7 +59,7 @@ public class CommunityFragment extends Fragment {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), CommunityActivity.class);
+                    Intent intent = new Intent(getActivity(), CommunitySubListActivity.class);
                     intent.putExtra("subject", button.getText().toString());
 
                     startActivity(intent);
@@ -61,7 +69,7 @@ public class CommunityFragment extends Fragment {
         }
     }
 
-    private void addSearchViewEvent(){
+   /* private void addSearchViewEvent(){
         binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -76,6 +84,6 @@ public class CommunityFragment extends Fragment {
                 return false;
             }
         });
-    }
+    }*/
 
 }

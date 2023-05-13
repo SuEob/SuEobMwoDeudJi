@@ -27,24 +27,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="60dp"
         />
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintRight_toLeftOf="@+id/myProfile"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
-    <ImageView
-        android:id="@+id/myProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/account"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuide1"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
 
     <LinearLayout
         android:id="@+id/linear11"

@@ -30,7 +30,7 @@ public class CommunitySubListViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, CommunitySubPostActivity.class);
-                intent.putExtra("subject", "대충 subject");
+                intent.putExtra("subject", data.getTitle());
                 context.startActivity(intent);
             }
         });

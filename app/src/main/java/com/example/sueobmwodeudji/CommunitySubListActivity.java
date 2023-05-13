@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.sueobmwodeudji.adapter.CommunitySubListAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityCommunitySubListBinding;
@@ -13,12 +14,16 @@ import com.example.sueobmwodeudji.model.CommunitySubListModel;
 
 import java.util.LinkedList;
 
-public class CommunityActivity extends AppCompatActivity {
+public class CommunitySubListActivity extends AppCompatActivity {
     private ActivityCommunitySubListBinding binding;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityCommunitySubListBinding.inflate(getLayoutInflater());
+        Toolbar toolbar = binding.toolBar.mainToolBar;
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         setContentView(binding.getRoot());
 
         showItem();
@@ -27,7 +32,9 @@ public class CommunityActivity extends AppCompatActivity {
     private void showItem(){
         Intent intent = getIntent();
         String subject = intent.getStringExtra("subject");
-        binding.subjectTv.setText(subject);
+
+
+        getSupportActionBar().setTitle(subject);
 
         LinkedList<CommunitySubListModel> list = new LinkedList<>();
         list.add(new CommunitySubListModel("제목1"));
