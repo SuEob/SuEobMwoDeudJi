@@ -9,7 +9,8 @@
 
     <include
         android:id="@+id/tool_bar"
-        layout="@layout/tool_bar"/>
+        layout="@layout/tool_bar"
+        app:menu="@menu/frame_tool_bar" />
 
     <FrameLayout
         android:id="@+id/containers"
