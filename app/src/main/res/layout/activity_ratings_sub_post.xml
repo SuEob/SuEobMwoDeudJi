@@ -18,40 +18,17 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="16dp"
         />
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/contentStartGuide1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="60dp"
-        />
-    <TextView
-        android:id="@+id/class_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="수업 이름"
-        android:textColor="@color/black_12"
-        android:textSize="24dp"
-        android:textStyle="bold"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="@+id/leftGuide1"
-        />
-    <TextView
-        android:id="@+id/teacher_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="수업 이름"
-        android:textSize="18dp"
-        app:layout_constraintTop_toBottomOf="@+id/class_tv"
-        app:layout_constraintLeft_toLeftOf="@+id/leftGuide1"
-        />
+
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/content_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        app:layout_constraintTop_toTopOf="@id/contentStartGuide1"
+        app:layout_constraintTop_toBottomOf="@+id/tool_bar"
         app:layout_constraintLeft_toLeftOf="@id/leftGuide1"
         app:layout_constraintRight_toRightOf="@id/rightGuide1"
         >
@@ -184,5 +161,17 @@
             app:layout_constraintBottom_toBottomOf="@+id/ratings_iv"
             app:layout_constraintLeft_toRightOf="@+id/chatings_iv" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@+id/content_layout"
+        app:layout_constraintLeft_toLeftOf="@id/leftGuide1"
+        app:layout_constraintRight_toRightOf="@id/rightGuide1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

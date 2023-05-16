@@ -30,9 +30,9 @@ public class CommunitySubSearchActivity extends AppCompatActivity {
 
     private void showItem(){
         Intent intent = getIntent();
-        /*String result_text = intent.getStringExtra("query");
+        String result_text = intent.getStringExtra("query");
         result_text = "'"+result_text + "' 검색결과";
-        binding.searchTv.setText(result_text);*/
+        binding.searchTv.setText(result_text);
         LinkedList<CommunitySubSearchModel> list = new LinkedList<>();
         list.add(new CommunitySubSearchModel("a"));
         list.add(new CommunitySubSearchModel("a"));

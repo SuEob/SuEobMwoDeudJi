@@ -20,40 +20,14 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="16dp"
         />
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/contentStartGuide1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="60dp"
-        />
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintRight_toLeftOf="@+id/myProfile"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
-    <ImageView
-        android:id="@+id/myProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/account"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuide1"
-        app:layout_constraintLeft_toRightOf="@+id/searchView"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-
     <LinearLayout
         android:id="@+id/linear11"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintLeft_toLeftOf="@+id/leftGuide1"
         app:layout_constraintRight_toRightOf="@+id/rightGuide1"
-        app:layout_constraintTop_toTopOf="@+id/contentStartGuide1"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/linear21"
         android:orientation="vertical">
         <TextView
@@ -110,56 +84,12 @@
             app:layout_constraintTop_toTopOf="@+id/contentStartGuide1"
             app:layout_constraintBottom_toTopOf="@+id/linear21"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="자료구조"
-                android:textColor="@color/black_12"
-                android:textSize="24dp"
-                android:layout_marginLeft="16dp"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginTop="16dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="김현호"
-                android:textColor="@color/black_12"
-                android:textSize="10dp"
-                android:layout_marginLeft="16dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="매 수업마다 ppt자료를 가져와서 수업을 이해하는데 많이 도움이 됨 어쩌고 저쩌고..."
-                android:textColor="@color/black_12"
-                android:textSize="14dp"
-                android:layout_marginLeft="16dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="자료구조"
-                android:textColor="@color/black_12"
-                android:textSize="24dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="김현호"
-                android:textColor="@color/black_12"
-                android:textSize="10dp"
-                android:layout_marginLeft="16dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="매 수업마다 ppt자료를 가져와서 수업을 이해하는데 많이 도움이 됨 어쩌고 저쩌고..."
-                android:textColor="@color/black_12"
-                android:textSize="14dp"
-                android:layout_marginLeft="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 />
         </LinearLayout>
     </LinearLayout>

@@ -9,12 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.R;
-import com.example.sueobmwodeudji.custom_view.CommunitySubCommentCommentViewHolder;
 import com.example.sueobmwodeudji.model.CommunitySubCommentCommentModel;
 
 import java.util.List;
 
-public class CommunitySubCommentCommentAdapter extends RecyclerView.Adapter<CommunitySubCommentCommentViewHolder> {
+public class CommunitySubCommentCommentAdapter extends RecyclerView.Adapter<CommunitySubCommentCommentAdapter.CommunitySubCommentCommentViewHolder> {
 
     private final Context context;
     private final List<CommunitySubCommentCommentModel> commentModels;
@@ -41,5 +40,11 @@ public class CommunitySubCommentCommentAdapter extends RecyclerView.Adapter<Comm
     @Override
     public int getItemCount() {
         return commentModels.size();
+    }
+
+    public static class CommunitySubCommentCommentViewHolder extends RecyclerView.ViewHolder{
+        public CommunitySubCommentCommentViewHolder(@NonNull View itemView) {
+            super(itemView);
+        }
     }
 }

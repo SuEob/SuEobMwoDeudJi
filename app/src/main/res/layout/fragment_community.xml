@@ -20,21 +20,15 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="16dp"
         />
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/contentStartGuide1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="60dp"
-        />
 
     <LinearLayout
         android:id="@+id/linear11"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintLeft_toLeftOf="@+id/leftGuide1"
         app:layout_constraintRight_toRightOf="@+id/rightGuide1"
-        app:layout_constraintTop_toTopOf="@+id/contentStartGuide1"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/linear21"
         android:orientation="vertical">
         <TextView
@@ -198,56 +192,12 @@
             app:layout_constraintTop_toTopOf="@+id/contentStartGuide1"
             app:layout_constraintBottom_toTopOf="@+id/linear21"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="글 제목"
-                android:textColor="@color/black"
-                android:textSize="24dp"
-                android:layout_marginLeft="16dp"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginTop="16dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="닉네임"
-                android:textColor="@color/black_12"
-                android:textSize="10dp"
-                android:layout_marginLeft="16dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="게시글 내용이 들어가는 곳 게시글 내용이 들어가는 곳 게시글 내용이 들어가는 곳 게시글 내용이 들어가는 곳 게시글 내용이 들어가는 곳..."
-                android:textColor="@color/black_12"
-                android:textSize="14dp"
-                android:layout_marginLeft="16dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="글 제목"
-                android:textColor="@color/black_12"
-                android:textSize="24dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="닉네임"
-                android:textColor="@color/black_12"
-                android:textSize="10dp"
-                android:layout_marginLeft="16dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="게시글 내용이 들어가는 곳 게시글 내용이 들어가는 곳 게시글 내용이 들어가는 곳 게시글 내용이 들어가는 곳 게시글 내용이 들어가는 곳..."
-                android:textColor="@color/black_12"
-                android:textSize="14dp"
-                android:layout_marginLeft="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 />
         </LinearLayout>
     </LinearLayout>

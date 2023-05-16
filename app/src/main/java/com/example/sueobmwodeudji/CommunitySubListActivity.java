@@ -9,7 +9,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.sueobmwodeudji.adapter.CommunitySubListAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityCommunitySubListBinding;
-import com.example.sueobmwodeudji.decoration.RatingsRecyclerViewDecoration;
 import com.example.sueobmwodeudji.model.CommunitySubListModel;
 
 import java.util.LinkedList;
@@ -46,6 +45,5 @@ public class CommunitySubListActivity extends AppCompatActivity {
 
         CommunitySubListAdapter adapter = new CommunitySubListAdapter(this, list);
         binding.recyclerView.setAdapter(adapter);
-        binding.recyclerView.addItemDecoration(new RatingsRecyclerViewDecoration(40));
     }
 }

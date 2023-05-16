@@ -10,9 +10,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.sueobmwodeudji.MainActivity;
+import com.example.sueobmwodeudji.adapter.RatingsSubRecentListAdapter;
 import com.example.sueobmwodeudji.adapter.ViewPagerAdapter;
 import com.example.sueobmwodeudji.databinding.FragmentRatingsBinding;
 import com.example.sueobmwodeudji.dto.RatingMyClassData;
+import com.example.sueobmwodeudji.model.CommunitySubRecentListModel;
+import com.example.sueobmwodeudji.model.RatingsSubRecentListModel;
 
 import java.util.ArrayList;
 
@@ -39,6 +42,7 @@ public class RatingsFragment extends Fragment {
         super.onViewCreated(binding.getRoot(), savedInstanceState);
 
         ratingsItemView();
+        setRecentListRecyclerView();
     }
 
     @Override
@@ -67,5 +71,20 @@ public class RatingsFragment extends Fragment {
         listData.add(list3);
 
         binding.viewPager2.setAdapter(new ViewPagerAdapter(listData));
+    }
+
+    private void setRecentListRecyclerView(){
+        ArrayList<RatingsSubRecentListModel> list = new ArrayList<>();
+        list.add(new RatingsSubRecentListModel("제목1", "닉네임1", "내용내용내용내용내용"));
+        list.add(new RatingsSubRecentListModel("제목2", "닉네임2", "내용내용내용내용내용내용내용내용내용내용"));
+        list.add(new RatingsSubRecentListModel("제목3", "닉네임3", "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"));
+        list.add(new RatingsSubRecentListModel("제목4", "닉네임4", "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"));
+        list.add(new RatingsSubRecentListModel("제목5", "닉네임5", "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"));
+        list.add(new RatingsSubRecentListModel("제목6", "닉네임6", "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"));
+        list.add(new RatingsSubRecentListModel("제목7", "닉네임7", "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"));
+        list.add(new RatingsSubRecentListModel("제목8", "닉네임8", "내용내용내용내용내용내용내용내용내용내용"));
+
+        RatingsSubRecentListAdapter adapter = new RatingsSubRecentListAdapter(getContext(), list);
+        binding.recyclerView.setAdapter(adapter);
     }
 }

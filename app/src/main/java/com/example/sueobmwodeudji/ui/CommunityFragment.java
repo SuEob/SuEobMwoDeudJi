@@ -17,8 +17,16 @@ import com.example.sueobmwodeudji.CommunitySubListActivity;
 import com.example.sueobmwodeudji.CommunitySubSearchActivity;
 import com.example.sueobmwodeudji.MainActivity;
 import com.example.sueobmwodeudji.R;
+import com.example.sueobmwodeudji.adapter.CommunitySubRecentListAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityMainBinding;
 import com.example.sueobmwodeudji.databinding.FragmentCommunityBinding;
+import com.example.sueobmwodeudji.dto.RatingMyClassData;
+import com.example.sueobmwodeudji.model.CommunitySubRecentListModel;
+
+import org.checkerframework.checker.units.qual.A;
+import org.checkerframework.checker.units.qual.C;
+
+import java.util.ArrayList;
 
 
 public class CommunityFragment extends Fragment {
@@ -43,6 +51,7 @@ public class CommunityFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(binding.getRoot(), savedInstanceState);
         addCategoryButtonEvent();
+        setRecentListRecyclerView();
         //addSearchViewEvent();
     }
 
@@ -67,6 +76,21 @@ public class CommunityFragment extends Fragment {
             });
 
         }
+    }
+
+    private void setRecentListRecyclerView(){
+        ArrayList<CommunitySubRecentListModel> list = new ArrayList<>();
+        list.add(new CommunitySubRecentListModel("제목1", "닉네임1", "내용내용내용내용내용"));
+        list.add(new CommunitySubRecentListModel("제목2", "닉네임2", "내용내용내용내용내용내용내용내용내용내용"));
+        list.add(new CommunitySubRecentListModel("제목3", "닉네임3", "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"));
+        list.add(new CommunitySubRecentListModel("제목4", "닉네임4", "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"));
+        list.add(new CommunitySubRecentListModel("제목5", "닉네임5", "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"));
+        list.add(new CommunitySubRecentListModel("제목6", "닉네임6", "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"));
+        list.add(new CommunitySubRecentListModel("제목7", "닉네임7", "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"));
+        list.add(new CommunitySubRecentListModel("제목8", "닉네임8", "내용내용내용내용내용내용내용내용내용내용"));
+
+        CommunitySubRecentListAdapter adapter = new CommunitySubRecentListAdapter(getContext(), list);
+        binding.recyclerView.setAdapter(adapter);
     }
 
    /* private void addSearchViewEvent(){

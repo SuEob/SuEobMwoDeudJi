@@ -9,12 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.R;
-import com.example.sueobmwodeudji.custom_view.CommunitySubSearchViewHolder;
 import com.example.sueobmwodeudji.model.CommunitySubSearchModel;
 
 import java.util.List;
 
-public class CommunitySubSearchAdapter extends RecyclerView.Adapter<CommunitySubSearchViewHolder> {
+public class CommunitySubSearchAdapter extends RecyclerView.Adapter<CommunitySubSearchAdapter.CommunitySubSearchViewHolder> {
 
     private final Context context;
     private final List<CommunitySubSearchModel> searchModels;
@@ -40,5 +39,11 @@ public class CommunitySubSearchAdapter extends RecyclerView.Adapter<CommunitySub
     @Override
     public int getItemCount() {
         return searchModels.size();
+    }
+
+    public static class CommunitySubSearchViewHolder extends RecyclerView.ViewHolder {
+        public CommunitySubSearchViewHolder(Context _context, @NonNull View itemView) {
+            super(itemView);
+        }
     }
 }

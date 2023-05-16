@@ -9,12 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.R;
-import com.example.sueobmwodeudji.custom_view.CommunitySubCommentViewHolder;
+import com.example.sueobmwodeudji.databinding.ItemCommunityCommentBinding;
+import com.example.sueobmwodeudji.model.CommunitySubCommentCommentModel;
 import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
 
+import java.util.LinkedList;
 import java.util.List;
 
-public class CommunitySubCommentAdapter extends RecyclerView.Adapter<CommunitySubCommentViewHolder>{
+public class CommunitySubCommentAdapter extends RecyclerView.Adapter<CommunitySubCommentAdapter.CommunitySubCommentViewHolder>{
     private final Context context;
     private final List<CommunitySubCommentModel> commentModels;
 
@@ -40,5 +42,24 @@ public class CommunitySubCommentAdapter extends RecyclerView.Adapter<CommunitySu
     @Override
     public int getItemCount() {
         return commentModels.size();
+    }
+
+    public static class CommunitySubCommentViewHolder extends RecyclerView.ViewHolder{
+        private final Context context;
+        private final ItemCommunityCommentBinding binding;
+        public CommunitySubCommentViewHolder(Context _context, @NonNull View itemView) {
+            super(itemView);
+            context = _context;
+            binding = ItemCommunityCommentBinding.bind(itemView);
+        }
+
+        public void onBind(CommunitySubCommentModel data){
+            LinkedList<CommunitySubCommentCommentModel> list = new LinkedList<>();
+            list.add(new CommunitySubCommentCommentModel("a"));
+            list.add(new CommunitySubCommentCommentModel("a"));
+            list.add(new CommunitySubCommentCommentModel("a"));
+            CommunitySubCommentCommentAdapter adapter = new CommunitySubCommentCommentAdapter(context, list);
+            binding.recyclerView.setAdapter(adapter);
+        }
     }
 }
