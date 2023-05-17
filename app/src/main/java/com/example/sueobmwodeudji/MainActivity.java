@@ -1,5 +1,7 @@
 package com.example.sueobmwodeudji;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +16,8 @@ import com.example.sueobmwodeudji.ui.HomeFragment;
 import com.example.sueobmwodeudji.ui.RatingsFragment;
 import com.example.sueobmwodeudji.ui.SettingsFragment;
 import com.example.sueobmwodeudji.ui.TimeTableFragment;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -31,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        BottomNavBar();
     }
 
 
