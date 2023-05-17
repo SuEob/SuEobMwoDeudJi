@@ -45,6 +45,8 @@
             android:name=".SearchActivity"
             android:exported="true"
             android:parentActivityName=".MainActivity"/>
+
+        <activity android:name=".fb.FbMainActivity" />
     </application>
 
 </manifest>

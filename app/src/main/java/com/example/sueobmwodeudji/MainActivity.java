@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.sueobmwodeudji.databinding.ActivityMainBinding;
+import com.example.sueobmwodeudji.fb.FbMainActivity;
 import com.example.sueobmwodeudji.ui.CommunityFragment;
 import com.example.sueobmwodeudji.ui.HomeFragment;
 import com.example.sueobmwodeudji.ui.RatingsFragment;
@@ -29,6 +31,14 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = binding.toolBar.mainToolBar;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        binding.testBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), FbMainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         BottomNavBar();
     }

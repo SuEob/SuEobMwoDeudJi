@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/aButton"
+                android:textSize="24dp"
+                android:hint="사용자" />
+
+            <EditText
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/ccText1"
+                android:textSize="24dp"
+                android:hint="추가할 학교명" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ccButton"
+                android:textSize="24dp"
+                android:hint="학교 추가" />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/classRG"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/kor"
+                    android:text="국어" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/math"
+                    android:text="수학" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/eng"
+                    android:text="영어" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/soc"
+                    android:text="사탐" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sci"
+                    android:text="과탐" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/art"
+                    android:text="예체능" />
+           </RadioGroup>
+
+            <EditText
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/cText0"
+                android:textSize="24dp"
+                android:hint="학교명" />
+
+            <EditText
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/cText1"
+                android:textSize="24dp"
+                android:hint="과목코드" />
+
+            <EditText
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/cText2"
+                android:textSize="24dp"
+                android:hint="과목명" />
+
+            <EditText
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/cText3"
+                android:textSize="24dp"
+                android:hint="교사명" />
+
+            <EditText
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/cText4"
+                android:textSize="24dp"
+                android:hint="요일" />
+
+            <EditText
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/cText5"
+                android:textSize="24dp"
+                android:hint="교시" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cButton"
+                android:textSize="24dp"
+                android:hint="입력" />
+
+            <EditText
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/rText1"
+                android:textSize="24dp"
+                android:hint="읽어올 document 명" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rButton"
+                android:textSize="24dp"
+                android:hint="가져오기" />
+
+            <TextView
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv1"
+                android:textSize="24dp"
+                android:text="과목명: " />
+
+            <TextView
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv2"
+                android:textSize="24dp"
+                android:text="교사명: " />
+
+            <TextView
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv3"
+                android:textSize="24dp"
+                android:text="요일: " />
+
+            <TextView
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv4"
+                android:textSize="24dp"
+                android:text="교시: " />
+
+            <EditText
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/uText1"
+                android:textSize="24dp"
+                android:hint="수정할 document(과목코드) 명" />
+
+            <EditText
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/uText2"
+                android:textSize="24dp"
+                android:hint="수정할 key 값" />
+
+            <EditText
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/uText3"
+                android:textSize="24dp"
+                android:hint="수정될 value 값" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/uButton"
+                android:textSize="24dp"
+                android:hint="수정하기" />
+
+
+
+
+            <EditText
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/dText1"
+                android:textSize="24dp"
+                android:hint="삭제할 document(과목코드) 명" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dButton"
+                android:textSize="24dp"
+                android:hint="삭제하기" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

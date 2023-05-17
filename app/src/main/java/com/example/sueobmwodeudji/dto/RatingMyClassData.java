@@ -1,8 +1,8 @@
 package com.example.sueobmwodeudji.dto;
 
 public class RatingMyClassData {
-    protected String class_name;
-    protected String teacher_name;
+    private String class_name;
+    private String teacher_name;
 
     public RatingMyClassData(String class_name, String teacher_name) {
         this.class_name = class_name;
