@@ -47,6 +47,9 @@
             android:parentActivityName=".MainActivity"/>
 
         <activity android:name=".fb.FbMainActivity" />
+        <activity android:name=".fb.FbPost" />
+        <activity android:name=".fb.FbSueob" />
+        <activity android:name=".fb.FbTimeTable" />
     </application>
 
 </manifest>
