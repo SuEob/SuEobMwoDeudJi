@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/aButton"
+                android:textSize="24dp"
+                android:hint="사용자" />
+
+            <EditText
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/ccText1"
+                android:textSize="24dp"
+                android:hint="추가할 학교명" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ccButton"
+                android:textSize="24dp"
+                android:hint="학교 추가" />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/postRG"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/post_grade1"
+                    android:text="1학년" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/post_grade2"
+                    android:text="2" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/post_grade3"
+                    android:text="3" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/post_game"
+                    android:text="게임" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/post_study"
+                    android:text="공부" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/post_shop"
+                    android:text="쇼핑" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/post_exercise"
+                    android:text="운동" />
+            </RadioGroup>
+
+            <EditText
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/cText0"
+                android:textSize="24dp"
+                android:hint="학교명" />
+
+            <EditText
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/cText1"
+                android:textSize="24dp"
+                android:hint="글제목" />
+
+            <EditText
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/cText2"
+                android:textSize="24dp"
+                android:hint="글내용" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cButton"
+                android:textSize="24dp"
+                android:hint="입력" />
+
+            <EditText
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/cccText1"
+                android:textSize="24dp"
+                android:hint="작성할 document 명(게시글)" />
+
+            <EditText
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/cccText2"
+                android:textSize="24dp"
+                android:hint="댓글내용" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cccButton"
+                android:textSize="24dp"
+                android:hint="댓글 입력" />
+
+            <EditText
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/rText1"
+                android:textSize="24dp"
+                android:hint="읽어올 document 명" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rButton"
+                android:textSize="24dp"
+                android:hint="가져오기" />
+
+            <TextView
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv1"
+                android:textSize="24dp"
+                android:text="글제목: " />
+
+            <TextView
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv2"
+                android:textSize="24dp"
+                android:text="글내용: " />
+
+            <TextView
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv3"
+                android:textSize="24dp"
+                android:text="댓글수: " />
+
+            <TextView
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv4"
+                android:textSize="24dp"
+                android:text="추천수: " />
+
+            <EditText
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/uText1"
+                android:textSize="24dp"
+                android:hint="수정할 document 명(게시글)" />
+
+            <EditText
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/uText2"
+                android:textSize="24dp"
+                android:hint="수정할 key 값" />
+
+            <EditText
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/uText3"
+                android:textSize="24dp"
+                android:hint="수정될 value 값" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/uButton"
+                android:textSize="24dp"
+                android:hint="수정하기" />
+
+            <EditText
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/uText4"
+                android:textSize="24dp"
+                android:hint="수정할 document 값(댓글)" />
+
+            <EditText
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/uText5"
+                android:textSize="24dp"
+                android:hint="수정할 key 값" />
+
+            <EditText
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/uText6"
+                android:textSize="24dp"
+                android:hint="수정될 value 값" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/uuButton"
+                android:textSize="24dp"
+                android:hint="댓글 수정하기" />
+
+
+            <EditText
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/dText1"
+                android:textSize="24dp"
+                android:hint="삭제할 document 명(게시글)" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dButton"
+                android:textSize="24dp"
+                android:hint="삭제하기" />
+
+            <EditText
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/dText2"
+                android:textSize="24dp"
+                android:hint="삭제할 document 명(댓글)" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ddButton"
+                android:textSize="24dp"
+                android:hint="댓글 삭제하기" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
