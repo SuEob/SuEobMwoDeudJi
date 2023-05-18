@@ -32,14 +32,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        binding.testBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), FbMainActivity.class);
-                startActivity(intent);
-            }
-        });
-
         BottomNavBar();
     }
 

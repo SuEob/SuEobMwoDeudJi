@@ -34,9 +34,9 @@ public class CommunitySubPostActivity extends AppCompatActivity {
 
 
         LinkedList<CommunitySubCommentModel> list = new LinkedList<>();
-        list.add(new CommunitySubCommentModel("s"));
-        list.add(new CommunitySubCommentModel("s"));
-        list.add(new CommunitySubCommentModel("s"));
+        list.add(new CommunitySubCommentModel("s","a"));
+        list.add(new CommunitySubCommentModel("s","a"));
+        list.add(new CommunitySubCommentModel("s","a"));
 
         CommunitySubCommentAdapter adapter = new CommunitySubCommentAdapter(this, list);
         binding.recyclerView.setAdapter(adapter);

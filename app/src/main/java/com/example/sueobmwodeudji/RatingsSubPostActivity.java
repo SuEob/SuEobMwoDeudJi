@@ -39,9 +39,9 @@ public class RatingsSubPostActivity extends AppCompatActivity {
         getSupportActionBar().setSubtitle(teacher_name);
 
         LinkedList<CommunitySubCommentModel> list = new LinkedList<>();
-        list.add(new CommunitySubCommentModel("s"));
-        list.add(new CommunitySubCommentModel("s"));
-        list.add(new CommunitySubCommentModel("s"));
+        list.add(new CommunitySubCommentModel("s","a"));
+        list.add(new CommunitySubCommentModel("s","a"));
+        list.add(new CommunitySubCommentModel("s","a"));
 
         CommunitySubCommentAdapter adapter = new CommunitySubCommentAdapter(this, list);
         binding.recyclerView.setAdapter(adapter);

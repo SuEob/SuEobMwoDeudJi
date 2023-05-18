@@ -1,5 +1,6 @@
 package com.example.sueobmwodeudji.fb;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -15,13 +16,18 @@ import com.example.sueobmwodeudji.R;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class FbMainActivity extends AppCompatActivity {
-
     int userNUM;
+
+    UserDTO data;
 
 
     @Override
@@ -31,6 +37,14 @@ public class FbMainActivity extends AppCompatActivity {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference ccc = db.collection("users");
+
+        ccc.document("user1").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                t(documentSnapshot);
+            }
+        });
+/*
         // C 문법 CollectionReference ccc = db.collection("users");
         // D 문법 DocumentReference ddd = db.collection("users").document("user2");
 
@@ -146,7 +160,11 @@ public class FbMainActivity extends AppCompatActivity {
                     }
                 });
             }
-        });
+        });*/
+    }
 
+    protected void t(DocumentSnapshot documentSnapshot){
+        data =  documentSnapshot.toObject(UserDTO.class);
+        Log.d("asdfasd",data.getId());
     }
 }
