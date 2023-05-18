@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.sueobmwodeudji.adapter.CommunitySubCommentAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityCommunitySubPostBinding;
 import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
+import com.example.sueobmwodeudji.model.CommunitySubListModel;
 
 import java.util.LinkedList;
 
@@ -29,16 +30,10 @@ public class CommunitySubPostActivity extends AppCompatActivity {
 
     private void showItem(){
         Intent intent = getIntent();
-        String subject = intent.getStringExtra("subject");
-        getSupportActionBar().setTitle(subject);
+        CommunitySubListModel data = (CommunitySubListModel) intent.getSerializableExtra("data");
+        getSupportActionBar().setTitle(data.getTitle());
 
-
-        LinkedList<CommunitySubCommentModel> list = new LinkedList<>();
-        list.add(new CommunitySubCommentModel("s","a"));
-        list.add(new CommunitySubCommentModel("s","a"));
-        list.add(new CommunitySubCommentModel("s","a"));
-
-        CommunitySubCommentAdapter adapter = new CommunitySubCommentAdapter(this, list);
+        CommunitySubCommentAdapter adapter = new CommunitySubCommentAdapter(this, data);
         binding.recyclerView.setAdapter(adapter);
     }
 }

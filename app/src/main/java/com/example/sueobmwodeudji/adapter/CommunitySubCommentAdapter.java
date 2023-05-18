@@ -1,28 +1,38 @@
 package com.example.sueobmwodeudji.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.databinding.ItemCommunityCommentBinding;
 import com.example.sueobmwodeudji.model.CommunitySubCommentCommentModel;
 import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
+import com.example.sueobmwodeudji.model.CommunitySubListModel;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class CommunitySubCommentAdapter extends RecyclerView.Adapter<CommunitySubCommentAdapter.CommunitySubCommentViewHolder>{
     private final Context context;
-    private final List<CommunitySubCommentModel> commentModels;
+    private final CommunitySubListModel communitySubListModels;
+    private ArrayList<CommunitySubCommentModel> commentModels = new ArrayList<>();
 
-    public CommunitySubCommentAdapter(Context context, List<CommunitySubCommentModel> commentModels) {
+    public CommunitySubCommentAdapter(Context context, CommunitySubListModel communitySubListModels) {
         this.context = context;
-        this.commentModels = commentModels;
+        this.communitySubListModels = communitySubListModels;
+        commentModels = communitySubListModels.getComents();
     }
 
     @NonNull
@@ -54,11 +64,11 @@ public class CommunitySubCommentAdapter extends RecyclerView.Adapter<CommunitySu
         }
 
         public void onBind(CommunitySubCommentModel data){
-            LinkedList<CommunitySubCommentCommentModel> list = new LinkedList<>();
-            list.add(new CommunitySubCommentCommentModel("a"));
-            list.add(new CommunitySubCommentCommentModel("a"));
-            list.add(new CommunitySubCommentCommentModel("a"));
-            CommunitySubCommentCommentAdapter adapter = new CommunitySubCommentCommentAdapter(context, list);
+            binding.idTv.setText(data.getName());
+            binding.dateTv.setText(data.getTimestamp().toString());
+            binding.contentTv.setText(data.getContent());
+
+            CommunitySubCommentCommentAdapter adapter = new CommunitySubCommentCommentAdapter(context, data.getCommentModels());
             binding.recyclerView.setAdapter(adapter);
         }
     }

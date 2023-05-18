@@ -9,16 +9,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.R;
+import com.example.sueobmwodeudji.databinding.ItemCommunityCommentBinding;
+import com.example.sueobmwodeudji.databinding.ItemCommunityCommentCommentBinding;
 import com.example.sueobmwodeudji.model.CommunitySubCommentCommentModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommunitySubCommentCommentAdapter extends RecyclerView.Adapter<CommunitySubCommentCommentAdapter.CommunitySubCommentCommentViewHolder> {
 
     private final Context context;
-    private final List<CommunitySubCommentCommentModel> commentModels;
+    private final ArrayList<CommunitySubCommentCommentModel> commentModels;
 
-    public CommunitySubCommentCommentAdapter(Context context, List<CommunitySubCommentCommentModel> commentModels) {
+    public CommunitySubCommentCommentAdapter(Context context, ArrayList<CommunitySubCommentCommentModel> commentModels) {
         this.context = context;
         this.commentModels = commentModels;
     }
@@ -34,7 +37,7 @@ public class CommunitySubCommentCommentAdapter extends RecyclerView.Adapter<Comm
 
     @Override
     public void onBindViewHolder(@NonNull CommunitySubCommentCommentViewHolder holder, int position) {
-
+        holder.onBind(commentModels.get(position));
     }
 
     @Override
@@ -43,8 +46,16 @@ public class CommunitySubCommentCommentAdapter extends RecyclerView.Adapter<Comm
     }
 
     public static class CommunitySubCommentCommentViewHolder extends RecyclerView.ViewHolder{
+        ItemCommunityCommentCommentBinding binding;
         public CommunitySubCommentCommentViewHolder(@NonNull View itemView) {
             super(itemView);
+            binding = ItemCommunityCommentCommentBinding.bind(itemView);
+        }
+
+        public void onBind(CommunitySubCommentCommentModel data){
+            binding.idTv.setText(data.getName());
+            binding.dateTv.setText(data.getTimestamp().toString());
+            binding.contentTv.setText(data.getContent());
         }
     }
 }

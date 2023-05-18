@@ -27,23 +27,23 @@ public class RatingsSubPostActivity extends AppCompatActivity {
 
         setContentView(binding.getRoot());
 
-        showItem();
+        //showItem();
     }
 
     private void showItem() {
-        Intent intent = getIntent();
-        String class_name = intent.getStringExtra("class_name");
-        String teacher_name = intent.getStringExtra("teacher_name");
-
-        getSupportActionBar().setTitle(class_name);
-        getSupportActionBar().setSubtitle(teacher_name);
-
-        LinkedList<CommunitySubCommentModel> list = new LinkedList<>();
-        list.add(new CommunitySubCommentModel("s","a"));
-        list.add(new CommunitySubCommentModel("s","a"));
-        list.add(new CommunitySubCommentModel("s","a"));
-
-        CommunitySubCommentAdapter adapter = new CommunitySubCommentAdapter(this, list);
-        binding.recyclerView.setAdapter(adapter);
+//        Intent intent = getIntent();
+//        String class_name = intent.getStringExtra("class_name");
+//        String teacher_name = intent.getStringExtra("teacher_name");
+//
+//        getSupportActionBar().setTitle(class_name);
+//        getSupportActionBar().setSubtitle(teacher_name);
+//
+//        LinkedList<CommunitySubCommentModel> list = new LinkedList<>();
+//        list.add(new CommunitySubCommentModel("s","a"));
+//        list.add(new CommunitySubCommentModel("s","a"));
+//        list.add(new CommunitySubCommentModel("s","a"));
+//
+//        CommunitySubCommentAdapter adapter = new CommunitySubCommentAdapter(this, list);
+//        binding.recyclerView.setAdapter(adapter);
     }
 }

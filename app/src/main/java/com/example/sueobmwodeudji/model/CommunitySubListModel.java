@@ -1,17 +1,19 @@
 package com.example.sueobmwodeudji.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
+import java.util.Objects;
 
-public class CommunitySubListModel {
+public class CommunitySubListModel implements Serializable {
+    private String name;
     private String title;
     private String content;
-    private String name;
+    private Date timestamp;
 
-    public CommunitySubListModel(String title, String content, String name) {
-        this.title = title;
-        this.content = content;
-        this.name = name;
-    }
+    private Map<String, Boolean> like;
+    private ArrayList<CommunitySubCommentModel> coments = new ArrayList<>();
 
     public CommunitySubListModel() {
     }
@@ -38,5 +40,27 @@ public class CommunitySubListModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public ArrayList<CommunitySubCommentModel> getComents() {
+        return coments;
+    }
+
+    public void setComents(ArrayList<CommunitySubCommentModel> coments) {
+        this.coments = coments;
+    }
+    public Map<String, Boolean> getLike() {
+        return like;
+    }
+    public void setLike(Map<String, Boolean> like) {
+        this.like = like;
     }
 }

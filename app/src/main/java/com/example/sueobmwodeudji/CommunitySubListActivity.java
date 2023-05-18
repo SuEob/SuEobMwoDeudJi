@@ -10,6 +10,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.sueobmwodeudji.adapter.CommunitySubListAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityCommunitySubListBinding;
+import com.example.sueobmwodeudji.model.CommunitySubCommentCommentModel;
+import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
 import com.example.sueobmwodeudji.model.CommunitySubListModel;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
@@ -20,11 +22,14 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.checkerframework.checker.units.qual.A;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-public class CommunitySubListActivity extends AppCompatActivity implements EventListener<QuerySnapshot> {
+public class CommunitySubListActivity extends AppCompatActivity {
     private ActivityCommunitySubListBinding binding;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,48 +50,63 @@ public class CommunitySubListActivity extends AppCompatActivity implements Event
 
         getSupportActionBar().setTitle(subject);
 
+        //CommunitySubListAdapter adapter = new CommunitySubListAdapter(this, readPostData());
+        //binding.recyclerView.setAdapter(adapter);
         //readPostData().addSnapshotListener(this);
-
-
         //createPost();
+        //deleteData();
 
 //        CommunitySubListAdapter adapter = new CommunitySubListAdapter(this, list);
 //        binding.recyclerView.setAdapter(adapter);
     }
     private Query readPostData(){
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        return mFirestore.collection("testPost")
-                .document("first")
-                .collection("게시판1")
+        return mFirestore.collection("게시글")
+                .document("첫 고등학교")
+                .collection("1학년 게시판")
                 .orderBy("timestamp",Query.Direction.DESCENDING)
                 .limit(10);
     }
 
     private void createPost(){
-        String docName = "2";
-        Map<String, Object> data = new HashMap<>();
-        data.put("content", "글내용" + docName);
-        data.put("name", "작성자" + docName);
-        data.put("timestamp", Timestamp.now().toDate());
-        data.put("title", "글제목" + docName);
+        String docName = "1";
+        CommunitySubListModel data = createData(docName);
 
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        mFirestore.collection("testPost")
-                .document("first")
-                .collection("게시판1")
+        mFirestore.collection("게시글")
+                .document("첫 고등학교")
+                .collection("2학년 게시판")
                 .document(docName)
                 .set(data);
     }
+    private CommunitySubListModel createData(String docName){
+        CommunitySubListModel data = new CommunitySubListModel();
+        data.setContent("글내용" + docName);
+        data.setName("작성자" + docName);
+        data.setTimestamp(Timestamp.now().toDate());
+        data.setTitle("글제목" + docName);
+        Map<String, Boolean> like = new HashMap<>();
+        like.put("a",true);
+        like.put("b",false);
+        ArrayList<CommunitySubCommentModel> d = new ArrayList<>();
+        ArrayList<CommunitySubCommentCommentModel> dd = new ArrayList<>();
+        dd.add(new CommunitySubCommentCommentModel("작성자1","댓글내용1",Timestamp.now().toDate(), like));
+        dd.add(new CommunitySubCommentCommentModel("작성자2","댓글내용2",Timestamp.now().toDate(), like));
+        d.add(new CommunitySubCommentModel("작성자1","댓글내용1",Timestamp.now().toDate(), like, dd));
+        d.add(new CommunitySubCommentModel("작성자2","댓글내용2",Timestamp.now().toDate(), like, dd));
+        data.setComents(d);
 
-    @Override
-    public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
-        if(e != null){
-            Log.w("list 에러","onEvent:error", e);
-        }
-
-        Log.d("list onEvent", "size : " + documentSnapshots.getDocuments());
-        for(DocumentSnapshot doc : documentSnapshots.getDocuments()){
-            CommunitySubListModel model = doc.toObject(CommunitySubListModel.class);
-        }
+        return data;
     }
+//    private void deleteData(){
+//        String docName = "3";
+//        CommunitySubListModel data = createData(docName);
+//
+//        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+//        mFirestore.collection("testPost")
+//                .document("first")
+//                .collection("게시판1")
+//                .document(docName)
+//                .delete();
+//    }
 }
