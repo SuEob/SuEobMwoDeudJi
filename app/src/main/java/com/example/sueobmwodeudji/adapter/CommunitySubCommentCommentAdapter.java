@@ -23,7 +23,7 @@ public class CommunitySubCommentCommentAdapter extends RecyclerView.Adapter<Comm
 
     public CommunitySubCommentCommentAdapter(Context context, ArrayList<CommunitySubCommentCommentModel> commentModels) {
         this.context = context;
-        this.commentModels = commentModels;
+        this.commentModels = (commentModels != null)? commentModels : new ArrayList<>();
     }
 
     @NonNull

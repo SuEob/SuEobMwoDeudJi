@@ -11,7 +11,7 @@ public class CommunitySubCommentModel implements Serializable {
     private String content;
     private Date timestamp;
     private Map<String, Boolean> like;
-    private ArrayList<CommunitySubCommentCommentModel> commentModels;
+    private ArrayList<CommunitySubCommentCommentModel> commentModels = new ArrayList<>();
 
 
     public CommunitySubCommentModel() {

@@ -3,6 +3,7 @@ package com.example.sueobmwodeudji;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,8 +30,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-public class CommunitySubListActivity extends AppCompatActivity {
+public class CommunitySubListActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivityCommunitySubListBinding binding;
+    private String subject;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,17 +43,19 @@ public class CommunitySubListActivity extends AppCompatActivity {
 
         setContentView(binding.getRoot());
 
+        binding.fab.setOnClickListener(this);
+
         showItem();
     }
 
     private void showItem(){
         Intent intent = getIntent();
-        String subject = intent.getStringExtra("subject");
+        subject = intent.getStringExtra("subject");
 
         getSupportActionBar().setTitle(subject);
 
-        //CommunitySubListAdapter adapter = new CommunitySubListAdapter(this, readPostData());
-        //binding.recyclerView.setAdapter(adapter);
+        CommunitySubListAdapter adapter = new CommunitySubListAdapter(this, readPostData());
+        binding.recyclerView.setAdapter(adapter);
         //readPostData().addSnapshotListener(this);
         //createPost();
         //deleteData();
@@ -61,8 +65,8 @@ public class CommunitySubListActivity extends AppCompatActivity {
     }
     private Query readPostData(){
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        return mFirestore.collection("게시글")
-                .document("첫 고등학교")
+        return mFirestore.collection("testPost")
+                .document("first")
                 .collection("1학년 게시판")
                 .orderBy("timestamp",Query.Direction.DESCENDING)
                 .limit(10);
@@ -94,9 +98,16 @@ public class CommunitySubListActivity extends AppCompatActivity {
         dd.add(new CommunitySubCommentCommentModel("작성자2","댓글내용2",Timestamp.now().toDate(), like));
         d.add(new CommunitySubCommentModel("작성자1","댓글내용1",Timestamp.now().toDate(), like, dd));
         d.add(new CommunitySubCommentModel("작성자2","댓글내용2",Timestamp.now().toDate(), like, dd));
-        data.setComents(d);
+        data.setComments(d);
 
         return data;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(getApplicationContext(), CommunitySubFormActivity.class);
+        intent.putExtra("subject", subject);
+        startActivity(intent);
     }
 //    private void deleteData(){
 //        String docName = "3";

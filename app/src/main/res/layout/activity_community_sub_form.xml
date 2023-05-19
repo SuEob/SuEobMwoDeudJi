@@ -68,6 +68,7 @@
         android:layout_height="0dp"
         android:background="@null"
         android:hint="게시글에 입력할 내용을 작성해주세요."
+        android:gravity="top"
         app:layout_constraintTop_toBottomOf="@+id/title_et"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/leftGuide1"

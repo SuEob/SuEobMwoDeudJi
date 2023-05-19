@@ -66,7 +66,6 @@ public class CommunitySubListAdapter extends RecyclerView.Adapter<CommunitySubLi
         for(DocumentSnapshot doc : documentSnapshots.getDocuments()){
             communitySubListModels.add(doc.toObject(CommunitySubListModel.class));
             notifyDataSetChanged();
-            Log.d("list 뭐가들었나" , communitySubListModels.get(i++).getComents().get(0).getName());
         }
     }
 
