@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.RatingsSubPostActivity;
 import com.example.sueobmwodeudji.databinding.ItemRatingsRecentListBinding;
-import com.example.sueobmwodeudji.model.CommunitySubRecentListModel;
 import com.example.sueobmwodeudji.model.RatingsSubRecentListModel;
 
 import java.util.List;

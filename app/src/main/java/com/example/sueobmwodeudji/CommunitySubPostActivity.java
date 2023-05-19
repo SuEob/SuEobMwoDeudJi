@@ -84,39 +84,41 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK){
-            if ( binding.commentEt.getHint().equals("대댓글을 입력하세요.")){
-                binding.commentEt.setHint("댓글을 입력하세요.");
-                binding.commentEt.setText(null);
-                binding.submitBtn.setOnClickListener(this);
-            }else finish();
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (binding.commentEt.getHint().equals("댓글을 입력하세요.")) finish();
+
+            binding.commentEt.setHint("댓글을 입력하세요.");
+            binding.commentEt.setText(null);
+            binding.submitBtn.setOnClickListener(this);
         }
         return false;
     }
 
-    private class cocomentSubmitBtnClickListener implements View.OnClickListener{
+    private class cocomentSubmitBtnClickListener implements View.OnClickListener {
         private final int mPosition;
-        public cocomentSubmitBtnClickListener(int positon){
+
+        public cocomentSubmitBtnClickListener(int positon) {
             this.mPosition = positon;
         }
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder dlg = new AlertDialog.Builder(CommunitySubPostActivity.this);
-                dlg.setTitle("대댓글 작성")
-                        .setMessage("대댓글을 작성하시겠습니까?")
-                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(CommunitySubPostActivity.this, "취소되었습니다.", Toast.LENGTH_SHORT).show();
-                            }
-                        }).setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                createCocomment(mPosition);
-                                //Toast.makeText(CommunitySubPostActivity.this, "대대대댓글 작성", Toast.LENGTH_SHORT).show();
-                            }
-                        }).show();
-            }
+
+        @Override
+        public void onClick(View v) {
+            AlertDialog.Builder dlg = new AlertDialog.Builder(CommunitySubPostActivity.this);
+            dlg.setTitle("대댓글 작성")
+                    .setMessage("대댓글을 작성하시겠습니까?")
+                    .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(CommunitySubPostActivity.this, "취소되었습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }).setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            createCocomment(mPosition);
+                            //Toast.makeText(CommunitySubPostActivity.this, "대대대댓글 작성", Toast.LENGTH_SHORT).show();
+                        }
+                    }).show();
+        }
     }
 
     @Override
@@ -157,7 +159,8 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
                 .document(firstDP)
                 .collection(secondCP)
                 .document(data.getName() + data.getTimestamp())
-                .update("comments", data.getComments()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                .update("comments", data.getComments())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         Toast.makeText(CommunitySubPostActivity.this, "작성되었습니다.", Toast.LENGTH_SHORT).show();
@@ -178,12 +181,11 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
                                         return null;
                                     }
                                 });
-
-
                     }
                 });
     }
-    private void createCocomment(int position){
+
+    private void createCocomment(int position) {
         String comment = binding.commentEt.getText().toString();
         CommunitySubCommentCommentModel comment_model = new CommunitySubCommentCommentModel();
         comment_model.setContent(comment);
@@ -198,7 +200,8 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
                 .document(firstDP)
                 .collection(secondCP)
                 .document(data.getName() + data.getTimestamp())
-                .update("comments", data.getComments()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                .update("comments", data.getComments())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         //Toast.makeText(CommunitySubPostActivity.this, "작성되었습니다.", Toast.LENGTH_SHORT).show();

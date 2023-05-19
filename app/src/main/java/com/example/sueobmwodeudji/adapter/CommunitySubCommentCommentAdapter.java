@@ -9,12 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.R;
-import com.example.sueobmwodeudji.databinding.ItemCommunityCommentBinding;
 import com.example.sueobmwodeudji.databinding.ItemCommunityCommentCommentBinding;
 import com.example.sueobmwodeudji.model.CommunitySubCommentCommentModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CommunitySubCommentCommentAdapter extends RecyclerView.Adapter<CommunitySubCommentCommentAdapter.CommunitySubCommentCommentViewHolder> {
 
