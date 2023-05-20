@@ -2,29 +2,40 @@ package com.example.sueobmwodeudji.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.RatingsSubPostActivity;
 import com.example.sueobmwodeudji.databinding.ItemRatingsListBinding;
+import com.example.sueobmwodeudji.model.CommunitySubListModel;
 import com.example.sueobmwodeudji.model.RatingsSubListModel;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class RatingsSubListAdapter extends RecyclerView.Adapter<RatingsSubListAdapter.RatingsSubListViewHolder> {
+public class RatingsSubListAdapter extends RecyclerView.Adapter<RatingsSubListAdapter.RatingsSubListViewHolder> implements EventListener<QuerySnapshot> {
     private final Context context;
-    private final List<RatingsSubListModel> ratingsSubListModel;
+    private final Query mQuery;
+    private ArrayList<RatingsSubListModel> ratingsSubListModel = new ArrayList<>();
 
-    public RatingsSubListAdapter(Context context, List<RatingsSubListModel> ratingsSubListModel) {
+    public RatingsSubListAdapter(Context context, Query query) {
         this.context = context;
-        this.ratingsSubListModel = ratingsSubListModel;
+        this.mQuery = query;
+        mQuery.addSnapshotListener(this);
     }
 
     @NonNull
@@ -47,6 +58,19 @@ public class RatingsSubListAdapter extends RecyclerView.Adapter<RatingsSubListAd
         return ratingsSubListModel.size();
     }
 
+    @Override
+    public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
+        if(e != null){
+            Log.w("list 에러","onEvent:error", e);
+        }
+        int i =0;
+        ratingsSubListModel.clear();
+        for(DocumentSnapshot doc : documentSnapshots.getDocuments()){
+            ratingsSubListModel.add(doc.toObject(RatingsSubListModel.class));
+            notifyDataSetChanged();
+        }
+    }
+
     public static class RatingsSubListViewHolder extends RecyclerView.ViewHolder {
         Context context;
         private final TextView title;
@@ -64,14 +88,14 @@ public class RatingsSubListAdapter extends RecyclerView.Adapter<RatingsSubListAd
         }
         public void onBind(RatingsSubListModel data){
             title.setText(data.getTitle());
-            sub_title.setText(data.getSubTitle());
+            //sub_title.setText(data.getSubTitle());
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, RatingsSubPostActivity.class);
-
-                    intent.putExtra("title", data.getTitle());
-                    intent.putExtra("sub_title", data.getSubTitle());
+                    intent.putExtra("data", data);
+                    //intent.putExtra("title", data.getTitle());
+                    //intent.putExtra("sub_title", data.getSubTitle());
 
                     context.startActivity(intent);
                 }

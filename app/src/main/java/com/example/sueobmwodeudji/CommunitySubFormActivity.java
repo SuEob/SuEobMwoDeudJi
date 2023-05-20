@@ -64,7 +64,7 @@ public class CommunitySubFormActivity  extends AppCompatActivity implements View
 
     @Override
     public void onClick(View v) {
-        imm.hideSoftInputFromWindow(binding.subjectTv.getWindowToken(), 0); //키보드 내림
+        imm.hideSoftInputFromWindow(binding.contentEt.getWindowToken(), 0); //키보드 내림
 
         AlertDialog.Builder dlg = new AlertDialog.Builder(CommunitySubFormActivity.this);
         dlg.setTitle("게시글 작성");

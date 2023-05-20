@@ -16,6 +16,7 @@ import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.databinding.ItemCommunityCommentBinding;
 import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
 import com.example.sueobmwodeudji.model.CommunitySubListModel;
+import com.example.sueobmwodeudji.model.RatingsSubListModel;
 
 import java.util.ArrayList;
 
@@ -24,8 +25,8 @@ public class CommunitySubCommentAdapter extends RecyclerView.Adapter<CommunitySu
     //private static CommunitySubListModel mCommunitySubListModels = null;
     private final ArrayList<CommunitySubCommentModel> commentModels;
 
-    public void setSibal(OnCocommentPositiveListener sibal) {
-        ocpl = sibal;
+    public void setOclp(OnCocommentPositiveListener onListener) {
+        ocpl = onListener;
     }
 
     private static OnCocommentPositiveListener ocpl;
@@ -33,6 +34,10 @@ public class CommunitySubCommentAdapter extends RecyclerView.Adapter<CommunitySu
     public CommunitySubCommentAdapter(Context context, CommunitySubListModel communitySubListModels) {
         this.context = context;
         commentModels = (communitySubListModels.getComments() != null) ? communitySubListModels.getComments() : new ArrayList<>();
+    }
+    public CommunitySubCommentAdapter(Context context, RatingsSubListModel ratingsSubListModel) {
+        this.context = context;
+        commentModels = (ratingsSubListModel.getComments() != null) ? ratingsSubListModel.getComments() : new ArrayList<>();
     }
 
     public interface OnCocommentPositiveListener{
@@ -62,14 +67,12 @@ public class CommunitySubCommentAdapter extends RecyclerView.Adapter<CommunitySu
         private final Context context;
         private final ItemCommunityCommentBinding binding;
 
-        private final CommunitySubPostActivity c;
         private int mPositon;
 
         public CommunitySubCommentViewHolder(Context _context, @NonNull View itemView) {
             super(itemView);
             context = _context;
             binding = ItemCommunityCommentBinding.bind(itemView);
-            c = (CommunitySubPostActivity) context;
         }
 
         public void onBind(CommunitySubCommentModel data, int position) {
@@ -89,7 +92,7 @@ public class CommunitySubCommentAdapter extends RecyclerView.Adapter<CommunitySu
             @Override
             public void onClick(View v) {
 
-                AlertDialog.Builder dlg = new AlertDialog.Builder(c);
+                AlertDialog.Builder dlg = new AlertDialog.Builder(context);
                 dlg.setTitle("대댓글 작성")
                         .setMessage("대댓글을 작성하시겠습니까?")
                         .setNegativeButton("취소", new NegativeButtonClickListener())
@@ -101,7 +104,7 @@ public class CommunitySubCommentAdapter extends RecyclerView.Adapter<CommunitySu
         private class NegativeButtonClickListener implements DialogInterface.OnClickListener {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(c, "취소되었습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "취소되었습니다.", Toast.LENGTH_SHORT).show();
             }
         }
         private class PositiveButtonClickListener implements DialogInterface.OnClickListener{

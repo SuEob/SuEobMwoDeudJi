@@ -9,12 +9,22 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.sueobmwodeudji.adapter.RatingsSubListAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityRatingsSubListBinding;
+import com.example.sueobmwodeudji.model.CommunitySubCommentCommentModel;
+import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
+import com.example.sueobmwodeudji.model.CommunitySubListModel;
 import com.example.sueobmwodeudji.model.RatingsSubListModel;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 public class RatingsSubListActivity extends AppCompatActivity {
     private ActivityRatingsSubListBinding binding;
+    private String mSubject;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +36,7 @@ public class RatingsSubListActivity extends AppCompatActivity {
 
         setContentView(binding.getRoot());
 
+        //createRating();
         showItem();
     }
 
@@ -34,20 +45,55 @@ public class RatingsSubListActivity extends AppCompatActivity {
         String class_name = intent.getStringExtra("class_name");
         String teacher_name = intent.getStringExtra("teacher_name");
 
+        mSubject = class_name+teacher_name;
+
         getSupportActionBar().setTitle(class_name);
         getSupportActionBar().setSubtitle(teacher_name);
 
-        LinkedList<RatingsSubListModel> list = new LinkedList<>();
-        list.add(new RatingsSubListModel("제목1", "평가 내용1"));
-        list.add(new RatingsSubListModel("제목2", "평가 내용2"));
-        list.add(new RatingsSubListModel("제목3", "평가 내용3"));
-        list.add(new RatingsSubListModel("제목3", "평가 내용3"));
-        list.add(new RatingsSubListModel("제목3", "평가 내용3"));
-        list.add(new RatingsSubListModel("제목3", "평가 내용3"));
-        list.add(new RatingsSubListModel("제목3", "평가 내용3"));
-        list.add(new RatingsSubListModel("제목3", "평가 내용3"));
 
-        RatingsSubListAdapter adapter = new RatingsSubListAdapter(this, list);
+        RatingsSubListAdapter adapter = new RatingsSubListAdapter(this, readPostData());
         binding.recyclerView.setAdapter(adapter);
+    }
+
+    private Query readPostData(){
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        return mFirestore.collection("testRating")
+                .document("first")
+                .collection(mSubject)
+                .orderBy("timestamp",Query.Direction.DESCENDING)
+                .limit(10);
+    }
+    private void createRating(){
+        String docName = "4";
+        RatingsSubListModel data = createData(docName);
+
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        mFirestore.collection("testRating")
+                .document("first")
+                .collection("수업코드")
+                .document(docName)
+                .set(data);
+    }
+    private RatingsSubListModel createData(String docName){
+        RatingsSubListModel data = new RatingsSubListModel();
+        data.setContent("글내용" + docName);
+        data.setName("작성자" + docName);
+        data.setTimestamp(Timestamp.now().toDate());
+        data.setTitle("글제목" + docName);
+        data.setDifficulty("상");
+        data.setType("유인물 위주");
+        data.setHoney(true);
+        Map<String, Boolean> like = new HashMap<>();
+        like.put("a",true);
+        like.put("b",false);
+        ArrayList<CommunitySubCommentModel> d = new ArrayList<>();
+        ArrayList<CommunitySubCommentCommentModel> dd = new ArrayList<>();
+        dd.add(new CommunitySubCommentCommentModel("작성자1","댓글내용1",Timestamp.now().toDate(), like));
+        dd.add(new CommunitySubCommentCommentModel("작성자2","댓글내용2",Timestamp.now().toDate(), like));
+        d.add(new CommunitySubCommentModel("작성자1","댓글내용1",Timestamp.now().toDate(), like, dd));
+        d.add(new CommunitySubCommentModel("작성자2","댓글내용2",Timestamp.now().toDate(), like, dd));
+        data.setComments(d);
+
+        return data;
     }
 }

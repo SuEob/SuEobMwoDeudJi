@@ -89,8 +89,8 @@ public class CommunitySubListAdapter extends RecyclerView.Adapter<CommunitySubLi
                 public void onClick(View v) {
                     Intent intent = new Intent(context, CommunitySubPostActivity.class);
                     intent.putExtra("data", data);
-                    intent.putExtra("title", data.getTitle());
-                    intent.putExtra("subject", subject);
+                    //intent.putExtra("title", data.getTitle());
+                    //intent.putExtra("subject", subject);
                     context.startActivity(intent);
                 }
             });

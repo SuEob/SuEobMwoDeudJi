@@ -43,12 +43,13 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivityCommunitySubPostBinding.inflate(getLayoutInflater());
 
         intent = getIntent();
         data = (CommunitySubListModel) intent.getSerializableExtra("data");
         subject = intent.getStringExtra("subject");
 
-        binding = ActivityCommunitySubPostBinding.inflate(getLayoutInflater());
+
         Toolbar toolbar = binding.toolBar.mainToolBar;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -71,12 +72,12 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
         getSupportActionBar().setTitle(data.getTitle());
 
         CommunitySubCommentAdapter adapter = new CommunitySubCommentAdapter(this, data);
-        adapter.setSibal(new CommunitySubCommentAdapter.OnCocommentPositiveListener() {
+        adapter.setOclp(new CommunitySubCommentAdapter.OnCocommentPositiveListener() {
             @Override
             public void onPositive(int positon) {
                 binding.commentEt.setHint("대댓글을 입력하세요.");
                 binding.commentEt.setText(null);
-                binding.submitBtn.setOnClickListener(new cocomentSubmitBtnClickListener(positon));
+                binding.submitBtn.setOnClickListener(new CocomentSubmitBtnClickListener(positon));
                 //imm.showSoftInput(binding.commentEt, 0);
             }
         });
@@ -95,10 +96,10 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
         return false;
     }
 
-    private class cocomentSubmitBtnClickListener implements View.OnClickListener {
+    private class CocomentSubmitBtnClickListener implements View.OnClickListener {
         private final int mPosition;
 
-        public cocomentSubmitBtnClickListener(int positon) {
+        public CocomentSubmitBtnClickListener(int positon) {
             this.mPosition = positon;
         }
 

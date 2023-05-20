@@ -1,12 +1,31 @@
 package com.example.sueobmwodeudji.model;
 
-public class RatingsSubListModel {
-    private String title;
-    private String sub_title;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Map;
 
-    public RatingsSubListModel(String title, String sub_title) {
-        this.title = title;
-        this.sub_title = sub_title;
+public class RatingsSubListModel  implements Serializable {
+    private String name;
+    private String title;
+    private String content;
+    private String difficulty;
+    private String type;
+    private Boolean honey;
+    private Date timestamp;
+
+    private Map<String, Boolean> like;
+    private ArrayList<CommunitySubCommentModel> comments = new ArrayList<>();
+
+    public RatingsSubListModel() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getTitle() {
@@ -17,11 +36,59 @@ public class RatingsSubListModel {
         this.title = title;
     }
 
-    public String getSubTitle() {
-        return sub_title;
+    public String getContent() {
+        return content;
     }
 
-    public void setSubTitle(String sub_title) {
-        this.sub_title = sub_title;
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public Map<String, Boolean> getLike() {
+        return like;
+    }
+
+    public void setLike(Map<String, Boolean> like) {
+        this.like = like;
+    }
+
+    public ArrayList<CommunitySubCommentModel> getComments() {
+        return comments;
+    }
+
+    public void setComments(ArrayList<CommunitySubCommentModel> comments) {
+        this.comments = comments;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Boolean getHoney() {
+        return honey;
+    }
+
+    public void setHoney(Boolean honey) {
+        this.honey = honey;
     }
 }
