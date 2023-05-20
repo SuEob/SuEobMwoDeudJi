@@ -15,19 +15,11 @@ import com.example.sueobmwodeudji.model.CommunitySubCommentCommentModel;
 import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
 import com.example.sueobmwodeudji.model.CommunitySubListModel;
 import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 
 public class CommunitySubListActivity extends AppCompatActivity implements View.OnClickListener {
@@ -54,7 +46,7 @@ public class CommunitySubListActivity extends AppCompatActivity implements View.
 
         getSupportActionBar().setTitle(subject);
 
-        CommunitySubListAdapter adapter = new CommunitySubListAdapter(this, readPostData());
+        CommunitySubListAdapter adapter = new CommunitySubListAdapter(this, readPostData(subject));
         binding.recyclerView.setAdapter(adapter);
         //readPostData().addSnapshotListener(this);
         //createPost();
@@ -63,11 +55,11 @@ public class CommunitySubListActivity extends AppCompatActivity implements View.
 //        CommunitySubListAdapter adapter = new CommunitySubListAdapter(this, list);
 //        binding.recyclerView.setAdapter(adapter);
     }
-    private Query readPostData(){
+    private Query readPostData(String subject){
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         return mFirestore.collection("testPost")
                 .document("first")
-                .collection("1학년 게시판")
+                .collection(subject)
                 .orderBy("timestamp",Query.Direction.DESCENDING)
                 .limit(10);
     }

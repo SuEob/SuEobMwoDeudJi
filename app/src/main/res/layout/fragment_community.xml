@@ -108,7 +108,7 @@
                     android:drawableTop="@drawable/class3"
                     android:minWidth="0dp"
                     android:minHeight="0dp"
-                    android:text="3학년 게시판"
+                    android:text="3학년 대화방"
                     android:textColor="@color/black_12"
                     android:textSize="10dp"
                     app:layout_constraintTop_toTopOf="@id/subContentStartGuide1"

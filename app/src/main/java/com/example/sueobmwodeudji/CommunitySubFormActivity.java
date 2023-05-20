@@ -97,7 +97,7 @@ public class CommunitySubFormActivity  extends AppCompatActivity implements View
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection(firstCP)
                 .document(firstDP)
-                .collection(secondCP)
+                .collection(subject)
                 .document(id + data.getTimestamp())
                 .set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

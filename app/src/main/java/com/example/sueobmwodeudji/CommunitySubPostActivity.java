@@ -46,6 +46,7 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
 
         intent = getIntent();
         data = (CommunitySubListModel) intent.getSerializableExtra("data");
+        subject = intent.getStringExtra("subject");
 
         binding = ActivityCommunitySubPostBinding.inflate(getLayoutInflater());
         Toolbar toolbar = binding.toolBar.mainToolBar;
@@ -157,7 +158,7 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection(firstCP)
                 .document(firstDP)
-                .collection(secondCP)
+                .collection(subject)
                 .document(data.getName() + data.getTimestamp())
                 .update("comments", data.getComments())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -167,7 +168,7 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
                         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
                         mFirestore.collection("testPost")
                                 .document("first")
-                                .collection("1학년 게시판")
+                                .collection(subject)
                                 .document(data.getName() + data.getTimestamp())
                                 .get().onSuccessTask(new SuccessContinuation<DocumentSnapshot, Object>() {
                                     @NonNull
@@ -198,7 +199,7 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection(firstCP)
                 .document(firstDP)
-                .collection(secondCP)
+                .collection(subject)
                 .document(data.getName() + data.getTimestamp())
                 .update("comments", data.getComments())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -208,7 +209,7 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
                         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
                         mFirestore.collection("testPost")
                                 .document("first")
-                                .collection("1학년 게시판")
+                                .collection(subject)
                                 .document(data.getName() + data.getTimestamp())
                                 .get().onSuccessTask(new SuccessContinuation<DocumentSnapshot, Object>() {
                                     @NonNull
