@@ -1,15 +1,12 @@
 <resources>
-    <!-- Profile Preference -->
-<!--    <string-array name="profile">-->
-<!--        <item>프로필 이미지 변경</item>-->
-<!--        <item>프로필 이미지 삭제</item>-->
-<!--    </string-array>-->
+    <!-- Reply Preference -->
+    <string-array name="reply_entries">
+        <item>Reply</item>
+        <item>Reply to all</item>
+    </string-array>
 
-<!--    <string-array name="profile_values">-->
-<!--        <item>change</item>-->
-<!--        <item>remove</item>-->
-<!--    </string-array>-->
-
-
-
+    <string-array name="reply_values">
+        <item>reply</item>
+        <item>reply_all</item>
+    </string-array>
 </resources>
