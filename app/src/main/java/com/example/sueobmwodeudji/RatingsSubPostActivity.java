@@ -175,6 +175,7 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
 
     private void initComment(){
         binding.commentEt.setText(null);
+        binding.commentEt.setHint("댓글을 입력하세요.");
         binding.submitBtn.setOnClickListener(this);
     }
 
