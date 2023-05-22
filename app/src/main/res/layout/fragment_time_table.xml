@@ -38,7 +38,9 @@
         app:layout_constraintStart_toStartOf="@+id/leftGuide"
         app:layout_constraintTop_toTopOf="@+id/topGuide">
 
-        <include layout="@layout/item_time_table_sub" />
+        <include
+            android:id="@+id/time_table"
+            layout="@layout/item_time_table_sub" />
 
     </LinearLayout>
 

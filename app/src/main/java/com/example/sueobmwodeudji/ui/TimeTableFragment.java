@@ -2,6 +2,7 @@ package com.example.sueobmwodeudji.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,6 +35,8 @@ public class TimeTableFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentTimeTableBinding.inflate(inflater, container, false);
         setHasOptionsMenu(true);
+
+        binding.timeTable.friday1.setText("class_name");
         return binding.getRoot();
     }
 
@@ -67,5 +70,10 @@ public class TimeTableFragment extends Fragment {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onChangeTimeTable(String class_name) {
+        Log.d("class_title", class_name);
+        binding.timeTable.friday1.setText(class_name);// 여기 값이 없음
     }
 }
