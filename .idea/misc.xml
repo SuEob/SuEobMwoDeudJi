@@ -56,6 +56,27 @@
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2245" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2245" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/xml/root_preferences.xml" value="0.35280797101449274" />
+        <entry key="..\:/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/activity_time_table_second.xml" value="0.14130434782608695" />
+        <entry key="..\:/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/activity_time_table_thrid.xml" value="0.14130434782608695" />
+        <entry key="..\:/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/dialog_table_name_change.xml" value="0.16983695652173914" />
+        <entry key="..\:/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_community.xml" value="0.16983695652173914" />
+        <entry key="..\:/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_home.xml" value="0.14130434782608695" />
+        <entry key="..\:/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_ratings.xml" value="0.14130434782608695" />
+        <entry key="..\:/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_settings.xml" value="0.1" />
+        <entry key="..\:/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_time_table.xml" value="0.1" />
+        <entry key="..\:/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_community_sub_1.xml" value="0.16983695652173914" />
+        <entry key="..\:/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_community_sub_2.xml" value="0.16983695652173914" />
+        <entry key="..\:/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_fragment.xml" value="0.16983695652173914" />
+        <entry key="..\:/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_fragment_small.xml" value="0.14130434782608695" />
+        <entry key="..\:/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_home_sub_1.xml" value="0.16983695652173914" />
+        <entry key="..\:/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_home_sub_2.xml" value="0.16983695652173914" />
+        <entry key="..\:/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_ratings_sub_1.xml" value="0.16983695652173914" />
+        <entry key="..\:/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_ratings_sub_2.xml" value="0.16983695652173914" />
+        <entry key="..\:/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_settings_my_info.xml" value="0.16983695652173914" />
+        <entry key="..\:/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_time_table_list.xml" value="0.16983695652173914" />
+        <entry key="..\:/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_time_table_sub_1.xml" value="0.1" />
+        <entry key="..\:/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_time_table_sub_2.xml" value="0.14130434782608695" />
         <entry key="..\:/MobileApp/SuEobMwoDeudJi/app/src/main/res/drawable-v24/community.xml" value="0.112" />
         <entry key="..\:/MobileApp/SuEobMwoDeudJi/app/src/main/res/drawable-v24/home.xml" value="0.112" />
         <entry key="..\:/MobileApp/SuEobMwoDeudJi/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.112" />
