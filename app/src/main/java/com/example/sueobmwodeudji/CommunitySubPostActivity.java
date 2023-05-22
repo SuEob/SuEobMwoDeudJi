@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.SuccessContinuation;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -47,7 +48,9 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
 
         intent = getIntent();
         data = (CommunitySubListModel) intent.getSerializableExtra("data");
-        subject = intent.getStringExtra("subject");
+        //subject = intent.getStringExtra("subject");
+
+        Log.d("fsadfasdfsd", data.getName() + data.getTitle());
 
 
         Toolbar toolbar = binding.toolBar.mainToolBar;
@@ -59,7 +62,7 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
         /********** DB Path Setting **********/
         firstCP = "testPost";
         firstDP = "first";
-        secondCP = "1학년 게시판";
+        secondCP = "1학년 대화방";
 
         binding.submitBtn.setOnClickListener(this);
 
@@ -68,20 +71,27 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
         setContentView(binding.getRoot());
     }
 
-    private void showItem() {
-        getSupportActionBar().setTitle(data.getTitle());
+    @Override
+    public void onClick(View v) {
+        imm.hideSoftInputFromWindow(binding.commentEt.getWindowToken(), 0); //키보드 내림
 
-        CommunitySubCommentAdapter adapter = new CommunitySubCommentAdapter(this, data);
-        adapter.setOclp(new CommunitySubCommentAdapter.OnCocommentPositiveListener() {
+        AlertDialog.Builder dlg = new AlertDialog.Builder(CommunitySubPostActivity.this);
+        dlg.setTitle("댓글 작성");
+        dlg.setMessage("댓글을 작성하시겠습니까?");
+        dlg.setNegativeButton("취소", new DialogInterface.OnClickListener() {
             @Override
-            public void onPositive(int positon) {
-                binding.commentEt.setHint("대댓글을 입력하세요.");
-                binding.commentEt.setText(null);
-                binding.submitBtn.setOnClickListener(new CocomentSubmitBtnClickListener(positon));
-                //imm.showSoftInput(binding.commentEt, 0);
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(CommunitySubPostActivity.this, "취소되었습니다.", Toast.LENGTH_SHORT).show();
             }
         });
-        binding.recyclerView.setAdapter(adapter);
+        dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                createComment();
+                //Toast.makeText(CommunitySubPostActivity.this, "댓글 작성", Toast.LENGTH_SHORT).show();
+            }
+        });
+        dlg.show();
     }
 
     @Override
@@ -95,6 +105,31 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
         }
         return false;
     }
+
+    private void showItem() {
+        getSupportActionBar().setTitle(data.getTitle());
+
+        CommunitySubCommentAdapter adapter = new CommunitySubCommentAdapter(this, readData());
+        adapter.setOclp(new CommunitySubCommentAdapter.OnCocommentPositiveListener() {
+            @Override
+            public void onPositive(int positon) {
+                binding.commentEt.setHint("대댓글을 입력하세요.");
+                binding.commentEt.setText(null);
+                binding.submitBtn.setOnClickListener(new CocomentSubmitBtnClickListener(positon));
+                //imm.showSoftInput(binding.commentEt, 0);
+            }
+        });
+        binding.recyclerView.setAdapter(adapter);
+    }
+
+    private DocumentReference readData(){
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        return mFirestore.collection(firstCP)
+                .document(firstDP)
+                .collection(secondCP)
+                .document(data.getName() + data.getTimestamp());
+    }
+
 
     private class CocomentSubmitBtnClickListener implements View.OnClickListener {
         private final int mPosition;
@@ -123,31 +158,9 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        imm.hideSoftInputFromWindow(binding.commentEt.getWindowToken(), 0); //키보드 내림
-
-        AlertDialog.Builder dlg = new AlertDialog.Builder(CommunitySubPostActivity.this);
-        dlg.setTitle("댓글 작성");
-        dlg.setMessage("댓글을 작성하시겠습니까?");
-        dlg.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(CommunitySubPostActivity.this, "취소되었습니다.", Toast.LENGTH_SHORT).show();
-            }
-        });
-        dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                createComment();
-                //Toast.makeText(CommunitySubPostActivity.this, "댓글 작성", Toast.LENGTH_SHORT).show();
-            }
-        });
-        dlg.show();
-    }
-
     private void createComment() {
         String comment = binding.commentEt.getText().toString();
+        binding.commentEt.setText(null);
         CommunitySubCommentModel comment_model = new CommunitySubCommentModel();
         comment_model.setContent(comment);
         comment_model.setTimestamp(Timestamp.now().toDate());
@@ -159,36 +172,38 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection(firstCP)
                 .document(firstDP)
-                .collection(subject)
+                .collection(secondCP)
                 .document(data.getName() + data.getTimestamp())
                 .update("comments", data.getComments())
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                /*.addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         Toast.makeText(CommunitySubPostActivity.this, "작성되었습니다.", Toast.LENGTH_SHORT).show();
                         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-                        mFirestore.collection("testPost")
-                                .document("first")
-                                .collection(subject)
+                        mFirestore.collection(firstCP)
+                                .document(firstDP)
+                                .collection(secondCP)
                                 .document(data.getName() + data.getTimestamp())
                                 .get().onSuccessTask(new SuccessContinuation<DocumentSnapshot, Object>() {
                                     @NonNull
                                     @Override
                                     public Task<Object> then(DocumentSnapshot documentSnapshot) throws Exception {
-                                        Intent _intent = new Intent(CommunitySubPostActivity.this, CommunitySubPostActivity.class);
+                                        finish();
+                                        Intent _intent = getIntent();
                                         CommunitySubListModel _data = documentSnapshot.toObject(CommunitySubListModel.class);
                                         _intent.putExtra("data", _data);
-                                        finish();
                                         startActivity(_intent);
                                         return null;
                                     }
                                 });
                     }
-                });
+                })*/;
+        Toast.makeText(CommunitySubPostActivity.this, "작성되었습니다.", Toast.LENGTH_SHORT).show();
     }
 
     private void createCocomment(int position) {
         String comment = binding.commentEt.getText().toString();
+        binding.commentEt.setText(null);
         CommunitySubCommentCommentModel comment_model = new CommunitySubCommentCommentModel();
         comment_model.setContent(comment);
         comment_model.setTimestamp(Timestamp.now().toDate());
@@ -200,17 +215,17 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection(firstCP)
                 .document(firstDP)
-                .collection(subject)
+                .collection(secondCP)
                 .document(data.getName() + data.getTimestamp())
                 .update("comments", data.getComments())
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                /*.addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         //Toast.makeText(CommunitySubPostActivity.this, "작성되었습니다.", Toast.LENGTH_SHORT).show();
                         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
                         mFirestore.collection("testPost")
                                 .document("first")
-                                .collection(subject)
+                                .collection(secondCP)
                                 .document(data.getName() + data.getTimestamp())
                                 .get().onSuccessTask(new SuccessContinuation<DocumentSnapshot, Object>() {
                                     @NonNull
@@ -225,6 +240,7 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
                                     }
                                 });
                     }
-                });
+                })*/;
+        Toast.makeText(CommunitySubPostActivity.this, "작성되었습니다.", Toast.LENGTH_SHORT).show();
     }
 }

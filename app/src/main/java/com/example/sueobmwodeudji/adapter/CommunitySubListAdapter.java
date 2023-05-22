@@ -28,7 +28,7 @@ import java.util.ArrayList;
 public class CommunitySubListAdapter extends RecyclerView.Adapter<CommunitySubListAdapter.CommunitySubListViewHolder> implements EventListener<QuerySnapshot> {
     private final Context context;
     private final Query mQuery;
-    private ArrayList<CommunitySubListModel> communitySubListModels = new ArrayList<>();
+    private ArrayList<DocumentSnapshot> mSnapshots  = new ArrayList<>();
 
     public CommunitySubListAdapter(Context context, Query query) {
         this.context = context;
@@ -47,12 +47,12 @@ public class CommunitySubListAdapter extends RecyclerView.Adapter<CommunitySubLi
 
     @Override
     public void onBindViewHolder(@NonNull CommunitySubListViewHolder holder, int position) {
-        holder.onBind(communitySubListModels.get(position));
+        holder.onBind(mSnapshots.get(position).toObject(CommunitySubListModel.class));
     }
 
     @Override
     public int getItemCount() {
-        return communitySubListModels.size();
+        return mSnapshots.size();
     }
 
     @Override
@@ -60,10 +60,9 @@ public class CommunitySubListAdapter extends RecyclerView.Adapter<CommunitySubLi
         if(e != null){
             Log.w("list 에러","onEvent:error", e);
         }
-        int i =0;
-        communitySubListModels.clear();
+        mSnapshots.clear();
         for(DocumentSnapshot doc : documentSnapshots.getDocuments()){
-            communitySubListModels.add(doc.toObject(CommunitySubListModel.class));
+            mSnapshots.add(doc);
             notifyDataSetChanged();
         }
     }

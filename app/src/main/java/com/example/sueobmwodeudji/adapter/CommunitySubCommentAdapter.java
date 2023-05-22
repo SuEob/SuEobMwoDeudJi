@@ -2,12 +2,14 @@ package com.example.sueobmwodeudji.adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,13 +19,22 @@ import com.example.sueobmwodeudji.databinding.ItemCommunityCommentBinding;
 import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
 import com.example.sueobmwodeudji.model.CommunitySubListModel;
 import com.example.sueobmwodeudji.model.RatingsSubListModel;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class CommunitySubCommentAdapter extends RecyclerView.Adapter<CommunitySubCommentAdapter.CommunitySubCommentViewHolder> {
+public class CommunitySubCommentAdapter extends RecyclerView.Adapter<CommunitySubCommentAdapter.CommunitySubCommentViewHolder> implements EventListener<DocumentSnapshot> {
     private final Context context;
     //private static CommunitySubListModel mCommunitySubListModels = null;
-    private final ArrayList<CommunitySubCommentModel> commentModels;
+    private ArrayList<CommunitySubCommentModel> commentModels = new ArrayList<>();
+    private DocumentReference mReference;
+
+    private String firstCP, firstDP, secondCP;
 
     public void setOclp(OnCocommentPositiveListener onListener) {
         ocpl = onListener;
@@ -31,13 +42,25 @@ public class CommunitySubCommentAdapter extends RecyclerView.Adapter<CommunitySu
 
     private static OnCocommentPositiveListener ocpl;
 
-    public CommunitySubCommentAdapter(Context context, CommunitySubListModel communitySubListModels) {
+    public CommunitySubCommentAdapter(Context context, DocumentReference documentReference) {
         this.context = context;
-        commentModels = (communitySubListModels.getComments() != null) ? communitySubListModels.getComments() : new ArrayList<>();
+        mReference = documentReference;
+        mReference.addSnapshotListener(this);
     }
     public CommunitySubCommentAdapter(Context context, RatingsSubListModel ratingsSubListModel) {
         this.context = context;
         commentModels = (ratingsSubListModel.getComments() != null) ? ratingsSubListModel.getComments() : new ArrayList<>();
+    }
+
+    @Override
+    public void onEvent(@Nullable DocumentSnapshot doc, @Nullable FirebaseFirestoreException e) {
+        if(e != null){
+            Log.w("list 에러","onEvent:error", e);
+        }
+        commentModels.clear();
+        ArrayList<CommunitySubCommentModel> data = doc.toObject(CommunitySubListModel.class).getComments();
+        commentModels = (data != null) ? data : new ArrayList<>();
+        notifyDataSetChanged();
     }
 
     public interface OnCocommentPositiveListener{
