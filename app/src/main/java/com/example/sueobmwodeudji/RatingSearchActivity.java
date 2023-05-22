@@ -4,25 +4,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sueobmwodeudji.adapter.SmallFrameAdapter;
-import com.example.sueobmwodeudji.databinding.ActivityRatingSearchBinding;
-import com.example.sueobmwodeudji.databinding.ActivityTimeTableSecondBinding;
+import com.example.sueobmwodeudji.databinding.ActivityRatingsSubSearchBinding;
 import com.example.sueobmwodeudji.model.SmallFrameModel;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class RatingSearchActivity extends AppCompatActivity {
-    private ActivityRatingSearchBinding binding;
+    private ActivityRatingsSubSearchBinding binding;
     private List<SmallFrameModel> list = new LinkedList<SmallFrameModel>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityRatingSearchBinding.inflate(getLayoutInflater());
+        binding = ActivityRatingsSubSearchBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         TimeTableItemView();
 
