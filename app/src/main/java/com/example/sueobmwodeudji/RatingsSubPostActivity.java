@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,16 +16,11 @@ import com.example.sueobmwodeudji.adapter.CommunitySubCommentAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityRatingsSubPostBinding;
 import com.example.sueobmwodeudji.model.CommunitySubCommentCommentModel;
 import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
-import com.example.sueobmwodeudji.model.CommunitySubListModel;
 import com.example.sueobmwodeudji.model.RatingsSubListModel;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.SuccessContinuation;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.LinkedList;
 
 public class RatingsSubPostActivity extends AppCompatActivity implements View.OnClickListener{
     private ActivityRatingsSubPostBinding binding;
@@ -34,6 +28,8 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
     private Intent intent;
     private RatingsSubListModel data;
     private InputMethodManager imm;
+    private String class_name, teacher_name;
+
     private String firstCP, firstDP, secondCP;
     private String subject, id;
 
@@ -43,11 +39,11 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
         binding = ActivityRatingsSubPostBinding.inflate(getLayoutInflater());
 
         intent = getIntent();
-        data = (RatingsSubListModel) intent.getSerializableExtra("data");
-        //subject = intent.getStringExtra("subject");
 
         Toolbar toolbar = binding.toolBar.mainToolBar;
         setSupportActionBar(toolbar);
+
+
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
@@ -55,7 +51,7 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
         /********** DB Path Setting **********/
         firstCP = "testRating";
         firstDP = "first";
-        secondCP = "모바일캡스톤조범석";
+        //secondCP = "모바일캡스톤조범석";
 
         binding.submitBtn.setOnClickListener(this);
 
@@ -65,13 +61,16 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
     }
 
     private void showItem() {
-        String class_name = intent.getStringExtra("class_name");
-        String teacher_name = intent.getStringExtra("teacher_name");
+        data = (RatingsSubListModel) intent.getSerializableExtra("data");
+        class_name = intent.getStringExtra("class_name");
+        teacher_name = intent.getStringExtra("teacher_name");
+
+        secondCP = class_name + teacher_name;
 
         getSupportActionBar().setTitle(class_name);
         getSupportActionBar().setSubtitle(teacher_name);
 
-        CommunitySubCommentAdapter adapter = new CommunitySubCommentAdapter(this, data);
+        CommunitySubCommentAdapter adapter = new CommunitySubCommentAdapter(this, readData());
         adapter.setOclp(new CommunitySubCommentAdapter.OnCocommentPositiveListener() {
             @Override
             public void onPositive(int positon) {
@@ -82,6 +81,14 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
             }
         });
         binding.recyclerView.setAdapter(adapter);
+    }
+
+    private DocumentReference readData(){
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        return mFirestore.collection(firstCP)
+                .document(firstDP)
+                .collection(secondCP)
+                .document(data.getName() + data.getTimestamp());
     }
 
     private class CocomentSubmitBtnClickListener implements View.OnClickListener {
@@ -136,6 +143,9 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
 
     private void createComment() {
         String comment = binding.commentEt.getText().toString();
+
+        initComment();
+
         CommunitySubCommentModel comment_model = new CommunitySubCommentModel();
         comment_model.setContent(comment);
         comment_model.setTimestamp(Timestamp.now().toDate());
@@ -143,40 +153,15 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
 
         data.getComments().add(comment_model);
 
-        //파베 Create
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        mFirestore.collection(firstCP)
-                .document(firstDP)
-                .collection(secondCP)
-                .document(data.getName() + data.getTimestamp())
-                .update("comments", data.getComments())
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(RatingsSubPostActivity.this, "작성되었습니다.", Toast.LENGTH_SHORT).show();
-                        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-                        mFirestore.collection(firstCP)
-                                .document(firstDP)
-                                .collection(secondCP)
-                                .document(data.getName() + data.getTimestamp())
-                                .get().onSuccessTask(new SuccessContinuation<DocumentSnapshot, Object>() {
-                                    @NonNull
-                                    @Override
-                                    public Task<Object> then(DocumentSnapshot documentSnapshot) throws Exception {
-                                        Intent _intent = new Intent(RatingsSubPostActivity.this, RatingsSubPostActivity.class);
-                                        RatingsSubListModel _data = documentSnapshot.toObject(RatingsSubListModel.class);
-                                        _intent.putExtra("data", _data);
-                                        finish();
-                                        startActivity(_intent);
-                                        return null;
-                                    }
-                                });
-                    }
-                });
+        //파베 Update
+        updateComment();
     }
 
     private void createCocomment(int position) {
         String comment = binding.commentEt.getText().toString();
+
+        initComment();
+
         CommunitySubCommentCommentModel comment_model = new CommunitySubCommentCommentModel();
         comment_model.setContent(comment);
         comment_model.setTimestamp(Timestamp.now().toDate());
@@ -184,35 +169,22 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
 
         data.getComments().get(position).getCommentModels().add(comment_model);
 
+        updateComment();
         //파베 Create
+    }
+
+    private void initComment(){
+        binding.commentEt.setText(null);
+        binding.submitBtn.setOnClickListener(this);
+    }
+
+    private void updateComment(){
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection(firstCP)
                 .document(firstDP)
-                .collection(subject)
+                .collection(secondCP)
                 .document(data.getName() + data.getTimestamp())
-                .update("comments", data.getComments())
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        //Toast.makeText(CommunitySubPostActivity.this, "작성되었습니다.", Toast.LENGTH_SHORT).show();
-                        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-                        mFirestore.collection("testPost")
-                                .document("first")
-                                .collection(subject)
-                                .document(data.getName() + data.getTimestamp())
-                                .get().onSuccessTask(new SuccessContinuation<DocumentSnapshot, Object>() {
-                                    @NonNull
-                                    @Override
-                                    public Task<Object> then(DocumentSnapshot documentSnapshot) throws Exception {
-                                        Intent _intent = new Intent(RatingsSubPostActivity.this, RatingsSubPostActivity.class);
-                                        RatingsSubListModel _data = documentSnapshot.toObject(RatingsSubListModel.class);
-                                        _intent.putExtra("data", _data);
-                                        finish();
-                                        startActivity(_intent);
-                                        return null;
-                                    }
-                                });
-                    }
-                });
+                .update("comments", data.getComments());
+        Toast.makeText(RatingsSubPostActivity.this, "작성되었습니다.", Toast.LENGTH_SHORT).show();
     }
 }

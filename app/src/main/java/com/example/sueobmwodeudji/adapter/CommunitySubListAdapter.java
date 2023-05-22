@@ -30,6 +30,16 @@ public class CommunitySubListAdapter extends RecyclerView.Adapter<CommunitySubLi
     private final Query mQuery;
     private ArrayList<DocumentSnapshot> mSnapshots  = new ArrayList<>();
 
+    private static OnPostClickListener opcl;
+
+    public void setOpcl(OnPostClickListener onListener) {
+        opcl = onListener;
+    }
+    public interface OnPostClickListener{
+        void onClick(CommunitySubListModel data, int position);
+    }
+
+
     public CommunitySubListAdapter(Context context, Query query) {
         this.context = context;
         this.mQuery = query;
@@ -42,12 +52,12 @@ public class CommunitySubListAdapter extends RecyclerView.Adapter<CommunitySubLi
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_community_list, parent, false);
 
-        return new CommunitySubListViewHolder(context, view);
+        return new CommunitySubListViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CommunitySubListViewHolder holder, int position) {
-        holder.onBind(mSnapshots.get(position).toObject(CommunitySubListModel.class));
+        holder.onBind(mSnapshots.get(position).toObject(CommunitySubListModel.class), position);
     }
 
     @Override
@@ -68,29 +78,23 @@ public class CommunitySubListAdapter extends RecyclerView.Adapter<CommunitySubLi
     }
 
     public static class CommunitySubListViewHolder extends RecyclerView.ViewHolder {
-        private final Context context;
         private final TextView title, content;
         private final ConstraintLayout layout;
 
-        public CommunitySubListViewHolder(Context _context, View itemView) {
+        public CommunitySubListViewHolder(View itemView) {
             super(itemView);
             ItemCommunityListBinding binding = ItemCommunityListBinding.bind(itemView);
-            context = _context;
             title = binding.titleTv;
             content = binding.contentTv;
             layout = binding.layout;
         }
-        public void onBind(CommunitySubListModel data){
+        public void onBind(CommunitySubListModel data, int positon){
             title.setText(data.getTitle());
             content.setText(data.getContent());
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, CommunitySubPostActivity.class);
-                    intent.putExtra("data", data);
-                    //intent.putExtra("title", data.getTitle());
-                    //intent.putExtra("subject", subject);
-                    context.startActivity(intent);
+                    opcl.onClick(data, positon);
                 }
             });
         }

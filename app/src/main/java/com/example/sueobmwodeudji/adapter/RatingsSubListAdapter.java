@@ -32,6 +32,8 @@ public class RatingsSubListAdapter extends RecyclerView.Adapter<RatingsSubListAd
     private final Query mQuery;
     private ArrayList<RatingsSubListModel> ratingsSubListModel = new ArrayList<>();
 
+    private static OnRatingClickListener orcl;
+
     public RatingsSubListAdapter(Context context, Query query) {
         this.context = context;
         this.mQuery = query;
@@ -71,6 +73,13 @@ public class RatingsSubListAdapter extends RecyclerView.Adapter<RatingsSubListAd
         }
     }
 
+    public void setOrcl(OnRatingClickListener orcl) {
+        RatingsSubListAdapter.orcl = orcl;
+    }
+    public interface OnRatingClickListener{
+        void onClick(RatingsSubListModel data);
+    }
+
     public static class RatingsSubListViewHolder extends RecyclerView.ViewHolder {
         Context context;
         private final TextView title;
@@ -92,12 +101,7 @@ public class RatingsSubListAdapter extends RecyclerView.Adapter<RatingsSubListAd
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, RatingsSubPostActivity.class);
-                    intent.putExtra("data", data);
-                    //intent.putExtra("title", data.getTitle());
-                    //intent.putExtra("sub_title", data.getSubTitle());
-
-                    context.startActivity(intent);
+                    orcl.onClick(data);
                 }
             });
         }

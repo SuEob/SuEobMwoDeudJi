@@ -47,6 +47,15 @@ public class CommunitySubListActivity extends AppCompatActivity implements View.
         getSupportActionBar().setTitle(subject);
 
         CommunitySubListAdapter adapter = new CommunitySubListAdapter(this, readPostData(subject));
+        adapter.setOpcl(new CommunitySubListAdapter.OnPostClickListener() {
+            @Override
+            public void onClick(CommunitySubListModel data, int position) {
+                Intent intent = new Intent(getApplicationContext(), CommunitySubPostActivity.class);
+                intent.putExtra("data", data);
+                intent.putExtra("subject", subject);
+                startActivity(intent);
+            }
+        });
         binding.recyclerView.setAdapter(adapter);
         //readPostData().addSnapshotListener(this);
         //createPost();
@@ -101,6 +110,7 @@ public class CommunitySubListActivity extends AppCompatActivity implements View.
         intent.putExtra("subject", subject);
         startActivity(intent);
     }
+
 //    private void deleteData(){
 //        String docName = "3";
 //        CommunitySubListModel data = createData(docName);

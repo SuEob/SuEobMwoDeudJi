@@ -45,13 +45,23 @@ public class RatingsSubListActivity extends AppCompatActivity {
         String class_name = intent.getStringExtra("class_name");
         String teacher_name = intent.getStringExtra("teacher_name");
 
-        mSubject = class_name+teacher_name;
+        mSubject = class_name + teacher_name;
 
         getSupportActionBar().setTitle(class_name);
         getSupportActionBar().setSubtitle(teacher_name);
 
 
         RatingsSubListAdapter adapter = new RatingsSubListAdapter(this, readPostData());
+        adapter.setOrcl(new RatingsSubListAdapter.OnRatingClickListener() {
+            @Override
+            public void onClick(RatingsSubListModel data) {
+                Intent intent = new Intent(getApplicationContext(), RatingsSubPostActivity.class);
+                intent.putExtra("data", data);
+                intent.putExtra("class_name", class_name);
+                intent.putExtra("teacher_name", teacher_name);
+                startActivity(intent);
+            }
+        });
         binding.recyclerView.setAdapter(adapter);
     }
 

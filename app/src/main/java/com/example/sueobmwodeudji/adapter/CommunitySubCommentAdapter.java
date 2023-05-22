@@ -36,20 +36,16 @@ public class CommunitySubCommentAdapter extends RecyclerView.Adapter<CommunitySu
 
     private String firstCP, firstDP, secondCP;
 
+    private static OnCocommentPositiveListener ocpl;
+
     public void setOclp(OnCocommentPositiveListener onListener) {
         ocpl = onListener;
     }
-
-    private static OnCocommentPositiveListener ocpl;
 
     public CommunitySubCommentAdapter(Context context, DocumentReference documentReference) {
         this.context = context;
         mReference = documentReference;
         mReference.addSnapshotListener(this);
-    }
-    public CommunitySubCommentAdapter(Context context, RatingsSubListModel ratingsSubListModel) {
-        this.context = context;
-        commentModels = (ratingsSubListModel.getComments() != null) ? ratingsSubListModel.getComments() : new ArrayList<>();
     }
 
     @Override
@@ -85,6 +81,7 @@ public class CommunitySubCommentAdapter extends RecyclerView.Adapter<CommunitySu
     public int getItemCount() {
         return commentModels.size();
     }
+
 
     public static class CommunitySubCommentViewHolder extends RecyclerView.ViewHolder {
         private final Context context;
