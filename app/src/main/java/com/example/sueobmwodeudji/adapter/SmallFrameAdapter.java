@@ -55,7 +55,7 @@ public class SmallFrameAdapter extends RecyclerView.Adapter<SmallFrameAdapter.Sm
             super(itemView);
             binding = ItemTimeTableListBinding.bind(itemView);
 
-            btn = binding.tableName;
+            btn = binding.timeTableListTitle;
         }
     }
 }
