@@ -33,7 +33,7 @@ public class TimeTableSubAddAdapter extends RecyclerView.Adapter<TimeTableSubAdd
 
     @Override
     public void onBindViewHolder(@NonNull TimeTableSubAddViewHolder holder, int position) {
-        holder.addTitle.setText(timeTableSubFrameModel.get(position).title);
+        holder.addTitle.setText(timeTableSubFrameModel.get(position).addTitle);
         holder.addTeacher.setText(timeTableSubFrameModel.get(position).teacher);
         holder.addContent.setText(timeTableSubFrameModel.get(position).content);
     }

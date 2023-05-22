@@ -3,6 +3,7 @@ package com.example.sueobmwodeudji;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.Nullable;
@@ -42,6 +43,11 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         setContentView(binding.getRoot());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
