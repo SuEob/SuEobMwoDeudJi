@@ -1,18 +1,11 @@
 package com.example.sueobmwodeudji;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.sueobmwodeudji.databinding.ActivityMainBinding;
-import com.example.sueobmwodeudji.fb.FbMainActivity;
 import com.example.sueobmwodeudji.ui.CommunityFragment;
 import com.example.sueobmwodeudji.ui.HomeFragment;
 import com.example.sueobmwodeudji.ui.RatingsFragment;
@@ -30,31 +23,30 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = binding.toolBar.mainToolBar;
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         BottomNavBar();
     }
 
     // 툴바 생성
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.frame_tool_bar, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.frame_tool_bar, menu);
+//        return true;
+//    }
 
     // 툴바 아이콘 클릭이 새 창으로 이동
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.search) {
-                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-                intent.putExtra("title", getSupportActionBar().getTitle());
-
-                startActivity(intent);
-
-        }
-        return false;
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        if (item.getItemId() == R.id.search) {
+//                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+//                intent.putExtra("title", getSupportActionBar().getTitle());
+//
+//                startActivity(intent);
+//
+//        }
+//        return false;
+//    }
 
     // 네비게이션바 클릭시 프래크먼트 이동
     private void BottomNavBar() {

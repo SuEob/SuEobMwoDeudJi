@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -17,11 +20,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.sueobmwodeudji.MainActivity;
-import com.example.sueobmwodeudji.R;
-import com.example.sueobmwodeudji.TimeTableSecondActivity;
-import com.example.sueobmwodeudji.TimeTableThridActivity;
-import com.example.sueobmwodeudji.adapter.BasicFrameAdapter;
+import com.example.sueobmwodeudji.TimeTableSubActivity;
 import com.example.sueobmwodeudji.databinding.FragmentTimeTableBinding;
 import com.example.sueobmwodeudji.databinding.ItemTimeTableSub1Binding;
 import com.example.sueobmwodeudji.model.BasicFrameModel;
@@ -41,36 +40,17 @@ public class TimeTableFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         binding = FragmentTimeTableBinding.inflate(inflater, container, false);
-        binding.tableList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), TimeTableSecondActivity.class);
-                startActivity(intent);
-            }
+
+        Intent intent = new Intent(getContext(), TimeTableSubActivity.class);
+        binding.addViewBtn.setOnClickListener(v -> {
+            intent.putExtra("Code", 0);
+            startActivity(intent);
         });
 
-        binding.tableNameChange.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText newName = new EditText(getContext());
-                newName.setHint("변경할 시간표 명");
-                new AlertDialog.Builder(getContext()).setTitle("시간표 이름 변경").setView(newName)
-                        .setPositiveButton("작성", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Log.d ("성sdrsdr공", "눌drsrs림");
-                    }
-                }).show();
-            }
-        });
-
-        binding.tableDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogClick(v);
-            }
+        binding.listViewBtn.setOnClickListener(view -> {
+            intent.putExtra("Code", 1);
+            startActivity(intent);
         });
 
         return binding.getRoot();
@@ -97,8 +77,6 @@ public class TimeTableFragment extends Fragment {
     }
 
 
-
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(binding.getRoot(), savedInstanceState);
@@ -110,4 +88,29 @@ public class TimeTableFragment extends Fragment {
         binding = null;
     }
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.time_table_tool_bar, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent = new Intent(getContext(), TimeTableSubActivity.class);
+
+        if (item.getItemId() == R.id.add) {
+            intent.putExtra("Code", 0);
+            startActivity(intent);
+        } else if (item.getItemId() == R.id.list) {
+            intent.putExtra("Code", 1);
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void onChangeTimeTable(String class_name) {
+        Log.d("class_title", class_name);
+        binding.timeTable.friday1.setText(class_name);// 여기 값이 없음
+    }
 }

@@ -6,69 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".ui.TimeTableFragment">
 
-    <TextView
-        android:id="@+id/yearSemesterText"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/topGuide"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:textSize="25dp"
-        android:text="xxxx년 oo학기"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
-    <TextView
-        android:id="@+id/tableNametext"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:textSize="30dp"
-        android:text="시간표 1"
-        app:layout_constraintTop_toBottomOf="@id/yearSemesterText"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
-    <Button
-        android:id="@+id/add_view_btn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_margin="10dp"
-        android:drawableTop="@drawable/add"
-        android:drawableTint="@color/white"
-        android:backgroundTint="@color/secondary_blue"
-        app:layout_constraintRight_toLeftOf="@id/settings_view_btn"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/settings_view_btn"
-        android:layout_margin="10dp"
-        android:drawableTop="@drawable/settings"
-        android:drawableTint="@color/white"
-        android:backgroundTint="#4384ff"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/list_view_btn"/>
-    <Button
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/list_view_btn"
-        android:layout_margin="10dp"
-        android:drawableTop="@drawable/community"
-        android:drawableTint="@color/white"
-        android:backgroundTint="#4384ff"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
-
-    <ScrollView
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tableNametext"
-        app:layout_constraintLeft_toLeftOf="parent"
-        tools:ignore="MissingConstraints">
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.02" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/leftGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rightGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp"
+        />
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:ignore="MissingConstraints">
-        <include layout="@layout/item_time_table_sub_1" />
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_background"
+        app:layout_constraintEnd_toStartOf="@+id/rightGuide"
+        app:layout_constraintStart_toStartOf="@+id/leftGuide"
+        app:layout_constraintTop_toTopOf="@+id/topGuide">
+
+        <include
+            android:id="@+id/time_table"
+            layout="@layout/item_time_table_sub" />
 
     </LinearLayout>
-    </ScrollView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

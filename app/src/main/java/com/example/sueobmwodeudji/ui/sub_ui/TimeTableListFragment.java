@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.sueobmwodeudji.adapter.TimeTableSubAddAdapter;
+import com.example.sueobmwodeudji.adapter.TimeTableSubListAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityTimeTableSubListBinding;
 import com.example.sueobmwodeudji.model.TimeTableSubFrameModel;
 
@@ -38,6 +38,6 @@ public class TimeTableListFragment extends Fragment {
     private void TimeTableListView() {
         list.add(new TimeTableSubFrameModel("수업명"));
         binding.timeTableSubList.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.timeTableSubList.setAdapter(new TimeTableSubAddAdapter(getContext(), list));
+        binding.timeTableSubList.setAdapter(new TimeTableSubListAdapter(getContext(), list));
     }
 }

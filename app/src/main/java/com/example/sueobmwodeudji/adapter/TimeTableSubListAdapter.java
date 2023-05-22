@@ -32,12 +32,12 @@ public class TimeTableSubListAdapter extends RecyclerView.Adapter<TimeTableSubLi
 
     @Override
     public void onBindViewHolder(@NonNull TimeTableSubListViewHolder holder, int position) {
-        holder.listTitle.setText(timeTableSubFrameModel.get(position).title);
+        holder.listTitle.setText(timeTableSubFrameModel.get(position).listTitle);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return timeTableSubFrameModel.size();
     }
 
     public static class TimeTableSubListViewHolder extends RecyclerView.ViewHolder {

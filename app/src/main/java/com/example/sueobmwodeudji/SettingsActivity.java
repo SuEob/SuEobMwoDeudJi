@@ -54,8 +54,6 @@ public class SettingsActivity extends AppCompatActivity implements
 
     }
 
-
-
     @Override
     public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
         // Instantiate the new Fragment
