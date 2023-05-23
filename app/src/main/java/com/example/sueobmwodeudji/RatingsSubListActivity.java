@@ -2,6 +2,7 @@ package com.example.sueobmwodeudji;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +23,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-public class RatingsSubListActivity extends AppCompatActivity {
+public class RatingsSubListActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivityRatingsSubListBinding binding;
     private String mSubject;
     @Override
@@ -36,6 +37,8 @@ public class RatingsSubListActivity extends AppCompatActivity {
 
         setContentView(binding.getRoot());
 
+        binding.fab.setOnClickListener(this);
+
         //createRating();
         showItem();
     }
@@ -43,12 +46,12 @@ public class RatingsSubListActivity extends AppCompatActivity {
     private void showItem(){
         Intent intent = getIntent();
         String class_name = intent.getStringExtra("class_name");
-        String teacher_name = intent.getStringExtra("teacher_name");
+        //String teacher_name = intent.getStringExtra("teacher_name");
 
-        mSubject = class_name + teacher_name;
+        mSubject = class_name;
 
         getSupportActionBar().setTitle(class_name);
-        getSupportActionBar().setSubtitle(teacher_name);
+        //getSupportActionBar().setSubtitle(teacher_name);
 
 
         RatingsSubListAdapter adapter = new RatingsSubListAdapter(this, readPostData());
@@ -58,7 +61,7 @@ public class RatingsSubListActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), RatingsSubPostActivity.class);
                 intent.putExtra("data", data);
                 intent.putExtra("class_name", class_name);
-                intent.putExtra("teacher_name", teacher_name);
+                //intent.putExtra("teacher_name", teacher_name);
                 startActivity(intent);
             }
         });
@@ -105,5 +108,12 @@ public class RatingsSubListActivity extends AppCompatActivity {
         data.setComments(d);
 
         return data;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(getApplicationContext(), RatingsSubFormActivity.class);
+        intent.putExtra("class_name", mSubject);
+        startActivity(intent);
     }
 }

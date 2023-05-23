@@ -2,29 +2,56 @@ package com.example.sueobmwodeudji.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sueobmwodeudji.CommunitySubListActivity;
 import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.RatingsSubPostActivity;
 import com.example.sueobmwodeudji.databinding.ItemRatingsRecentListBinding;
+import com.example.sueobmwodeudji.model.CommunitySubListModel;
+import com.example.sueobmwodeudji.model.RatingsSubListModel;
 import com.example.sueobmwodeudji.model.RatingsSubRecentListModel;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class RatingsSubRecentListAdapter  extends RecyclerView.Adapter<RatingsSubRecentListAdapter.RatingsSubRecentListViewHolder> {
+public class RatingsSubRecentListAdapter  extends RecyclerView.Adapter<RatingsSubRecentListAdapter.RatingsSubRecentListViewHolder> implements EventListener<QuerySnapshot> {
     protected final Context context;
-    private final List<RatingsSubRecentListModel> ratingsSubRecentListModels;
+    private ArrayList<Query> mQuerys;
+    private final ArrayList<RatingsSubListModel> ratingsSubRecentListModels = new ArrayList<>();
+    private static OnRecentItemClickLintener oricl;
+    public void setOricl(OnRecentItemClickLintener onListener) {
+        oricl = onListener;
+    }
+    public interface OnRecentItemClickLintener{
+        void onClick(RatingsSubListModel data);
+    }
 
-    public RatingsSubRecentListAdapter(Context context, List<RatingsSubRecentListModel> ratingsSubRecentListModels) {
+    public RatingsSubRecentListAdapter(Context context, ArrayList<Query> querys) {
         this.context = context;
-        this.ratingsSubRecentListModels = ratingsSubRecentListModels;
+        mQuerys = querys;
+        addQuerySnapshotListener();
+    }
+
+    private void addQuerySnapshotListener() {
+        for(Query query : mQuerys){
+            query.addSnapshotListener(this);
+        }
     }
 
     @NonNull
@@ -46,6 +73,26 @@ public class RatingsSubRecentListAdapter  extends RecyclerView.Adapter<RatingsSu
         return ratingsSubRecentListModels.size();
     }
 
+    @Override
+    public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
+        if(e != null){
+            Log.w("list 에러","onEvent:error", e);
+        }
+        for(DocumentChange change : documentSnapshots.getDocumentChanges()){
+            switch (change.getType()){
+                case ADDED:
+                    onDocumentAdded(change);
+                    break;
+            }
+        }
+    }
+
+    private void onDocumentAdded(DocumentChange change) {
+        ratingsSubRecentListModels.add(change.getDocument().toObject(RatingsSubListModel.class));
+        Collections.reverse(ratingsSubRecentListModels);
+        notifyDataSetChanged();
+    }
+
     public static class RatingsSubRecentListViewHolder extends RecyclerView.ViewHolder {
         private final Context context;
         private TextView class_name, teacher_name, content;
@@ -61,19 +108,14 @@ public class RatingsSubRecentListAdapter  extends RecyclerView.Adapter<RatingsSu
             layout = binding.layout;
         }
 
-        public void onBind(RatingsSubRecentListModel data){
-            class_name.setText(data.getClassName());
-            teacher_name.setText(data.getTeacherName());
+        public void onBind(RatingsSubListModel data){
+            class_name.setText(data.getTitle());
+            //teacher_name.setText(data.getTeacherName());
             content.setText(data.getContent());
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, RatingsSubPostActivity.class);
-
-                    intent.putExtra("class_name", data.getClassName());
-                    intent.putExtra("teacher_name", data.getTeacherName());
-
-                    context.startActivity(intent);
+                    oricl.onClick(data);
                 }
             });
         }

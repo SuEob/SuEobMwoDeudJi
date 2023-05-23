@@ -62,13 +62,18 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
 
     private void showItem() {
         data = (RatingsSubListModel) intent.getSerializableExtra("data");
-        class_name = intent.getStringExtra("class_name");
-        teacher_name = intent.getStringExtra("teacher_name");
+        class_name = data.getClassName();
+        //teacher_name = intent.getStringExtra("teacher_name");
 
-        secondCP = class_name + teacher_name;
+        binding.idTv.setText(data.getName());
+        binding.dateTv.setText(data.getTimestamp().toString());
+        binding.titleTv.setText(data.getTitle());
+        binding.contentTv.setText(data.getContent());
+        binding.difficultyTv.setText(data.getDifficulty());
+        binding.typeTv.setText(data.getType());
 
         getSupportActionBar().setTitle(class_name);
-        getSupportActionBar().setSubtitle(teacher_name);
+        //getSupportActionBar().setSubtitle(teacher_name);
 
         CommunitySubCommentAdapter adapter = new CommunitySubCommentAdapter(this, readData());
         adapter.setOclp(new CommunitySubCommentAdapter.OnCocommentPositiveListener() {
@@ -87,7 +92,7 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         return mFirestore.collection(firstCP)
                 .document(firstDP)
-                .collection(secondCP)
+                .collection(class_name)
                 .document(data.getName() + data.getTimestamp());
     }
 
@@ -183,7 +188,7 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection(firstCP)
                 .document(firstDP)
-                .collection(secondCP)
+                .collection(class_name)
                 .document(data.getName() + data.getTimestamp())
                 .update("comments", data.getComments());
         Toast.makeText(RatingsSubPostActivity.this, "작성되었습니다.", Toast.LENGTH_SHORT).show();

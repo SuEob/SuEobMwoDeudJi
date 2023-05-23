@@ -49,7 +49,7 @@ public class CommunitySubListActivity extends AppCompatActivity implements View.
         CommunitySubListAdapter adapter = new CommunitySubListAdapter(this, readPostData(subject));
         adapter.setOpcl(new CommunitySubListAdapter.OnPostClickListener() {
             @Override
-            public void onClick(CommunitySubListModel data, int position) {
+            public void onClick(CommunitySubListModel data) {
                 Intent intent = new Intent(getApplicationContext(), CommunitySubPostActivity.class);
                 intent.putExtra("data", data);
                 intent.putExtra("subject", subject);

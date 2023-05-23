@@ -1,5 +1,6 @@
 package com.example.sueobmwodeudji.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,13 +10,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.sueobmwodeudji.CommunitySubPostActivity;
 import com.example.sueobmwodeudji.MainActivity;
+import com.example.sueobmwodeudji.RatingsSubPostActivity;
+import com.example.sueobmwodeudji.adapter.CommunitySubRecentListAdapter;
 import com.example.sueobmwodeudji.adapter.RatingsSubRecentListAdapter;
 import com.example.sueobmwodeudji.adapter.ViewPagerAdapter;
 import com.example.sueobmwodeudji.databinding.FragmentRatingsBinding;
 import com.example.sueobmwodeudji.dto.RatingMyClassData;
+import com.example.sueobmwodeudji.model.CommunitySubListModel;
 import com.example.sueobmwodeudji.model.CommunitySubRecentListModel;
+import com.example.sueobmwodeudji.model.RatingsSubListModel;
 import com.example.sueobmwodeudji.model.RatingsSubRecentListModel;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
 
@@ -74,17 +82,30 @@ public class RatingsFragment extends Fragment {
     }
 
     private void setRecentListRecyclerView(){
-        ArrayList<RatingsSubRecentListModel> list = new ArrayList<>();
-        list.add(new RatingsSubRecentListModel("제목1", "닉네임1", "내용내용내용내용내용"));
-        list.add(new RatingsSubRecentListModel("제목2", "닉네임2", "내용내용내용내용내용내용내용내용내용내용"));
-        list.add(new RatingsSubRecentListModel("제목3", "닉네임3", "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"));
-        list.add(new RatingsSubRecentListModel("제목4", "닉네임4", "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"));
-        list.add(new RatingsSubRecentListModel("제목5", "닉네임5", "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"));
-        list.add(new RatingsSubRecentListModel("제목6", "닉네임6", "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"));
-        list.add(new RatingsSubRecentListModel("제목7", "닉네임7", "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"));
-        list.add(new RatingsSubRecentListModel("제목8", "닉네임8", "내용내용내용내용내용내용내용내용내용내용"));
-
-        RatingsSubRecentListAdapter adapter = new RatingsSubRecentListAdapter(getContext(), list);
+        RatingsSubRecentListAdapter adapter = new RatingsSubRecentListAdapter(getContext(), createRatingsQuery());
+        adapter.setOricl(new RatingsSubRecentListAdapter.OnRecentItemClickLintener() {
+            @Override
+            public void onClick(RatingsSubListModel data) {
+                Intent intent = new Intent(getActivity().getApplicationContext(), RatingsSubPostActivity.class);
+                intent.putExtra("data", data);
+                intent.putExtra("class_name", data.getClassName());
+                startActivity(intent);
+            }
+        });
         binding.recyclerView.setAdapter(adapter);
+    }
+
+    private ArrayList<Query> createRatingsQuery(){
+        String[] categorys = {"모바일캡스톤", "인공지능", "자료구조"};
+        ArrayList<Query> query = new ArrayList<>();
+        for (String category : categorys) {
+            FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+            query.add(mFirestore.collection("testRating")
+                    .document("first")
+                    .collection(category)
+                    .orderBy("timestamp", Query.Direction.DESCENDING)
+                    .limit(3));
+        }
+        return query;
     }
 }

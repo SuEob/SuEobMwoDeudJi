@@ -42,7 +42,7 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
         data = (CommunitySubListModel) intent.getSerializableExtra("data");
         subject = intent.getStringExtra("subject");
 
-        Log.d("fsadfasdfsd", data.getName() + data.getTitle());
+        Log.d("fsadfasdfsd", data.getComments().toString());
 
 
         Toolbar toolbar = binding.toolBar.mainToolBar;
@@ -98,6 +98,11 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
     private void showItem() {
         getSupportActionBar().setTitle(data.getTitle());
 
+        binding.idTv.setText(data.getName());
+        binding.dateTv.setText(data.getTimestamp().toString());
+        binding.titleTv.setText(data.getTitle());
+        binding.contentTv.setText(data.getContent());
+
         CommunitySubCommentAdapter adapter = new CommunitySubCommentAdapter(this, readData());
         adapter.setOclp(new CommunitySubCommentAdapter.OnCocommentPositiveListener() {
             @Override
@@ -113,6 +118,7 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
 
     private DocumentReference readData(){
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        Log.d("asdffdsa", firstCP + firstCP + subject + data.getName() + data.getTimestamp());
         return mFirestore.collection(firstCP)
                 .document(firstDP)
                 .collection(subject)

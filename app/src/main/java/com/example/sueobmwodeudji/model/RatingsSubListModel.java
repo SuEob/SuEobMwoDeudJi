@@ -11,6 +11,7 @@ public class RatingsSubListModel  implements Serializable {
     private String content;
     private String difficulty;
     private String type;
+    private String class_name;
     private Boolean honey;
     private Date timestamp;
 
@@ -90,5 +91,13 @@ public class RatingsSubListModel  implements Serializable {
 
     public void setHoney(Boolean honey) {
         this.honey = honey;
+    }
+
+    public String getClassName() {
+        return class_name;
+    }
+
+    public void setClassName(String class_name) {
+        this.class_name = class_name;
     }
 }

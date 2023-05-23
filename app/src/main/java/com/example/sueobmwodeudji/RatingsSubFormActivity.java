@@ -35,8 +35,8 @@ public class RatingsSubFormActivity extends AppCompatActivity implements View.On
 
         Intent intent = getIntent();
         class_name = intent.getStringExtra("class_name");
-        teacher_name = intent.getStringExtra("teacher_name");
-        secondCP = class_name + teacher_name;
+        //teacher_name = intent.getStringExtra("teacher_name");
+        secondCP = class_name;
 
         id = "test";
 
@@ -54,7 +54,7 @@ public class RatingsSubFormActivity extends AppCompatActivity implements View.On
 
     private void showItem() {
         binding.classTv.setText(class_name);
-        binding.teacherTv.setText(teacher_name);
+        //binding.teacherTv.setText(teacher_name);
         binding.submitTv.setOnClickListener(this);
     }
 
@@ -92,13 +92,14 @@ public class RatingsSubFormActivity extends AppCompatActivity implements View.On
         RadioButton type_rd = findViewById(binding.typeRg.getCheckedRadioButtonId());
         data.setDifficulty(difi_rd.getText().toString());
         data.setType(type_rd.getText().toString());
+        data.setClassName(class_name);
 
 
         //파베 Create
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection(firstCP)
                 .document(firstDP)
-                .collection(secondCP)
+                .collection(class_name)
                 .document(id + data.getTimestamp())
                 .set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

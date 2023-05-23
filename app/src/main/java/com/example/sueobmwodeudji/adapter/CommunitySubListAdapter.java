@@ -36,7 +36,7 @@ public class CommunitySubListAdapter extends RecyclerView.Adapter<CommunitySubLi
         opcl = onListener;
     }
     public interface OnPostClickListener{
-        void onClick(CommunitySubListModel data, int position);
+        void onClick(CommunitySubListModel data);
     }
 
 
@@ -94,7 +94,7 @@ public class CommunitySubListAdapter extends RecyclerView.Adapter<CommunitySubLi
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    opcl.onClick(data, positon);
+                    opcl.onClick(data);
                 }
             });
         }

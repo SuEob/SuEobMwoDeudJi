@@ -14,6 +14,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
 import com.example.sueobmwodeudji.CommunitySubListActivity;
+import com.example.sueobmwodeudji.CommunitySubPostActivity;
 import com.example.sueobmwodeudji.CommunitySubSearchActivity;
 import com.example.sueobmwodeudji.MainActivity;
 import com.example.sueobmwodeudji.R;
@@ -21,7 +22,10 @@ import com.example.sueobmwodeudji.adapter.CommunitySubRecentListAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityMainBinding;
 import com.example.sueobmwodeudji.databinding.FragmentCommunityBinding;
 import com.example.sueobmwodeudji.dto.RatingMyClassData;
+import com.example.sueobmwodeudji.model.CommunitySubListModel;
 import com.example.sueobmwodeudji.model.CommunitySubRecentListModel;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import org.checkerframework.checker.units.qual.A;
 import org.checkerframework.checker.units.qual.C;
@@ -79,18 +83,31 @@ public class CommunityFragment extends Fragment {
     }
 
     private void setRecentListRecyclerView(){
-        ArrayList<CommunitySubRecentListModel> list = new ArrayList<>();
-        list.add(new CommunitySubRecentListModel("제목1", "닉네임1", "내용내용내용내용내용"));
-        list.add(new CommunitySubRecentListModel("제목2", "닉네임2", "내용내용내용내용내용내용내용내용내용내용"));
-        list.add(new CommunitySubRecentListModel("제목3", "닉네임3", "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"));
-        list.add(new CommunitySubRecentListModel("제목4", "닉네임4", "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"));
-        list.add(new CommunitySubRecentListModel("제목5", "닉네임5", "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"));
-        list.add(new CommunitySubRecentListModel("제목6", "닉네임6", "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"));
-        list.add(new CommunitySubRecentListModel("제목7", "닉네임7", "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"));
-        list.add(new CommunitySubRecentListModel("제목8", "닉네임8", "내용내용내용내용내용내용내용내용내용내용"));
-
-        CommunitySubRecentListAdapter adapter = new CommunitySubRecentListAdapter(getContext(), list);
+        CommunitySubRecentListAdapter adapter = new CommunitySubRecentListAdapter(getContext(), createCategoryQuery());
+        adapter.setOricl(new CommunitySubRecentListAdapter.OnRecentItemClickLintener() {
+            @Override
+            public void onClick(CommunitySubListModel data) {
+                Intent intent = new Intent(getActivity().getApplicationContext(), CommunitySubPostActivity.class);
+                intent.putExtra("data", data);
+                intent.putExtra("subject", data.getCategory());
+                startActivity(intent);
+            }
+        });
         binding.recyclerView.setAdapter(adapter);
+    }
+
+    private ArrayList<Query> createCategoryQuery(){
+        String[] categorys = {"1학년 대화방", "2학년 대화방", "3학년 대화방", "게임 게시판", "공부 게시판", "운동 게시판"};
+        ArrayList<Query> query = new ArrayList<>();
+        for (String category : categorys) {
+            FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+            query.add(mFirestore.collection("testPost")
+                    .document("first")
+                    .collection(category)
+                    .orderBy("timestamp", Query.Direction.DESCENDING)
+                    .limit(3));
+        }
+        return query;
     }
 
    /* private void addSearchViewEvent(){

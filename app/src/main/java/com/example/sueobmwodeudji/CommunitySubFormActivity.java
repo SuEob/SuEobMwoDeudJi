@@ -92,6 +92,7 @@ public class CommunitySubFormActivity  extends AppCompatActivity implements View
         data.setName(id);
         data.setContent(binding.contentEt.getText().toString());
         data.setTimestamp(Timestamp.now().toDate());
+        data.setCategory(subject);
 
         //파베 Create
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();

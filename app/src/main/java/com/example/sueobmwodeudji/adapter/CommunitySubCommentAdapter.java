@@ -13,19 +13,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sueobmwodeudji.CommunitySubPostActivity;
 import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.databinding.ItemCommunityCommentBinding;
 import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
 import com.example.sueobmwodeudji.model.CommunitySubListModel;
-import com.example.sueobmwodeudji.model.RatingsSubListModel;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class CommunitySubCommentAdapter extends RecyclerView.Adapter<CommunitySubCommentAdapter.CommunitySubCommentViewHolder> implements EventListener<DocumentSnapshot> {
@@ -54,6 +50,7 @@ public class CommunitySubCommentAdapter extends RecyclerView.Adapter<CommunitySu
             Log.w("list 에러","onEvent:error", e);
         }
         commentModels.clear();
+        Log.d("Asdfasdfdfsa", doc.toObject(CommunitySubListModel.class).toString());
         ArrayList<CommunitySubCommentModel> data = doc.toObject(CommunitySubListModel.class).getComments();
         commentModels = (data != null) ? data : new ArrayList<>();
         notifyDataSetChanged();

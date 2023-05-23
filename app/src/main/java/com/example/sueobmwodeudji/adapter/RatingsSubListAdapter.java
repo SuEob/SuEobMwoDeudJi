@@ -97,7 +97,7 @@ public class RatingsSubListAdapter extends RecyclerView.Adapter<RatingsSubListAd
         }
         public void onBind(RatingsSubListModel data){
             title.setText(data.getTitle());
-            //sub_title.setText(data.getSubTitle());
+            sub_title.setText(data.getContent());
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -10,6 +10,7 @@ public class CommunitySubListModel implements Serializable {
     private String name;
     private String title;
     private String content;
+    private String category;
     private Date timestamp;
 
     private Map<String, Boolean> like;
@@ -64,5 +65,13 @@ public class CommunitySubListModel implements Serializable {
 
     public void setComments(ArrayList<CommunitySubCommentModel> comments) {
         this.comments = comments;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
