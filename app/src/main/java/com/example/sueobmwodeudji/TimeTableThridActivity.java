@@ -6,17 +6,20 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.sueobmwodeudji.databinding.ActivityTimeTableThridBinding;
+
 
 public class TimeTableThridActivity extends AppCompatActivity {
+    private ActivityTimeTableThridBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_time_table_thrid);
+        binding = ActivityTimeTableThridBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         final String[] years = {"2023년", "2024년", "2025년", "2026년", "2027년"};
         final String[] semesters = {"1학기", "2학기"};
