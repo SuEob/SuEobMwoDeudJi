@@ -111,12 +111,12 @@
         app:layout_constraintStart_toStartOf="@+id/leftGuide"
         app:layout_constraintTop_toBottomOf="@+id/semester" />
 
-    <EditText
-        android:id="@+id/gradeET"
-        android:layout_width="200dp"
+    <Spinner
+        android:id="@+id/grade_spin"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="96dp"
         android:hint=""
         app:layout_constraintStart_toEndOf="@+id/grade"
         app:layout_constraintTop_toBottomOf="@+id/semester_spin" />
@@ -131,15 +131,16 @@
         app:layout_constraintStart_toStartOf="@+id/leftGuide"
         app:layout_constraintTop_toBottomOf="@+id/grade" />
 
-    <EditText
-        android:id="@+id/classNameET"
-        android:layout_width="200dp"
+    <Spinner
+        android:id="@+id/class_name_spin"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_marginStart="72dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="96dp"
         android:hint=""
         app:layout_constraintStart_toEndOf="@+id/className"
-        app:layout_constraintTop_toBottomOf="@+id/gradeET" />
+        app:layout_constraintTop_toBottomOf="@+id/grade_spin" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

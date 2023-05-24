@@ -64,9 +64,7 @@ public class RegistrationActivity extends AppCompatActivity {
         callInfo = NEIS_API.getInfoService().getSchoolInfo(
                 "9da752136d5849b985288deb5036dba1",
                 "json",
-                "가락고등학교" // binding.registrationSchool.getText().toString();
-
-
+                "용문고등학교" // binding.registrationSchool.getText().toString();
         );
 
         callInfo.enqueue(new Callback<SchoolResponse>() {
@@ -94,7 +92,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     }
 
-    // 월요일 ~ 금요일까지 몇 교시에 무슨 과목인지 구하는 메소드
+    // 월요일 ~ 금요일까지 몇 교시에 무슨 과목인지 구하는 메소드 (class_name="1")
     public void SchoolCallTimeTable(String ministryCode, String schoolCode) {
 
         callTimeTable = NEIS_API.getTimeTableService().getSchoolTimeTable(
@@ -105,36 +103,40 @@ public class RegistrationActivity extends AppCompatActivity {
                 "2023",
                 "1",
                 "1",
-                "01", // "1" or "01" 인 경우가 있어서 따로 만들기!!, 지금은 "01" 해야 값 나옴
+                "1",
                 "20230313",
                 "20230317"
         );
-
-        Log.d("callTimeTable", String.valueOf(callTimeTable));
 
         callTimeTable.enqueue(new Callback<SchoolResponse>() {
             @Override
             public void onResponse(Call<SchoolResponse> call, Response<SchoolResponse> response) {
                 if (response.isSuccessful()) {
-                    SchoolResponse schoolTimeTableResponse = response.body();
-                    SchoolTimeTable schoolTimeTable = schoolTimeTableResponse.getSchoolTimeTable().get(1); // row
-                    List<Row> rows = schoolTimeTable.getRow();
-
-                    for (int i=0; i< rows.size(); i++) {
-                        Row row = rows.get(i);
-                        perioList.add(row.getPeriority());
-                        classCntntList.add(row.getClassContent());
-                    }
-
-                    Log.d("perioList", String.valueOf(perioList));
-                    Log.d("classCntntList", String.valueOf(classCntntList));
-
                     try {
+                        SchoolResponse schoolTimeTableResponse = response.body();
+                        Log.d("response", String.valueOf(response.raw()));
+                        SchoolTimeTable schoolTimeTable = schoolTimeTableResponse.getSchoolTimeTable().get(1); // row
+                        List<Row> rows = schoolTimeTable.getRow();
+
+                        for (int i = 0; i < rows.size(); i++) {
+                            Row row = rows.get(i);
+                            perioList.add(row.getPeriority());
+                            classCntntList.add(row.getClassContent());
+                        }
+
+                        Log.d("perioList", String.valueOf(perioList));
+                        Log.d("classCntntList", String.valueOf(classCntntList));
+
                         CreateJSON();
-                    } catch (JSONException e) {
+
+                    } catch (NullPointerException e) {
+                        Log.e("ERROR", "NullPointerException");
+                        // SchoolService 값 변경
+                        SchoolCallTimeTableError(ministryCode, schoolCode);
+
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
-
                 }
             }
 
@@ -143,7 +145,62 @@ public class RegistrationActivity extends AppCompatActivity {
 
             }
         });
+
     }
+
+    // 월요일 ~ 금요일까지 몇 교시에 무슨 과목인지 구하는 메소드 (class_name="01")
+    public void SchoolCallTimeTableError(String ministryCode, String schoolCode) {
+
+        callTimeTable = NEIS_API.getTimeTableService().getSchoolTimeTable(
+                "9da752136d5849b985288deb5036dba1",
+                "json",
+                ministryCode,
+                schoolCode,
+                "2023",
+                "1",
+                "1",
+                "01",
+                "20230313",
+                "20230317"
+        );
+
+        callTimeTable.enqueue(new Callback<SchoolResponse>() {
+            @Override
+            public void onResponse(Call<SchoolResponse> call, Response<SchoolResponse> response) {
+                if (response.isSuccessful()) {
+                    try {
+                        SchoolResponse schoolTimeTableResponse = response.body();
+                        Log.d("response", String.valueOf(response.raw()));
+                        SchoolTimeTable schoolTimeTable = schoolTimeTableResponse.getSchoolTimeTable().get(1); // row
+                        List<Row> rows = schoolTimeTable.getRow();
+
+                        for (int i = 0; i < rows.size(); i++) {
+                            Row row = rows.get(i);
+                            perioList.add(row.getPeriority());
+                            classCntntList.add(row.getClassContent());
+                        }
+
+                        Log.d("perioList", String.valueOf(perioList));
+                        Log.d("classCntntList", String.valueOf(classCntntList));
+
+                        CreateJSON();
+
+                    } catch (NullPointerException e) {
+                        Log.e("ERROR", "NullPointerException");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SchoolResponse> call, Throwable t) {
+
+            }
+        });
+
+    }
+
 
     // JSON 구조를 만드는 메소드
     public void CreateJSON() throws JSONException {
