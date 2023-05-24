@@ -2,6 +2,8 @@ package com.example.sueobmwodeudji;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,11 +42,22 @@ public class TimeTableSubActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.time_table_sub_container, new TimeTableListFragment()).commit();
     }
 
+    // 툴바 생성
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.time_table_sub_tool_bar, menu);
+        return true;
+    }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;
+            case R.id.add:
+                Intent intent = new Intent(this, TimeTableThridActivity.class);
+                startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

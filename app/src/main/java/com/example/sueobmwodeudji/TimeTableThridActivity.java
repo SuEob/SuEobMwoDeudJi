@@ -63,8 +63,11 @@ public class TimeTableThridActivity extends AppCompatActivity {
 //        });
 
         binding.tableAddBtn.setOnClickListener(v -> {
-
+//            SchoolCallTimeTable();
+            finish();
         });
 
     }
+
+
 }
