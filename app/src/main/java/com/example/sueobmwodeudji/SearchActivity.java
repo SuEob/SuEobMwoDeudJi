@@ -25,11 +25,11 @@ public class SearchActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
-        Log.d("asdfasd","asfddfassfad");
+        Log.d("검색","검색창 들어옴");
         binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-
+                Log.d("검색","검색실행");
                 Intent intent = new Intent(SearchActivity.this, CommunitySubSearchActivity.class);
                 intent.putExtra("query", query);
                 startActivity(intent);
@@ -59,4 +59,3 @@ public class SearchActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
-
