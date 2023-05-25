@@ -13,24 +13,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.databinding.ItemTimeTableAddBinding;
 import com.example.sueobmwodeudji.model.TimeTableSubFrameModel;
-import com.example.sueobmwodeudji.ui.TimeTableFragment;
 
 import java.util.List;
 
-public class TimeTableSubAddAdapter extends RecyclerView.Adapter<TimeTableSubAddAdapter.TimeTableSubAddViewHolder>{
+public class TimeTableSubAddAdapter extends RecyclerView.Adapter<TimeTableSubAddAdapter.TimeTableSubAddViewHolder> {
     private Context context;
     private List<TimeTableSubFrameModel> timeTableSubFrameModel;
-    public TimeTableFragment timeTableFragment;
     private AlertDialog.Builder builder;
 
     public TimeTableSubAddAdapter(Context context, List<TimeTableSubFrameModel> timeTableSubFrameModel) {
         this.context = context;
         this.timeTableSubFrameModel = timeTableSubFrameModel;
-    }
-
-    public TimeTableSubAddAdapter(Context context, TimeTableFragment timeTableFragment) {
-        this.context = context;
-        this.timeTableFragment = timeTableFragment;
     }
 
     @NonNull
@@ -39,23 +32,16 @@ public class TimeTableSubAddAdapter extends RecyclerView.Adapter<TimeTableSubAdd
         ItemTimeTableAddBinding binding = ItemTimeTableAddBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         TimeTableSubAddViewHolder viewHolder = new TimeTableSubAddViewHolder(binding);
 
-//        builder = new AlertDialog.Builder(parent.getContext());
-
         // + 버튼을 누르면 dialog 띄우고 확인 누르면 시간표에 저장
         binding.timeTableAddBtn.setOnClickListener(v -> {
             int position = viewHolder.getAdapterPosition();
 
             if (position != RecyclerView.NO_POSITION) {
                 Log.d("POSITION", String.valueOf(position));
-                timeTableFragment.onChangeTimeTable("asdasd");
+//                mCallBack.onClick("asd"); 여기서 오류뜸 
             } else {
                 Log.d("NO_POSITION", String.valueOf(RecyclerView.NO_POSITION));
             }
-
-//            builder.setTitle("Title")
-//                    .setMessage("Hello, This is message")
-//                    .create()
-//                    .show();
 
         });
 

@@ -5,14 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.R;
-import com.example.sueobmwodeudji.databinding.ActivityTimeTableSecondBinding;
 import com.example.sueobmwodeudji.databinding.ItemTimeTableListBinding;
 import com.example.sueobmwodeudji.model.SmallFrameModel;
 
@@ -54,8 +51,8 @@ public class SmallFrameAdapter extends RecyclerView.Adapter<SmallFrameAdapter.Sm
         public SmallFrameViewHolder(@NonNull View itemView) {
             super(itemView);
             binding = ItemTimeTableListBinding.bind(itemView);
-
-            btn = binding.timeTableListTitle;
+//
+//            btn = binding.timeTableListTitle;
         }
     }
 }

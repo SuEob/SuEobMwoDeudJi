@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,15 +19,14 @@ import androidx.fragment.app.Fragment;
 
 import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.TimeTableSubActivity;
+import com.example.sueobmwodeudji.TimeTableThridActivity;
 import com.example.sueobmwodeudji.databinding.FragmentTimeTableBinding;
-import com.example.sueobmwodeudji.model.BasicFrameModel;
 
-import java.util.LinkedList;
-import java.util.List;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class TimeTableFragment extends Fragment {
     private FragmentTimeTableBinding binding;
-    private List<BasicFrameModel> list = new LinkedList<BasicFrameModel>();
 
     public static TimeTableFragment getInstance() {
         return new TimeTableFragment();
@@ -36,15 +36,95 @@ public class TimeTableFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentTimeTableBinding.inflate(inflater, container, false);
-        setHasOptionsMenu(true);
-
-        binding.timeTable.friday1.setText("class_name");
         return binding.getRoot();
-    } // onCreateView
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(binding.getRoot(), savedInstanceState);
+        setHasOptionsMenu(true);
+        Log.d("onViewCreated", "onViewCreated");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("onResume", "onResume");
+        if (TimeTableThridActivity.schedule != null) {
+            String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri"}; // 월요일 ~ 금요일
+
+            TextView[][] timetable  = new TextView[5][];
+
+            timetable[0] = new TextView[] {
+                    binding.timeTable.monday1,
+                    binding.timeTable.monday2,
+                    binding.timeTable.monday3,
+                    binding.timeTable.monday4,
+                    binding.timeTable.monday5,
+                    binding.timeTable.monday6,
+                    binding.timeTable.monday7,
+                    binding.timeTable.monday8
+            };
+
+            timetable[1] = new TextView[] {
+                    binding.timeTable.tuesday1,
+                    binding.timeTable.tuesday2,
+                    binding.timeTable.tuesday3,
+                    binding.timeTable.tuesday4,
+                    binding.timeTable.tuesday5,
+                    binding.timeTable.tuesday6,
+                    binding.timeTable.tuesday7,
+                    binding.timeTable.tuesday8
+            };
+
+            timetable[2] = new TextView[] {
+                    binding.timeTable.wednesday1,
+                    binding.timeTable.wednesday2,
+                    binding.timeTable.wednesday3,
+                    binding.timeTable.wednesday4,
+                    binding.timeTable.wednesday5,
+                    binding.timeTable.wednesday6,
+                    binding.timeTable.wednesday7,
+                    binding.timeTable.wednesday8
+            };
+
+            timetable[3] = new TextView[] {
+                    binding.timeTable.thursday1,
+                    binding.timeTable.thursday2,
+                    binding.timeTable.thursday3,
+                    binding.timeTable.thursday4,
+                    binding.timeTable.thursday5,
+                    binding.timeTable.thursday6,
+                    binding.timeTable.thursday7,
+                    binding.timeTable.thursday8
+            };
+
+            timetable[4] = new TextView[] {
+                    binding.timeTable.friday1,
+                    binding.timeTable.friday2,
+                    binding.timeTable.friday3,
+                    binding.timeTable.friday4,
+                    binding.timeTable.friday5,
+                    binding.timeTable.friday6,
+                    binding.timeTable.friday7,
+                    binding.timeTable.friday8
+            };
+
+
+            try {
+                for (int i=0; i<days.length; i++) {
+                    for (int j=0; j<TimeTableThridActivity.schedule.getJSONArray(days[i]).length(); j++) {
+                        JSONObject object = TimeTableThridActivity.schedule.getJSONArray(days[i]).getJSONObject(j);
+                        String classContent = object.getString("class_content");
+                        timetable[i][j].setText(classContent);
+                    }
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
     @Override
@@ -76,10 +156,6 @@ public class TimeTableFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onChangeTimeTable(String class_name) {
-        Log.d("class_title", class_name);
-        binding.timeTable.friday1.setText(class_name);// 여기 값이 없음
-    }
 
     public void dialogClick(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());

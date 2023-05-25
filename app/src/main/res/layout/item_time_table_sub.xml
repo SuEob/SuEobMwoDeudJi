@@ -10,7 +10,7 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:gravity="center"
             android:text="" />
 
@@ -50,7 +50,7 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="55dp"
             android:gravity="center"
             android:text="1교시" />
 
@@ -95,7 +95,7 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="55dp"
             android:gravity="center"
             android:text="2교시" />
 
@@ -140,7 +140,7 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="55dp"
             android:gravity="center"
             android:text="3교시" />
 
@@ -185,7 +185,7 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="55dp"
             android:gravity="center"
             android:text="4교시" />
 
@@ -230,7 +230,7 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="55dp"
             android:gravity="center"
             android:text="5교시" />
 
@@ -275,7 +275,7 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="55dp"
             android:gravity="center"
             android:text="6교시" />
 
@@ -320,7 +320,7 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="55dp"
             android:gravity="center"
             android:text="7교시" />
 
@@ -365,7 +365,7 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="55dp"
             android:gravity="center"
             android:text="8교시" />
 
