@@ -1,6 +1,7 @@
 package com.example.sueobmwodeudji;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -12,8 +13,29 @@ import com.example.sueobmwodeudji.ui.RatingsFragment;
 import com.example.sueobmwodeudji.ui.SettingsFragment;
 import com.example.sueobmwodeudji.ui.TimeTableFragment;
 
+import java.sql.Time;
+
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
+    private long backKeyPressedTime = 0L;
+
+    @Override
+    public void onBackPressed() {
+//        안드로이드에서 기본으로 제공하는 뒤로가기
+//        super.onBackPressed();
+
+//      2000 = 2초
+        if (System.currentTimeMillis() - backKeyPressedTime >= 2000 ) {
+            backKeyPressedTime = System.currentTimeMillis();
+            Toast.makeText(this,"뒤로가기 버튼을 한번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
+//      2초 이내에 뒤로가기 버튼을 한번 더 누르면 종료
+        if (System.currentTimeMillis() - backKeyPressedTime < 2000 ) {
+            finish(); // 액티비티 종료
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,27 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavBar();
     }
-
-    // 툴바 생성
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.frame_tool_bar, menu);
-//        return true;
-//    }
-
-    // 툴바 아이콘 클릭이 새 창으로 이동
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if (item.getItemId() == R.id.search) {
-//                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-//                intent.putExtra("title", getSupportActionBar().getTitle());
-//
-//                startActivity(intent);
-//
-//        }
-//        return false;
-//    }
 
     // 네비게이션바 클릭시 프래크먼트 이동
     private void BottomNavBar() {

@@ -83,25 +83,21 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--
-        양쪽에 보이게하는 xml
-        android:clipChildren="false"
-        android:clipToPadding="false"
-    -->
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/homeTimeTableViewPager"
-            android:clipChildren="false"
-            android:clipToPadding="false"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="84dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:orientation="horizontal"
         android:paddingStart="30dp"
         android:paddingTop="30dp"
         android:paddingEnd="30dp"
         android:paddingBottom="30dp"
         app:layout_constraintEnd_toStartOf="@+id/rightGuide"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/leftGuide"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
@@ -117,15 +113,54 @@
         app:layout_constraintTop_toBottomOf="@id/homeTimeTableViewPager" />
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/homePopularPost"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
         android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="132dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="44dp"
         app:layout_constraintEnd_toStartOf="@+id/rightGuide"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/leftGuide"
         app:layout_constraintTop_toBottomOf="@+id/indicators" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/homePostPager"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/rightGuide"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/leftGuide"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout">
+
+
+    </androidx.viewpager2.widget.ViewPager2>
+
+
+    <!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/rightGuide"-->
+<!--        app:layout_constraintHorizontal_bias="0.498"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/leftGuide"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/indicators" />-->
+
+<!--    <androidx.viewpager2.widget.ViewPager2-->
+<!--        android:id="@+id/pager"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_weight="1" />-->
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/homePopularPost"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:layout_marginTop="132dp"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/rightGuide"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/leftGuide"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/indicators" />-->
 
 
     <!--    <androidx.recyclerview.widget.RecyclerView-->

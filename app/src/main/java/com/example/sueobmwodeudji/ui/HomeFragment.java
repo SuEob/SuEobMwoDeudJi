@@ -13,15 +13,17 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.SearchActivity;
-import com.example.sueobmwodeudji.adapter.HomePopularPostAdapter;
+import com.example.sueobmwodeudji.adapter.HomePagerAdapter;
 import com.example.sueobmwodeudji.adapter.HomeTimeTableAdapter;
 import com.example.sueobmwodeudji.databinding.FragmentHomeBinding;
 import com.example.sueobmwodeudji.dto.HomeTimaTableData;
-import com.example.sueobmwodeudji.model.HomePopularPostData;
+import com.example.sueobmwodeudji.ui.view_pager_ui.HomePopularPostFragment;
+import com.example.sueobmwodeudji.ui.view_pager_ui.HomeRatingFragment;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,8 +49,40 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(binding.getRoot(), savedInstanceState);
         setHasOptionsMenu(true); // Activity 보다 Fragment 우선
         HomeTimeTableView();
-        HomeIndicators();
-        HomePopularPost();
+
+
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("인기 게시글"));
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("인기 평가글"));
+        binding.tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+                if (position == 0) {
+                    new HomePopularPostFragment();
+                } else if (position == 1) {
+                    new HomeRatingFragment();
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+
+        HomePagerAdapter adapter = new HomePagerAdapter(getActivity());
+        binding.homePostPager.setAdapter(adapter);
+        binding.homePostPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
+        binding.homePostPager.setOffscreenPageLimit(2);
+//        binding.homePostPager.setCurrentItem(1000);
+
+
     }
 
     @Override
@@ -81,6 +115,7 @@ public class HomeFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+
     public void HomeTimeTableView() {
         List<List<HomeTimaTableData>> list = new ArrayList<>();
         List<HomeTimaTableData> monList = new ArrayList<>();
@@ -96,40 +131,9 @@ public class HomeFragment extends Fragment {
         list.add(monList);
         list.add(tueList);
 
-
         HomeTimeTableAdapter adapter = new HomeTimeTableAdapter(getContext(), list);
         binding.homeTimeTableViewPager.setAdapter(adapter);
-
-
-//        List<Integer> list = new ArrayList<>();
-//        list.add(1);
-//        list.add(2);
-//        list.add(3);
-//        list.add(4);
-//        list.add(5);
-//        binding.homeTimeTableViewPager.setClipToPadding(false);
-//        binding.homeTimeTableViewPager.setPadding(100,0,100,0);
-
-
-
-
     }
 
-    public void HomeIndicators() {
-
-    }
-
-
-
-    public void HomePopularPost() {
-        List<HomePopularPostData> list = new ArrayList<>();
-        list.add(new HomePopularPostData("흠..", "05.23"));
-        list.add(new HomePopularPostData("헉!", "05.13"));
-
-        HomePopularPostAdapter adapter = new HomePopularPostAdapter(getContext(), list);
-        binding.homePopularPost.setAdapter(adapter);
-        binding.homePopularPost.setLayoutManager(new LinearLayoutManager(getContext()));
-
-    }
 
 }
