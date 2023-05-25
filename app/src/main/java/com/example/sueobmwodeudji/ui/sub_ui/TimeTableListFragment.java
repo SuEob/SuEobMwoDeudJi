@@ -29,6 +29,15 @@ public class TimeTableListFragment extends Fragment {
         return binding.getRoot();
     }
 
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        list.add(new TimeTableSubFrameModel("1"));
+//        binding.timeTableSubList.setLayoutManager(new LinearLayoutManager(getContext()));
+//        binding.timeTableSubList.setAdapter(new TimeTableSubListAdapter(getContext(), list));
+//
+//    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -36,7 +45,11 @@ public class TimeTableListFragment extends Fragment {
     }
 
     private void TimeTableListView() {
-        list.add(new TimeTableSubFrameModel("수업명"));
+//        List<HomeTimaTableData>
+        list.add(new TimeTableSubFrameModel("수업명1"));
+        list.add(new TimeTableSubFrameModel("수업명2"));
+        list.add(new TimeTableSubFrameModel("수업명3"));
+        list.add(new TimeTableSubFrameModel("수업명4"));
         binding.timeTableSubList.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.timeTableSubList.setAdapter(new TimeTableSubListAdapter(getContext(), list));
     }

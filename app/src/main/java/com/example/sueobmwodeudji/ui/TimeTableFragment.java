@@ -18,9 +18,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.sueobmwodeudji.R;
-import com.example.sueobmwodeudji.RegistrationActivity;
 import com.example.sueobmwodeudji.TimeTableSubActivity;
-import com.example.sueobmwodeudji.adapter.TimeTableSubAddAdapter;
+import com.example.sueobmwodeudji.TimeTableThridActivity;
 import com.example.sueobmwodeudji.databinding.FragmentTimeTableBinding;
 
 import org.json.JSONException;
@@ -28,7 +27,6 @@ import org.json.JSONObject;
 
 public class TimeTableFragment extends Fragment {
     private FragmentTimeTableBinding binding;
-    private TimeTableSubAddAdapter adapter;
 
     public static TimeTableFragment getInstance() {
         return new TimeTableFragment();
@@ -45,8 +43,14 @@ public class TimeTableFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(binding.getRoot(), savedInstanceState);
         setHasOptionsMenu(true);
+        Log.d("onViewCreated", "onViewCreated");
+    }
 
-        if (RegistrationActivity.schedule != null) {
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("onResume", "onResume");
+        if (TimeTableThridActivity.schedule != null) {
             String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri"}; // 월요일 ~ 금요일
 
             TextView[][] timetable  = new TextView[5][];
@@ -109,8 +113,8 @@ public class TimeTableFragment extends Fragment {
 
             try {
                 for (int i=0; i<days.length; i++) {
-                    for (int j=0; j<RegistrationActivity.schedule.getJSONArray(days[i]).length(); j++) {
-                        JSONObject object = RegistrationActivity.schedule.getJSONArray(days[i]).getJSONObject(j);
+                    for (int j=0; j<TimeTableThridActivity.schedule.getJSONArray(days[i]).length(); j++) {
+                        JSONObject object = TimeTableThridActivity.schedule.getJSONArray(days[i]).getJSONObject(j);
                         String classContent = object.getString("class_content");
                         timetable[i][j].setText(classContent);
                     }
@@ -121,7 +125,6 @@ public class TimeTableFragment extends Fragment {
             }
 
         }
-
     }
 
     @Override

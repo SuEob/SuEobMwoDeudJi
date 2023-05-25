@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sueobmwodeudji.OnItemClick;
 import com.example.sueobmwodeudji.databinding.ItemTimeTableAddBinding;
 import com.example.sueobmwodeudji.model.TimeTableSubFrameModel;
 
@@ -20,17 +19,11 @@ import java.util.List;
 public class TimeTableSubAddAdapter extends RecyclerView.Adapter<TimeTableSubAddAdapter.TimeTableSubAddViewHolder> {
     private Context context;
     private List<TimeTableSubFrameModel> timeTableSubFrameModel;
-    private OnItemClick mCallBack;
     private AlertDialog.Builder builder;
 
     public TimeTableSubAddAdapter(Context context, List<TimeTableSubFrameModel> timeTableSubFrameModel) {
         this.context = context;
         this.timeTableSubFrameModel = timeTableSubFrameModel;
-    }
-
-    public TimeTableSubAddAdapter(Context context, OnItemClick listener) {
-        this.context = context;
-        this.mCallBack = listener;
     }
 
     @NonNull

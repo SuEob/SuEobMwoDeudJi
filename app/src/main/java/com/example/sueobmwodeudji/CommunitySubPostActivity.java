@@ -3,7 +3,6 @@ package com.example.sueobmwodeudji;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -42,7 +41,6 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
         data = (CommunitySubListModel) intent.getSerializableExtra("data");
         subject = intent.getStringExtra("subject");
 
-        Log.d("fsadfasdfsd", data.getName() + data.getTitle());
 
 
         Toolbar toolbar = binding.toolBar.mainToolBar;
