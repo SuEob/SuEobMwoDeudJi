@@ -96,7 +96,7 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
     }
 
     private void showItem() {
-        getSupportActionBar().setTitle(data.getTitle());
+        getSupportActionBar().setTitle(data.getCategory());
 
         binding.idTv.setText(data.getName());
         binding.dateTv.setText(data.getTimestamp().toString());

@@ -9,8 +9,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.sueobmwodeudji.adapter.CommunitySubListAdapter;
 import com.example.sueobmwodeudji.adapter.CommunitySubSearchAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityCommunitySubSearchBinding;
+import com.example.sueobmwodeudji.model.CommunitySubListModel;
 import com.example.sueobmwodeudji.model.CommunitySubSearchModel;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -33,8 +35,8 @@ public class CommunitySubSearchActivity extends AppCompatActivity {
 
         binding = ActivityCommunitySubSearchBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-/*        Toolbar toolbar = binding.toolBar.mainToolBar;
-        setSupportActionBar(toolbar);*/
+        Toolbar toolbar = binding.toolBar.mainToolBar;
+        setSupportActionBar(toolbar);
 
         showItem();
 
@@ -44,9 +46,18 @@ public class CommunitySubSearchActivity extends AppCompatActivity {
         Intent intent = getIntent();
         search_word = intent.getStringExtra("query");
         search_text = "'"+search_word + "' 검색결과";
-        binding.searchTv.setText(search_text);
+        getSupportActionBar().setTitle(search_text);
 
         CommunitySubSearchAdapter adapter = new CommunitySubSearchAdapter(this, createCategoryQuery());
+        adapter.setOpcl(new CommunitySubListAdapter.OnPostClickListener() {
+            @Override
+            public void onClick(CommunitySubListModel data) {
+                Intent intent = new Intent(getApplicationContext(), CommunitySubPostActivity.class);
+                intent.putExtra("data", data);
+                intent.putExtra("subject", data.getCategory());
+                startActivity(intent);
+            }
+        });
         binding.recyclerView.setAdapter(adapter);
     }
 

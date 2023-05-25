@@ -32,14 +32,6 @@ public class CommunitySubListAdapter extends RecyclerView.Adapter<CommunitySubLi
 
     private static OnPostClickListener opcl;
 
-    public void setOpcl(OnPostClickListener onListener) {
-        opcl = onListener;
-    }
-    public interface OnPostClickListener{
-        void onClick(CommunitySubListModel data);
-    }
-
-
     public CommunitySubListAdapter(Context context, Query query) {
         this.context = context;
         this.mQuery = query;
@@ -57,7 +49,7 @@ public class CommunitySubListAdapter extends RecyclerView.Adapter<CommunitySubLi
 
     @Override
     public void onBindViewHolder(@NonNull CommunitySubListViewHolder holder, int position) {
-        holder.onBind(mSnapshots.get(position).toObject(CommunitySubListModel.class), position);
+        holder.onBind(mSnapshots.get(position).toObject(CommunitySubListModel.class));
     }
 
     @Override
@@ -77,6 +69,13 @@ public class CommunitySubListAdapter extends RecyclerView.Adapter<CommunitySubLi
         }
     }
 
+    public void setOpcl(OnPostClickListener onListener) {
+        opcl = onListener;
+    }
+    public interface OnPostClickListener{
+        void onClick(CommunitySubListModel data);
+    }
+
     public static class CommunitySubListViewHolder extends RecyclerView.ViewHolder {
         private final TextView title, content;
         private final ConstraintLayout layout;
@@ -88,7 +87,7 @@ public class CommunitySubListAdapter extends RecyclerView.Adapter<CommunitySubLi
             content = binding.contentTv;
             layout = binding.layout;
         }
-        public void onBind(CommunitySubListModel data, int positon){
+        public void onBind(CommunitySubListModel data){
             title.setText(data.getTitle());
             content.setText(data.getContent());
             layout.setOnClickListener(new View.OnClickListener() {
