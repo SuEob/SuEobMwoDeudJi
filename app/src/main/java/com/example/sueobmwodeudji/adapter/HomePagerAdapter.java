@@ -44,7 +44,7 @@ public class HomePagerAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return Integer.MAX_VALUE;
+        return selectCnt;
     }
 
 }

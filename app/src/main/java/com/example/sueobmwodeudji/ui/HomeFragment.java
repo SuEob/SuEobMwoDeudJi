@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,11 +22,11 @@ import com.example.sueobmwodeudji.adapter.HomePagerAdapter;
 import com.example.sueobmwodeudji.adapter.HomeTimeTableAdapter;
 import com.example.sueobmwodeudji.databinding.FragmentHomeBinding;
 import com.example.sueobmwodeudji.dto.HomeTimaTableData;
-import com.example.sueobmwodeudji.ui.view_pager_ui.HomePopularPostFragment;
-import com.example.sueobmwodeudji.ui.view_pager_ui.HomeRatingFragment;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -50,38 +51,26 @@ public class HomeFragment extends Fragment {
         setHasOptionsMenu(true); // Activity 보다 Fragment 우선
         HomeTimeTableView();
 
-
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("인기 게시글"));
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("인기 평가글"));
-        binding.tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                int position = tab.getPosition();
-                if (position == 0) {
-                    new HomePopularPostFragment();
-                } else if (position == 1) {
-                    new HomeRatingFragment();
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
-
         HomePagerAdapter adapter = new HomePagerAdapter(getActivity());
         binding.homePostPager.setAdapter(adapter);
         binding.homePostPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         binding.homePostPager.setOffscreenPageLimit(2);
-//        binding.homePostPager.setCurrentItem(1000);
 
+
+        List<String> list = Arrays.asList("인기 게시글", "인기 평가글");
+
+        // TabLayout와 ViewPager2 연결
+        new TabLayoutMediator(binding.tabLayout, binding.homePostPager, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                TextView textView = new TextView(getContext());
+                textView.setText(list.get(position));
+                textView.setTextSize(20);
+                textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
+                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                tab.setCustomView(textView);
+            }
+        }).attach();
 
     }
 
@@ -133,7 +122,8 @@ public class HomeFragment extends Fragment {
 
         HomeTimeTableAdapter adapter = new HomeTimeTableAdapter(getContext(), list);
         binding.homeTimeTableViewPager.setAdapter(adapter);
-    }
 
+        binding.indicators.setViewPager2(binding.homeTimeTableViewPager);
+    }
 
 }
