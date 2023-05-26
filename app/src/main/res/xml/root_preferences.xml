@@ -42,9 +42,6 @@
             app:key="root_logout"
             app:title="로그아웃"
             app:iconSpaceReserved="false">
-            <intent
-                android:targetPackage="com.example.sueobmwodeudji"
-                android:targetClass="com.example.sueobmwodeudji.SettingsActivity" />
         </Preference>
 
         <Preference

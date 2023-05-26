@@ -1,6 +1,7 @@
 package com.example.sueobmwodeudji;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,8 @@ import com.example.sueobmwodeudji.ui.HomeFragment;
 import com.example.sueobmwodeudji.ui.RatingsFragment;
 import com.example.sueobmwodeudji.ui.SettingsFragment;
 import com.example.sueobmwodeudji.ui.TimeTableFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.sql.Time;
 
@@ -42,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        testAuth();
 
         Toolbar toolbar = binding.toolBar.mainToolBar;
         setSupportActionBar(toolbar);
@@ -89,6 +94,17 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
+    }
+
+    private void testAuth(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null){
+            String name = user.getDisplayName();
+            String email = user.getEmail();
+            String uid = user.getUid();
+
+            Log.d("asdffads", name + email + uid);
+        }
     }
 
 }
