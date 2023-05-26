@@ -17,18 +17,11 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="16dp"
         />
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/contentStartGuide1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="16dp"
-        />
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_layout1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/contentStartGuide1"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/leftGuide1"
         app:layout_constraintRight_toRightOf="@id/rightGuide1"
         >
