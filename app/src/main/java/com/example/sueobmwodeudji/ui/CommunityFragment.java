@@ -6,29 +6,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 
 import com.example.sueobmwodeudji.CommunitySubListActivity;
 import com.example.sueobmwodeudji.CommunitySubPostActivity;
-import com.example.sueobmwodeudji.CommunitySubSearchActivity;
 import com.example.sueobmwodeudji.MainActivity;
-import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.adapter.CommunitySubRecentListAdapter;
-import com.example.sueobmwodeudji.databinding.ActivityMainBinding;
 import com.example.sueobmwodeudji.databinding.FragmentCommunityBinding;
-import com.example.sueobmwodeudji.dto.RatingMyClassData;
 import com.example.sueobmwodeudji.model.CommunitySubListModel;
-import com.example.sueobmwodeudji.model.CommunitySubRecentListModel;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-
-import org.checkerframework.checker.units.qual.A;
-import org.checkerframework.checker.units.qual.C;
 
 import java.util.ArrayList;
 
@@ -53,7 +43,7 @@ public class CommunityFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(binding.getRoot(), savedInstanceState);
+        super.onViewCreated(view, savedInstanceState);
         addCategoryButtonEvent();
         setRecentListRecyclerView();
         //addSearchViewEvent();

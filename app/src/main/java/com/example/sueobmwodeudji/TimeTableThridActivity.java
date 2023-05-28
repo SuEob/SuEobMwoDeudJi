@@ -7,19 +7,18 @@ import android.widget.ArrayAdapter;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sueobmwodeudji.databinding.ActivityTimeTableThridBinding;
+import com.example.sueobmwodeudji.dto.CallSchoolData;
 import com.example.sueobmwodeudji.rest_api.NEIS_API;
 import com.example.sueobmwodeudji.rest_api.Row;
 import com.example.sueobmwodeudji.rest_api.SchoolInfo;
 import com.example.sueobmwodeudji.rest_api.SchoolResponse;
 import com.example.sueobmwodeudji.rest_api.SchoolTimeTable;
+import com.example.sueobmwodeudji.ui.TimeTableFragment;
 import com.example.sueobmwodeudji.ui.sub_ui.TimeTableListFragment;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -28,12 +27,13 @@ import retrofit2.Response;
 
 
 public class TimeTableThridActivity extends AppCompatActivity {
+    public static boolean checkCall = false;
     private ActivityTimeTableThridBinding binding;
 
     Call<SchoolResponse> callInfo, callTimeTable;
 
-    List<String> perioList = new LinkedList<String>();
-    List<String> classCntntList = new LinkedList<String>();
+    List<String> perioList = new ArrayList<>();
+    List<String> classCntntList = new ArrayList<>();
 
     public static JSONObject schedule;
 
@@ -42,6 +42,83 @@ public class TimeTableThridActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityTimeTableThridBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        // 서비스 점검중이라 임의적으로 만듬
+        // 학기
+        perioList.add("1");
+        perioList.add("2");
+        perioList.add("3");
+        perioList.add("4");
+        perioList.add("5");
+        perioList.add("6");
+
+        perioList.add("1");
+        perioList.add("2");
+        perioList.add("3");
+        perioList.add("4");
+        perioList.add("5");
+        perioList.add("6");
+        perioList.add("7");
+
+        perioList.add("1");
+        perioList.add("2");
+        perioList.add("3");
+        perioList.add("4");
+        perioList.add("5");
+        perioList.add("6");
+        perioList.add("7");
+
+        perioList.add("1");
+        perioList.add("2");
+        perioList.add("3");
+        perioList.add("4");
+        perioList.add("5");
+        perioList.add("6");
+
+        perioList.add("1");
+        perioList.add("2");
+        perioList.add("3");
+        perioList.add("4");
+        perioList.add("5");
+        perioList.add("6");
+
+        // 수업내용
+        classCntntList.add("수학");
+        classCntntList.add("한국사");
+        classCntntList.add("통합과학");
+        classCntntList.add("국어");
+        classCntntList.add("기술·가정");
+        classCntntList.add("기술·가정");
+
+        classCntntList.add("국어");
+        classCntntList.add("영어");
+        classCntntList.add("한국사");
+        classCntntList.add("통합과학");
+        classCntntList.add("수학");
+        classCntntList.add("진로와 직업");
+        classCntntList.add("진로활동");
+
+        classCntntList.add("통합사회");
+        classCntntList.add("영어");
+        classCntntList.add("과학탐구실험");
+        classCntntList.add("음악");
+        classCntntList.add("통합과학");
+        classCntntList.add("수학");
+        classCntntList.add("통합사회");
+
+        classCntntList.add("수학");
+        classCntntList.add("체육");
+        classCntntList.add("통합사회");
+        classCntntList.add("통합과학");
+        classCntntList.add("영어");
+        classCntntList.add("국어");
+
+        classCntntList.add("한국사");
+        classCntntList.add("기술·가정");
+        classCntntList.add("체육");
+        classCntntList.add("음악");
+        classCntntList.add("자율활동");
+        classCntntList.add("자율활동");
 
         final String[] years = {"2023년"};
         final String[] semesters = {"1학기", "2학기"};
@@ -69,8 +146,8 @@ public class TimeTableThridActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putString("time_table_name", binding.nameET.getText().toString());
             fragment.setArguments(bundle);
-
             SchoolCallInfo();
+            CreateList(); // 30일까지 서버 통신 막혀서 그냥 이거 써야함 ㅋㅋ 30일 이후에는 지워
             finish();
         });
     }
@@ -143,7 +220,7 @@ public class TimeTableThridActivity extends AppCompatActivity {
                         Log.d("perioList", String.valueOf(perioList));
                         Log.d("classCntntList", String.valueOf(classCntntList));
 
-                        CreateJSON();
+                        CreateList();
 
                     } catch (NullPointerException e) {
                         Log.e("ERROR", "NullPointerException");
@@ -199,7 +276,7 @@ public class TimeTableThridActivity extends AppCompatActivity {
                         Log.d("perioList", String.valueOf(perioList));
                         Log.d("classCntntList", String.valueOf(classCntntList));
 
-                        CreateJSON();
+                        CreateList();
 
                     } catch (NullPointerException e) {
                         Log.e("ERROR", "NullPointerException");
@@ -217,55 +294,46 @@ public class TimeTableThridActivity extends AppCompatActivity {
 
     }
 
-
-    // JSON 구조를 만드는 메소드
-    public void CreateJSON() throws JSONException {
+    /*
+    List 구조를 만드는 메소드
+    [{"day": "mon", "classCntnt": []},
+        {"day": "tue", "classCntnt": []},
+        {"day": "wed", "classCntnt": []},
+        {"day": "thu", "classCntnt": []},
+        {"day": "fri", "classCntnt": []}]
+     */
+    public void CreateList() {
         String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri"}; // 월요일 ~ 금요일
         int dayNum = 0; // 0:월요일 ~ 4:금요일
         int cnt = 0; // 첫번째 월요일 계산 용도
 
-    /* JSON 구조
-    JSONObject = {
-        JSONArray = [{JSONObject},{JSONObject}],
-        JSONArray = [{JSONObject},{JSONObject}], ...
-    } */
+        List<CallSchoolData> list = new ArrayList<>();
 
-        schedule = new JSONObject();
+        List<String> subList;
+        CallSchoolData schoolData;
 
-        List<JSONArray> dayList = new ArrayList<>();
-        for (int i=0; i<5; i++) {
-            resetJSONArray(dayList);
+        for (String day:days) {
+            subList = new ArrayList<>();
+            schoolData = new CallSchoolData(day, subList);
+            list.add(schoolData);
         }
 
         for (int i=0; i<perioList.size(); i++) {
-            if (perioList.get(i).equals("1") && cnt!=0) { // 월요일 ~ 목요일까지 저장, 1교시로 요일을 구분
-                schedule.put(days[dayNum], dayList.get(dayNum));
+            if (perioList.get(i).equals("1") && cnt!=0) {
                 dayNum++;
-            } else if (perioList.get(i).equals("4")) { // 금요일 저장
-                schedule.put(days[dayNum], dayList.get(dayNum));
             }
-            addJSONObject(dayList.get(dayNum), perioList.get(i), classCntntList.get(i));
+            list.get(dayNum).classCntnt.add(classCntntList.get(i));
             cnt++;
         }
 
-        Log.d("schedule", String.valueOf(schedule));
+        TimeTableFragment.newInstance(list);
 
+        checkCall = true;
 
-    }
+        for (CallSchoolData data : list) {
+            Log.d("TAG", data.toString());
+        }
 
-    // CreateJSON 안에서 List<JSONArray>안에 JSONArray 초기화 후 add
-    public void resetJSONArray(List< JSONArray > dayList) {
-        JSONArray dayArray = new JSONArray();
-        dayList.add(dayArray);
-    }
-
-    // CreateJSON 안에서 JSONObject 초기화 후 교시와 수업 내용을 put 그 후 JSONArray 안에 put
-    public void addJSONObject(JSONArray dayArray, String period, String classContent) throws
-    JSONException {
-        JSONObject dayObject = new JSONObject();
-        dayObject.put("perio", period);
-        dayObject.put("class_content", classContent);
-        dayArray.put(dayObject);
     }
 
 }

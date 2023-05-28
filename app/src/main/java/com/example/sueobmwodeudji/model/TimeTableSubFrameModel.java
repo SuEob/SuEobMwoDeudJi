@@ -2,15 +2,15 @@ package com.example.sueobmwodeudji.model;
 
 public class TimeTableSubFrameModel {
     public String addTitle, listTitle;
-    public String teacher;
-    public String content;
-    public int layoutId;
+    public String day;
+    public String period;
+
 
     // TimeTableAddFragment
-    public TimeTableSubFrameModel(String addTitle, String teacher, String content) {
+    public TimeTableSubFrameModel(String addTitle, String day, String period) {
         this.addTitle = addTitle;
-        this.teacher = teacher;
-        this.content = content;
+        this.day = day;
+        this.period = period;
     }
 
     // TimeTableListFragment

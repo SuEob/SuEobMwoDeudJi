@@ -15,7 +15,7 @@ import java.util.List;
 
 public class HomeTimeTableAdapter extends RecyclerView.Adapter<HomeTimeTableAdapter.HomeTimeTableViewHolder> {
     private Context context;
-        private List<List<HomeTimaTableData>> list;
+    private List<List<HomeTimaTableData>> list;
     private List<HomeTimaTableData> subList;
     private List<Integer> imgList;
 

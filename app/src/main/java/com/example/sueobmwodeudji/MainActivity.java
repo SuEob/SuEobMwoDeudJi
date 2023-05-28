@@ -13,8 +13,6 @@ import com.example.sueobmwodeudji.ui.RatingsFragment;
 import com.example.sueobmwodeudji.ui.SettingsFragment;
 import com.example.sueobmwodeudji.ui.TimeTableFragment;
 
-import java.sql.Time;
-
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private long backKeyPressedTime = 0L;

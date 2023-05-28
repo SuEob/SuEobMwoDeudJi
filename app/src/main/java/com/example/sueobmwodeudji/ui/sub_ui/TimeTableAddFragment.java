@@ -36,7 +36,10 @@ public class TimeTableAddFragment extends Fragment {
     }
 
     private void TimeTableAddView() {
-        list.add(new TimeTableSubFrameModel("수업명", "교사명", "수업내용"));
+        list.add(new TimeTableSubFrameModel("수업명", "월요일", "1교시"));
+        list.add(new TimeTableSubFrameModel("수업명", "화요일", "1교시"));
+        list.add(new TimeTableSubFrameModel("수업명", "수요일", "1교시"));
+
         binding.timeTableSubAdd.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.timeTableSubAdd.setAdapter(new TimeTableSubAddAdapter(getContext(), list));
     }

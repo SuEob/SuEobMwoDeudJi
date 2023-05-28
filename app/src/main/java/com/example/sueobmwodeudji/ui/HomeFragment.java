@@ -47,7 +47,7 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(binding.getRoot(), savedInstanceState);
+        super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true); // Activity 보다 Fragment 우선
         HomeTimeTableView();
 

@@ -10,18 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.sueobmwodeudji.CommunitySubPostActivity;
 import com.example.sueobmwodeudji.MainActivity;
 import com.example.sueobmwodeudji.RatingsSubPostActivity;
-import com.example.sueobmwodeudji.adapter.CommunitySubRecentListAdapter;
 import com.example.sueobmwodeudji.adapter.RatingsSubRecentListAdapter;
 import com.example.sueobmwodeudji.adapter.ViewPagerAdapter;
 import com.example.sueobmwodeudji.databinding.FragmentRatingsBinding;
 import com.example.sueobmwodeudji.dto.RatingMyClassData;
-import com.example.sueobmwodeudji.model.CommunitySubListModel;
-import com.example.sueobmwodeudji.model.CommunitySubRecentListModel;
 import com.example.sueobmwodeudji.model.RatingsSubListModel;
-import com.example.sueobmwodeudji.model.RatingsSubRecentListModel;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -47,7 +42,7 @@ public class RatingsFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(binding.getRoot(), savedInstanceState);
+        super.onViewCreated(view, savedInstanceState);
 
         ratingsItemView();
         setRecentListRecyclerView();
