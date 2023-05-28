@@ -103,19 +103,11 @@ public class HomeFragment extends Fragment {
 
 
     public void HomeTimeTableView() {
-        List<List<HomeTimaTableData>> list = new ArrayList<>();
-        List<HomeTimaTableData> monList = new ArrayList<>();
-        monList.add(new HomeTimaTableData( "1교시 수학"));
-        monList.add(new HomeTimaTableData( "2교시 수학"));
-        monList.add(new HomeTimaTableData("3교시 수학"));
+        List<HomeTimaTableData> list = new ArrayList<>();
 
-        List<HomeTimaTableData> tueList = new ArrayList<>();
-        tueList.add(new HomeTimaTableData( "1교시 국어"));
-        tueList.add(new HomeTimaTableData( "2교시 국어"));
-        tueList.add(new HomeTimaTableData("3교시 국어"));
-
-        list.add(monList);
-        list.add(tueList);
+        list.add(new HomeTimaTableData( "1교시 수학"));
+        list.add(new HomeTimaTableData( "2교시 수학"));
+        list.add(new HomeTimaTableData("3교시 수학"));
 
         HomeTimeTableAdapter adapter = new HomeTimeTableAdapter(getContext(), list);
         binding.homeTimeTableViewPager.setAdapter(adapter);

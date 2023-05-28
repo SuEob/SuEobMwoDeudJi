@@ -15,11 +15,10 @@ import java.util.List;
 
 public class HomeTimeTableAdapter extends RecyclerView.Adapter<HomeTimeTableAdapter.HomeTimeTableViewHolder> {
     private Context context;
-    private List<List<HomeTimaTableData>> list;
-    private List<HomeTimaTableData> subList;
+    private List<HomeTimaTableData> list;
     private List<Integer> imgList;
 
-    public HomeTimeTableAdapter(Context context, List<List<HomeTimaTableData>> list) {
+    public HomeTimeTableAdapter(Context context, List<HomeTimaTableData> list) {
         this.context = context;
         this.list = list;
     }
@@ -39,8 +38,8 @@ public class HomeTimeTableAdapter extends RecyclerView.Adapter<HomeTimeTableAdap
 
     @Override
     public void onBindViewHolder(@NonNull HomeTimeTableViewHolder holder, int position) {
-        holder.classContent.setText(list.get(position).get(0).class_content);
-        holder.classContent.setText(list.get(position).get(1).class_content);
+        holder.classContent.setText(list.get(position).getClass_content());
+
 
     }
 
