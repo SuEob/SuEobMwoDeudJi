@@ -19,6 +19,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegistrationActivity extends AppCompatActivity {
     private ActivityRegistrationBinding binding;
@@ -26,8 +27,8 @@ public class RegistrationActivity extends AppCompatActivity {
     public static String school_name;
     private String mName, mSchool, mId, mPw;
     private boolean agree;
-
     private FirebaseAuth mAuth;
+    private String mUid;
 
 //    public static JSONObject schedule;
 
@@ -110,6 +111,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             user.updateProfile(new UserProfileChangeRequest.Builder().setDisplayName(mName).build());
+                            mUid = user.getUid();
                             success();
                         } else {
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -122,17 +124,26 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     private void success() {
+        createUserDB();
         Intent intent = new Intent(this, LoginActivity.class);
         setResult(RESULT_OK, intent);
         finish();
     }
 
+    private void createUserDB() {
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        mFirestore.collection("사용자")
+                .document(mUid)
+                .set(createUserDTO());
+
+    }
+
     private UserDTO createUserDTO() {
         UserDTO user = new UserDTO();
-        user = new UserDTO();
-        user.setName(mName);
-        user.setId(mId);
-        user.setPw(mPw);
+//        user = new UserDTO();
+//        user.setName(mName);
+//        user.setId(mId);
+//        user.setPw(mPw);
         user.setSchool_name(mSchool);
 
         return user;

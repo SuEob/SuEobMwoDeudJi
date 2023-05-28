@@ -3,6 +3,9 @@ package com.example.sueobmwodeudji.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,6 +21,7 @@ import com.example.sueobmwodeudji.CommunitySubPostActivity;
 import com.example.sueobmwodeudji.CommunitySubSearchActivity;
 import com.example.sueobmwodeudji.MainActivity;
 import com.example.sueobmwodeudji.R;
+import com.example.sueobmwodeudji.SearchActivity;
 import com.example.sueobmwodeudji.adapter.CommunitySubRecentListAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityMainBinding;
 import com.example.sueobmwodeudji.databinding.FragmentCommunityBinding;
@@ -44,7 +48,7 @@ public class CommunityFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentCommunityBinding.inflate(inflater, container, false);
-
+        setHasOptionsMenu(true); // Activity 보다 Fragment 우선
         String tool_bar_title = "커뮤니티";
         ((MainActivity)getActivity()).getSupportActionBar().setTitle(tool_bar_title);
 
@@ -63,6 +67,26 @@ public class CommunityFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().invalidateOptionsMenu(); // onCreateOptionsMenu() 재호출
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.community_tool_bar, menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.search) {
+            Intent intent = new Intent(getActivity(), SearchActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void addCategoryButtonEvent() {
@@ -105,7 +129,7 @@ public class CommunityFragment extends Fragment {
                     .document("first")
                     .collection(category)
                     .orderBy("timestamp", Query.Direction.DESCENDING)
-                    .limit(3));
+                    .limit(10));
         }
         return query;
     }

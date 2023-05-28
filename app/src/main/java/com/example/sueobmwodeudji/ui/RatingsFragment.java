@@ -3,6 +3,9 @@ package com.example.sueobmwodeudji.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -12,7 +15,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.sueobmwodeudji.CommunitySubPostActivity;
 import com.example.sueobmwodeudji.MainActivity;
+import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.RatingsSubPostActivity;
+import com.example.sueobmwodeudji.SearchActivity;
 import com.example.sueobmwodeudji.adapter.CommunitySubRecentListAdapter;
 import com.example.sueobmwodeudji.adapter.RatingsSubRecentListAdapter;
 import com.example.sueobmwodeudji.adapter.ViewPagerAdapter;
@@ -38,7 +43,7 @@ public class RatingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentRatingsBinding.inflate(inflater, container, false);
-
+        setHasOptionsMenu(true); // Activity 보다 Fragment 우선
         String tool_bar_title = "평가";
         ((MainActivity)getActivity()).getSupportActionBar().setTitle(tool_bar_title);
 
@@ -57,6 +62,27 @@ public class RatingsFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().invalidateOptionsMenu(); // onCreateOptionsMenu() 재호출
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.rating_tool_bar, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.search) {
+            Intent intent = new Intent(getActivity(), SearchActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void ratingsItemView() {
