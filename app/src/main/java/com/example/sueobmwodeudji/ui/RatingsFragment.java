@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.sueobmwodeudji.MainActivity;
 import com.example.sueobmwodeudji.RatingsSubPostActivity;
 import com.example.sueobmwodeudji.adapter.RatingsSubRecentListAdapter;
 import com.example.sueobmwodeudji.adapter.ViewPagerAdapter;
@@ -25,6 +24,7 @@ import java.util.ArrayList;
 public class RatingsFragment extends Fragment {
     private FragmentRatingsBinding binding;
 
+
     public static RatingsFragment getInstance() {
         return new RatingsFragment();
     }
@@ -33,10 +33,6 @@ public class RatingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentRatingsBinding.inflate(inflater, container, false);
-
-        String tool_bar_title = "평가";
-        ((MainActivity)getActivity()).getSupportActionBar().setTitle(tool_bar_title);
-
         return binding.getRoot();
     }
 

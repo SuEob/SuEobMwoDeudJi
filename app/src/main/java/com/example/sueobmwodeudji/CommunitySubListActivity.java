@@ -2,7 +2,7 @@ package com.example.sueobmwodeudji;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -25,18 +25,19 @@ import java.util.Map;
 public class CommunitySubListActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivityCommunitySubListBinding binding;
     private String subject;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityCommunitySubListBinding.inflate(getLayoutInflater());
-        Toolbar toolbar = binding.toolBar.mainToolBar;
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
         setContentView(binding.getRoot());
 
-        binding.fab.setOnClickListener(this);
+        Toolbar toolbar = binding.toolBar.mainToolBar;
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
 
+        binding.fab.setOnClickListener(this);
         showItem();
     }
 
@@ -109,6 +110,14 @@ public class CommunitySubListActivity extends AppCompatActivity implements View.
         Intent intent = new Intent(getApplicationContext(), CommunitySubFormActivity.class);
         intent.putExtra("subject", subject);
         startActivity(intent);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 //    private void deleteData(){

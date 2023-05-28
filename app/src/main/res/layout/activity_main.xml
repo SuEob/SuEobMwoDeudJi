@@ -11,17 +11,28 @@
         android:id="@+id/tool_bar"
         layout="@layout/tool_bar" />
 
-    <FrameLayout
-        android:id="@+id/containers"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_nav_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tool_bar"
-        tools:ignore="UselessLeaf">
+        android:fillViewport="true" >
 
-    </FrameLayout>
+        <FrameLayout
+            android:id="@+id/containers"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_nav_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tool_bar"
+            tools:ignore="UselessLeaf">
+
+        </FrameLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav_view"

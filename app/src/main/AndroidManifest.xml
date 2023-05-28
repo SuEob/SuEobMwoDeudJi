@@ -38,7 +38,9 @@
             android:name=".TimeTableThridActivity"
             android:exported="true">
         </activity>
-        <activity android:name=".CommunitySubListActivity" />
+        <activity android:name=".CommunitySubListActivity"
+            android:exported="true"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".CommunitySubPostActivity" />
         <activity android:name=".CommunitySubSearchActivity" />
         <activity android:name=".CommunitySubFormActivity" />

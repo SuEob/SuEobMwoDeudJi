@@ -2,6 +2,7 @@ package com.example.sueobmwodeudji;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -12,7 +13,6 @@ import com.example.sueobmwodeudji.adapter.RatingsSubListAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityRatingsSubListBinding;
 import com.example.sueobmwodeudji.model.CommunitySubCommentCommentModel;
 import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
-import com.example.sueobmwodeudji.model.CommunitySubListModel;
 import com.example.sueobmwodeudji.model.RatingsSubListModel;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -20,7 +20,6 @@ import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 
 public class RatingsSubListActivity extends AppCompatActivity implements View.OnClickListener {
@@ -33,7 +32,8 @@ public class RatingsSubListActivity extends AppCompatActivity implements View.On
 
         Toolbar toolbar = binding.toolBar.mainToolBar;
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
 
         setContentView(binding.getRoot());
 
@@ -115,5 +115,13 @@ public class RatingsSubListActivity extends AppCompatActivity implements View.On
         Intent intent = new Intent(getApplicationContext(), RatingsSubFormActivity.class);
         intent.putExtra("class_name", mSubject);
         startActivity(intent);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

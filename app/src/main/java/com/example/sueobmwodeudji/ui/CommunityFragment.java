@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.sueobmwodeudji.CommunitySubListActivity;
 import com.example.sueobmwodeudji.CommunitySubPostActivity;
-import com.example.sueobmwodeudji.MainActivity;
 import com.example.sueobmwodeudji.adapter.CommunitySubRecentListAdapter;
 import com.example.sueobmwodeudji.databinding.FragmentCommunityBinding;
 import com.example.sueobmwodeudji.model.CommunitySubListModel;
@@ -34,10 +33,6 @@ public class CommunityFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentCommunityBinding.inflate(inflater, container, false);
-
-        String tool_bar_title = "커뮤니티";
-        ((MainActivity)getActivity()).getSupportActionBar().setTitle(tool_bar_title);
-
         return binding.getRoot();
     }
 

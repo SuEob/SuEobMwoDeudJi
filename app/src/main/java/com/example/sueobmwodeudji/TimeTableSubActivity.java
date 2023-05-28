@@ -21,9 +21,9 @@ public class TimeTableSubActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityTimeTableSubBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         // 툴바
-        setContentView(binding.getRoot());
         Toolbar toolbar = binding.toolBar.mainToolBar;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

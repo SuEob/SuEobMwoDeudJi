@@ -8,7 +8,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,7 +31,6 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
-    private LinearLayout indicators;
 
     public static HomeFragment getInstance() {
         return new HomeFragment();
@@ -55,7 +53,6 @@ public class HomeFragment extends Fragment {
         binding.homePostPager.setAdapter(adapter);
         binding.homePostPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
         binding.homePostPager.setOffscreenPageLimit(2);
-
 
         List<String> list = Arrays.asList("인기 게시글", "인기 평가글");
 

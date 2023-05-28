@@ -72,11 +72,13 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.containers,  new CommunityFragment())
                             .commit();
+                    getSupportActionBar().setTitle("커뮤니티");
                     return true;
                 case R.id.navigation_ratings:
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.containers, new RatingsFragment())
                             .commit();
+                    getSupportActionBar().setTitle("평가");
                     return true;
                 case R.id.navigation_settings:
                     getSupportFragmentManager().beginTransaction()

@@ -3,6 +3,7 @@ package com.example.sueobmwodeudji;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
@@ -38,13 +39,12 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         binding = ActivityRatingsSubPostBinding.inflate(getLayoutInflater());
 
-        intent = getIntent();
-
         Toolbar toolbar = binding.toolBar.mainToolBar;
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
 
-
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        intent = getIntent();
 
         imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 
@@ -192,5 +192,13 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
                 .document(data.getName() + data.getTimestamp())
                 .update("comments", data.getComments());
         Toast.makeText(RatingsSubPostActivity.this, "작성되었습니다.", Toast.LENGTH_SHORT).show();
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
