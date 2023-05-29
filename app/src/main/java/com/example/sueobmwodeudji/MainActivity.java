@@ -16,6 +16,11 @@ import com.example.sueobmwodeudji.ui.TimeTableFragment;
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private long backKeyPressedTime = 0L;
+    private HomeFragment homeFragment;
+    private TimeTableFragment timeTableFragment;
+    private CommunityFragment communityFragment;
+    private RatingsFragment ratingsFragment;
+    private SettingsFragment settingsFragment;
 
     @Override
     public void onBackPressed() {
@@ -44,6 +49,12 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = binding.toolBar.mainToolBar;
         setSupportActionBar(toolbar);
 
+        homeFragment = new HomeFragment();
+        timeTableFragment = new TimeTableFragment();
+        communityFragment = new CommunityFragment();
+        ratingsFragment = new RatingsFragment();
+        settingsFragment = new SettingsFragment();
+
         BottomNavBar();
     }
 
@@ -58,31 +69,31 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.containers, new HomeFragment())
+                            .replace(R.id.containers, homeFragment)
                             .commit();
                     getSupportActionBar().setTitle("홈");
                     return true;
                 case R.id.navigation_time_table:
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.containers,  new TimeTableFragment())
+                            .replace(R.id.containers, timeTableFragment)
                             .commit();
                     getSupportActionBar().setTitle("시간표");
                     return true;
                 case R.id.navigation_community:
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.containers,  new CommunityFragment())
+                            .replace(R.id.containers, communityFragment)
                             .commit();
                     getSupportActionBar().setTitle("커뮤니티");
                     return true;
                 case R.id.navigation_ratings:
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.containers, new RatingsFragment())
+                            .replace(R.id.containers, ratingsFragment)
                             .commit();
                     getSupportActionBar().setTitle("평가");
                     return true;
                 case R.id.navigation_settings:
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.containers, new SettingsFragment())
+                            .replace(R.id.containers, settingsFragment)
                             .commit();
                     getSupportActionBar().setTitle("설정");
                     return true;
