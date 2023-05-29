@@ -66,7 +66,7 @@
 
         <SwitchPreferenceCompat
             app:key="root_alert"
-            app:title="알림 수신(가장 나중에 만들거라 제외 가능!)"
+            app:title="알림 수신"
             app:iconSpaceReserved="false"/>
 
         <Preference

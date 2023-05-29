@@ -51,6 +51,7 @@
             app:layout_constraintGuide_end="16dp" />
 
         <ImageView
+            android:id="@+id/my_iv"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/account_circle"
@@ -59,10 +60,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="270dp"
+            android:layout_width="0dp"
             android:layout_height="80dp"
             android:background="@drawable/home_profile_border"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/my_iv"
             app:layout_constraintEnd_toStartOf="@+id/subRightGuide"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0">

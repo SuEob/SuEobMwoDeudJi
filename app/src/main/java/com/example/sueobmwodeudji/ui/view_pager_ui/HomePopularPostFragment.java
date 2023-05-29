@@ -38,7 +38,7 @@ public class HomePopularPostFragment extends Fragment {
 
     public void HomeViewPager() {
         List<HomePopularPostData> list = new ArrayList<>();
-        list.add(new HomePopularPostData("흠..", "05.23"));
+        list.add(new HomePopularPostData("", "05.23"));
         list.add(new HomePopularPostData("헉!", "05.13"));
 
         HomePopularPostAdapter adapter = new HomePopularPostAdapter(getContext(), list);
