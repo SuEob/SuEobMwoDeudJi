@@ -7,13 +7,15 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NEIS_API {
+
     /*
 SchoolResponse -> SchoolInfo -> Head -> Result
                              -> Row
 
 SchoolResponse -> SchoolTimeTable -> Head -> Result
                                   -> Row
-*/
+    */
+
     private static final String BASE_URL = "https://open.neis.go.kr/hub/";
 
     public static SchoolService getInfoService(){

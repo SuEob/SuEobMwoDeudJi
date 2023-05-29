@@ -13,6 +13,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="secondary_blue">#FF4384FF</color>
     <color name="secondary_blue_variant">#FF0058FF</color>
+    <color name="secondary_blue_sub">#81ADFF</color>
     <color name="error_red_1">#FFFF3B30</color>
     <color name="error_red_2">#FFFF5449</color>
     <color name="background">#FFF7F7F7</color>

@@ -1,5 +1,7 @@
 package com.example.sueobmwodeudji.ui;
 
+import static com.example.sueobmwodeudji.TimeTableThridActivity.checkCall;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,50 +13,71 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.TimeTableSubActivity;
 import com.example.sueobmwodeudji.TimeTableThridActivity;
+import com.example.sueobmwodeudji.adapter.TimeTableSubAddAdapter;
 import com.example.sueobmwodeudji.databinding.FragmentTimeTableBinding;
+import com.example.sueobmwodeudji.dto.CallSchoolData;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.io.Serializable;
+import java.util.List;
 
-public class TimeTableFragment extends Fragment {
+public class TimeTableFragment extends Fragment implements TimeTableSubAddAdapter.CallBackListener {
     private FragmentTimeTableBinding binding;
+
+    private static Bundle args;
+    private static final String TIMETABLE_DATA = "dataList";
+
+    private TimeTableSubAddAdapter adapter;
 
     public static TimeTableFragment getInstance() {
         return new TimeTableFragment();
     }
 
+    public static TimeTableFragment newInstance(List<CallSchoolData> dataList) {
+        TimeTableFragment fragment = new TimeTableFragment();
+        args = new Bundle();
+        args.putSerializable("dataList", (Serializable) dataList);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
         binding = FragmentTimeTableBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(binding.getRoot(), savedInstanceState);
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
-        Log.d("onViewCreated", "onViewCreated");
+
+        adapter = new TimeTableSubAddAdapter();
+        adapter.setCallBackListener(data -> callBack(data));
+//        adapter.performAction();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("onResume", "onResume");
-        if (TimeTableThridActivity.schedule != null) {
+
+        // 새로 추가한 데이터값을 받아옴
+        if (checkCall && args != null) {
+            List<CallSchoolData> dataList = (List<CallSchoolData>) args.getSerializable(TIMETABLE_DATA);
+
             String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri"}; // 월요일 ~ 금요일
 
             TextView[][] timetable  = new TextView[5][];
-
             timetable[0] = new TextView[] {
                     binding.timeTable.monday1,
                     binding.timeTable.monday2,
@@ -110,21 +133,18 @@ public class TimeTableFragment extends Fragment {
                     binding.timeTable.friday8
             };
 
-
-            try {
-                for (int i=0; i<days.length; i++) {
-                    for (int j=0; j<TimeTableThridActivity.schedule.getJSONArray(days[i]).length(); j++) {
-                        JSONObject object = TimeTableThridActivity.schedule.getJSONArray(days[i]).getJSONObject(j);
-                        String classContent = object.getString("class_content");
-                        timetable[i][j].setText(classContent);
-                    }
+            for (int i=0; i<days.length; i++) {
+                for (int j=0; j<dataList.get(i).classCntnt.size(); j++) {
+                    String classContent = dataList.get(i).classCntnt.get(j);
+                    timetable[i][j].setText(classContent);
                 }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
 
+            // onResume()으로 인한 메모리 낭비 방지
+            TimeTableThridActivity.checkCall = false;
+
         }
+
     }
 
     @Override
@@ -175,5 +195,10 @@ public class TimeTableFragment extends Fragment {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    @Override
+    public void callBack(String data) {
+        Toast.makeText(getActivity(), ""+data, Toast.LENGTH_SHORT).show();
     }
 }

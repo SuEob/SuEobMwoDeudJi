@@ -1,6 +1,5 @@
 package com.example.sueobmwodeudji.adapter;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,7 +18,9 @@ import java.util.List;
 public class TimeTableSubAddAdapter extends RecyclerView.Adapter<TimeTableSubAddAdapter.TimeTableSubAddViewHolder> {
     private Context context;
     private List<TimeTableSubFrameModel> timeTableSubFrameModel;
-    private AlertDialog.Builder builder;
+    private CallBackListener listener;
+
+    public TimeTableSubAddAdapter() {}
 
     public TimeTableSubAddAdapter(Context context, List<TimeTableSubFrameModel> timeTableSubFrameModel) {
         this.context = context;
@@ -38,7 +39,12 @@ public class TimeTableSubAddAdapter extends RecyclerView.Adapter<TimeTableSubAdd
 
             if (position != RecyclerView.NO_POSITION) {
                 Log.d("POSITION", String.valueOf(position));
-//                mCallBack.onClick("asd"); 여기서 오류뜸 
+//                Toast.makeText(parent.getContext(), ""+position, Toast.LENGTH_SHORT).show();
+                setCallBackListener(listener);
+                if (listener != null) {
+                    String value = "Hello, World!";
+                    listener.callBack(value);
+                }
             } else {
                 Log.d("NO_POSITION", String.valueOf(RecyclerView.NO_POSITION));
             }
@@ -51,8 +57,8 @@ public class TimeTableSubAddAdapter extends RecyclerView.Adapter<TimeTableSubAdd
     @Override
     public void onBindViewHolder(@NonNull TimeTableSubAddViewHolder holder, int position) {
         holder.addTitle.setText(timeTableSubFrameModel.get(position).addTitle);
-        holder.addTeacher.setText(timeTableSubFrameModel.get(position).teacher);
-        holder.addContent.setText(timeTableSubFrameModel.get(position).content);
+        holder.addDay.setText(timeTableSubFrameModel.get(position).day);
+        holder.addPeriod.setText(timeTableSubFrameModel.get(position).period);
     }
 
     @Override
@@ -60,20 +66,32 @@ public class TimeTableSubAddAdapter extends RecyclerView.Adapter<TimeTableSubAdd
         return timeTableSubFrameModel.size();
     }
 
-    public static class TimeTableSubAddViewHolder extends RecyclerView.ViewHolder {
+    public static class TimeTableSubAddViewHolder extends RecyclerView.ViewHolder{
         private ItemTimeTableAddBinding binding;
+        private CallBackListener listener;
+
         public TextView addTitle;
-        public TextView addTeacher;
-        public TextView addContent;
+        public TextView addPeriod;
+        public TextView addDay;
         public ImageButton addBtn;
 
         public TimeTableSubAddViewHolder(@NonNull ItemTimeTableAddBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
             addTitle = binding.timeTableAddTitle;
-            addTeacher = binding.timeTableAddTeacher;
-            addContent = binding.timeTableAddContent;
+            addPeriod = binding.timeTableAddPeriod;
+            addDay = binding.timeTableAddDay;
             addBtn = binding.timeTableAddBtn;
         }
+
     }
+
+    public interface CallBackListener {
+        void callBack(String data);
+    }
+
+    public void setCallBackListener(CallBackListener listener) {
+        this.listener = listener;
+    }
+
 }

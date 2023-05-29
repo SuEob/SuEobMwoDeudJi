@@ -2,12 +2,10 @@ package com.example.sueobmwodeudji;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.sueobmwodeudji.adapter.SmallFrameAdapter;
 
+import com.example.sueobmwodeudji.adapter.SmallFrameAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityTimeTableSecondBinding;
 import com.example.sueobmwodeudji.model.SmallFrameModel;
 
@@ -26,12 +24,9 @@ public class TimeTableSecondActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         TimeTableItemView();
 
-        binding.addTable.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), TimeTableThridActivity.class);
-                startActivity(intent);
-            }
+        binding.addTable.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), TimeTableThridActivity.class);
+            startActivity(intent);
         });
     }
 

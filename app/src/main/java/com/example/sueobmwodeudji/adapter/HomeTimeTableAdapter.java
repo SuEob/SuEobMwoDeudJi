@@ -9,25 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.databinding.ItemHomeTimeTableBinding;
-import com.example.sueobmwodeudji.dto.HomeTimaTableData;
+import com.example.sueobmwodeudji.dto.HomeTimeTableData;
 
 import java.util.List;
 
 public class HomeTimeTableAdapter extends RecyclerView.Adapter<HomeTimeTableAdapter.HomeTimeTableViewHolder> {
     private Context context;
-        private List<List<HomeTimaTableData>> list;
-    private List<HomeTimaTableData> subList;
-    private List<Integer> imgList;
+    private List<HomeTimeTableData> list;
 
-    public HomeTimeTableAdapter(Context context, List<List<HomeTimaTableData>> list) {
+    public HomeTimeTableAdapter(Context context, List<HomeTimeTableData> list) {
         this.context = context;
         this.list = list;
     }
-
-//    public HomeTimeTableAdapter(Context context, List<Integer> imgList) {
-//        this.context = context;
-//        this.imgList = imgList;
-//    }
 
     @NonNull
     @Override
@@ -39,14 +32,12 @@ public class HomeTimeTableAdapter extends RecyclerView.Adapter<HomeTimeTableAdap
 
     @Override
     public void onBindViewHolder(@NonNull HomeTimeTableViewHolder holder, int position) {
-        holder.classContent.setText(list.get(position).get(0).class_content);
-        holder.classContent.setText(list.get(position).get(1).class_content);
-
+        holder.classContent.setText(list.get(position % list.size()).getClass_content());
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return Integer.MAX_VALUE;
     }
 
     public static class HomeTimeTableViewHolder extends RecyclerView.ViewHolder {
