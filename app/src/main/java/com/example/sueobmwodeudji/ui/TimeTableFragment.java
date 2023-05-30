@@ -1,7 +1,5 @@
 package com.example.sueobmwodeudji.ui;
 
-import static com.example.sueobmwodeudji.TimeTableThridActivity.checkCall;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +23,7 @@ import com.example.sueobmwodeudji.TimeTableThridActivity;
 import com.example.sueobmwodeudji.adapter.TimeTableSubAddAdapter;
 import com.example.sueobmwodeudji.databinding.FragmentTimeTableBinding;
 import com.example.sueobmwodeudji.dto.CallSchoolData;
+import com.example.sueobmwodeudji.ui.sub_ui.TimeTableFragmentDialog;
 
 import java.io.Serializable;
 import java.util.List;
@@ -61,18 +60,18 @@ public class TimeTableFragment extends Fragment implements TimeTableSubAddAdapte
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
-
+        // 다른 프래그먼트
+        TimeTableThridActivity.checkCall = true;
         adapter = new TimeTableSubAddAdapter();
         adapter.setCallBackListener(data -> callBack(data));
-//        adapter.performAction();
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
-        // 새로 추가한 데이터값을 받아옴
-        if (checkCall && args != null) {
+        // 새로 추가한 데이터값을 받아옴 + TimeTableThridActivity.checkCall 이 false가 됨 흠..
+        if (TimeTableThridActivity.checkCall && args != null) {
             List<CallSchoolData> dataList = (List<CallSchoolData>) args.getSerializable(TIMETABLE_DATA);
 
             String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri"}; // 월요일 ~ 금요일
@@ -164,8 +163,12 @@ public class TimeTableFragment extends Fragment implements TimeTableSubAddAdapte
         Intent intent = new Intent(getContext(), TimeTableSubActivity.class);
 
         if (item.getItemId() == R.id.add) {
-            intent.putExtra("Code", 0);
-            startActivity(intent);
+            new TimeTableFragmentDialog().show(
+                    getActivity().getSupportFragmentManager(), "Dialog"
+            );
+
+//            intent.putExtra("Code", 0);
+//            startActivity(intent);
         } else if (item.getItemId() == R.id.list) {
             intent.putExtra("Code", 1);
             startActivity(intent);

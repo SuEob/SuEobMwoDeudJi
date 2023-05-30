@@ -135,10 +135,13 @@ public class HomeFragment extends Fragment {
         HomeTimeTableAdapter adapter = new HomeTimeTableAdapter(getContext(), list);
         binding.homeSubTitleViewPager.setAdapter(adapter);
 
+        // 현재 페이지 여백
         float currentScale = getResources().getDisplayMetrics().density;
         int currentVisibleItemPx = (int) (currentScale);
+        // 이전, 이후 페이지 여백
         float nextScale = getResources().getDisplayMetrics().density;
         int nextVisibleItemPxInt = (int) (-8f * nextScale);
+        // 이동 시킬 페이지 값
         int pageTranslationX = nextVisibleItemPxInt + currentVisibleItemPx;
 
         // 페이지의 왼쪽, 오른쪽 여백 만듬 -> 겹치지 않게 하기 위해서
@@ -165,23 +168,58 @@ public class HomeFragment extends Fragment {
         // 오버 스크롤 효과 비 활성화
         binding.homeSubTitleViewPager.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
 
-        // 왜 2번 실행됨? 진짜 모름
-        // 현재 보이는 페이지, 999 % 3 = 0 -> index가 0인 것 부터 보여짐
+        // 첫 번째 페이지 설정
         if (check) {
-            binding.homeSubTitleViewPager.setCurrentItem(999);
+            binding.homeSubTitleViewPager.setCurrentItem(999, false);
             check = false;
         }
 
         // 자동 스크롤
         binding.homeSubTitleViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            Boolean first = true;
+            // 현재 페이지를 스크롤할 때 -> 터치 스크롤의 일부로 호출
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                // 첫 번째 페이지 설정 후 다음 페이지 설정
+               if (first && positionOffset == 0 && positionOffsetPixels == 0) {
+                    onPageSelected(999);
+                    first = false;
+                }
+                Log.d("Tag.onPageScrolled", String.valueOf(position));
+            }
+
+            // 새 페이지가 선택될 때 호출
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 currentItemIndex = position;
-                Log.d("currentItemIndex", String.valueOf(currentItemIndex));
                 handler.removeCallbacks(runnable);
                 handler.postDelayed(runnable, 4000);
+                Log.d("Tag.onPageSelected", String.valueOf(position));
             }
+
+            // 스크롤 상태가 변경될 때 호출
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
+                switch (state) {
+                    case ViewPager2.SCROLL_STATE_IDLE:
+
+                        break;
+
+                    case ViewPager2.SCROLL_STATE_DRAGGING:
+                        //
+                        break;
+
+                    case ViewPager2.SCROLL_STATE_SETTLING:
+
+                        break;
+                }
+
+            }
+
+
         });
 
     }
