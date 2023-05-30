@@ -2,19 +2,24 @@ package com.example.sueobmwodeudji;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.sueobmwodeudji.adapter.SmallFrameAdapter;
+import com.example.sueobmwodeudji.adapter.TimeTableSubListAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityTimeTableSecondBinding;
-import com.example.sueobmwodeudji.model.SmallFrameModel;
+import com.example.sueobmwodeudji.model.TimeTableSubFrameModel;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class TimeTableSecondActivity extends AppCompatActivity {
     private ActivityTimeTableSecondBinding binding;
-    private List<SmallFrameModel> list = new LinkedList<SmallFrameModel>();
+    private List<TimeTableSubFrameModel> list = new LinkedList<TimeTableSubFrameModel>();
 
 
     @Override
@@ -22,20 +27,45 @@ public class TimeTableSecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityTimeTableSecondBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        TimeTableItemView();
 
-        binding.addTable.setOnClickListener(view -> {
-            Intent intent = new Intent(view.getContext(), TimeTableThridActivity.class);
-            startActivity(intent);
-        });
+        // 툴바
+        Toolbar toolbar = binding.toolBar.mainToolBar;
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
+
+        TimeTableListView();
+
     }
 
-    private void TimeTableItemView() {
-        list.add(new SmallFrameModel("시간표 이름1", R.layout.item_ratings_sub_1));
-        list.add(new SmallFrameModel("시간표 이름2", R.layout.item_ratings_sub_1));
-        list.add(new SmallFrameModel("시간표 이름3", R.layout.item_ratings_sub_1));
-        list.add(new SmallFrameModel("시간표 이름4", R.layout.item_ratings_sub_1));
-        SmallFrameAdapter adapter = new SmallFrameAdapter(this, list);
-        binding.timeTableFragment.setAdapter(adapter);
+    private void TimeTableListView() {
+        list.add(new TimeTableSubFrameModel("수업명1"));
+        list.add(new TimeTableSubFrameModel("수업명2"));
+        list.add(new TimeTableSubFrameModel("수업명3"));
+        list.add(new TimeTableSubFrameModel("수업명4"));
+        binding.timeTableSubList.setLayoutManager(new LinearLayoutManager(this));
+        binding.timeTableSubList.setAdapter(new TimeTableSubListAdapter(this, list));
     }
+
+    // 툴바 생성
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.time_table_sub_tool_bar, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+            case R.id.add:
+                Intent intent = new Intent(this, TimeTableThridActivity.class);
+                startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 }

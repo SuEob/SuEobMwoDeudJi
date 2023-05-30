@@ -14,7 +14,6 @@ import com.example.sueobmwodeudji.rest_api.SchoolInfo;
 import com.example.sueobmwodeudji.rest_api.SchoolResponse;
 import com.example.sueobmwodeudji.rest_api.SchoolTimeTable;
 import com.example.sueobmwodeudji.ui.TimeTableFragment;
-import com.example.sueobmwodeudji.ui.sub_ui.TimeTableListFragment;
 
 import org.json.JSONObject;
 
@@ -65,12 +64,7 @@ public class TimeTableThridActivity extends AppCompatActivity {
         binding.classNameSpin.setAdapter(adapter4);
 
         binding.tableAddBtn.setOnClickListener(v -> {
-            TimeTableListFragment fragment = new TimeTableListFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("time_table_name", binding.nameET.getText().toString());
-            fragment.setArguments(bundle);
             SchoolCallInfo();
-            CreateList(); // 30일까지 서버 통신 막혀서 그냥 이거 써야함 ㅋㅋ 30일 이후에는 지워
             finish();
         });
     }

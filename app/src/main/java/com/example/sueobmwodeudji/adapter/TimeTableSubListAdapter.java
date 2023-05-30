@@ -32,13 +32,7 @@ public class TimeTableSubListAdapter extends RecyclerView.Adapter<TimeTableSubLi
         TimeTableSubListViewHolder viewHolder = new TimeTableSubListViewHolder(binding);
 
         ActivityTimeTableSubListBinding listBinding = ActivityTimeTableSubListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        binding.timeTableListTitle.setOnClickListener(v -> {
-//            Log.d("ASD", "ASD");
-//            timeTableSubFrameModel.add(new TimeTableSubFrameModel("1"));
-//            listBinding.timeTableSubList.setLayoutManager(new LinearLayoutManager(parent.getContext()));
-//            listBinding.timeTableSubList.setAdapter(new TimeTableSubListAdapter(parent.getContext(), timeTableSubFrameModel));
 
-        });
 
         binding.timeTableListBtn.setOnClickListener(v -> {
             int position = viewHolder.getAbsoluteAdapterPosition();

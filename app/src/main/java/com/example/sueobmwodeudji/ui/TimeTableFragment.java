@@ -11,16 +11,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.sueobmwodeudji.R;
-import com.example.sueobmwodeudji.TimeTableSubActivity;
+import com.example.sueobmwodeudji.TimeTableSecondActivity;
 import com.example.sueobmwodeudji.TimeTableThridActivity;
-import com.example.sueobmwodeudji.adapter.TimeTableSubAddAdapter;
 import com.example.sueobmwodeudji.databinding.FragmentTimeTableBinding;
 import com.example.sueobmwodeudji.dto.CallSchoolData;
 import com.example.sueobmwodeudji.ui.sub_ui.TimeTableFragmentDialog;
@@ -28,13 +26,12 @@ import com.example.sueobmwodeudji.ui.sub_ui.TimeTableFragmentDialog;
 import java.io.Serializable;
 import java.util.List;
 
-public class TimeTableFragment extends Fragment implements TimeTableSubAddAdapter.CallBackListener {
+public class TimeTableFragment extends Fragment {
     private FragmentTimeTableBinding binding;
 
     private static Bundle args;
     private static final String TIMETABLE_DATA = "dataList";
 
-    private TimeTableSubAddAdapter adapter;
 
     public static TimeTableFragment getInstance() {
         return new TimeTableFragment();
@@ -60,11 +57,6 @@ public class TimeTableFragment extends Fragment implements TimeTableSubAddAdapte
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
-        // 다른 프래그먼트
-        TimeTableThridActivity.checkCall = true;
-        adapter = new TimeTableSubAddAdapter();
-        adapter.setCallBackListener(data -> callBack(data));
-
     }
 
     @Override
@@ -160,20 +152,13 @@ public class TimeTableFragment extends Fragment implements TimeTableSubAddAdapte
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Intent intent = new Intent(getContext(), TimeTableSubActivity.class);
-
         if (item.getItemId() == R.id.add) {
             new TimeTableFragmentDialog().show(
                     getActivity().getSupportFragmentManager(), "Dialog"
             );
-
-//            intent.putExtra("Code", 0);
-//            startActivity(intent);
         } else if (item.getItemId() == R.id.list) {
-            intent.putExtra("Code", 1);
+            Intent intent = new Intent(getContext(), TimeTableSecondActivity.class);
             startActivity(intent);
-        } else if(item.getItemId() == R.id.settings){
-
         }
 
         return super.onOptionsItemSelected(item);
@@ -200,8 +185,4 @@ public class TimeTableFragment extends Fragment implements TimeTableSubAddAdapte
         alertDialog.show();
     }
 
-    @Override
-    public void callBack(String data) {
-        Toast.makeText(getActivity(), ""+data, Toast.LENGTH_SHORT).show();
-    }
 }
