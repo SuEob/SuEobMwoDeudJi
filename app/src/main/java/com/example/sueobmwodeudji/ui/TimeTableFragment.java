@@ -1,7 +1,5 @@
 package com.example.sueobmwodeudji.ui;
 
-import static com.example.sueobmwodeudji.TimeTableThridActivity.checkCall;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,29 +11,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.sueobmwodeudji.R;
-import com.example.sueobmwodeudji.TimeTableSubActivity;
+import com.example.sueobmwodeudji.TimeTableSecondActivity;
 import com.example.sueobmwodeudji.TimeTableThridActivity;
-import com.example.sueobmwodeudji.adapter.TimeTableSubAddAdapter;
 import com.example.sueobmwodeudji.databinding.FragmentTimeTableBinding;
 import com.example.sueobmwodeudji.dto.CallSchoolData;
+import com.example.sueobmwodeudji.ui.sub_ui.TimeTableFragmentDialog;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class TimeTableFragment extends Fragment implements TimeTableSubAddAdapter.CallBackListener {
+public class TimeTableFragment extends Fragment {
     private FragmentTimeTableBinding binding;
 
     private static Bundle args;
     private static final String TIMETABLE_DATA = "dataList";
 
-    private TimeTableSubAddAdapter adapter;
 
     public static TimeTableFragment getInstance() {
         return new TimeTableFragment();
@@ -61,18 +57,13 @@ public class TimeTableFragment extends Fragment implements TimeTableSubAddAdapte
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
-
-        adapter = new TimeTableSubAddAdapter();
-        adapter.setCallBackListener(data -> callBack(data));
-//        adapter.performAction();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
-        // 새로 추가한 데이터값을 받아옴
-        if (checkCall && args != null) {
+        // 새로 추가한 데이터값을 받아옴 + TimeTableThridActivity.checkCall 이 false가 됨 흠..
+        if (TimeTableThridActivity.checkCall && args != null) {
             List<CallSchoolData> dataList = (List<CallSchoolData>) args.getSerializable(TIMETABLE_DATA);
 
             String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri"}; // 월요일 ~ 금요일
@@ -161,13 +152,12 @@ public class TimeTableFragment extends Fragment implements TimeTableSubAddAdapte
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Intent intent = new Intent(getContext(), TimeTableSubActivity.class);
-
         if (item.getItemId() == R.id.add) {
-            intent.putExtra("Code", 0);
-            startActivity(intent);
+            new TimeTableFragmentDialog().show(
+                    getActivity().getSupportFragmentManager(), "Dialog"
+            );
         } else if (item.getItemId() == R.id.list) {
-            intent.putExtra("Code", 1);
+            Intent intent = new Intent(getContext(), TimeTableSecondActivity.class);
             startActivity(intent);
         }
 
@@ -195,8 +185,4 @@ public class TimeTableFragment extends Fragment implements TimeTableSubAddAdapte
         alertDialog.show();
     }
 
-    @Override
-    public void callBack(String data) {
-        Toast.makeText(getActivity(), ""+data, Toast.LENGTH_SHORT).show();
-    }
 }

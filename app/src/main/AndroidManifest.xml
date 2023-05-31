@@ -48,10 +48,6 @@
         <activity android:name=".RatingsSubPostActivity" />
         <activity android:name=".RatingsSubFormActivity" />
         <activity
-            android:name=".TimeTableSubActivity"
-            android:exported="true"
-            android:parentActivityName=".MainActivity"/>
-        <activity
             android:name=".SearchActivity"
             android:exported="true"
             android:parentActivityName=".MainActivity"/>

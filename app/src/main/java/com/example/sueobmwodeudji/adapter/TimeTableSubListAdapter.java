@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sueobmwodeudji.databinding.ActivityTimeTableSubListBinding;
 import com.example.sueobmwodeudji.databinding.ItemTimeTableListBinding;
 import com.example.sueobmwodeudji.model.TimeTableSubFrameModel;
 
@@ -30,16 +29,6 @@ public class TimeTableSubListAdapter extends RecyclerView.Adapter<TimeTableSubLi
     public TimeTableSubListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ItemTimeTableListBinding binding = ItemTimeTableListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         TimeTableSubListViewHolder viewHolder = new TimeTableSubListViewHolder(binding);
-
-        ActivityTimeTableSubListBinding listBinding = ActivityTimeTableSubListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        binding.timeTableListTitle.setOnClickListener(v -> {
-//            Log.d("ASD", "ASD");
-//            timeTableSubFrameModel.add(new TimeTableSubFrameModel("1"));
-//            listBinding.timeTableSubList.setLayoutManager(new LinearLayoutManager(parent.getContext()));
-//            listBinding.timeTableSubList.setAdapter(new TimeTableSubListAdapter(parent.getContext(), timeTableSubFrameModel));
-
-        });
-
         binding.timeTableListBtn.setOnClickListener(v -> {
             int position = viewHolder.getAbsoluteAdapterPosition();
             Log.d("position", String.valueOf(position));
@@ -49,16 +38,6 @@ public class TimeTableSubListAdapter extends RecyclerView.Adapter<TimeTableSubLi
             }
 
         });
-
-//        아마 제거
-//        binding.timeTableListBtn.setOnClickListener(v -> {
-//            int position = viewHolder.getAdapterPosition();
-//
-//            if (position != RecyclerView.NO_POSITION) {
-//                Intent intent = new Intent(parent.getContext(), TimeTableThridActivity.class);
-//                parent.getContext().startActivity(intent);
-//            }
-//        });
 
         return viewHolder;
     }
