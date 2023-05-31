@@ -85,23 +85,18 @@ public class RegistrationActivity extends AppCompatActivity {
 
         return true;
     }
-
     private boolean isNameEmpty(String name) {
         return name.equals("");
     }
-
     private boolean isSchoolEmpty(String school) {
         return school.equals("");
     }
-
     private boolean isIdEmpty(String id) {
         return id.equals("");
     }
-
     private boolean isPwEmpty(String pw) {
         return pw.equals("");
     }
-
     private void createUser() {
         mAuth.createUserWithEmailAndPassword(mId, mPw)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -125,8 +120,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private void success() {
         createUserDB();
-        Intent intent = new Intent(this, LoginActivity.class);
-        setResult(RESULT_OK, intent);
+        //Intent intent = new Intent(this, LoginActivity.class);
+        //setResult(RESULT_OK, intent);
         finish();
     }
 

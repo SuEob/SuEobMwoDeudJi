@@ -44,7 +44,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="나의 강의"
+                    android:text="나의 수업"
                     android:textColor="@color/black_12"
                     android:textSize="24dp"
                     android:textStyle="bold" />
@@ -81,7 +81,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="최근 강의 평"
+                    android:text="최근 수업 평"
                     android:textColor="@color/black_12"
                     android:textSize="24dp"
                     android:textStyle="bold" />

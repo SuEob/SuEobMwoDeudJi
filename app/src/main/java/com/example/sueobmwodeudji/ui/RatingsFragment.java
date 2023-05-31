@@ -88,17 +88,17 @@ public class RatingsFragment extends Fragment {
     private void ratingsItemView() {
         ArrayList<ArrayList<RatingMyClassData>> listData = new ArrayList<>();
         ArrayList<RatingMyClassData> list1 = new ArrayList<>();
-        list1.add(new RatingMyClassData("인공지능", "조범석"));
-        list1.add(new RatingMyClassData("자료구조", "조범석"));
-        list1.add(new RatingMyClassData("모바일캡스톤", "조범석"));
+        list1.add(new RatingMyClassData("인공지능", "김세돌"));
+        list1.add(new RatingMyClassData("자료구조", "이면봉"));
+        list1.add(new RatingMyClassData("모바일캡스톤", "김이박"));
 
         ArrayList<RatingMyClassData> list2 = new ArrayList<>();
-        list2.add(new RatingMyClassData("모바일캡스톤", "조범석"));
-        list2.add(new RatingMyClassData("모바일캡스톤", "조범석"));
-        list2.add(new RatingMyClassData("모바일캡스톤", "조범석"));
+        list2.add(new RatingMyClassData("모바일캡스톤", "김이박"));
+        list2.add(new RatingMyClassData("모바일캡스톤", "김이박"));
+        list2.add(new RatingMyClassData("모바일캡스톤", "김이박"));
 
         ArrayList<RatingMyClassData> list3 = new ArrayList<>();
-        list3.add(new RatingMyClassData("모바일캡스톤", "조범석"));
+        list3.add(new RatingMyClassData("모바일캡스톤", "김이박"));
 
         listData.add(list1);
         listData.add(list2);

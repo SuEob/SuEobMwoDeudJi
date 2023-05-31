@@ -11,14 +11,6 @@
         />
 
     <item
-        android:id="@+id/settings"
-        android:icon="@drawable/settings"
-        android:title="검색"
-        android:enabled="true"
-        app:showAsAction="always"
-        />
-
-    <item
         android:id="@+id/list"
         android:icon="@drawable/community"
         android:title="검색"

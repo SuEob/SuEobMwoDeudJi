@@ -169,8 +169,6 @@ public class TimeTableFragment extends Fragment implements TimeTableSubAddAdapte
         } else if (item.getItemId() == R.id.list) {
             intent.putExtra("Code", 1);
             startActivity(intent);
-        } else if(item.getItemId() == R.id.settings){
-
         }
 
         return super.onOptionsItemSelected(item);

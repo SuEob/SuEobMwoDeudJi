@@ -109,7 +109,7 @@ public class CommunitySubRecentListAdapter extends RecyclerView.Adapter<Communit
 
         public void onBind(CommunitySubListModel data){
             title.setText(data.getTitle());
-            nickname.setText(data.getName());
+            nickname.setText(data.getCategory());
             content.setText(data.getContent());
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
