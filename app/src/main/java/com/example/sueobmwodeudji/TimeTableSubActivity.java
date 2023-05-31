@@ -2,6 +2,7 @@ package com.example.sueobmwodeudji;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import com.example.sueobmwodeudji.ui.sub_ui.TimeTableListFragment;
 public class TimeTableSubActivity extends AppCompatActivity {
     private ActivityTimeTableSubBinding binding;
     private int code;
+    int timeTableFlag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +38,13 @@ public class TimeTableSubActivity extends AppCompatActivity {
         Intent intent = getIntent();
         code = intent.getIntExtra("Code", 0);
 
-        if (code == 0)
+        if (code == 0) {
+            timeTableFlag = 0;
             getSupportFragmentManager().beginTransaction().replace(R.id.time_table_sub_container, new TimeTableAddFragment()).commit();
-        else if (code == 1)
+        } else if (code == 1) {
+            timeTableFlag = 1;
             getSupportFragmentManager().beginTransaction().replace(R.id.time_table_sub_container, new TimeTableListFragment()).commit();
+        }
     }
 
     // 툴바 생성
@@ -56,8 +61,14 @@ public class TimeTableSubActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.add:
-                Intent intent = new Intent(this, TimeTableThridActivity.class);
-                startActivity(intent);
+                if (timeTableFlag == 0) {
+                    Intent intent = new Intent(this, TimeTableFourthActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(this, TimeTableThridActivity.class);
+                    startActivity(intent);
+                }
+
         }
         return super.onOptionsItemSelected(item);
     }
