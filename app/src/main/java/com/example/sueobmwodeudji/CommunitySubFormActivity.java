@@ -18,19 +18,23 @@ import com.example.sueobmwodeudji.model.CommunitySubListModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class CommunitySubFormActivity  extends AppCompatActivity implements View.OnClickListener {
     ActivityCommunitySubFormBinding binding;
 
     private String firstCP, firstDP, secondCP;
-    private String subject, id;
+    private String subject, mName;
+    private String mEmail;
 
     private InputMethodManager imm;
 
@@ -41,8 +45,10 @@ public class CommunitySubFormActivity  extends AppCompatActivity implements View
 
         Intent intent = getIntent();
         subject = intent.getStringExtra("subject");
+        mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        mName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
 
-        id = "test";
+        //id = "test";
 
         binding.subjectTv.setText(subject);
 
@@ -89,9 +95,10 @@ public class CommunitySubFormActivity  extends AppCompatActivity implements View
         //데이터 생성
         CommunitySubListModel data = new CommunitySubListModel();
         data.setTitle(binding.titleEt.getText().toString());
-        data.setName(id);
+        data.setEmail(mEmail);
         data.setContent(binding.contentEt.getText().toString());
         data.setTimestamp(Timestamp.now().toDate());
+        data.setLike(new HashMap<>());
         data.setCategory(subject);
 
         //파베 Create
@@ -99,7 +106,7 @@ public class CommunitySubFormActivity  extends AppCompatActivity implements View
         mFirestore.collection(firstCP)
                 .document(firstDP)
                 .collection(subject)
-                .document(id + data.getTimestamp())
+                .document(mEmail + data.getTimestamp())
                 .set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {

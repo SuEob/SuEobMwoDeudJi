@@ -2,6 +2,7 @@ package com.example.sueobmwodeudji;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -88,7 +89,7 @@ public class CommunitySubListActivity extends AppCompatActivity implements View.
     private CommunitySubListModel createData(String docName){
         CommunitySubListModel data = new CommunitySubListModel();
         data.setContent("글내용" + docName);
-        data.setName("작성자" + docName);
+        data.setEmail("작성자" + docName);
         data.setTimestamp(Timestamp.now().toDate());
         data.setTitle("글제목" + docName);
         Map<String, Boolean> like = new HashMap<>();

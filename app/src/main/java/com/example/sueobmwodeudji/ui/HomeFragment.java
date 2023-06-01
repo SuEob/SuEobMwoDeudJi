@@ -93,7 +93,7 @@ public class HomeFragment extends Fragment {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection("사용자")
-                .document(user.getUid())
+                .document(user.getEmail())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override

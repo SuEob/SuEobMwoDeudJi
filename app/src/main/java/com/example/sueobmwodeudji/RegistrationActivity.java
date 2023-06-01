@@ -28,7 +28,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private String mName, mSchool, mId, mPw;
     private boolean agree;
     private FirebaseAuth mAuth;
-    private String mUid;
+    private String mEmail;
 
 //    public static JSONObject schedule;
 
@@ -106,7 +106,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             user.updateProfile(new UserProfileChangeRequest.Builder().setDisplayName(mName).build());
-                            mUid = user.getUid();
+                            mEmail = user.getEmail();
                             success();
                         } else {
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -128,17 +128,16 @@ public class RegistrationActivity extends AppCompatActivity {
     private void createUserDB() {
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection("사용자")
-                .document(mUid)
+                .document(mEmail)
                 .set(createUserDTO());
-
     }
 
     private UserDTO createUserDTO() {
         UserDTO user = new UserDTO();
 //        user = new UserDTO();
-//        user.setName(mName);
 //        user.setId(mId);
 //        user.setPw(mPw);
+        user.setName(mName);
         user.setSchool_name(mSchool);
 
         return user;

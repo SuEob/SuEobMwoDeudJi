@@ -50,10 +50,14 @@ public class CommunitySubCommentAdapter extends RecyclerView.Adapter<CommunitySu
             Log.w("list 에러","onEvent:error", e);
         }
         commentModels.clear();
-        Log.d("Asdfasdfdfsa", doc.toObject(CommunitySubListModel.class).toString());
-        ArrayList<CommunitySubCommentModel> data = doc.toObject(CommunitySubListModel.class).getComments();
-        commentModels = (data != null) ? data : new ArrayList<>();
-        notifyDataSetChanged();
+        //Log.d("Asdfasdfdfsa", doc.toObject(CommunitySubListModel.class).toString());
+        if(doc != null) {
+            if(doc.toObject(CommunitySubListModel.class) != null) {
+                ArrayList<CommunitySubCommentModel> data = doc.toObject(CommunitySubListModel.class).getComments();
+                commentModels = (data != null) ? data : new ArrayList<>();
+                notifyDataSetChanged();
+            }
+        }
     }
 
     public interface OnCocommentPositiveListener{

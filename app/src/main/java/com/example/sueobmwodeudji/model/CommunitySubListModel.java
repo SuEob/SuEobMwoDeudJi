@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class CommunitySubListModel implements Serializable {
-    private String name;
+    private String email;
     private String title;
     private String content;
     private String category;
@@ -17,14 +17,6 @@ public class CommunitySubListModel implements Serializable {
     private ArrayList<CommunitySubCommentModel> comments = new ArrayList<>();
 
     public CommunitySubListModel() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getTitle() {
@@ -73,5 +65,13 @@ public class CommunitySubListModel implements Serializable {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

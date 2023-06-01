@@ -3,6 +3,7 @@ package com.example.sueobmwodeudji;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -19,9 +20,14 @@ import com.example.sueobmwodeudji.databinding.ActivityCommunitySubPostBinding;
 import com.example.sueobmwodeudji.model.CommunitySubCommentCommentModel;
 import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
 import com.example.sueobmwodeudji.model.CommunitySubListModel;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Map;
 
 public class CommunitySubPostActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivityCommunitySubPostBinding binding;
@@ -31,7 +37,8 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
     private InputMethodManager imm;
 
     private String firstCP, firstDP, secondCP;
-    private String subject, id;
+    private String subject, name;
+    private String mEmail;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +48,8 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
         intent = getIntent();
         data = (CommunitySubListModel) intent.getSerializableExtra("data");
         subject = intent.getStringExtra("subject");
+        mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
 
         Log.d("fsadfasdfsd", data.getComments().toString());
 
@@ -57,6 +66,7 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
         secondCP = "1학년 대화방";
 
         binding.submitBtn.setOnClickListener(this);
+        binding.ratingLayout.setOnClickListener(new LikeBtnOnClickListener());
 
         showItem();
 
@@ -98,11 +108,96 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
     private void showItem() {
         getSupportActionBar().setTitle(data.getCategory());
 
-        binding.idTv.setText(data.getName());
+        changeText();
+        setCommentRecyclerView();
+
+        if (data.getEmail().equals(mEmail)) myPost();
+    }
+
+    private void myPost() {
+        binding.etcIv.setVisibility(View.VISIBLE);
+        binding.etcIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder dlg = new AlertDialog.Builder(CommunitySubPostActivity.this);
+                dlg.setTitle("글 삭제")
+                        .setMessage("게시글을 삭제하시겠습니까?")
+                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //Toast.makeText(CommunitySubPostActivity.this, "취소되었습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                deletePost();
+                                //Toast.makeText(CommunitySubPostActivity.this, "게시글 수정ㄱㄱ", Toast.LENGTH_SHORT).show();
+                            }
+                        }).show();
+            }
+        });
+    }
+
+    private void deletePost() {
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        mFirestore.collection(firstCP)
+                .document(firstDP)
+                .collection(subject)
+                .document(data.getEmail() + data.getTimestamp())
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        finish();
+                    }
+                });
+    }
+
+    private void changeText() {
+        int like_count = likeCounting();
+        int comment_count = commentCounting();
+
         binding.dateTv.setText(data.getTimestamp().toString());
         binding.titleTv.setText(data.getTitle());
         binding.contentTv.setText(data.getContent());
+        binding.likeTv.setText(like_count + "");
+        binding.commentTv.setText(comment_count + "");
 
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        mFirestore.collection("사용자")
+                .document(data.getEmail())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        binding.idTv.setText(documentSnapshot.getString("name"));
+                    }
+                });
+    }
+
+    private int likeCounting() {
+        if (data.getLike() == null) return 0;
+
+        int total = 0;
+        Map<String, Boolean> map = data.getLike();
+
+        for (String key : map.keySet()) {
+            total += (map.get(key)) ? 1 : 0;
+        }
+
+        return total;
+    }
+
+    private int commentCounting() {
+        int total = data.getComments().size();
+        for (CommunitySubCommentModel data : data.getComments()) {
+            total += data.getCommentModels().size();
+        }
+        return total;
+    }
+
+    private void setCommentRecyclerView() {
         CommunitySubCommentAdapter adapter = new CommunitySubCommentAdapter(this, readData());
         adapter.setOclp(new CommunitySubCommentAdapter.OnCocommentPositiveListener() {
             @Override
@@ -116,15 +211,14 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
         binding.recyclerView.setAdapter(adapter);
     }
 
-    private DocumentReference readData(){
+    private DocumentReference readData() {
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        Log.d("asdffdsa", firstCP + firstCP + subject + data.getName() + data.getTimestamp());
+        //Log.d("asdffdsa", firstCP + firstCP + subject + data.getName() + data.getTimestamp());
         return mFirestore.collection(firstCP)
                 .document(firstDP)
                 .collection(subject)
-                .document(data.getName() + data.getTimestamp());
+                .document(data.getEmail() + data.getTimestamp());
     }
-
 
     private class CocomentSubmitBtnClickListener implements View.OnClickListener {
         private final int mPosition;
@@ -153,6 +247,40 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
         }
     }
 
+    private class LikeBtnOnClickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            boolean like;
+            int like_count = Integer.parseInt(binding.likeTv.getText().toString());
+            if (data.getLike().get(mEmail) != null) {
+                like = !data.getLike().get(mEmail);
+                if (data.getLike().get(mEmail)) {
+                    binding.likeTv.setText(--like_count + "");
+                    //Toast.makeText(CommunitySubPostActivity.this, "트루처리", Toast.LENGTH_SHORT).show();
+                } else {
+                    binding.likeTv.setText(++like_count + "");
+                    //Toast.makeText(CommunitySubPostActivity.this, "펄스처리", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                like = true;
+                binding.likeTv.setText(++like_count + "");
+                //Toast.makeText(CommunitySubPostActivity.this, "널처리", Toast.LENGTH_SHORT).show();
+            }
+            data.getLike().put(mEmail, like);
+            updateLike();
+        }
+
+        private void updateLike() {
+            FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+            mFirestore.collection(firstCP)
+                    .document(firstDP)
+                    .collection(subject)
+                    .document(mEmail + data.getTimestamp())
+                    .update("like", data.getLike());
+        }
+    }
+
     private void createComment() {
         String comment = binding.commentEt.getText().toString();
 
@@ -161,7 +289,7 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
         CommunitySubCommentModel comment_model = new CommunitySubCommentModel();
         comment_model.setContent(comment);
         comment_model.setTimestamp(Timestamp.now().toDate());
-        comment_model.setName(id);
+        comment_model.setName(name);
 
         data.getComments().add(comment_model);
 
@@ -177,7 +305,7 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
         CommunitySubCommentCommentModel comment_model = new CommunitySubCommentCommentModel();
         comment_model.setContent(comment);
         comment_model.setTimestamp(Timestamp.now().toDate());
-        comment_model.setName(id);
+        comment_model.setName(name);
 
         data.getComments().get(position).getCommentModels().add(comment_model);
 
@@ -185,18 +313,18 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
         updateComment();
     }
 
-    private void initComment(){
+    private void initComment() {
         binding.commentEt.setText(null);
         binding.commentEt.setHint("댓글을 입력하세요.");
         binding.submitBtn.setOnClickListener(this);
     }
 
-    private void updateComment(){
+    private void updateComment() {
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection(firstCP)
                 .document(firstDP)
                 .collection(subject)
-                .document(data.getName() + data.getTimestamp())
+                .document(data.getEmail() + data.getTimestamp())
                 .update("comments", data.getComments());
         Toast.makeText(CommunitySubPostActivity.this, "작성되었습니다.", Toast.LENGTH_SHORT).show();
     }
