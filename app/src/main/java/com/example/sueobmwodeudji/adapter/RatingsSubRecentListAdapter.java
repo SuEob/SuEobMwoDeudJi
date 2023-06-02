@@ -89,7 +89,7 @@ public class RatingsSubRecentListAdapter  extends RecyclerView.Adapter<RatingsSu
 
     private void onDocumentAdded(DocumentChange change) {
         ratingsSubRecentListModels.add(change.getDocument().toObject(RatingsSubListModel.class));
-        Collections.reverse(ratingsSubRecentListModels);
+        //Collections.reverse(ratingsSubRecentListModels);
         notifyDataSetChanged();
     }
 

@@ -51,7 +51,7 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
         mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
 
-        Log.d("fsadfasdfsd", data.getComments().toString());
+        //Log.d("fsadfasdfsd", data.getComments().toString());
 
 
         Toolbar toolbar = binding.toolBar.mainToolBar;
@@ -113,6 +113,60 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
 
         if (data.getEmail().equals(mEmail)) myPost();
     }
+    private void changeText() {
+        int like_count = likeCounting();
+        int comment_count = commentCounting();
+
+        binding.dateTv.setText(data.getTimestamp().toString());
+        binding.titleTv.setText(data.getTitle());
+        binding.contentTv.setText(data.getContent());
+        binding.likeTv.setText(like_count + "");
+        binding.commentTv.setText(comment_count + "");
+
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        mFirestore.collection("사용자")
+                .document(data.getEmail())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        binding.idTv.setText(documentSnapshot.getString("name"));
+                    }
+                });
+    }
+    private int likeCounting() {
+        if (data.getLike() == null) return 0;
+
+        int total = 0;
+        Map<String, Boolean> map = data.getLike();
+
+        for (String key : map.keySet()) {
+            total += (map.get(key)) ? 1 : 0;
+        }
+
+        return total;
+    }
+    private int commentCounting() {
+        int total = data.getComments().size();
+        for (CommunitySubCommentModel data : data.getComments()) {
+            total += data.getCommentModels().size();
+        }
+        return total;
+    }
+
+    private void setCommentRecyclerView() {
+        CommunitySubCommentAdapter adapter = new CommunitySubCommentAdapter(this, readData());
+        adapter.setOclp(new CommunitySubCommentAdapter.OnCocommentPositiveListener() {
+            @Override
+            public void onPositive(int positon) {
+                binding.commentEt.setHint("대댓글을 입력하세요.");
+                binding.commentEt.setText(null);
+                binding.submitBtn.setOnClickListener(new CocomentSubmitBtnClickListener(positon));
+                //imm.showSoftInput(binding.commentEt, 0);
+            }
+        });
+        binding.recyclerView.setAdapter(adapter);
+    }
 
     private void myPost() {
         binding.etcIv.setVisibility(View.VISIBLE);
@@ -154,66 +208,8 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
                 });
     }
 
-    private void changeText() {
-        int like_count = likeCounting();
-        int comment_count = commentCounting();
-
-        binding.dateTv.setText(data.getTimestamp().toString());
-        binding.titleTv.setText(data.getTitle());
-        binding.contentTv.setText(data.getContent());
-        binding.likeTv.setText(like_count + "");
-        binding.commentTv.setText(comment_count + "");
-
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        mFirestore.collection("사용자")
-                .document(data.getEmail())
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        binding.idTv.setText(documentSnapshot.getString("name"));
-                    }
-                });
-    }
-
-    private int likeCounting() {
-        if (data.getLike() == null) return 0;
-
-        int total = 0;
-        Map<String, Boolean> map = data.getLike();
-
-        for (String key : map.keySet()) {
-            total += (map.get(key)) ? 1 : 0;
-        }
-
-        return total;
-    }
-
-    private int commentCounting() {
-        int total = data.getComments().size();
-        for (CommunitySubCommentModel data : data.getComments()) {
-            total += data.getCommentModels().size();
-        }
-        return total;
-    }
-
-    private void setCommentRecyclerView() {
-        CommunitySubCommentAdapter adapter = new CommunitySubCommentAdapter(this, readData());
-        adapter.setOclp(new CommunitySubCommentAdapter.OnCocommentPositiveListener() {
-            @Override
-            public void onPositive(int positon) {
-                binding.commentEt.setHint("대댓글을 입력하세요.");
-                binding.commentEt.setText(null);
-                binding.submitBtn.setOnClickListener(new CocomentSubmitBtnClickListener(positon));
-                //imm.showSoftInput(binding.commentEt, 0);
-            }
-        });
-        binding.recyclerView.setAdapter(adapter);
-    }
-
     private DocumentReference readData() {
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        //Log.d("asdffdsa", firstCP + firstCP + subject + data.getName() + data.getTimestamp());
         return mFirestore.collection(firstCP)
                 .document(firstDP)
                 .collection(subject)
@@ -270,15 +266,14 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
             data.getLike().put(mEmail, like);
             updateLike();
         }
-
-        private void updateLike() {
-            FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-            mFirestore.collection(firstCP)
-                    .document(firstDP)
-                    .collection(subject)
-                    .document(mEmail + data.getTimestamp())
-                    .update("like", data.getLike());
-        }
+    }
+    private void updateLike() {
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        mFirestore.collection(firstCP)
+                .document(firstDP)
+                .collection(subject)
+                .document(mEmail + data.getTimestamp())
+                .update("like", data.getLike());
     }
 
     private void createComment() {

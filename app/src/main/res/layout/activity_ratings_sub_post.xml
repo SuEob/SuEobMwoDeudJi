@@ -69,6 +69,15 @@
             app:layout_constraintLeft_toRightOf="@+id/account_iv"
             />
         <ImageView
+            android:id="@+id/etc_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/account"
+            android:visibility="invisible"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+        <ImageView
             android:id="@+id/honey_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -126,15 +135,23 @@
             android:layout_height="4px"
             android:layout_marginTop="24dp"
             android:background="@color/grey_cc"
-            app:layout_constraintTop_toBottomOf="@+id/type_tv"
+            app:layout_constraintTop_toBottomOf="@+id/rating_layout"
             app:layout_constraintLeft_toLeftOf="parent" />
+        <LinearLayout
+            android:layout_marginTop="12dp"
+            android:id="@+id/rating_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/type_tv">
 
         <ImageView
             android:id="@+id/ratings_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ratings"
-            android:layout_marginTop="12dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/hr"
             app:tint="#FF3B30" />
@@ -151,6 +168,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/ratings_iv"
             app:layout_constraintLeft_toRightOf="@+id/ratings_iv"
             />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/chatings_iv"
@@ -158,8 +176,8 @@
             android:layout_height="wrap_content"
             android:src="@drawable/chatings"
             android:layout_marginLeft="8dp"
-            app:layout_constraintLeft_toRightOf="@+id/like_tv"
-            app:layout_constraintTop_toTopOf="@+id/ratings_iv"
+            app:layout_constraintLeft_toRightOf="@+id/rating_layout"
+            app:layout_constraintTop_toTopOf="@+id/rating_layout"
             app:tint="#8866FF" />
         <TextView
             android:id="@+id/comment_tv"
@@ -169,8 +187,8 @@
             android:layout_marginLeft="8dp"
             android:textSize="12dp"
             android:textColor="#8866FF"
-            app:layout_constraintTop_toTopOf="@+id/ratings_iv"
-            app:layout_constraintBottom_toBottomOf="@+id/ratings_iv"
+            app:layout_constraintTop_toTopOf="@+id/rating_layout"
+            app:layout_constraintBottom_toBottomOf="@+id/rating_layout"
             app:layout_constraintLeft_toRightOf="@+id/chatings_iv" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

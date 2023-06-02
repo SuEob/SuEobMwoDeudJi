@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.Map;
 
 public class RatingsSubListModel  implements Serializable {
-    private String name;
+    private String email;
     private String title;
     private String content;
     private String difficulty;
@@ -19,14 +19,6 @@ public class RatingsSubListModel  implements Serializable {
     private ArrayList<CommunitySubCommentModel> comments = new ArrayList<>();
 
     public RatingsSubListModel() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getTitle() {
@@ -99,5 +91,13 @@ public class RatingsSubListModel  implements Serializable {
 
     public void setClassName(String class_name) {
         this.class_name = class_name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

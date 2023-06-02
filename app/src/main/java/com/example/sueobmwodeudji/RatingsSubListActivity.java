@@ -90,7 +90,7 @@ public class RatingsSubListActivity extends AppCompatActivity implements View.On
     private RatingsSubListModel createData(String docName){
         RatingsSubListModel data = new RatingsSubListModel();
         data.setContent("글내용" + docName);
-        data.setName("작성자" + docName);
+        //data.setName("작성자" + docName);
         data.setTimestamp(Timestamp.now().toDate());
         data.setTitle("글제목" + docName);
         data.setDifficulty("상");

@@ -17,7 +17,11 @@ import com.example.sueobmwodeudji.model.CommunitySubListModel;
 import com.example.sueobmwodeudji.model.RatingsSubListModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RatingsSubFormActivity extends AppCompatActivity implements View.OnClickListener{
     ActivityRatingsSubFormBinding binding;
@@ -25,7 +29,8 @@ public class RatingsSubFormActivity extends AppCompatActivity implements View.On
     private String class_name, teacher_name;
 
     private String firstCP, firstDP, secondCP;
-    private String subject, id;
+    private String subject;
+    private String mEmail;
 
     private InputMethodManager imm;
     @Override
@@ -37,8 +42,7 @@ public class RatingsSubFormActivity extends AppCompatActivity implements View.On
         class_name = intent.getStringExtra("class_name");
         //teacher_name = intent.getStringExtra("teacher_name");
         secondCP = class_name;
-
-        id = "test";
+        mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
         imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 
@@ -85,9 +89,10 @@ public class RatingsSubFormActivity extends AppCompatActivity implements View.On
         //데이터 생성
         RatingsSubListModel data = new RatingsSubListModel();
         data.setTitle(binding.titleEt.getText().toString());
-        data.setName(id);
+        data.setEmail(mEmail);
         data.setContent(binding.contentEt.getText().toString());
         data.setTimestamp(Timestamp.now().toDate());
+        data.setLike(new HashMap<>());
         RadioButton difi_rd = findViewById(binding.difficultyRg.getCheckedRadioButtonId());
         RadioButton type_rd = findViewById(binding.typeRg.getCheckedRadioButtonId());
         data.setDifficulty(difi_rd.getText().toString());
@@ -100,7 +105,7 @@ public class RatingsSubFormActivity extends AppCompatActivity implements View.On
         mFirestore.collection(firstCP)
                 .document(firstDP)
                 .collection(class_name)
-                .document(id + data.getTimestamp())
+                .document(mEmail + data.getTimestamp())
                 .set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {

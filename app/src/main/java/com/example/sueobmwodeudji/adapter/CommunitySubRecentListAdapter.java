@@ -88,7 +88,7 @@ public class CommunitySubRecentListAdapter extends RecyclerView.Adapter<Communit
 
     private void onDocumentAdded(DocumentChange change) {
         communitySubRecentListModels.add(change.getDocument().toObject(CommunitySubListModel.class));
-        Collections.reverse(communitySubRecentListModels);
+        //Collections.reverse(communitySubRecentListModels);
         notifyDataSetChanged();
     }
 
