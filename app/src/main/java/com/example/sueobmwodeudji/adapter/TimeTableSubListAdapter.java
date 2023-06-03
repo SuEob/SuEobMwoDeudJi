@@ -3,78 +3,100 @@ package com.example.sueobmwodeudji.adapter;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.databinding.ItemTimeTableListBinding;
+import com.example.sueobmwodeudji.dto.TimeTableDTO;
+import com.example.sueobmwodeudji.model.CommunitySubListModel;
 import com.example.sueobmwodeudji.model.TimeTableSubFrameModel;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class TimeTableSubListAdapter extends RecyclerView.Adapter<TimeTableSubListAdapter.TimeTableSubListViewHolder>{
-    private Context context;
-    private List<TimeTableSubFrameModel> list;
+public class TimeTableSubListAdapter extends RecyclerView.Adapter<TimeTableSubListAdapter.TimeTableSubListViewHolder> implements EventListener<QuerySnapshot> {
+    private final Context context;
+    private final Query mQuery;
+    private ArrayList<DocumentSnapshot> mSnapshots = new ArrayList<>();
 
-    public TimeTableSubListAdapter(Context context, List<TimeTableSubFrameModel> list) {
+    private static OnListClickListener olcl;
+
+    public TimeTableSubListAdapter(Context context, Query query) {
         this.context = context;
-        this.list = list;
-    }
-
-    public void addItem(String name) {
-        list.add(new TimeTableSubFrameModel(name));
-        notifyItemInserted(0);
-        notifyDataSetChanged();
-    }
-
-    public void removeItem(int position) {
-        list.remove(position);
-        notifyItemRemoved(position);
-        notifyDataSetChanged();
+        this.mQuery = query;
+        mQuery.addSnapshotListener(this);
     }
 
     @NonNull
     @Override
     public TimeTableSubListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemTimeTableListBinding binding = ItemTimeTableListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        TimeTableSubListViewHolder viewHolder = new TimeTableSubListViewHolder(binding);
-        binding.timeTableListBtn.setOnClickListener(v -> {
-            int position = viewHolder.getAbsoluteAdapterPosition();
-            Log.d("position", String.valueOf(position));
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.item_time_table_list, parent, false);
 
-            if (position != RecyclerView.NO_POSITION) {
-                removeItem(position);
-//                addItem("asd");
-            }
-
-        });
-
-        return viewHolder;
+        return new TimeTableSubListViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TimeTableSubListViewHolder holder, int position) {
-        holder.listTitle.setText(list.get(position).listTitle);
+        holder.onBind(mSnapshots.get(position).toObject(TimeTableDTO.class));
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return mSnapshots.size();
+    }
+
+    @Override
+    public void onEvent(@Nullable QuerySnapshot documentSnapshots, @Nullable FirebaseFirestoreException e) {
+        if (e != null) {
+            Log.w("list 에러", "onEvent:error", e);
+        }
+        mSnapshots.clear();
+        for (DocumentSnapshot doc : documentSnapshots.getDocuments()) {
+            mSnapshots.add(doc);
+            notifyDataSetChanged();
+        }
+    }
+
+    public void setOlcl(OnListClickListener onListener) {
+        olcl = onListener;
+    }
+
+    public interface OnListClickListener {
+        void onClick(TimeTableDTO data);
     }
 
     public static class TimeTableSubListViewHolder extends RecyclerView.ViewHolder {
-        private ItemTimeTableListBinding binding;
         public TextView listTitle;
         public ImageButton listBtn;
 
-        public TimeTableSubListViewHolder(@NonNull ItemTimeTableListBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
+        public TimeTableSubListViewHolder(View itemView) {
+            super(itemView);
+            ItemTimeTableListBinding binding = ItemTimeTableListBinding.bind(itemView);
             listTitle = binding.timeTableListTitle;
             listBtn = binding.timeTableListBtn;
+        }
+
+        public void onBind(TimeTableDTO data) {
+            listTitle.setText(data.getTimeTableName());
+            //layout.setOnClickListener(new View.OnClickListener() {
+            //@Override
+            //public void onClick (View v){
+            // olcl.onClick(data);
+            // }
+            //});
         }
     }
 }

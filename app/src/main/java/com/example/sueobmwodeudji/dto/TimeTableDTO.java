@@ -7,6 +7,7 @@ public class TimeTableDTO {
     String timeTableName;
     int year, semester;
     ArrayList<String> mon, tue, wed, thu, fri;
+    private String email;
 
     public String getTimeTableName() {
         return timeTableName;
@@ -51,4 +52,12 @@ public class TimeTableDTO {
         return fri;
     }
     public void setFri(ArrayList<String> asd) { fri = asd; }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

@@ -68,6 +68,7 @@ public class TimeTableFragment extends Fragment {
     public void onStart() {
         super.onStart();
         addFullTime();
+
     }
 
     @Override
@@ -223,7 +224,6 @@ public class TimeTableFragment extends Fragment {
             }
         });
         dialog.show(getChildFragmentManager(), "TAG");
-
     }
 
 }
