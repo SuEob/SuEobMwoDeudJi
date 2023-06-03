@@ -96,34 +96,40 @@ public class TimeTableFragment extends Fragment {
     }
 
     private void CreateList() {
-        String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri"}; // 월요일 ~ 금요일
+        Bundle args = getArguments();
 
-        List<CallSchoolData> list = new ArrayList<>();
+        if (args != null) {
 
-        List<String> subList;
-        CallSchoolData schoolData;
+            String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri"}; // 월요일 ~ 금요일
 
-        // List<CallSchoolData> 초기화
-        for (String day:days) {
-            subList = new ArrayList<>();
-            schoolData = new CallSchoolData(day, subList);
-            list.add(schoolData);
-        }
+            List<CallSchoolData> list = new ArrayList<>();
 
-        // 빈 값 넣기
-        for (int i=0; i<5; i++) {
-            for (int j=0; j<8; j++) {
-                list.get(i).classCntnt.add("");
+            List<String> subList;
+            CallSchoolData schoolData;
+
+            // List<CallSchoolData> 초기화
+            for (String day:days) {
+                subList = new ArrayList<>();
+                schoolData = new CallSchoolData(day, subList);
+                list.add(schoolData);
             }
-        }
+
+            // 빈 값 넣기
+            for (int i=0; i<5; i++) {
+                for (int j=0; j<8; j++) {
+                    list.get(i).classCntnt.add("");
+                }
+            }
 
 //        list.get(day_of_week).classCntnt.set(period, class_name);
 
-        TimeTableFragment.newInstance(list);
+            TimeTableFragment.newInstance(list);
 
-        for (CallSchoolData data : list) {
-            Log.d("TAG", data.toString());
+            for (CallSchoolData data : list) {
+                Log.d("TAG", data.toString());
+            }
         }
+
     }
 
     // TextView[][] timetable -> 시간표 초기화

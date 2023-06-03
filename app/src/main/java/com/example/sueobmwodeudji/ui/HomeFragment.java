@@ -25,13 +25,8 @@ import com.example.sueobmwodeudji.adapter.HomePagerAdapter;
 import com.example.sueobmwodeudji.adapter.HomeTimeTableAdapter;
 import com.example.sueobmwodeudji.databinding.FragmentHomeBinding;
 import com.example.sueobmwodeudji.dto.HomeTimeTableData;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -68,22 +63,22 @@ public class HomeFragment extends Fragment {
         HomeTimeTableView();
         HomePostViewPager2();
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        mFirestore.collection("사용자")
-                .document(user.getEmail())
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        String school_name = documentSnapshot.getString("school_name");
-                        String school_username = school_name +" / " +  user.getDisplayName();
-
-                        binding.infoTv.setText(school_username);
-                    }
-                });
-
-        binding.infoTv.setText(user.getDisplayName());
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+//        mFirestore.collection("사용자")
+//                .document(user.getEmail())
+//                .get()
+//                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                        String school_name = documentSnapshot.getString("school_name");
+//                        String school_username = school_name +" / " +  user.getDisplayName();
+//
+//                        binding.infoTv.setText(school_username);
+//                    }
+//                });
+//
+//        binding.infoTv.setText(user.getDisplayName());
 
     }
 
