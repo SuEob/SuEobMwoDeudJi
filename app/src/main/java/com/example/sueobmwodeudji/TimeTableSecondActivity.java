@@ -39,10 +39,7 @@ public class TimeTableSecondActivity extends AppCompatActivity {
     }
 
     private void TimeTableListView() {
-        list.add(new TimeTableSubFrameModel("수업명1"));
-        list.add(new TimeTableSubFrameModel("수업명2"));
-        list.add(new TimeTableSubFrameModel("수업명3"));
-        list.add(new TimeTableSubFrameModel("수업명4"));
+        list.add(new TimeTableSubFrameModel("기본 시간표"));
         binding.timeTableSubList.setLayoutManager(new LinearLayoutManager(this));
         binding.timeTableSubList.setAdapter(new TimeTableSubListAdapter(this, list));
     }
