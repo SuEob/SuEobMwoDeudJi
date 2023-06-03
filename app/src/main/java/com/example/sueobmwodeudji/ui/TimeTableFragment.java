@@ -101,6 +101,46 @@ public class TimeTableFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+<<<<<<< HEAD
+=======
+    private void CreateList() {
+        Bundle args = getArguments();
+
+        if (args != null) {
+
+            String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri"}; // 월요일 ~ 금요일
+
+            List<CallSchoolData> list = new ArrayList<>();
+
+            List<String> subList;
+            CallSchoolData schoolData;
+
+            // List<CallSchoolData> 초기화
+            for (String day:days) {
+                subList = new ArrayList<>();
+                schoolData = new CallSchoolData(day, subList);
+                list.add(schoolData);
+            }
+
+            // 빈 값 넣기
+            for (int i=0; i<5; i++) {
+                for (int j=0; j<8; j++) {
+                    list.get(i).classCntnt.add("");
+                }
+            }
+
+//        list.get(day_of_week).classCntnt.set(period, class_name);
+
+            TimeTableFragment.newInstance(list);
+
+            for (CallSchoolData data : list) {
+                Log.d("TAG", data.toString());
+            }
+        }
+
+    }
+
+>>>>>>> e19d63e7d576f046c5993950e6c8a63004ce4a54
     // TextView[][] timetable -> 시간표 초기화
     private void setTimeTable() {
         timetable  = new TextView[5][];
