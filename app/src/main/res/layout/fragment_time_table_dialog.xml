@@ -13,7 +13,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:background="@color/secondary_blue"
-        android:text="시간표 추가"
+        android:text="수업 추가"
         android:textSize="20sp"
         android:textColor="#ffffff"/>
 
