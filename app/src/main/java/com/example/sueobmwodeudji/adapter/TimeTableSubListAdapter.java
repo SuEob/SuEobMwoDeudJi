@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.R;
@@ -64,7 +66,7 @@ public class TimeTableSubListAdapter extends RecyclerView.Adapter<TimeTableSubLi
             Log.w("list 에러", "onEvent:error", e);
         }
         mSnapshots.clear();
-        for (DocumentSnapshot doc : documentSnapshots.getDocuments()) {
+         for (DocumentSnapshot doc : documentSnapshots.getDocuments()) {
             mSnapshots.add(doc);
             notifyDataSetChanged();
         }
@@ -81,22 +83,25 @@ public class TimeTableSubListAdapter extends RecyclerView.Adapter<TimeTableSubLi
     public static class TimeTableSubListViewHolder extends RecyclerView.ViewHolder {
         public TextView listTitle;
         public ImageButton listBtn;
+        public ConstraintLayout layout;
 
         public TimeTableSubListViewHolder(View itemView) {
             super(itemView);
             ItemTimeTableListBinding binding = ItemTimeTableListBinding.bind(itemView);
             listTitle = binding.timeTableListTitle;
             listBtn = binding.timeTableListBtn;
+            layout = binding.layout;
         }
 
         public void onBind(TimeTableDTO data) {
             listTitle.setText(data.getTimeTableName());
-            //layout.setOnClickListener(new View.OnClickListener() {
-            //@Override
-            //public void onClick (View v){
-            // olcl.onClick(data);
-            // }
-            //});
+            layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick (View v){
+                    olcl.onClick(data);
+
+                }
+            });
         }
     }
 }

@@ -2,18 +2,25 @@ package com.example.sueobmwodeudji;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sueobmwodeudji.databinding.ActivityTimeTableThridBinding;
 import com.example.sueobmwodeudji.dto.CallSchoolData;
+import com.example.sueobmwodeudji.dto.TimeTableDTO;
 import com.example.sueobmwodeudji.rest_api.NEIS_API;
 import com.example.sueobmwodeudji.rest_api.Row;
 import com.example.sueobmwodeudji.rest_api.SchoolInfo;
 import com.example.sueobmwodeudji.rest_api.SchoolResponse;
 import com.example.sueobmwodeudji.rest_api.SchoolTimeTable;
 import com.example.sueobmwodeudji.ui.TimeTableFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.json.JSONObject;
 
@@ -28,6 +35,7 @@ import retrofit2.Response;
 public class TimeTableThridActivity extends AppCompatActivity {
     public static boolean checkCall = false;
     private ActivityTimeTableThridBinding binding;
+    int yearSelect, semesterSelect;
 
     Call<SchoolResponse> callInfo, callTimeTable;
 
@@ -36,13 +44,17 @@ public class TimeTableThridActivity extends AppCompatActivity {
 
     public static JSONObject schedule;
 
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    CollectionReference ccc = db.collection("시간표");
+    // DocumentReference ddd = ccc.document("T3");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityTimeTableThridBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        final String[] years = {"2023년"};
+        final String[] years = {"2023년", "2024년", "2025년", "2026년", "2027년", "2028년"};
         final String[] semesters = {"1학기", "2학기"};
         final String[] grades = {"1학년", "2학년", "3학년"};
         final String[] className = {"1반", "2반", "3반", "4반", "5반", "6반", "7반", "8반", "9반", "10반"};
@@ -55,23 +67,68 @@ public class TimeTableThridActivity extends AppCompatActivity {
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.semesterSpin.setAdapter(adapter2);
 
-        ArrayAdapter adapter3 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, grades);
+/*        ArrayAdapter adapter3 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, grades);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.gradeSpin.setAdapter(adapter3);
 
         ArrayAdapter adapter4 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, className);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.classNameSpin.setAdapter(adapter4);
+        binding.classNameSpin.setAdapter(adapter4);*/
 
-        binding.tableAddBtn.setOnClickListener(v -> {
-            // 여기에 addItem(binding.nameET.getText().toString());
-            SchoolCallInfo();
-            finish();
+        binding.yearSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                yearSelect = position + 2023;
+                Log.d("년도", ""+yearSelect);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
+        });
+
+        binding.semesterSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                semesterSelect = position + 1;
+                Log.d("학기",""+semesterSelect);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
+        });
+
+        binding.tableAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 여기에 addItem(binding.nameET.getText().toString());
+                // SchoolCallInfo();
+                ArrayList<String> list = new ArrayList<>();
+                for (int k=0; k<8; k++) {
+                    list.add("");
+                }
+
+                Log.d ("테이블", "들어옴11");
+                String tableName = binding.nameET.getText().toString();
+                String userID = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+                TimeTableDTO dto = new TimeTableDTO();
+                dto.setTimeTableName(tableName);
+                dto.setYear(yearSelect);
+                dto.setSemester(semesterSelect);
+                dto.setMon(list);
+                dto.setTue(list);
+                dto.setWed(list);
+                dto.setThu(list);
+                dto.setFri(list);
+                dto.setEmail(userID);
+                ccc.document(userID + " " + yearSelect + " - " + semesterSelect).set(dto);
+
+                finish();
+            }
         });
     }
 
     // 교육청 코드와 학교 코드를 구하는 메소드
-    public void SchoolCallInfo() {
+/*    public void SchoolCallInfo() {
         callInfo = NEIS_API.getInfoService().getSchoolInfo(
                 "9da752136d5849b985288deb5036dba1",
                 "json",
@@ -101,10 +158,10 @@ public class TimeTableThridActivity extends AppCompatActivity {
             }
         });
 
-    }
+    }*/
 
     // 월요일 ~ 금요일까지 몇 교시에 무슨 과목인지 구하는 메소드 (class_name="1")
-    public void SchoolCallTimeTable(String ministryCode, String schoolCode) {
+/*    public void SchoolCallTimeTable(String ministryCode, String schoolCode) {
 
         callTimeTable = NEIS_API.getTimeTableService().getSchoolTimeTable(
                 "9da752136d5849b985288deb5036dba1",
@@ -157,10 +214,10 @@ public class TimeTableThridActivity extends AppCompatActivity {
             }
         });
 
-    }
+    }*/
 
     // 월요일 ~ 금요일까지 몇 교시에 무슨 과목인지 구하는 메소드 (class_name="01")
-    public void SchoolCallTimeTableError(String ministryCode, String schoolCode) {
+/*    public void SchoolCallTimeTableError(String ministryCode, String schoolCode) {
 
         callTimeTable = NEIS_API.getTimeTableService().getSchoolTimeTable(
                 "9da752136d5849b985288deb5036dba1",
@@ -210,7 +267,7 @@ public class TimeTableThridActivity extends AppCompatActivity {
             }
         });
 
-    }
+    }*/
 
     /*
     List 구조를 만드는 메소드

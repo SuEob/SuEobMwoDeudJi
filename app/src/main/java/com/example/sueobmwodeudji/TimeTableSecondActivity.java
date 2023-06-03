@@ -7,16 +7,24 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.sueobmwodeudji.adapter.TimeTableSubListAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityTimeTableSecondBinding;
+import com.example.sueobmwodeudji.dto.TimeTableDTO;
 import com.example.sueobmwodeudji.model.TimeTableSubFrameModel;
+import com.example.sueobmwodeudji.ui.TimeTableFragment;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -66,10 +74,35 @@ public class TimeTableSecondActivity extends AppCompatActivity {
     }
 
     private void TimeTableListView() {
-        //list.add(new TimeTableSubFrameModel("기본 시간표"));
+        list.add(new TimeTableSubFrameModel("기본 시간표"));
         binding.timeTableSubList.setLayoutManager(new LinearLayoutManager(this));
         TimeTableSubListAdapter adapter = new TimeTableSubListAdapter(this, readTimeTable());
-        //adapter.setOlcl();
+        adapter.setOlcl(new TimeTableSubListAdapter.OnListClickListener() {
+            @Override
+            public void onClick(TimeTableDTO data) {
+                //finish();
+
+                // 선택한 시간표를 true로, 나머지 시간표를 false로 변경
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                CollectionReference ccc = db.collection("시간표");
+                Log.d ("ㅂㅈㄷㅂㅈㄷ", "들어옴");
+                ccc.whereEqualTo("selected", true).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot value) {
+                        ccc.document(data.getEmail() + " " + data.getYear() + " - " + data.getSemester()).update("selected", true);
+                        Log.d ("ㅂㅈㄷㅂㅈㄷ", "true로 바뀜");
+
+                        if (value.getDocuments().size() != 0) {
+                            Log.d ("ㅂㅈㄷㅂㅈㄷ", "병신");
+                            TimeTableDTO dto = value.getDocuments().get(0).toObject(TimeTableDTO.class);
+                            ccc.document(dto.getEmail() + " " + dto.getYear() + " - " + dto.getSemester()).update("selected", false);
+                            Log.d ("ㅂㅈㄷㅂㅈㄷ", "false로 바뀜");
+                        }
+                        finish();
+                    }
+                });
+            }
+        });
         binding.timeTableSubList.setAdapter(adapter);
     }
 
