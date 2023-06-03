@@ -64,6 +64,7 @@ public class TimeTableThridActivity extends AppCompatActivity {
         binding.classNameSpin.setAdapter(adapter4);
 
         binding.tableAddBtn.setOnClickListener(v -> {
+            // 여기에 addItem(binding.nameET.getText().toString());
             SchoolCallInfo();
             finish();
         });

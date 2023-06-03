@@ -17,11 +17,23 @@ import java.util.List;
 
 public class TimeTableSubListAdapter extends RecyclerView.Adapter<TimeTableSubListAdapter.TimeTableSubListViewHolder>{
     private Context context;
-    private List<TimeTableSubFrameModel> timeTableSubFrameModel;
+    private List<TimeTableSubFrameModel> list;
 
-    public TimeTableSubListAdapter(Context context, List<TimeTableSubFrameModel> timeTableSubFrameModel) {
+    public TimeTableSubListAdapter(Context context, List<TimeTableSubFrameModel> list) {
         this.context = context;
-        this.timeTableSubFrameModel = timeTableSubFrameModel;
+        this.list = list;
+    }
+
+    public void addItem(String name) {
+        list.add(new TimeTableSubFrameModel(name));
+        notifyItemInserted(0);
+        notifyDataSetChanged();
+    }
+
+    public void removeItem(int position) {
+        list.remove(position);
+        notifyItemRemoved(position);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -34,7 +46,8 @@ public class TimeTableSubListAdapter extends RecyclerView.Adapter<TimeTableSubLi
             Log.d("position", String.valueOf(position));
 
             if (position != RecyclerView.NO_POSITION) {
-                timeTableSubFrameModel.remove(position);
+                removeItem(position);
+//                addItem("asd");
             }
 
         });
@@ -44,12 +57,12 @@ public class TimeTableSubListAdapter extends RecyclerView.Adapter<TimeTableSubLi
 
     @Override
     public void onBindViewHolder(@NonNull TimeTableSubListViewHolder holder, int position) {
-        holder.listTitle.setText(timeTableSubFrameModel.get(position).listTitle);
+        holder.listTitle.setText(list.get(position).listTitle);
     }
 
     @Override
     public int getItemCount() {
-        return timeTableSubFrameModel.size();
+        return list.size();
     }
 
     public static class TimeTableSubListViewHolder extends RecyclerView.ViewHolder {
