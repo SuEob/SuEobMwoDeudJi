@@ -19,7 +19,13 @@ import com.example.sueobmwodeudji.TimeTableSecondActivity;
 import com.example.sueobmwodeudji.TimeTableThridActivity;
 import com.example.sueobmwodeudji.databinding.FragmentTimeTableBinding;
 import com.example.sueobmwodeudji.dto.CallSchoolData;
+import com.example.sueobmwodeudji.dto.TimeTableDTO;
 import com.example.sueobmwodeudji.ui.dialog_ui.TimeTableFragmentDialog;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -60,7 +66,6 @@ public class TimeTableFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
-        CreateList();
         setTimeTable();
         TimeTableThridActivity.checkCall = true;
     }
@@ -68,7 +73,8 @@ public class TimeTableFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        addFullTime();
+        // addFullTime();
+        drowTable();
     }
 
     @Override
@@ -93,37 +99,6 @@ public class TimeTableFragment extends Fragment {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void CreateList() {
-        String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri"}; // 월요일 ~ 금요일
-
-        List<CallSchoolData> list = new ArrayList<>();
-
-        List<String> subList;
-        CallSchoolData schoolData;
-
-        // List<CallSchoolData> 초기화
-        for (String day:days) {
-            subList = new ArrayList<>();
-            schoolData = new CallSchoolData(day, subList);
-            list.add(schoolData);
-        }
-
-        // 빈 값 넣기
-        for (int i=0; i<5; i++) {
-            for (int j=0; j<8; j++) {
-                list.get(i).classCntnt.add("");
-            }
-        }
-
-//        list.get(day_of_week).classCntnt.set(period, class_name);
-
-        TimeTableFragment.newInstance(list);
-
-        for (CallSchoolData data : list) {
-            Log.d("TAG", data.toString());
-        }
     }
 
     // TextView[][] timetable -> 시간표 초기화
@@ -222,41 +197,69 @@ public class TimeTableFragment extends Fragment {
                         Log.d("TAG", data.toString());
                     }
 
-                  }
-//                else { // 시간표가 비어있는 상태에서 추가
-//                    String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri"}; // 월요일 ~ 금요일
-//
-//                    List<CallSchoolData> list = new ArrayList<>();
-//
-//                    List<String> subList;
-//                    CallSchoolData schoolData;
-//
-//                    // List<CallSchoolData> 초기화
-//                    for (String day:days) {
-//                        subList = new ArrayList<>();
-//                        schoolData = new CallSchoolData(day, subList);
-//                        list.add(schoolData);
-//                    }
-//
-//                    // 빈 값 넣기
-//                    for (int i=0; i<5; i++) {
-//                        for (int j=0; j<8; j++) {
-//                            list.get(i).classCntnt.add("");
-//                        }
-//                    }
-//
-//                    list.get(day_of_week).classCntnt.set(period, class_name);
-//
-//                    TimeTableFragment.newInstance(list);
-//
-//                    for (CallSchoolData data : list) {
-//                        Log.d("TAG", data.toString());
-//                    }
-//                }
+                } else { // 시간표가 비어있는 상태에서 추가
+                    String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri"}; // 월요일 ~ 금요일
+
+                    List<CallSchoolData> list = new ArrayList<>();
+
+                    List<String> subList;
+                    CallSchoolData schoolData;
+
+                    // List<CallSchoolData> 초기화
+                    for (String day:days) {
+                        subList = new ArrayList<>();
+                        schoolData = new CallSchoolData(day, subList);
+                        list.add(schoolData);
+                    }
+
+                    // 빈 값 넣기
+                    for (int i=0; i<5; i++) {
+                        for (int j=0; j<8; j++) {
+                            list.get(i).classCntnt.add("");
+                        }
+                    }
+
+                    list.get(day_of_week).classCntnt.set(period, class_name);
+
+                    TimeTableFragment.newInstance(list);
+
+                    for (CallSchoolData data : list) {
+                        Log.d("TAG", data.toString());
+                    }
+                }
             }
         });
+        dialog.setDdd_year(2023);
+        dialog.setDdd_semester(1);
         dialog.show(getChildFragmentManager(), "TAG");
 
+    }
+
+    public void drowTable() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference ccc = db.collection("시간표");
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        ccc.whereEqualTo("email", userID).whereEqualTo("selected", true).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+
+            @Override
+            public void onSuccess(QuerySnapshot value) {
+                if (value.getDocuments().size() != 0) {
+                    Log.d ("ㅂㄷㄷ", "병신");
+                    TimeTableDTO dto = value.getDocuments().get(0).toObject(TimeTableDTO.class);
+                    ArrayList<ArrayList<String>> sueobs = new ArrayList<>();
+                    sueobs.add(dto.getMon());
+                    sueobs.add(dto.getTue());
+                    sueobs.add(dto.getWed());
+                    sueobs.add(dto.getThu());
+                    sueobs.add(dto.getFri());
+                    for (int i=0; i<5; i++) {
+                        for (int k=0; k<8; k++) {
+                            timetable[i][k].setText(sueobs.get(i).get(k));
+                        }
+                    }
+                }
+            }
+        });
     }
 
 }

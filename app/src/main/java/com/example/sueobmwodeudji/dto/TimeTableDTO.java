@@ -7,6 +7,8 @@ public class TimeTableDTO {
     String timeTableName;
     int year, semester;
     ArrayList<String> mon, tue, wed, thu, fri;
+    String email;
+    boolean selected;
 
     public String getTimeTableName() {
         return timeTableName;
@@ -51,4 +53,10 @@ public class TimeTableDTO {
         return fri;
     }
     public void setFri(ArrayList<String> asd) { fri = asd; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String asd) { email = asd; }
+
+    public boolean isSelected() { return selected; }
+    public void setSelected(boolean asd) { selected = asd; }
 }
