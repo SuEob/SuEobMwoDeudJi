@@ -28,14 +28,13 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
 
-    <!-- App Preferences -->
 
+    <!-- App Preferences -->
 
     <!-- Dialog -->
     <string-array name="profile">
         <item>"프로필 이미지 변경"</item>
         <item>"프로필 이미지 삭제"</item>
     </string-array>
-
 
 </resources>

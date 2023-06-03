@@ -14,15 +14,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SuEobMwoDeudJi"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity
             android:name=".SettingsActivity"
@@ -30,10 +31,40 @@
             android:parentActivityName=".MainActivity">
         </activity>
         <activity
-            android:name=".SettingsSubActivity"
-            android:exported="true"
-            android:parentActivityName=".SettingsActivity">
+            android:name=".TimeTableSecondActivity"
+            android:exported="true">
         </activity>
+        <activity
+            android:name=".TimeTableThridActivity"
+            android:exported="true">
+        </activity>
+        <activity android:name=".CommunitySubListActivity"
+            android:exported="true"
+            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".CommunitySubPostActivity" />
+        <activity android:name=".CommunitySubSearchActivity" />
+        <activity android:name=".CommunitySubFormActivity" />
+        <activity android:name=".RatingsSubListActivity" />
+        <activity android:name=".RatingsSubPostActivity" />
+        <activity android:name=".RatingsSubFormActivity" />
+        <activity
+            android:name=".SearchActivity"
+            android:exported="true"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".fb.FbMainActivity" />
+        <activity android:name=".fb.FbPost" />
+        <activity android:name=".fb.FbSueob" />
+        <activity android:name=".fb.FbTimeTable" />
     </application>
 
 </manifest>

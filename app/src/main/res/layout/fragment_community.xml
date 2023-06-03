@@ -6,17 +6,219 @@
     android:layout_height="match_parent"
     tools:context=".ui.CommunityFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/community_Fragment"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_fragment" >
+        app:layout_constraintTop_toTopOf="parent">
 
-    </androidx.recyclerview.widget.RecyclerView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/leftGuide1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/rightGuide1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+            <LinearLayout
+                android:id="@+id/linear11"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="@+id/leftGuide1"
+                app:layout_constraintRight_toRightOf="@+id/rightGuide1"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="카테고리"
+                    android:textColor="@color/black_12"
+                    android:textSize="24dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/layout_background"
+                    android:elevation="4dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="24dp">
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/subLeftGuide1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_begin="28dp" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/subRightGuide1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_end="28dp" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/subContentStartGuide1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layout_constraintGuide_begin="24dp" />
+
+                        <Button
+                            android:id="@+id/class1_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:drawableTop="@drawable/class1"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
+                            android:text="1학년 대화방"
+                            android:textColor="@color/black_12"
+                            android:textSize="10dp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@id/class2_btn"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/class2_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:drawableTop="@drawable/class2"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
+                            android:text="2학년 대화방"
+                            android:textColor="@color/black_12"
+                            android:textSize="10dp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/class3_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:drawableTop="@drawable/class3"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
+                            android:text="3학년 대화방"
+                            android:textColor="@color/black_12"
+                            android:textSize="10dp"
+                            app:layout_constraintLeft_toRightOf="@id/class2_btn"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Button
+                            android:id="@+id/game_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:drawableTop="@drawable/game"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
+                            android:text="게임 게시판"
+                            android:textColor="@color/black_12"
+                            android:textSize="10dp"
+                            app:layout_constraintLeft_toLeftOf="@id/class1_btn"
+                            app:layout_constraintRight_toRightOf="@id/class1_btn"
+                            app:layout_constraintTop_toBottomOf="@id/class1_btn" />
+
+                        <Button
+                            android:id="@+id/book_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:drawableTop="@drawable/book"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
+                            android:text="공부 게시판"
+                            android:textColor="@color/black_12"
+                            android:textSize="10dp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/class2_btn" />
+
+                        <Button
+                            android:id="@+id/anchor_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:drawableTop="@drawable/anchor"
+                            android:minWidth="0dp"
+                            android:minHeight="0dp"
+                            android:text="운동 게시판"
+                            android:textColor="@color/black_12"
+                            android:textSize="10dp"
+                            app:layout_constraintLeft_toLeftOf="@id/class3_btn"
+                            app:layout_constraintRight_toRightOf="@id/class3_btn"
+                            app:layout_constraintTop_toBottomOf="@id/class3_btn" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear21"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:orientation="vertical"
+                app:layout_constraintLeft_toLeftOf="@+id/leftGuide1"
+                app:layout_constraintRight_toRightOf="@+id/rightGuide1"
+                app:layout_constraintTop_toBottomOf="@+id/linear11">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="최근 작성된 글"
+                    android:textColor="@color/black_12"
+                    android:textSize="24dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/layout_background"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toTopOf="@+id/linear21"
+                    app:layout_constraintLeft_toLeftOf="@+id/leftGuide1"
+                    app:layout_constraintRight_toRightOf="@+id/rightGuide1"
+                    app:layout_constraintTop_toTopOf="@+id/contentStartGuide1">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

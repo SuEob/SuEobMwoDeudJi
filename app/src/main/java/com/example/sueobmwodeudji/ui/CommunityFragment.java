@@ -1,42 +1,66 @@
 package com.example.sueobmwodeudji.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.sueobmwodeudji.CommunitySubListActivity;
+import com.example.sueobmwodeudji.CommunitySubPostActivity;
+import com.example.sueobmwodeudji.CommunitySubSearchActivity;
+import com.example.sueobmwodeudji.MainActivity;
 import com.example.sueobmwodeudji.R;
-import com.example.sueobmwodeudji.adapter.BasicFrameAdapter;
+import com.example.sueobmwodeudji.SearchActivity;
+import com.example.sueobmwodeudji.adapter.CommunitySubRecentListAdapter;
+import com.example.sueobmwodeudji.databinding.ActivityMainBinding;
 import com.example.sueobmwodeudji.databinding.FragmentCommunityBinding;
-import com.example.sueobmwodeudji.model.BasicFrameModel;
+import com.example.sueobmwodeudji.dto.RatingMyClassData;
+import com.example.sueobmwodeudji.model.CommunitySubListModel;
+import com.example.sueobmwodeudji.model.CommunitySubRecentListModel;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
-import java.util.LinkedList;
-import java.util.List;
+import org.checkerframework.checker.units.qual.A;
+import org.checkerframework.checker.units.qual.C;
+
+import java.util.ArrayList;
+
 
 public class CommunityFragment extends Fragment {
     private FragmentCommunityBinding binding;
-    private List<BasicFrameModel> list = new LinkedList<BasicFrameModel>();
 
     public static CommunityFragment getInstance() {
         return new CommunityFragment();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentCommunityBinding.inflate(inflater, container, false);
+        setHasOptionsMenu(true); // Activity 보다 Fragment 우선
+        String tool_bar_title = "커뮤니티";
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle(tool_bar_title);
+
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(binding.getRoot(), savedInstanceState);
-        CommunityItemView();
+        addCategoryButtonEvent();
+        setRecentListRecyclerView();
+        //addSearchViewEvent();
     }
 
     @Override
@@ -45,11 +69,86 @@ public class CommunityFragment extends Fragment {
         binding = null;
     }
 
-    private void CommunityItemView() {
-        list.add(new BasicFrameModel("게시글", R.layout.item_community_sub_1));
-        list.add(new BasicFrameModel("최근 작성된 글", R.layout.item_community_sub_2));
-        binding.communityFragment.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.communityFragment.setAdapter(new BasicFrameAdapter(getContext(), list));
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().invalidateOptionsMenu(); // onCreateOptionsMenu() 재호출
     }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.community_tool_bar, menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.search) {
+            Intent intent = new Intent(getActivity(), SearchActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void addCategoryButtonEvent() {
+        Button[] buttons = { binding.class1Btn, binding.class2Btn, binding.class3Btn,
+                binding.gameBtn, binding.bookBtn, binding.anchorBtn};
+        for (Button button : buttons) {
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), CommunitySubListActivity.class);
+                    intent.putExtra("subject", button.getText().toString());
+
+                    startActivity(intent);
+                }
+            });
+
+        }
+    }
+
+    private void setRecentListRecyclerView(){
+        CommunitySubRecentListAdapter adapter = new CommunitySubRecentListAdapter(getContext(), createCategoryQuery());
+        adapter.setOricl(new CommunitySubRecentListAdapter.OnRecentItemClickLintener() {
+            @Override
+            public void onClick(CommunitySubListModel data) {
+                Intent intent = new Intent(getActivity().getApplicationContext(), CommunitySubPostActivity.class);
+                intent.putExtra("data", data);
+                intent.putExtra("subject", data.getCategory());
+                startActivity(intent);
+            }
+        });
+        binding.recyclerView.setAdapter(adapter);
+    }
+
+    private ArrayList<Query> createCategoryQuery(){
+        String[] categorys = {"1학년 대화방", "2학년 대화방", "3학년 대화방", "게임 게시판", "공부 게시판", "운동 게시판"};
+        ArrayList<Query> query = new ArrayList<>();
+        for (String category : categorys) {
+            FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+            query.add(mFirestore.collection("testPost")
+                    .document("first")
+                    .collection(category)
+                    .orderBy("timestamp", Query.Direction.DESCENDING)
+                    .limit(10));
+        }
+        return query;
+    }
+
+   /* private void addSearchViewEvent(){
+        binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent(getActivity(), CommunitySubSearchActivity.class);
+                intent.putExtra("query", query);
+                startActivity(intent);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+    }*/
 
 }
