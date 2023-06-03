@@ -278,9 +278,8 @@ public class TimeTableFragmentDialog extends DialogFragment {
             }
         });
 
-
         // 부모 프래그먼트(TimeTableFragment)에 데이터 전송
-        binding.btnSueobAdd.setOnClickListener(new View.OnClickListener() {
+        binding.dialogBtn.setOnClickListener(new View.OnClickListener() {
             String ddd_email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
             DocumentReference ddd = ccc.document(ddd_email + " " + ddd_year + " - " + ddd_semester);
 
