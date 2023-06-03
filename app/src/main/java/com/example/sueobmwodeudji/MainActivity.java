@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
     // 네비게이션바 클릭시 프래크먼트 이동
     private void BottomNavBar() {
         // 기본화면 설정(홈 화면)
-        getSupportFragmentManager().beginTransaction().replace(R.id.containers, new HomeFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.containers, homeFragment).commit();
         getSupportActionBar().setTitle("홈");
 
         // 화면 바뀜

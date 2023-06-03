@@ -25,13 +25,8 @@ import com.example.sueobmwodeudji.adapter.HomePagerAdapter;
 import com.example.sueobmwodeudji.adapter.HomeTimeTableAdapter;
 import com.example.sueobmwodeudji.databinding.FragmentHomeBinding;
 import com.example.sueobmwodeudji.dto.HomeTimeTableData;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,13 +35,13 @@ import java.util.List;
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private boolean check = true;
+    private boolean first = true;
     private int currentItemIndex;
     private Handler handler = new Handler();
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            currentItemIndex++;
-            binding.homeSubTitleViewPager.setCurrentItem(currentItemIndex);
+            binding.homeSubTitleViewPager.setCurrentItem(++currentItemIndex);
         }
     };
 
@@ -55,9 +50,8 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        Log.d("onCreateView","onCreateView");
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -65,60 +59,22 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setHasOptionsMenu(true); // Activity 보다 Fragment 우선
-        Log.d("onViewCreated","onViewCreated");
-
+        setHasOptionsMenu(true); // Activity 의 Toolbar 보다 Fragment 의 Toolbar 를 우선
         HomeTimeTableView();
-
-        HomePagerAdapter adapter = new HomePagerAdapter(getActivity());
-        binding.homePostViewPager.setAdapter(adapter);
-        binding.homePostViewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
-        binding.homePostViewPager.setOffscreenPageLimit(1);
-
-        List<String> list = Arrays.asList("인기 게시글", "인기 평가글");
-
-        // TabLayout와 ViewPager2 연결
-        new TabLayoutMediator(binding.tabLayout, binding.homePostViewPager, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                TextView textView = new TextView(getContext());
-                textView.setText(list.get(position));
-                textView.setTextSize(20);
-                textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
-                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                tab.setCustomView(textView);
-            }
-        }).attach();
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        mFirestore.collection("사용자")
-                .document(user.getEmail())
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        String school_name = documentSnapshot.getString("school_name");
-                        String school_username = school_name +" / " +  user.getDisplayName();
-
-                        binding.infoTv.setText(school_username);
-                    }
-                });
-
-        binding.infoTv.setText(user.getDisplayName());
+        HomePostViewPager2();
     }
 
     @Override
     public void onResume() {
         super.onResume();
         getActivity().invalidateOptionsMenu(); // onCreateOptionsMenu() 재호출
-        handler.postDelayed(runnable, 4000);
+        handler.postDelayed(runnable, 4000); // 4초마다 실행
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        handler.removeCallbacks(runnable);
+        handler.removeCallbacks(runnable); // 프래그먼트를 벗어나면 실행이 멈춤
     }
 
     @Override
@@ -127,26 +83,27 @@ public class HomeFragment extends Fragment {
         binding = null;
     }
 
+    // 메뉴바 생성
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.frame_tool_bar, menu);
     }
 
+    // 메뉴바 클릭
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.search) {
             Intent intent = new Intent(getActivity(), SearchActivity.class);
             startActivity(intent);
         } else if (item.getItemId() == R.id.profile) {
-            Intent intent = new Intent(getActivity(), SearchActivity.class);
-            startActivity(intent);
+            // 아마 설정창 열결하던가 없앨듯?
         }
         return super.onOptionsItemSelected(item);
     }
 
-
-    public void HomeTimeTableView() {
+    // 일정을 보여주기 위한 뷰페이저
+    private void HomeTimeTableView() {
         List<HomeTimeTableData> list = new ArrayList<>();
 
         list.add(new HomeTimeTableData("1교시 수학"));
@@ -197,13 +154,12 @@ public class HomeFragment extends Fragment {
 
         // 자동 스크롤
         binding.homeSubTitleViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            Boolean first = true;
             // 현재 페이지를 스크롤할 때 -> 터치 스크롤의 일부로 호출
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
                 // 첫 번째 페이지 설정 후 다음 페이지 설정
-               if (first && positionOffset == 0 && positionOffsetPixels == 0) {
+                if (first && positionOffset == 0 && positionOffsetPixels == 0) {
                     onPageSelected(999);
                     first = false;
                 }
@@ -226,24 +182,44 @@ public class HomeFragment extends Fragment {
                 super.onPageScrollStateChanged(state);
                 switch (state) {
                     case ViewPager2.SCROLL_STATE_IDLE:
-
+                        // 결정 X
                         break;
 
                     case ViewPager2.SCROLL_STATE_DRAGGING:
-                        //
+                        // 결정 X
                         break;
 
                     case ViewPager2.SCROLL_STATE_SETTLING:
-
+                        // 결정 X
                         break;
                 }
 
             }
 
-
         });
 
     }
 
+    // 선별한 글들을 보여주기 위한 뷰페이저
+    private void HomePostViewPager2() {
+        HomePagerAdapter adapter = new HomePagerAdapter(getActivity());
+        binding.homePostViewPager.setAdapter(adapter);
+        binding.homePostViewPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL); //수평
+        binding.homePostViewPager.setOffscreenPageLimit(1);
 
+        List<String> list = Arrays.asList("인기 게시글", "인기 평가글");
+
+        // TabLayout과 ViewPager2를 연결
+        new TabLayoutMediator(binding.tabLayout, binding.homePostViewPager, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                TextView textView = new TextView(getContext());
+                textView.setText(list.get(position));
+                textView.setTextSize(20);
+                textView.setGravity(View.TEXT_ALIGNMENT_CENTER);
+                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                tab.setCustomView(textView);
+            }
+        }).attach();
+    }
 }
