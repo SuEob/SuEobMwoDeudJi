@@ -2,9 +2,11 @@ package com.example.sueobmwodeudji;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.sueobmwodeudji.databinding.ActivityTimeTableThridBinding;
 import com.example.sueobmwodeudji.dto.CallSchoolData;
@@ -31,6 +33,12 @@ public class TimeTableThridActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityTimeTableThridBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        // 툴바
+        Toolbar toolbar = binding.toolBar.mainToolBar;
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
 
         final String[] years = {"2023년"};
         final String[] semesters = {"1학기", "2학기"};
@@ -59,6 +67,15 @@ public class TimeTableThridActivity extends AppCompatActivity {
 //            SchoolCallInfo();
             finish();
         });
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 //    // 교육청 코드와 학교 코드를 구하는 메소드

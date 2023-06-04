@@ -19,11 +19,11 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".SettingsActivity"
@@ -37,6 +37,11 @@
         <activity
             android:name=".TimeTableThridActivity"
             android:exported="true">
+        </activity>
+        <activity
+            android:name=".TimeTableClassActivity"
+            android:exported="true"
+            android:parentActivityName=".MainActivity">
         </activity>
         <activity android:name=".CommunitySubListActivity"
             android:exported="true"

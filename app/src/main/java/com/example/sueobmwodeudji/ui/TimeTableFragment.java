@@ -15,11 +15,14 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.sueobmwodeudji.R;
+import com.example.sueobmwodeudji.TimeTableClassActivity;
 import com.example.sueobmwodeudji.TimeTableSecondActivity;
 import com.example.sueobmwodeudji.TimeTableThridActivity;
 import com.example.sueobmwodeudji.databinding.FragmentTimeTableBinding;
 import com.example.sueobmwodeudji.dto.CallSchoolData;
+import com.example.sueobmwodeudji.ui.dialog_ui.TimeTableClearFragmentDialog;
 import com.example.sueobmwodeudji.ui.dialog_ui.TimeTableFragmentDialog;
+import com.example.sueobmwodeudji.ui.dialog_ui.TimeTableNameFragmentDialog;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -60,8 +63,48 @@ public class TimeTableFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
-        CreateList();
+//        CreateList();
         setTimeTable();
+
+        // 학년/반
+        binding.gradeClassBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), TimeTableClassActivity.class);
+            startActivity(intent);
+        });
+
+        // 이름변경
+        binding.changeNameBtn.setOnClickListener(v -> {
+            TimeTableNameFragmentDialog dialog = TimeTableNameFragmentDialog.getInstance();
+            dialog.setChangeName(new TimeTableNameFragmentDialog.ChangeNameInterface() {
+                @Override
+                public void onClick(String name) {
+//                    getActivity().getSupportActionBar().setTitle(name);
+                }
+            });
+            dialog.show(getChildFragmentManager(), "TAG");
+        });
+
+        // 비우기
+        binding.clearBtn.setOnClickListener(v -> {
+            TimeTableClearFragmentDialog dialog = TimeTableClearFragmentDialog.getInstance();
+            dialog.setClearContentInterface(new TimeTableClearFragmentDialog.ClearContentInterface() {
+                @Override
+                public void onClick(int day_of_week, int period) {
+                    timetable[day_of_week][period].setText("");
+                    if (args != null) { // 시간표가 이미 작성된 상태에서 추가
+                        List<CallSchoolData> dataList = (List<CallSchoolData>) args.getSerializable(TIMETABLE_DATA);
+                        dataList.get(day_of_week).classCntnt.set(period, "");
+
+                        for (CallSchoolData data : dataList) {
+                            Log.d("TAG", data.toString());
+                        }
+
+                    }
+                }
+            });
+            dialog.show(getChildFragmentManager(), "TAG");
+        });
+
         TimeTableThridActivity.checkCall = true;
     }
 
@@ -228,7 +271,7 @@ public class TimeTableFragment extends Fragment {
                         Log.d("TAG", data.toString());
                     }
 
-                  }
+                }
 //                else { // 시간표가 비어있는 상태에서 추가
 //                    String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri"}; // 월요일 ~ 금요일
 //

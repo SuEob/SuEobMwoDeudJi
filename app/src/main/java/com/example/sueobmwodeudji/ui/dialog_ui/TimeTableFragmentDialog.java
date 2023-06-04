@@ -64,7 +64,7 @@ public class TimeTableFragmentDialog extends DialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final String[] day_of_week = {"월요일", "화요일", "수요일", "목요일", "금요일"};
-        final String[] period = {"1교시", "2교시", "3교시", "4교시", "5교시", "6교시", "7교시", "8교시", };
+        final String[] period = {"1교시", "2교시", "3교시", "4교시", "5교시", "6교시", "7교시", "8교시"};
 
         // 요일 다이얼로그
         ArrayAdapter adapter1 = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, day_of_week);
@@ -102,7 +102,7 @@ public class TimeTableFragmentDialog extends DialogFragment {
 
 
 
-        // 부모 프래그먼트(TimeTableFragment)에 데이터 전송
+        // 부모 프래그먼트(TimeTableFragment)에 데이터 전송 + Firebase에 저장
         binding.dialogBtn.setOnClickListener(new View.OnClickListener() {
 
             ArrayList<String> listt = new ArrayList<>();
@@ -133,8 +133,6 @@ public class TimeTableFragmentDialog extends DialogFragment {
 
                 String value = binding.nameSueob.getText().toString();
                 timeTableInterface.onClick(value, day_of_week_position, period_position);
-                Log.d("ZZZ", String.valueOf(day_of_week_position));
-                Log.d("ZZZ", String.valueOf(period_position));
 
                 getDialog().dismiss();
             }

@@ -7,11 +7,18 @@
     tools:context=".ui.TimeTableFragment">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/topGuide"
+        android:id="@+id/topGuide1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_begin="8dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/topGuide2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/leftGuide"
@@ -29,6 +36,37 @@
         app:layout_constraintGuide_end="16dp"
         />
 
+    <Button
+        android:id="@+id/gradeClassBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="학년/반"
+        app:layout_constraintBottom_toTopOf="@+id/topGuide2"
+        app:layout_constraintStart_toStartOf="@+id/leftGuide"
+        app:layout_constraintTop_toTopOf="@+id/topGuide1" />
+
+    <Button
+        android:id="@+id/changeNameBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="이름변경"
+        app:layout_constraintBottom_toTopOf="@+id/topGuide2"
+        app:layout_constraintStart_toEndOf="@+id/gradeClassBtn"
+        app:layout_constraintTop_toTopOf="@+id/topGuide1"
+        app:layout_constraintVertical_bias="0.529" />
+
+    <Button
+        android:id="@+id/clearBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="비우기"
+        app:layout_constraintBottom_toTopOf="@+id/topGuide2"
+        app:layout_constraintStart_toEndOf="@+id/changeNameBtn"
+        app:layout_constraintTop_toTopOf="@+id/topGuide1"
+        app:layout_constraintVertical_bias="0.529" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
@@ -36,12 +74,14 @@
         android:background="@drawable/layout_background"
         app:layout_constraintEnd_toStartOf="@+id/rightGuide"
         app:layout_constraintStart_toStartOf="@+id/leftGuide"
-        app:layout_constraintTop_toTopOf="@+id/topGuide">
+        app:layout_constraintTop_toTopOf="@+id/topGuide2">
 
         <include
             android:id="@+id/time_table"
             layout="@layout/item_time_table_sub" />
 
     </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

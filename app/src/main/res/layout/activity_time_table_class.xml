@@ -4,6 +4,10 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/topGuide"
         android:layout_width="wrap_content"
@@ -24,10 +28,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="30dp" />
-
-    <include
-        android:id="@+id/tool_bar"
-        layout="@layout/tool_bar" />
 
     <Button
         android:id="@+id/table_add_btn"
