@@ -1,5 +1,6 @@
 package com.example.sueobmwodeudji;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -68,10 +69,17 @@ public class TimeTableClassActivity extends AppCompatActivity {
         adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.classNameSpin.setAdapter(adapter4);
 
+
         binding.tableAddBtn.setOnClickListener(v -> {
+            ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Loading TimeTable..");
+            progressDialog.setCancelable(true);
+            progressDialog.setProgressStyle(android.R.style.Widget_ProgressBar_Horizontal);
+            progressDialog.show();
+
 //            CreateList();
             SchoolCallInfo();
-            finish();
+//            finish();
         });
 
     }
@@ -258,6 +266,8 @@ public class TimeTableClassActivity extends AppCompatActivity {
         for (CallSchoolData data : list) {
             Log.d("TAG", data.toString());
         }
+
+        finish();
 
     }
 }
