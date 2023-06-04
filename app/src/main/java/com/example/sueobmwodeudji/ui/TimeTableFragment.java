@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.sueobmwodeudji.MainActivity;
 import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.TimeTableClassActivity;
 import com.example.sueobmwodeudji.TimeTableSecondActivity;
@@ -78,7 +79,7 @@ public class TimeTableFragment extends Fragment {
             dialog.setChangeName(new TimeTableNameFragmentDialog.ChangeNameInterface() {
                 @Override
                 public void onClick(String name) {
-//                    getActivity().getSupportActionBar().setTitle(name);
+                    ((MainActivity)getActivity()).getSupportActionBar().setTitle(name);
                 }
             });
             dialog.show(getChildFragmentManager(), "TAG");
