@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="660dp" />
+        app:layout_constraintGuide_end="658dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/leftGuide"
@@ -102,48 +102,5 @@
         android:spinnerMode="dropdown"
         app:layout_constraintStart_toEndOf="@+id/semester"
         app:layout_constraintTop_toBottomOf="@+id/year_spin" />
-
-    <TextView
-        android:id="@+id/grade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginTop="80dp"
-        android:text="학년"
-        android:textSize="30dp"
-        app:layout_constraintStart_toStartOf="@+id/leftGuide"
-        app:layout_constraintTop_toBottomOf="@+id/semester" />
-
-    <Spinner
-        android:id="@+id/grade_spin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="96dp"
-        android:hint=""
-        app:layout_constraintStart_toEndOf="@+id/grade"
-        app:layout_constraintTop_toBottomOf="@+id/semester_spin" />
-
-    <TextView
-        android:id="@+id/className"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="반"
-        android:textSize="30dp"
-        app:layout_constraintStart_toStartOf="@+id/leftGuide"
-        app:layout_constraintTop_toBottomOf="@+id/grade" />
-
-    <Spinner
-        android:id="@+id/class_name_spin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="96dp"
-        android:hint=""
-        app:layout_constraintStart_toEndOf="@+id/className"
-        app:layout_constraintTop_toBottomOf="@+id/grade_spin" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -53,13 +53,13 @@ public class TimeTableThridActivity extends AppCompatActivity {
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.semesterSpin.setAdapter(adapter2);
 
-        ArrayAdapter adapter3 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, grades);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.gradeSpin.setAdapter(adapter3);
-
-        ArrayAdapter adapter4 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, className);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.classNameSpin.setAdapter(adapter4);
+//        ArrayAdapter adapter3 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, grades);
+//        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        binding.gradeSpin.setAdapter(adapter3);
+//
+//        ArrayAdapter adapter4 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, className);
+//        adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        binding.classNameSpin.setAdapter(adapter4);
 
         binding.tableAddBtn.setOnClickListener(v -> {
             // 여기에 addItem(binding.nameET.getText().toString());

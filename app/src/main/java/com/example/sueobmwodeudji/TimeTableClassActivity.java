@@ -52,20 +52,20 @@ public class TimeTableClassActivity extends AppCompatActivity {
         final String[] grades = {"1학년", "2학년", "3학년"};
         final String[] className = {"1반", "2반", "3반", "4반", "5반", "6반", "7반", "8반", "9반", "10반"};
 
-        ArrayAdapter adapter1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, years);
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.yearSpin.setAdapter(adapter1);
-
-        ArrayAdapter adapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, semesters);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.semesterSpin.setAdapter(adapter2);
+//        ArrayAdapter adapter1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, years);
+//        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        binding.yearSpin.setAdapter(adapter1);
+//
+//        ArrayAdapter adapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, semesters);
+//        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        binding.semesterSpin.setAdapter(adapter2);
 
         ArrayAdapter adapter3 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, grades);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.gradeSpin.setAdapter(adapter3);
 
         ArrayAdapter adapter4 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, className);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.classNameSpin.setAdapter(adapter4);
 
         binding.tableAddBtn.setOnClickListener(v -> {
