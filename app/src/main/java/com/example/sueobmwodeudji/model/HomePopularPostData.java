@@ -9,4 +9,11 @@ public class HomePopularPostData {
         this.post_date = post_date;
     }
 
+    public String getPost_title() {
+        return post_title;
+    }
+
+    public String getPost_date() {
+        return post_date;
+    }
 }

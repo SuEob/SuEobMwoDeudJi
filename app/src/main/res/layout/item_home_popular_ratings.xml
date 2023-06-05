@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="80dp">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/leftGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="10dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rightGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="10dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/topGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="10dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottomGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="68dp" />
+
+    <TextView
+        android:id="@+id/home_post_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="타이틀"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/leftGuide"
+        app:layout_constraintTop_toTopOf="@+id/topGuide" />
+
+    <TextView
+        android:id="@+id/home_post_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="강의내용"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomGuide"
+        app:layout_constraintStart_toStartOf="@+id/leftGuide" />
+
+    <ImageView
+        android:id="@+id/ratings_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ratings"
+        app:layout_constraintBottom_toTopOf="@+id/bottomGuide"
+        app:layout_constraintEnd_toStartOf="@+id/like_tv"
+        app:tint="#FF3B30" />
+
+    <TextView
+        android:id="@+id/like_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:text="0"
+        android:textColor="#FF3B30"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomGuide"
+        app:layout_constraintEnd_toStartOf="@+id/chatings_iv" />
+
+    <ImageView
+        android:id="@+id/chatings_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+
+        android:src="@drawable/chatings"
+        app:layout_constraintBottom_toTopOf="@+id/bottomGuide"
+        app:layout_constraintEnd_toStartOf="@+id/comment_tv"
+        app:tint="#8866FF" />
+
+    <TextView
+        android:id="@+id/comment_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="#8866FF"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomGuide"
+        app:layout_constraintEnd_toStartOf="@+id/rightGuide"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

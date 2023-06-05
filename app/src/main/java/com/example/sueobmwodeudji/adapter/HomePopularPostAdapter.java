@@ -1,6 +1,5 @@
 package com.example.sueobmwodeudji.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -14,11 +13,9 @@ import com.example.sueobmwodeudji.model.HomePopularPostData;
 import java.util.List;
 
 public class HomePopularPostAdapter extends RecyclerView.Adapter<HomePopularPostAdapter.HomePopularPostViewHolder> {
-    private Context context;
     private List<HomePopularPostData> list;
 
-    public HomePopularPostAdapter(Context context, List<HomePopularPostData> list) {
-        this.context = context;
+    public HomePopularPostAdapter(List<HomePopularPostData> list) {
         this.list = list;
     }
 
@@ -32,8 +29,8 @@ public class HomePopularPostAdapter extends RecyclerView.Adapter<HomePopularPost
 
     @Override
     public void onBindViewHolder(@NonNull HomePopularPostAdapter.HomePopularPostViewHolder holder, int position) {
-        holder.postTitle.setText(list.get(position).post_title);
-        holder.postDate.setText(list.get(position).post_date);
+        holder.postTitle.setText(list.get(position).getPost_title());
+        holder.postDate.setText(list.get(position).getPost_date());
     }
 
     @Override

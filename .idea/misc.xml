@@ -33,7 +33,7 @@
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/activity_fb_main.xml" value="0.36614583333333334" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/activity_ratings_sub_form.xml" value="0.1" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/activity_ratings_sub_form.xml" value="0.33" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/activity_ratings_sub_list.xml" value="0.22644927536231885" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/activity_ratings_sub_post.xml" value="0.22644927536231885" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/activity_ratings_sub_search.xml" value="0.18795289855072464" />
@@ -52,7 +52,7 @@
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_home_item_list.xml" value="0.23324275362318841" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_home_sub_2.xml" value="0.33" />
-        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_home_sub_popular_post.xml" value="0.13949275362318841" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_home_sub_popular_post.xml" value="0.17" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_home_sub_post.xml" value="0.17755825734549138" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_home_sub_ratings.xml" value="0.17755825734549138" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/fragment_profile.xml" value="0.3328804347826087" />
@@ -79,6 +79,8 @@
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_fragment_sub_2.xml" value="0.2346014492753623" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_home.xml" value="0.18795289855072464" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_home_popular_post.xml" value="0.33" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_home_popular_raints.xml" value="0.3614583333333333" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_home_popular_ratings.xml" value="0.20108695652173914" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_home_sub_1.xml" value="0.23641304347826086" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_home_sub_2.xml" value="0.23641304347826086" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_home_time_table.xml" value="0.17806484295845998" />
@@ -86,7 +88,7 @@
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_rating_search.xml" value="0.17806484295845998" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_ratings_list.xml" value="0.22644927536231885" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_ratings_my_class_list.xml" value="0.22644927536231885" />
-        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_ratings_recent_list.xml" value="0.22644927536231885" />
+        <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_ratings_recent_list.xml" value="0.5" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_ratings_sub_1.xml" value="0.23641304347826086" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_ratings_sub_2.xml" value="0.23641304347826086" />
         <entry key="..\:/Coding/GitHub/SuEobMwoDeudJi/app/src/main/res/layout/item_settings_my_info.xml" value="0.75" />

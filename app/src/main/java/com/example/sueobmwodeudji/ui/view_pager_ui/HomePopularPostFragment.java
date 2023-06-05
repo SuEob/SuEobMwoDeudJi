@@ -41,7 +41,7 @@ public class HomePopularPostFragment extends Fragment {
         list.add(new HomePopularPostData("", "05.23"));
         list.add(new HomePopularPostData("헉!", "05.13"));
 
-        HomePopularPostAdapter adapter = new HomePopularPostAdapter(getContext(), list);
+        HomePopularPostAdapter adapter = new HomePopularPostAdapter(list);
         binding.homePopularPost.setAdapter(adapter);
         binding.homePopularPost.setLayoutManager(new LinearLayoutManager(getContext()));
     }
