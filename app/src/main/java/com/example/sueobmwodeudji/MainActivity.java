@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.sueobmwodeudji.databinding.ActivityMainBinding;
@@ -17,8 +18,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
+    public static boolean dark_mode;
+
     private ActivityMainBinding binding;
     private long backKeyPressedTime = 0L;
+
     private HomeFragment homeFragment;
     private TimeTableFragment timeTableFragment;
     private CommunityFragment communityFragment;
@@ -49,54 +53,76 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        testAuth();
-
-        Toolbar toolbar = binding.toolBar.mainToolBar;
-        setSupportActionBar(toolbar);
-
         homeFragment = new HomeFragment();
         timeTableFragment = new TimeTableFragment();
         communityFragment = new CommunityFragment();
         ratingsFragment = new RatingsFragment();
         settingsFragment = new SettingsFragment();
 
-        BottomNavBar();
+        testAuth();
+
+        // SharedPreferences 에서 저장한 값 불러오기
+        String mode_text = SettingsFragment.modeLoad(getApplicationContext());
+        if (mode_text.equals("light")) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        } else if (mode_text.equals("dark")) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+
+        // 툴바
+        Toolbar toolbar = binding.toolBar.mainToolBar;
+        setSupportActionBar(toolbar);
+
+        BottomNavBar(); // 네비게이션 바
     }
 
     // 네비게이션바 클릭시 프래크먼트 이동
     private void BottomNavBar() {
-        // 기본화면 설정(홈 화면)
-        getSupportFragmentManager().beginTransaction().replace(R.id.containers, homeFragment).commit();
-        getSupportActionBar().setTitle("홈");
+
+        if (dark_mode) {
+            // 다크모드 switch 클릭시 설정화면
+            getSupportFragmentManager().beginTransaction().replace(R.id.containers, settingsFragment).commit();
+            getSupportActionBar().setTitle("설정");
+        } else {
+            // 기본화면 설정(홈 화면)
+            getSupportFragmentManager().beginTransaction().replace(R.id.containers, homeFragment).commit();
+            getSupportActionBar().setTitle("홈");
+        }
 
         // 화면 바뀜
         binding.bottomNavView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.containers, homeFragment)
                             .commit();
                     getSupportActionBar().setTitle("홈");
                     return true;
                 case R.id.navigation_time_table:
+
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.containers, timeTableFragment)
                             .commit();
                     getSupportActionBar().setTitle("시간표");
                     return true;
                 case R.id.navigation_community:
+
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.containers, communityFragment)
                             .commit();
                     getSupportActionBar().setTitle("커뮤니티");
                     return true;
                 case R.id.navigation_ratings:
+
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.containers, ratingsFragment)
                             .commit();
                     getSupportActionBar().setTitle("평가");
+
                     return true;
                 case R.id.navigation_settings:
+                    dark_mode = true;
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.containers, settingsFragment)
                             .commit();
