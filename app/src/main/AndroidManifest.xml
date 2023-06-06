@@ -27,11 +27,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SettingsActivity"
-            android:exported="true"
-            android:parentActivityName=".MainActivity">
-        </activity>
-        <activity
             android:name=".TimeTableSecondActivity"
             android:exported="true">
         </activity>

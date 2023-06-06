@@ -8,5 +8,6 @@
         android:title="검색"
         android:enabled="true"
         app:showAsAction="always"
+        app:tint="#FFFFFFFF"
         />
 </menu>

@@ -8,6 +8,7 @@
         android:title="검색"
         android:enabled="true"
         app:showAsAction="always"
+        app:tint="#FFFFFFFF"
         />
 
     <item
@@ -16,6 +17,7 @@
         android:title="프로필"
         android:enabled="true"
         app:showAsAction="always"
+        app:tint="#FFFFFFFF"
         />
 
 </menu>
