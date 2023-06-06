@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 //        안드로이드에서 기본으로 제공하는 뒤로가기
 //        super.onBackPressed();
 
-//      2000 = 2초
+//      2000 = 2초 체크
         if (System.currentTimeMillis() - backKeyPressedTime >= 2000 ) {
             backKeyPressedTime = System.currentTimeMillis();
             Toast.makeText(this,"뒤로가기 버튼을 한번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
@@ -93,36 +93,30 @@ public class MainActivity extends AppCompatActivity {
         binding.bottomNavView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.containers, homeFragment)
                             .commit();
                     getSupportActionBar().setTitle("홈");
                     return true;
                 case R.id.navigation_time_table:
-
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.containers, timeTableFragment)
                             .commit();
                     getSupportActionBar().setTitle("시간표");
                     return true;
                 case R.id.navigation_community:
-
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.containers, communityFragment)
                             .commit();
                     getSupportActionBar().setTitle("커뮤니티");
                     return true;
                 case R.id.navigation_ratings:
-
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.containers, ratingsFragment)
                             .commit();
                     getSupportActionBar().setTitle("평가");
-
                     return true;
                 case R.id.navigation_settings:
-                    dark_mode = true;
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.containers, settingsFragment)
                             .commit();
@@ -143,5 +137,4 @@ public class MainActivity extends AppCompatActivity {
             Log.d("asdffads", name + email + uid);
         }
     }
-
 }

@@ -2,6 +2,7 @@ package com.example.sueobmwodeudji.ui;
 
 import android.content.Intent;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -19,6 +20,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.SearchActivity;
 import com.example.sueobmwodeudji.adapter.HomePagerAdapter;
@@ -62,6 +66,31 @@ public class HomeFragment extends Fragment {
         setHasOptionsMenu(true); // Activity 의 Toolbar 보다 Fragment 의 Toolbar 를 우선
         HomeTimeTableView();
         HomePostViewPager2();
+
+        // 프로필 이미지
+        String uri_text = SettingsFragment.imgLoad(getContext());
+        Uri uri;
+
+        if (SettingsFragment.checkImg)
+            uri = Uri.parse(uri_text);
+        else
+            uri = null;
+
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(R.drawable.account_circle) // 이미지 로딩 시작하기 전 표시할 이미지
+                .error(R.drawable.account_circle) // 로딩 에러 발생 시 표시할 이미지
+                .fallback(R.drawable.account_circle); // 로드할 url 이 비어있을(null 등) 경우 표시할 이미지
+
+        Glide.with(this)
+                .load(uri) // 불러올 이미지 uri
+                .apply(requestOptions)
+                .circleCrop() // 동그랗게 자르기
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(binding.profileTv); // 이미지를 넣을 뷰
+
+        // 닉네임
+        String name = SettingsFragment.nameLoad(getContext());
+        binding.infoTv.setText(name);
 
 //        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 //        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
