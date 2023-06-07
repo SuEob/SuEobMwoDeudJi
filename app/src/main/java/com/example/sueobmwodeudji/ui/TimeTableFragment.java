@@ -213,15 +213,19 @@ public class TimeTableFragment extends Fragment {
 
     // 시간표 부분 추가
     public void addPartTime() {
-        if(mYear == 0) {
+        if (mYear == 0) {
             Toast.makeText(getActivity(), "시간표가 없습니다.", Toast.LENGTH_SHORT).show();
             return;
         }
         // CallBack으로 Listener 만들기
         TimeTableFragmentDialog dialog = TimeTableFragmentDialog.getInstance();
-//        dialog.setTimeTableInterface(new TimeTableFragmentDialog.TimeTableInterface() {
-//            @Override
-//            public void onClick(String class_name, int day_of_week, int period) {
+        dialog.setTimeTableInterface(new TimeTableFragmentDialog.TimeTableInterface() {
+            @Override
+            public void onClick(String class_name, int day_of_week, int period) {
+                timetable[day_of_week][period].setText(class_name);
+            }
+        });
+
 //                // 시간표에 값 넣기
 //                timetable[day_of_week][period].setText(class_name);
 //                // DTO에 값 넣기
@@ -279,7 +283,7 @@ public class TimeTableFragment extends Fragment {
 //                        Log.d("TAG", data.toString());
 //                    }
 //                }
-                // 빈 값 넣기
+    // 빈 값 넣기
 //                    for (int i=0; i<5; i++) {
 //                        for (int j=0; j<8; j++) {
 //                            list.get(i).classCntnt.add("");
@@ -290,18 +294,20 @@ public class TimeTableFragment extends Fragment {
 //
 //                    TimeTableFragment.newInstance(list);
 
-                //for (CallSchoolData data : list) {
-                //    Log.d("TAG", data.toString());
-                //}
+    //for (CallSchoolData data : list) {
+    //    Log.d("TAG", data.toString());
+    //}
 //                }
 //            }
 //            }
 //        });
-        dialog.setDdd_year(mYear);
+                dialog.setDdd_year(mYear);
         dialog.setDdd_semester(mSemester);
-        dialog.show(getChildFragmentManager(), "TAG");
+        dialog.show(
+
+    getChildFragmentManager(), "TAG");
 //
-    }
+}
 
     public void drowTable() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -342,7 +348,7 @@ public class TimeTableFragment extends Fragment {
                             public void onClick(String name) {
                                 FirebaseFirestore f = FirebaseFirestore.getInstance();
                                 f.collection("시간표")
-                                        .document(dto.getEmail()+ " " + dto.getYear() + " - " + dto.getSemester())
+                                        .document(dto.getEmail() + " " + dto.getYear() + " - " + dto.getSemester())
                                         .update("timeTableName", name);
 
                                 ((MainActivity) getActivity()).getSupportActionBar().setTitle(name);
@@ -350,8 +356,12 @@ public class TimeTableFragment extends Fragment {
                         });
                         dialog.show(getChildFragmentManager(), "TAG");
                     });
-                }
-                else{
+                } else {
+                    for (int i = 0; i < 5; i++) {
+                        for (int k = 0; k < timetable[i].length; k++) {
+                            timetable[i][k].setText("");
+                        }
+                    }
                     binding.gradeClassBtn.setOnClickListener(v -> {
                         Toast.makeText(getActivity(), "시간표가 없습니다.", Toast.LENGTH_SHORT).show();
                     });
@@ -361,11 +371,11 @@ public class TimeTableFragment extends Fragment {
                         Toast.makeText(getActivity(), "시간표가 없습니다.", Toast.LENGTH_SHORT).show();
                     });
                 }
-                }
+            }
         });
     }
 
-    private void refresh(){
+    private void refresh() {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.detach(this).attach(this).commit();
     }

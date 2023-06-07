@@ -131,6 +131,8 @@ public class TimeTableFragmentDialog extends DialogFragment {
                 });
 
                 Toast.makeText(getContext(), "입력완료", Toast.LENGTH_SHORT).show();
+                String value = binding.nameSueob.getText().toString();
+                timeTableInterface.onClick(value, day_of_week_position, period_position);
 
 //                String value = binding.nameSueob.getText().toString();
 //                timeTableInterface.onClick(value, day_of_week_position, period_position);
@@ -155,9 +157,4 @@ public class TimeTableFragmentDialog extends DialogFragment {
     public void setDdd_semester(int ddd_semester) {
         this.ddd_semester = ddd_semester;
     }
-
-    public interface OnSubmitBtnClickListener{
-        void onClick(String class_name);
-    }
-
 }
