@@ -23,6 +23,8 @@ import com.example.sueobmwodeudji.R;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
     public static final String LIGHT_MODE = "light";
@@ -76,10 +78,45 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //Toast.makeText(getActivity(), "로그아웃", Toast.LENGTH_SHORT).show();
                         logout();
                     }
                 });
+                dlg.show();
+
+                return true;
+            }
+        });
+
+        // 회원탈퇴
+        findPreference("root_withdrawal").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
+                dlg.setTitle("회원탈퇴");
+                dlg.setMessage("회원을 탈퇴하시겠습니까?");
+                dlg.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "취소되었습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Log.d("유저삭제", "User account deleted.");
+                                }
+                            }
+                        });
+                        logout();
+                    }
+
+                });
+
                 dlg.show();
 
                 return true;
@@ -203,6 +240,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+                        getActivity().finish();
                         Intent intent = new Intent(getContext(), LoginActivity.class);
                         getActivity().startActivity(intent);
                     }

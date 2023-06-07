@@ -97,22 +97,22 @@ public class HomeFragment extends Fragment {
         String name = SettingsFragment.nameLoad(getContext());
         binding.infoTv.setText(name);
 
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-//        mFirestore.collection("사용자")
-//                .document(user.getEmail())
-//                .get()
-//                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//                    @Override
-//                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-//                        String school_name = documentSnapshot.getString("school_name");
-//                        String school_username = school_name +" / " +  user.getDisplayName();
-//
-//                        binding.infoTv.setText(school_username);
-//                    }
-//                });
-//
-//        binding.infoTv.setText(user.getDisplayName());
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        mFirestore.collection("사용자")
+                .document(user.getEmail())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        String school_name = documentSnapshot.getString("school_name");
+                        String school_username = school_name +" / " +  user.getDisplayName();
+
+                        binding.infoTv.setText(school_username);
+                    }
+                });
+
+        binding.infoTv.setText(user.getDisplayName());
 
     }
 
