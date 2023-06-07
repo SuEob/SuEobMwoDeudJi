@@ -140,10 +140,10 @@ public class TimeTableFragmentDialog extends DialogFragment {
 
                 Toast.makeText(getContext(), "입력완료", Toast.LENGTH_SHORT).show();
 
-                String value = binding.nameSueob.getText().toString();
-                timeTableInterface.onClick(value, day_of_week_position, period_position);
-                Log.d("ZZZ", String.valueOf(day_of_week_position));
-                Log.d("ZZZ", String.valueOf(period_position));
+//                String value = binding.nameSueob.getText().toString();
+//                timeTableInterface.onClick(value, day_of_week_position, period_position);
+//                Log.d("ZZZ", String.valueOf(day_of_week_position));
+//                Log.d("ZZZ", String.valueOf(period_position));
 
                 getDialog().dismiss();
             }

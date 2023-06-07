@@ -2,6 +2,7 @@ package com.example.sueobmwodeudji.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,17 +24,29 @@ import com.example.sueobmwodeudji.adapter.RatingsSubRecentListAdapter;
 import com.example.sueobmwodeudji.adapter.ViewPagerAdapter;
 import com.example.sueobmwodeudji.databinding.FragmentRatingsBinding;
 import com.example.sueobmwodeudji.dto.RatingMyClassData;
+import com.example.sueobmwodeudji.dto.TimeTableDTO;
 import com.example.sueobmwodeudji.model.CommunitySubListModel;
 import com.example.sueobmwodeudji.model.CommunitySubRecentListModel;
 import com.example.sueobmwodeudji.model.RatingsSubListModel;
 import com.example.sueobmwodeudji.model.RatingsSubRecentListModel;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 public class RatingsFragment extends Fragment {
     private FragmentRatingsBinding binding;
+    private String mEmail;
+
+    private ArrayList<ArrayList<String>> sueobs = new ArrayList<>();
 
     public static RatingsFragment getInstance() {
         return new RatingsFragment();
@@ -45,7 +58,9 @@ public class RatingsFragment extends Fragment {
         binding = FragmentRatingsBinding.inflate(inflater, container, false);
         setHasOptionsMenu(true); // Activity 보다 Fragment 우선
         String tool_bar_title = "평가";
-        ((MainActivity)getActivity()).getSupportActionBar().setTitle(tool_bar_title);
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle(tool_bar_title);
+
+        mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
         return binding.getRoot();
     }
@@ -54,7 +69,8 @@ public class RatingsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(binding.getRoot(), savedInstanceState);
 
-        ratingsItemView();
+        readTimeTable();
+        //ratingsItemView();
         setRecentListRecyclerView();
     }
 
@@ -86,28 +102,84 @@ public class RatingsFragment extends Fragment {
     }
 
     private void ratingsItemView() {
-        ArrayList<ArrayList<RatingMyClassData>> listData = new ArrayList<>();
-        ArrayList<RatingMyClassData> list1 = new ArrayList<>();
-        list1.add(new RatingMyClassData("인공지능", "김세돌"));
-        list1.add(new RatingMyClassData("자료구조", "이면봉"));
-        list1.add(new RatingMyClassData("모바일캡스톤", "김이박"));
-
-        ArrayList<RatingMyClassData> list2 = new ArrayList<>();
-        list2.add(new RatingMyClassData("모바일캡스톤", "김이박"));
-        list2.add(new RatingMyClassData("모바일캡스톤", "김이박"));
-        list2.add(new RatingMyClassData("모바일캡스톤", "김이박"));
-
-        ArrayList<RatingMyClassData> list3 = new ArrayList<>();
-        list3.add(new RatingMyClassData("모바일캡스톤", "김이박"));
-
-        listData.add(list1);
-        listData.add(list2);
-        listData.add(list3);
-
-        binding.viewPager2.setAdapter(new ViewPagerAdapter(listData));
+        readTimeTable();
+//        ArrayList<ArrayList<RatingMyClassData>> listData = new ArrayList<>();
+//        ArrayList<RatingMyClassData> list1 = new ArrayList<>();
+//        list1.add(new RatingMyClassData("인공지능"));
+//        list1.add(new RatingMyClassData("자료구조"));
+//        list1.add(new RatingMyClassData("모바일캡스톤"));
+//
+//        ArrayList<RatingMyClassData> list2 = new ArrayList<>();
+//        list2.add(new RatingMyClassData("모바일캡스톤"));
+//        list2.add(new RatingMyClassData("모바일캡스톤"));
+//        list2.add(new RatingMyClassData("모바일캡스톤"));
+//
+//        ArrayList<RatingMyClassData> list3 = new ArrayList<>();
+//        list3.add(new RatingMyClassData("모바일캡스톤"));
+//
+//        listData.add(list1);
+//        listData.add(list2);
+//        listData.add(list3);
+//
+//        binding.viewPager2.setAdapter(new ViewPagerAdapter(listData));
     }
 
-    private void setRecentListRecyclerView(){
+    private void readTimeTable() {
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        mFirestore.collection("시간표")
+                .whereEqualTo("email", mEmail)
+                .whereEqualTo("selected", true)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot documentSnapshots) {
+                        TimeTableDTO dto = documentSnapshots.getDocuments().get(0).toObject(TimeTableDTO.class);
+
+                        createSueobs(dto);
+
+                    }
+                });
+
+
+        //ArrayList<ArrayList<RatingMyClassData>> listData = new ArrayList<>();
+    }
+
+    private void createSueobs(TimeTableDTO dto) {
+        sueobs.add(dto.getMon());
+        sueobs.add(dto.getTue());
+        sueobs.add(dto.getWed());
+        sueobs.add(dto.getThu());
+        sueobs.add(dto.getFri());
+
+        ArrayList<String> s = new ArrayList<>();
+
+        for (ArrayList<String> list : sueobs) {
+            for (String string : list) {
+                if (!string.equals("")) {
+                    s.add(string);
+                }
+            }
+        }
+
+        HashSet<String> set = new HashSet<>(s);
+        s = new ArrayList<>(set);
+        ArrayList<ArrayList<String>> data = new ArrayList<>();
+
+        ArrayList<String> d = new ArrayList<>();
+
+        for(int i = 1; i <= s.size(); i++){
+            d.add((s.get(i-1)));
+            if(i%3 == 0) {
+                data.add(d);
+                d = new ArrayList<>();
+            }
+        }
+        if(d.size() != 0) data.add(d);
+
+        binding.viewPager2.setAdapter(new ViewPagerAdapter(data));
+    }
+
+    private void setRecentListRecyclerView() {
         RatingsSubRecentListAdapter adapter = new RatingsSubRecentListAdapter(getContext(), createRatingsQuery());
         adapter.setOricl(new RatingsSubRecentListAdapter.OnRecentItemClickLintener() {
             @Override
@@ -121,7 +193,7 @@ public class RatingsFragment extends Fragment {
         binding.recyclerView.setAdapter(adapter);
     }
 
-    private ArrayList<Query> createRatingsQuery(){
+    private ArrayList<Query> createRatingsQuery() {
         String[] categorys = {"모바일캡스톤", "인공지능", "자료구조"};
         ArrayList<Query> query = new ArrayList<>();
         for (String category : categorys) {

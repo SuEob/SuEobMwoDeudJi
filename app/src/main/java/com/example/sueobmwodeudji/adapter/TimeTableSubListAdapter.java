@@ -34,12 +34,14 @@ public class TimeTableSubListAdapter extends RecyclerView.Adapter<TimeTableSubLi
     private ArrayList<DocumentSnapshot> mSnapshots = new ArrayList<>();
 
     private static OnListClickListener olcl;
+    private static OnListDeletebtnClickListener odcl;
 
     public TimeTableSubListAdapter(Context context, Query query) {
         this.context = context;
         this.mQuery = query;
         mQuery.addSnapshotListener(this);
     }
+
 
     @NonNull
     @Override
@@ -80,6 +82,17 @@ public class TimeTableSubListAdapter extends RecyclerView.Adapter<TimeTableSubLi
         void onClick(TimeTableDTO data);
     }
 
+    public void setOdcl(OnListDeletebtnClickListener onListener) {
+        TimeTableSubListAdapter.odcl = onListener;
+    }
+
+    public interface OnListDeletebtnClickListener {
+        void onClick(TimeTableDTO data);
+    }
+
+
+
+
     public static class TimeTableSubListViewHolder extends RecyclerView.ViewHolder {
         public TextView listTitle;
         public ImageButton listBtn;
@@ -99,7 +112,13 @@ public class TimeTableSubListAdapter extends RecyclerView.Adapter<TimeTableSubLi
                 @Override
                 public void onClick (View v){
                     olcl.onClick(data);
+                }
+            });
 
+            listBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    odcl.onClick(data);
                 }
             });
         }

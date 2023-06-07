@@ -1,8 +1,9 @@
 package com.example.sueobmwodeudji.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TimeTableDTO {
+public class TimeTableDTO implements Serializable {
 
     String timeTableName;
     int year, semester;

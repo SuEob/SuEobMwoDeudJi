@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,17 +15,13 @@ import com.example.sueobmwodeudji.adapter.TimeTableSubListAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityTimeTableSecondBinding;
 import com.example.sueobmwodeudji.dto.TimeTableDTO;
 import com.example.sueobmwodeudji.model.TimeTableSubFrameModel;
-import com.example.sueobmwodeudji.ui.TimeTableFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,6 +31,8 @@ public class TimeTableSecondActivity extends AppCompatActivity {
 
     private String mEmail;
 
+    FirebaseFirestore db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +41,7 @@ public class TimeTableSecondActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        db = FirebaseFirestore.getInstance();
 
         // 툴바
         Toolbar toolbar = binding.toolBar.mainToolBar;
@@ -53,6 +51,7 @@ public class TimeTableSecondActivity extends AppCompatActivity {
 
         TimeTableListView();
     }
+
     // 툴바 생성
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -81,11 +80,9 @@ public class TimeTableSecondActivity extends AppCompatActivity {
             @Override
             public void onClick(TimeTableDTO data) {
                 //finish();
-
                 // 선택한 시간표를 true로, 나머지 시간표를 false로 변경
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
                 CollectionReference ccc = db.collection("시간표");
-                Log.d ("ㅂㅈㄷㅂㅈㄷ", "들어옴");
+                Log.d("ㅂㅈㄷㅂㅈㄷ", "들어옴");
                 ccc.whereEqualTo("selected", true).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot value) {
@@ -98,6 +95,20 @@ public class TimeTableSecondActivity extends AppCompatActivity {
                         finish();
                     }
                 });
+            }
+        });
+        adapter.setOdcl(new TimeTableSubListAdapter.OnListDeletebtnClickListener() {
+            @Override
+            public void onClick(TimeTableDTO data) {
+                db.collection("시간표")
+                        .document(data.getEmail() + " " + data.getYear() + " - " + data.getSemester())
+                        .delete()
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                finish();
+                            }
+                        });
             }
         });
         binding.timeTableSubList.setAdapter(adapter);

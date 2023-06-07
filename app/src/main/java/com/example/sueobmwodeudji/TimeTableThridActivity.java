@@ -293,38 +293,38 @@ public class TimeTableThridActivity extends AppCompatActivity {
         {"day": "thu", "classCntnt": []},
         {"day": "fri", "classCntnt": []}]
      */
-    public void CreateList() {
-        String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri"}; // 월요일 ~ 금요일
-        int dayNum = 0; // 0:월요일 ~ 4:금요일
-        int cnt = 0; // 첫번째 월요일 계산 용도
-
-        List<CallSchoolData> list = new ArrayList<>();
-
-        List<String> subList;
-        CallSchoolData schoolData;
-
-        for (String day:days) {
-            subList = new ArrayList<>();
-            schoolData = new CallSchoolData(day, subList);
-            list.add(schoolData);
-        }
-
-        for (int i=0; i<perioList.size(); i++) {
-            if (perioList.get(i).equals("1") && cnt!=0) {
-                dayNum++;
-            }
-            list.get(dayNum).classCntnt.add(classCntntList.get(i));
-            cnt++;
-        }
-
-        TimeTableFragment.newInstance(list);
-
-        checkCall = true;
-
-        for (CallSchoolData data : list) {
-            Log.d("TAG", data.toString());
-        }
-
-    }
+//    public void CreateList() {
+//        String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri"}; // 월요일 ~ 금요일
+//        int dayNum = 0; // 0:월요일 ~ 4:금요일
+//        int cnt = 0; // 첫번째 월요일 계산 용도
+//
+//        List<CallSchoolData> list = new ArrayList<>();
+//
+//        List<String> subList;
+//        CallSchoolData schoolData;
+//
+//        for (String day:days) {
+//            subList = new ArrayList<>();
+//            schoolData = new CallSchoolData(day, subList);
+//            list.add(schoolData);
+//        }
+//
+//        for (int i=0; i<perioList.size(); i++) {
+//            if (perioList.get(i).equals("1") && cnt!=0) {
+//                dayNum++;
+//            }
+//            list.get(dayNum).classCntnt.add(classCntntList.get(i));
+//            cnt++;
+//        }
+//
+//        TimeTableFragment.newInstance(list);
+//
+//        checkCall = true;
+//
+//        for (CallSchoolData data : list) {
+//            Log.d("TAG", data.toString());
+//        }
+//
+//    }
 
 }

@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.sueobmwodeudji.databinding.FragmentTimeTableNameDialogBinding;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class TimeTableNameFragmentDialog extends DialogFragment {
     private FragmentTimeTableNameDialogBinding binding;
@@ -49,9 +50,12 @@ public class TimeTableNameFragmentDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "입력완료", Toast.LENGTH_SHORT).show();
+
                 String name = binding.nameSueob.getText().toString();
                 changeNameInterface.onClick(name);
                 getDialog().dismiss();
+
+
             }
         });
     }

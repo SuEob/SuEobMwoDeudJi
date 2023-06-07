@@ -2,11 +2,9 @@ package com.example.sueobmwodeudji.dto;
 
 public class RatingMyClassData {
     private String class_name;
-    private String teacher_name;
 
-    public RatingMyClassData(String class_name, String teacher_name) {
+    public RatingMyClassData(String class_name) {
         this.class_name = class_name;
-        this.teacher_name = teacher_name;
     }
 
     public String getClass_name() {
@@ -15,13 +13,5 @@ public class RatingMyClassData {
 
     public void setClass_name(String class_name) {
         this.class_name = class_name;
-    }
-
-    public String getTeacher_name() {
-        return teacher_name;
-    }
-
-    public void setTeacher_name(String teacher_name) {
-        this.teacher_name = teacher_name;
     }
 }

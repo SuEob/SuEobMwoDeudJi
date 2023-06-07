@@ -1,6 +1,7 @@
 package com.example.sueobmwodeudji;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -12,15 +13,20 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.sueobmwodeudji.databinding.ActivityTimeTableClassBinding;
 import com.example.sueobmwodeudji.dto.CallSchoolData;
+import com.example.sueobmwodeudji.dto.TimeTableDTO;
 import com.example.sueobmwodeudji.rest_api.NEIS_API;
 import com.example.sueobmwodeudji.rest_api.Row;
 import com.example.sueobmwodeudji.rest_api.SchoolInfo;
 import com.example.sueobmwodeudji.rest_api.SchoolResponse;
 import com.example.sueobmwodeudji.rest_api.SchoolTimeTable;
 import com.example.sueobmwodeudji.ui.TimeTableFragment;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,12 +41,15 @@ public class TimeTableClassActivity extends AppCompatActivity {
     List<String> perioList = new ArrayList<>();
     List<String> classCntntList = new ArrayList<>();
 
+    private TimeTableDTO data;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityTimeTableClassBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        Intent intent = getIntent();
+        data = (TimeTableDTO) intent.getSerializableExtra("data");
 
         // 툴바
         Toolbar toolbar = binding.toolBar.mainToolBar;
@@ -77,8 +86,8 @@ public class TimeTableClassActivity extends AppCompatActivity {
             progressDialog.setProgressStyle(android.R.style.Widget_ProgressBar_Horizontal);
             progressDialog.show();
 
-//            CreateList();
-            SchoolCallInfo();
+            //createList();
+            schoolCallInfo();
 //            finish();
         });
 
@@ -94,7 +103,7 @@ public class TimeTableClassActivity extends AppCompatActivity {
     }
 
     // 교육청 코드와 학교 코드를 구하는 메소드
-    public void SchoolCallInfo() {
+    public void schoolCallInfo() {
         callInfo = NEIS_API.getInfoService().getSchoolInfo(
                 "9da752136d5849b985288deb5036dba1",
                 "json",
@@ -110,10 +119,10 @@ public class TimeTableClassActivity extends AppCompatActivity {
                     List<Row> rows = schoolInfo.getRow();
                     Row row = rows.get(0);
 
-                    SchoolCallTimeTable(row.getMinistryCode(), row.getShcoolCode());
+                    schoolCallTimeTable(row.getMinistryCode(), row.getShcoolCode());
 
-                    Log.d("ministryCode", row.getMinistryCode());
-                    Log.d("schoolCode", row.getShcoolCode());
+//                    Log.d("ministryCode", row.getMinistryCode());
+//                    Log.d("schoolCode", row.getShcoolCode());
 
                 }
             }
@@ -127,7 +136,7 @@ public class TimeTableClassActivity extends AppCompatActivity {
     }
 
     // 월요일 ~ 금요일까지 몇 교시에 무슨 과목인지 구하는 메소드 (class_name="1")
-    public void SchoolCallTimeTable(String ministryCode, String schoolCode) {
+    public void schoolCallTimeTable(String ministryCode, String schoolCode) {
 
         callTimeTable = NEIS_API.getTimeTableService().getSchoolTimeTable(
                 "9da752136d5849b985288deb5036dba1",
@@ -136,8 +145,8 @@ public class TimeTableClassActivity extends AppCompatActivity {
                 schoolCode,
                 "2023",
                 "1",
-                binding.gradeSpin.getSelectedItem().toString().substring(0,1),
-                binding.classNameSpin.getSelectedItem().toString().substring(0,1),
+                binding.gradeSpin.getSelectedItem().toString().substring(0, 1),
+                binding.classNameSpin.getSelectedItem().toString().substring(0, 1),
                 "20230313",
                 "20230317"
         );
@@ -157,29 +166,22 @@ public class TimeTableClassActivity extends AppCompatActivity {
                             perioList.add(row.getPeriority());
                             classCntntList.add(row.getClassContent());
                         }
-
-                        Log.d("perioList", String.valueOf(perioList));
-                        Log.d("classCntntList", String.valueOf(classCntntList));
-
-                        CreateList();
-
+//                        Log.d("perioList", String.valueOf(perioList));
+//                        Log.d("classCntntList", String.valueOf(classCntntList));
+                        createList();
                     } catch (NullPointerException e) {
-                        Log.e("ERROR", "NullPointerException");
+                        //Log.e("ERROR", "NullPointerException");
                         // SchoolService 값 변경
                         SchoolCallTimeTableError(ministryCode, schoolCode);
-
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             }
-
             @Override
             public void onFailure(Call<SchoolResponse> call, Throwable t) {
-
             }
         });
-
     }
 
     // 월요일 ~ 금요일까지 몇 교시에 무슨 과목인지 구하는 메소드 (class_name="01")
@@ -192,8 +194,8 @@ public class TimeTableClassActivity extends AppCompatActivity {
                 schoolCode,
                 "2023",
                 "1",
-                binding.gradeSpin.getSelectedItem().toString().substring(0,1),
-                "0"+binding.classNameSpin.getSelectedItem().toString().substring(0,1),
+                binding.gradeSpin.getSelectedItem().toString().substring(0, 1),
+                "0" + binding.classNameSpin.getSelectedItem().toString().substring(0, 1),
                 "20230313",
                 "20230317"
         );
@@ -217,7 +219,7 @@ public class TimeTableClassActivity extends AppCompatActivity {
                         Log.d("perioList", String.valueOf(perioList));
                         Log.d("classCntntList", String.valueOf(classCntntList));
 
-                        CreateList();
+                        createList();
 
                     } catch (NullPointerException e) {
                         Log.e("ERROR", "NullPointerException");
@@ -235,31 +237,31 @@ public class TimeTableClassActivity extends AppCompatActivity {
 
     }
 
-    public void CreateList() {
+    public void createList() {
         String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri"}; // 월요일 ~ 금요일
         int dayNum = 0; // 0:월요일 ~ 4:금요일
         int cnt = 0; // 첫번째 월요일 계산 용도
 
-        List<CallSchoolData> list = new ArrayList<>();
+        ArrayList<CallSchoolData> list = new ArrayList<>();
 
-        List<String> subList;
+        ArrayList<String> subList;
         CallSchoolData schoolData;
 
-        for (String day:days) {
+        for (String day : days) {
             subList = new ArrayList<>();
             schoolData = new CallSchoolData(day, subList);
             list.add(schoolData);
         }
 
-        for (int i=0; i<perioList.size(); i++) {
-            if (perioList.get(i).equals("1") && cnt!=0) {
+        for (int i = 0; i < perioList.size(); i++) {
+            if (perioList.get(i).equals("1") && cnt != 0) {
                 dayNum++;
             }
             list.get(dayNum).classCntnt.add(classCntntList.get(i));
             cnt++;
         }
 
-        TimeTableFragment.newInstance(list);
+        //TimeTableFragment.newInstance(list);
 
         checkCall = true;
 
@@ -267,7 +269,28 @@ public class TimeTableClassActivity extends AppCompatActivity {
             Log.d("TAG", data.toString());
         }
 
-        finish();
+        Map<String, Object> map = new HashMap<>();
+
+        for(CallSchoolData dto : list){
+            if(dto.day.equals("Mon")) map.put("mon", dto.classCntnt);
+            if(dto.day.equals("Tue")) map.put("tue", dto.classCntnt);
+            if(dto.day.equals("Wed")) map.put("wed", dto.classCntnt);
+            if(dto.day.equals("Thu")) map.put("thu", dto.classCntnt);
+            if(dto.day.equals("Fri")) map.put("fri", dto.classCntnt);
+        }
+
+        FirebaseFirestore f = FirebaseFirestore.getInstance();
+        f.collection("시간표")
+                        .document(data.getEmail() + " " + data.getYear() + " - " + data.getSemester())
+                                .update(map)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                finish();
+                                            }
+                                        });
+
+
 
     }
 }

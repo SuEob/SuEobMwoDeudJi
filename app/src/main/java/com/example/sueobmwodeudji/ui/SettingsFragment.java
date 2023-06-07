@@ -205,6 +205,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                     public void onComplete(@NonNull Task<Void> task) {
                         Intent intent = new Intent(getContext(), LoginActivity.class);
                         getActivity().startActivity(intent);
+                        getActivity().finish();
                     }
                 });
     }

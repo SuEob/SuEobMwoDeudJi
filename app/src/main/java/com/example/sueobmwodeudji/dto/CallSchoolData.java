@@ -5,9 +5,9 @@ import java.util.List;
 
 public class CallSchoolData {
     public String day;
-    public List<String> classCntnt = new ArrayList();
+    public ArrayList<String> classCntnt = new ArrayList();
 
-    public CallSchoolData(String day, List<String> classCntnt) {
+    public CallSchoolData(String day, ArrayList<String> classCntnt) {
         this.day = day;
         this.classCntnt = classCntnt;
     }

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -47,6 +48,9 @@ public class TimeTableFragment extends Fragment {
     private static final String TIMETABLE_DATA = "dataList";
     public static TextView[][] timetable;
 
+    private int mYear = 0;
+    private int mSemester = 0;
+
     public static TimeTableFragment getInstance() {
         return new TimeTableFragment();
     }
@@ -72,24 +76,6 @@ public class TimeTableFragment extends Fragment {
         setHasOptionsMenu(true);
         //CreateList();
         setTimeTable();
-
-        // 학년/반
-        binding.gradeClassBtn.setOnClickListener(v -> {
-            Intent intent = new Intent(getContext(), TimeTableClassActivity.class);
-            startActivity(intent);
-        });
-
-        // 이름변경
-        binding.changeNameBtn.setOnClickListener(v -> {
-            TimeTableNameFragmentDialog dialog = TimeTableNameFragmentDialog.getInstance();
-            dialog.setChangeName(new TimeTableNameFragmentDialog.ChangeNameInterface() {
-                @Override
-                public void onClick(String name) {
-                    ((MainActivity) getActivity()).getSupportActionBar().setTitle(name);
-                }
-            });
-            dialog.show(getChildFragmentManager(), "TAG");
-        });
 
         // 비우기
         binding.clearBtn.setOnClickListener(v -> {
@@ -226,38 +212,42 @@ public class TimeTableFragment extends Fragment {
 
     // 시간표 부분 추가
     public void addPartTime() {
+        if(mYear == 0) {
+            Toast.makeText(getActivity(), "시간표가 없습니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
         // CallBack으로 Listener 만들기
         TimeTableFragmentDialog dialog = TimeTableFragmentDialog.getInstance();
-        dialog.setTimeTableInterface(new TimeTableFragmentDialog.TimeTableInterface() {
-            @Override
-            public void onClick(String class_name, int day_of_week, int period) {
-                // 시간표에 값 넣기
-                timetable[day_of_week][period].setText(class_name);
-                // DTO에 값 넣기
-                if (args != null) { // 시간표가 이미 작성된 상태에서 추가
-                    List<CallSchoolData> dataList = (List<CallSchoolData>) args.getSerializable(TIMETABLE_DATA);
-                    dataList.get(day_of_week).classCntnt.set(period, class_name);
-
-                    //for (CallSchoolData data : dataList) {
-                    //    Log.d("TAG", data.toString());
-                    //}
-
-                } else { // 시간표가 비어있는 상태에서 추가
-                    String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri"}; // 월요일 ~ 금요일
-
-                    List<CallSchoolData> list = new ArrayList<>();
-
-                    List<String> subList;
-                    CallSchoolData schoolData;
-
-                    // List<CallSchoolData> 초기화
-                    for (String day : days) {
-                        subList = new ArrayList<>();
-                        schoolData = new CallSchoolData(day, subList);
-                        list.add(schoolData);
-                    }
-
-                }
+//        dialog.setTimeTableInterface(new TimeTableFragmentDialog.TimeTableInterface() {
+//            @Override
+//            public void onClick(String class_name, int day_of_week, int period) {
+//                // 시간표에 값 넣기
+//                timetable[day_of_week][period].setText(class_name);
+//                // DTO에 값 넣기
+//                if (args != null) { // 시간표가 이미 작성된 상태에서 추가
+//                    ArrayList<CallSchoolData> dataList = (List<CallSchoolData>) args.getSerializable(TIMETABLE_DATA);
+//                    dataList.get(day_of_week).classCntnt.set(period, class_name);
+//
+//                    //for (CallSchoolData data : dataList) {
+//                    //    Log.d("TAG", data.toString());
+//                    //}
+//
+//                } else { // 시간표가 비어있는 상태에서 추가
+//                    String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri"}; // 월요일 ~ 금요일
+//
+//                    ArrayList<CallSchoolData> list = new ArrayList<>();
+//
+//                    ArrayList<String> subList;
+//                    CallSchoolData schoolData;
+//
+//                    // List<CallSchoolData> 초기화
+//                    for (String day : days) {
+//                        subList = new ArrayList<>();
+//                        schoolData = new CallSchoolData(day, subList);
+//                        list.add(schoolData);
+//                    }
+//
+//                }
 //                else { // 시간표가 비어있는 상태에서 추가
 //                    String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri"}; // 월요일 ~ 금요일
 //
@@ -304,12 +294,12 @@ public class TimeTableFragment extends Fragment {
                 //}
 //                }
 //            }
-            }
-        });
-        dialog.setDdd_year(2023);
-        dialog.setDdd_semester(1);
+//            }
+//        });
+        dialog.setDdd_year(mYear);
+        dialog.setDdd_semester(mSemester);
         dialog.show(getChildFragmentManager(), "TAG");
-
+//
     }
 
     public void drowTable() {
@@ -320,21 +310,55 @@ public class TimeTableFragment extends Fragment {
 
             @Override
             public void onSuccess(QuerySnapshot value) {
-                if (value.getDocuments().size() != 0) {
+                if (!value.getDocuments().isEmpty()) {
                     TimeTableDTO dto = value.getDocuments().get(0).toObject(TimeTableDTO.class);
                     ArrayList<ArrayList<String>> sueobs = new ArrayList<>();
+                    mYear = dto.getYear();
+                    mSemester = dto.getSemester();
                     sueobs.add(dto.getMon());
                     sueobs.add(dto.getTue());
                     sueobs.add(dto.getWed());
                     sueobs.add(dto.getThu());
                     sueobs.add(dto.getFri());
+                    ((MainActivity) getActivity()).getSupportActionBar().setTitle(dto.getTimeTableName());
                     for (int i = 0; i < 5; i++) {
-                        for (int k = 0; k < 8; k++) {
+                        for (int k = 0; k < sueobs.get(i).size(); k++) {
                             timetable[i][k].setText(sueobs.get(i).get(k));
                         }
                     }
+                    // 학년/반
+                    binding.gradeClassBtn.setOnClickListener(v -> {
+                        Intent intent = new Intent(getContext(), TimeTableClassActivity.class);
+                        intent.putExtra("data", dto);
+                        startActivity(intent);
+                    });
+
+                    // 이름변경
+                    binding.changeNameBtn.setOnClickListener(v -> {
+                        TimeTableNameFragmentDialog dialog = TimeTableNameFragmentDialog.getInstance();
+                        dialog.setChangeName(new TimeTableNameFragmentDialog.ChangeNameInterface() {
+                            @Override
+                            public void onClick(String name) {
+                                FirebaseFirestore f = FirebaseFirestore.getInstance();
+                                f.collection("시간표")
+                                        .document("a@a.com " + dto.getYear() + " - " + dto.getSemester())
+                                        .update("timeTableName", name);
+                            }
+                        });
+                        dialog.show(getChildFragmentManager(), "TAG");
+                    });
                 }
-            }
+                else{
+                    binding.gradeClassBtn.setOnClickListener(v -> {
+                        Toast.makeText(getActivity(), "시간표가 없습니다.", Toast.LENGTH_SHORT).show();
+                    });
+
+                    // 이름변경
+                    binding.changeNameBtn.setOnClickListener(v -> {
+                        Toast.makeText(getActivity(), "시간표가 없습니다.", Toast.LENGTH_SHORT).show();
+                    });
+                }
+                }
         });
     }
 
