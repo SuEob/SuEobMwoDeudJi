@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -97,15 +98,16 @@ public class RatingsSubRecentListAdapter  extends RecyclerView.Adapter<RatingsSu
         private final Context context;
         private TextView class_name, teacher_name, content;
         private ConstraintLayout layout;
+        private ImageView honeyIV;
 
         public RatingsSubRecentListViewHolder(Context _context, View itemView) {
             super(itemView);
             ItemRatingsRecentListBinding binding = ItemRatingsRecentListBinding.bind(itemView);
             context = _context;
             class_name = binding.titleTv;
-            teacher_name = binding.teacherTv;
             content = binding.contentTv;
             layout = binding.layout;
+            honeyIV = binding.honeyIv;
         }
 
         public void onBind(RatingsSubListModel data){
@@ -118,6 +120,9 @@ public class RatingsSubRecentListAdapter  extends RecyclerView.Adapter<RatingsSu
                     oricl.onClick(data);
                 }
             });
+
+            if (data.getHoney())
+                honeyIV.setVisibility(View.VISIBLE);
         }
     }
 }

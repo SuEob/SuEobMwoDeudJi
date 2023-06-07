@@ -90,13 +90,10 @@ public class TimeTableSecondActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(QuerySnapshot value) {
                         ccc.document(data.getEmail() + " " + data.getYear() + " - " + data.getSemester()).update("selected", true);
-                        Log.d ("ㅂㅈㄷㅂㅈㄷ", "true로 바뀜");
 
                         if (value.getDocuments().size() != 0) {
-                            Log.d ("ㅂㅈㄷㅂㅈㄷ", "병신");
                             TimeTableDTO dto = value.getDocuments().get(0).toObject(TimeTableDTO.class);
                             ccc.document(dto.getEmail() + " " + dto.getYear() + " - " + dto.getSemester()).update("selected", false);
-                            Log.d ("ㅂㅈㄷㅂㅈㄷ", "false로 바뀜");
                         }
                         finish();
                     }

@@ -3,6 +3,7 @@ package com.example.sueobmwodeudji;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.RadioButton;
@@ -31,6 +32,7 @@ public class RatingsSubFormActivity extends AppCompatActivity implements View.On
     private String firstCP, firstDP, secondCP;
     private String subject;
     private String mEmail;
+    private boolean isHoney = true;
 
     private InputMethodManager imm;
     @Override
@@ -52,6 +54,21 @@ public class RatingsSubFormActivity extends AppCompatActivity implements View.On
         //secondCP = "수업코드";
 
         showItem();
+
+        binding.honeyIv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isHoney) {
+                    binding.honeyIv.setImageResource(R.drawable.honey_not);
+                    isHoney = false;
+                    Log.d("꿀첨가", "ㄴㄴ");
+                } else {
+                    binding.honeyIv.setImageResource(R.drawable.honey_yes);
+                    isHoney = true;
+                    Log.d("꿀첨가", "ㅇㅇ");
+                }
+            }
+        });
 
         setContentView(binding.getRoot());
     }
@@ -93,6 +110,7 @@ public class RatingsSubFormActivity extends AppCompatActivity implements View.On
         data.setContent(binding.contentEt.getText().toString());
         data.setTimestamp(Timestamp.now().toDate());
         data.setLike(new HashMap<>());
+        data.setHoney(isHoney);
         RadioButton difi_rd = findViewById(binding.difficultyRg.getCheckedRadioButtonId());
         RadioButton type_rd = findViewById(binding.typeRg.getCheckedRadioButtonId());
         data.setDifficulty(difi_rd.getText().toString());
