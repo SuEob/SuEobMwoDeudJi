@@ -12,7 +12,8 @@
         android:layout_marginTop="16dp"
         android:src="@drawable/person"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/black" />
 
     <TextView
         android:id="@+id/my_id"
@@ -21,6 +22,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:text="아이디"
+        android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/settings_my_info"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,6 +33,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:text="이름/닉네임"
+        android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/settings_my_info"
         app:layout_constraintTop_toBottomOf="@+id/my_id" />
 

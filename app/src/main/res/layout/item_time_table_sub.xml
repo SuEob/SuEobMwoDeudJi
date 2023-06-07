@@ -12,37 +12,43 @@
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:gravity="center"
-            android:text="" />
+            android:text=""
+            android:textColor="@color/black" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="월" />
+            android:text="월"
+            android:textColor="@color/black"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="화"/>
+            android:text="화"
+            android:textColor="@color/black" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="수"/>
+            android:text="수"
+            android:textColor="@color/black" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="목"/>
+            android:text="목"
+            android:textColor="@color/black"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="금"/>
+            android:text="금"
+            android:textColor="@color/black"/>
 
     </TableRow>
 
@@ -52,42 +58,48 @@
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:gravity="center"
-            android:text="1교시" />
+            android:text="1교시"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/monday_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="" />
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tuesday_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/wednesday_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/thursday_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/friday_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
     </TableRow>
 
@@ -97,42 +109,48 @@
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:gravity="center"
-            android:text="2교시" />
+            android:text="2교시"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/monday_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="" />
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tuesday_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/wednesday_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/thursday_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/friday_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
     </TableRow>
 
@@ -142,42 +160,48 @@
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:gravity="center"
-            android:text="3교시" />
+            android:text="3교시"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/monday_3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="" />
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tuesday_3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/wednesday_3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/thursday_3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/friday_3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
     </TableRow>
 
@@ -187,42 +211,48 @@
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:gravity="center"
-            android:text="4교시" />
+            android:text="4교시"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/monday_4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="" />
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tuesday_4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/wednesday_4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/thursday_4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/friday_4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
     </TableRow>
 
@@ -232,42 +262,48 @@
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:gravity="center"
-            android:text="5교시" />
+            android:text="5교시"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/monday_5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="" />
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tuesday_5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/wednesday_5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/thursday_5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/friday_5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
     </TableRow>
 
@@ -277,42 +313,48 @@
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:gravity="center"
-            android:text="6교시" />
+            android:text="6교시"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/monday_6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="" />
+            android:text=""
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tuesday_6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/wednesday_6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/thursday_6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/friday_6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
     </TableRow>
 
@@ -322,42 +364,48 @@
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:gravity="center"
-            android:text="7교시" />
+            android:text="7교시"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/monday_7"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="" />
+            android:text=""
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tuesday_7"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/wednesday_7"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/thursday_7"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/friday_7"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
     </TableRow>
 
@@ -367,42 +415,48 @@
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:gravity="center"
-            android:text="8교시" />
+            android:text="8교시"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/monday_8"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="" />
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tuesday_8"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/wednesday_8"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/thursday_8"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/friday_8"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/black"/>
 
     </TableRow>
 

@@ -1,4 +1,3 @@
-/*
 package com.example.sueobmwodeudji.ui.dialog_ui;
 
 import android.os.Bundle;
@@ -26,16 +25,12 @@ import java.util.ArrayList;
 
 public class TimeTableFragmentDialog extends DialogFragment {
     private FragmentTimeTableDialogBinding binding;
-
-    final String[] days = {"월요일", "화요일", "수요일", "목요일", "금요일"};
-    final String[] periods = {"1교시", "2교시", "3교시", "4교시", "5교시", "6교시", "7교시", "8교시"};
-    int daySelect = 0, periodSelect = 0;
+    private int day_of_week_position;
+    private int period_position;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     CollectionReference ccc = db.collection("시간표");
     DocumentReference ddd = ccc.document("T3");
-    private int day_of_week_position;
-    private int period_position;
 
     // 리스너를 만들기 위한 interface
     public interface TimeTableInterface {
@@ -74,9 +69,9 @@ public class TimeTableFragmentDialog extends DialogFragment {
         // 요일 다이얼로그
         ArrayAdapter adapter1 = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, day_of_week);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.daySpin.setAdapter(adapter1);
+        binding.dayOfWeekSpin.setAdapter(adapter1);
 
-        binding.daySpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.dayOfWeekSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 day_of_week_position = position;
@@ -93,22 +88,10 @@ public class TimeTableFragmentDialog extends DialogFragment {
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.periodSpin.setAdapter(adapter2);
 
-        binding.daySpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.d ("고른거", days[position] + "숫자는 " + position);
-                daySelect = position;
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
-        });
-
         binding.periodSpin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 period_position = position;
-                Log.d ("고른거", periods[position] + "숫자는 " + position);
-                periodSelect = position;
             }
 
             @Override
@@ -119,8 +102,8 @@ public class TimeTableFragmentDialog extends DialogFragment {
 
 
 
-        // 부모 프래그먼트(TimeTableFragment)에 데이터 전송
-        binding.btnSueobAdd.setOnClickListener(new View.OnClickListener() {
+        // 부모 프래그먼트(TimeTableFragment)에 데이터 전송 + Firebase에 저장
+        binding.dialogBtn.setOnClickListener(new View.OnClickListener() {
 
             ArrayList<String> listt = new ArrayList<>();
             @Override
@@ -301,7 +284,7 @@ public class TimeTableFragmentDialog extends DialogFragment {
                             case 3 : key = "thu"; listt = dto.getThu(); break;
                             case 4 : key = "fri"; listt = dto.getFri(); break;
                         }
-                        listt.set(period_position, sueobName);
+                        listt.set(period_position, sueobName); Log.d("테스트", "들어옴4");
                         ddd.update(key, listt);
                     }
                 });

@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/topGuide"
@@ -25,10 +30,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="30dp" />
 
-    <include
-        android:id="@+id/tool_bar"
-        layout="@layout/tool_bar" />
-
     <Button
         android:id="@+id/table_add_btn"
         android:layout_width="wrap_content"
@@ -39,68 +40,45 @@
         app:layout_constraintTop_toTopOf="@+id/topGuide" />
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/grade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="제목"
+
+        android:text="학년"
         android:textSize="30dp"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="@+id/leftGuide"
         app:layout_constraintTop_toTopOf="@+id/topGuide" />
 
-    <EditText
-        android:id="@+id/nameET"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:hint="시간표 이름"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/leftGuide"
-        app:layout_constraintTop_toBottomOf="@id/name" />
-
-    <TextView
-        android:id="@+id/year"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="년도"
-        android:textSize="30dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/leftGuide"
-        app:layout_constraintTop_toBottomOf="@id/nameET" />
-
     <Spinner
-        android:id="@+id/year_spin"
+        android:id="@+id/grade_spin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="48dp"
-        android:spinnerMode="dropdown"
-        app:layout_constraintStart_toEndOf="@+id/year"
-        app:layout_constraintTop_toBottomOf="@+id/nameET" />
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="16dp"
+        android:hint=""
+        app:layout_constraintStart_toEndOf="@+id/grade"
+        app:layout_constraintTop_toTopOf="@+id/topGuide" />
 
     <TextView
-        android:id="@+id/semester"
+        android:id="@+id/className"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
-        android:layout_marginEnd="228dp"
-        android:text="학기"
+        android:text="반"
         android:textSize="30dp"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuide"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="@+id/leftGuide"
-        app:layout_constraintTop_toBottomOf="@+id/year_spin" />
+        app:layout_constraintTop_toBottomOf="@+id/grade" />
 
     <Spinner
-        android:id="@+id/semester_spin"
+        android:id="@+id/class_name_spin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
+
+        android:layout_marginStart="80dp"
         android:layout_marginTop="72dp"
-        android:spinnerMode="dropdown"
-        app:layout_constraintStart_toEndOf="@+id/semester"
-        app:layout_constraintTop_toBottomOf="@+id/year_spin" />
+        android:hint=""
+        app:layout_constraintStart_toEndOf="@+id/className"
+        app:layout_constraintTop_toBottomOf="@+id/grade_spin" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

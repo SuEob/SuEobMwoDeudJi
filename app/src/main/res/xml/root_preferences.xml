@@ -9,9 +9,18 @@
         <Preference
             android:id="@+id/info_content"
             app:key="info_content"
-            android:layout="@layout/preferences_my_info"
-            android:fragment="com.example.sueobmwodeudji.ui.preferences_ui.MyInfoFragment">
-        </Preference>
+            android:layout="@layout/preferences_my_info" />
+
+        <EditTextPreference
+            app:key="info_name"
+            app:title="닉네임 설정"
+            app:iconSpaceReserved="false" />
+
+        <Preference
+            app:key="info_profile"
+            app:title="프로필 이미지 설정"
+            app:iconSpaceReserved="false"
+            />
 
     </PreferenceCategory>
 
@@ -19,24 +28,6 @@
         app:key="account"
         app:title="계정"
         app:iconSpaceReserved="false">
-
-        <Preference
-            app:key="root_school"
-            app:title="학교인증"
-            app:iconSpaceReserved="false">
-            <intent
-                android:targetPackage="com.example.sueobmwodeudji"
-                android:targetClass="com.example.sueobmwodeudji.SettingsActivity" />
-        </Preference>
-
-        <Preference
-            app:key="root_password"
-            app:title="비밀번호 변경"
-            app:iconSpaceReserved="false">
-            <intent
-                android:targetPackage="com.example.sueobmwodeudji"
-                android:targetClass="com.example.sueobmwodeudji.SettingsActivity" />
-        </Preference>
 
         <Preference
             app:key="root_logout"
@@ -60,20 +51,9 @@
         app:iconSpaceReserved="false">
 
         <SwitchPreferenceCompat
-            app:key="root_dark"
+            app:key="dark_mode"
             app:title="다크 모드"
             app:iconSpaceReserved="false"/>
-
-        <SwitchPreferenceCompat
-            app:key="root_alert"
-            app:title="알림 수신"
-            app:iconSpaceReserved="false"/>
-
-        <Preference
-            app:key="root_lock"
-            app:title="잠금"
-            app:iconSpaceReserved="false">
-        </Preference>
 
     </PreferenceCategory>
 
