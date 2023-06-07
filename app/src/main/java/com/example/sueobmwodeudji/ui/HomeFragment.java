@@ -29,8 +29,13 @@ import com.example.sueobmwodeudji.adapter.HomePagerAdapter;
 import com.example.sueobmwodeudji.adapter.HomeTimeTableAdapter;
 import com.example.sueobmwodeudji.databinding.FragmentHomeBinding;
 import com.example.sueobmwodeudji.dto.HomeTimeTableData;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
