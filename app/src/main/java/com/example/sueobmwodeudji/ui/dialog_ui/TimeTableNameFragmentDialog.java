@@ -54,8 +54,6 @@ public class TimeTableNameFragmentDialog extends DialogFragment {
                 String name = binding.nameSueob.getText().toString();
                 changeNameInterface.onClick(name);
                 getDialog().dismiss();
-
-
             }
         });
     }

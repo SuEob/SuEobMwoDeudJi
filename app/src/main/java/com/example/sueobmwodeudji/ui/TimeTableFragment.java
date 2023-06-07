@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.sueobmwodeudji.MainActivity;
 import com.example.sueobmwodeudji.R;
@@ -341,8 +342,10 @@ public class TimeTableFragment extends Fragment {
                             public void onClick(String name) {
                                 FirebaseFirestore f = FirebaseFirestore.getInstance();
                                 f.collection("시간표")
-                                        .document("a@a.com " + dto.getYear() + " - " + dto.getSemester())
+                                        .document(dto.getEmail()+ " " + dto.getYear() + " - " + dto.getSemester())
                                         .update("timeTableName", name);
+
+                                ((MainActivity) getActivity()).getSupportActionBar().setTitle(name);
                             }
                         });
                         dialog.show(getChildFragmentManager(), "TAG");
@@ -360,6 +363,11 @@ public class TimeTableFragment extends Fragment {
                 }
                 }
         });
+    }
+
+    private void refresh(){
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.detach(this).attach(this).commit();
     }
 
 }

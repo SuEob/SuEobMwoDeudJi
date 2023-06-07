@@ -31,13 +31,6 @@ public class TimeTableFragmentDialog extends DialogFragment {
     int ddd_year;
     int ddd_semester;
 
-    public void setDdd_year(int ddd_year) {
-        this.ddd_year = ddd_year;
-    }
-    public void setDdd_semester(int ddd_semester) {
-        this.ddd_semester = ddd_semester;
-    }
-
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     CollectionReference ccc = db.collection("시간표");
 
@@ -154,6 +147,17 @@ public class TimeTableFragmentDialog extends DialogFragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    public void setDdd_year(int ddd_year) {
+        this.ddd_year = ddd_year;
+    }
+    public void setDdd_semester(int ddd_semester) {
+        this.ddd_semester = ddd_semester;
+    }
+
+    public interface OnSubmitBtnClickListener{
+        void onClick(String class_name);
     }
 
 }
