@@ -27,41 +27,63 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey);
 
-        findPreference("root_logout").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
-                dlg.setTitle("로그아웃");
-                dlg.setMessage("로그아웃 하시겠습니까?");
-                dlg.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "취소되었습니다.", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //Toast.makeText(getActivity(), "로그아웃", Toast.LENGTH_SHORT).show();
-                        logout();
-                    }
-                });
-                dlg.show();
-
-                return false;
-            }
-        });
+        setPreferencesClickListener();
     }
 
-    private void logout() {
-        AuthUI.getInstance()
-                .signOut(getActivity())
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Intent intent = new Intent(getContext(), LoginActivity.class);
-                        getActivity().startActivity(intent);
-                    }
-                });
+    private void setPreferencesClickListener() {
+        setLogoutPreference();
+    }
+
+    private void setLogoutPreference(){
+        findPreference("root_logout").setOnPreferenceClickListener(new LogoutPreferenceClickListener());
+        findPreference("root_password").setOnPreferenceClickListener(new UpdatePwPreferenceClickListener());
+        findPreference("root_withdrawal").setOnPreferenceClickListener(new DeleteUserPreferenceClickListener());
+    }
+    private class LogoutPreferenceClickListener implements Preference.OnPreferenceClickListener{
+        @Override
+        public boolean onPreferenceClick(Preference preference) {
+            AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
+            dlg.setTitle("로그아웃");
+            dlg.setMessage("로그아웃 하시겠습니까?");
+            dlg.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(getActivity(), "취소되었습니다.", Toast.LENGTH_SHORT).show();
+                }
+            });
+            dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    //Toast.makeText(getActivity(), "로그아웃", Toast.LENGTH_SHORT).show();
+                    logout();
+                }
+            });
+            dlg.show();
+
+            return false;
+        }
+        private void logout() {
+            AuthUI.getInstance()
+                    .signOut(getActivity())
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Intent intent = new Intent(getContext(), LoginActivity.class);
+                            getActivity().startActivity(intent);
+                        }
+                    });
+        }
+    }
+    private class UpdatePwPreferenceClickListener implements Preference.OnPreferenceClickListener{
+        @Override
+        public boolean onPreferenceClick(Preference preference) {
+            return false;
+        }
+    }
+    private class DeleteUserPreferenceClickListener implements Preference.OnPreferenceClickListener{
+        @Override
+        public boolean onPreferenceClick(Preference preference) {
+            return false;
+        }
     }
 }

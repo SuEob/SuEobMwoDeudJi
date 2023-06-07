@@ -272,7 +272,7 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
         mFirestore.collection(firstCP)
                 .document(firstDP)
                 .collection(subject)
-                .document(mEmail + data.getTimestamp())
+                .document(data.getEmail() + data.getTimestamp())
                 .update("like", data.getLike());
     }
 

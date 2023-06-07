@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.RatingsSubPostActivity;
 import com.example.sueobmwodeudji.databinding.ItemRatingsListBinding;
+import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
 import com.example.sueobmwodeudji.model.CommunitySubListModel;
 import com.example.sueobmwodeudji.model.RatingsSubListModel;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -26,6 +27,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class RatingsSubListAdapter extends RecyclerView.Adapter<RatingsSubListAdapter.RatingsSubListViewHolder> implements EventListener<QuerySnapshot> {
     private final Context context;
@@ -83,8 +85,10 @@ public class RatingsSubListAdapter extends RecyclerView.Adapter<RatingsSubListAd
     public static class RatingsSubListViewHolder extends RecyclerView.ViewHolder {
         Context context;
         private final TextView title;
-        private final TextView sub_title;
+        private final TextView sub_title, likeTv, commentTv;
         private final ConstraintLayout layout;
+
+        RatingsSubListModel mData;
 
         public RatingsSubListViewHolder(Context _context, View itemView) {
             super(itemView);
@@ -93,17 +97,46 @@ public class RatingsSubListAdapter extends RecyclerView.Adapter<RatingsSubListAd
             context = _context;
             title = binding.titleTv;
             sub_title = binding.subTitleTv;
+            likeTv = binding.likeTv;
+            commentTv = binding.commentTv;
             layout = binding.layout;
         }
         public void onBind(RatingsSubListModel data){
+            mData = data;
+
+            int like_count = likeCounting();
+            int comment_count = commentCounting();
+
             title.setText(data.getTitle());
             sub_title.setText(data.getContent());
+            likeTv.setText(like_count + "");
+            commentTv.setText(comment_count + "");
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     orcl.onClick(data);
                 }
             });
+        }
+
+        private int likeCounting() {
+            if (mData.getLike() == null) return 0;
+
+            int total = 0;
+            Map<String, Boolean> map = mData.getLike();
+
+            for (String key : map.keySet()) {
+                total += (map.get(key)) ? 1 : 0;
+            }
+
+            return total;
+        }
+        private int commentCounting() {
+            int total = mData.getComments().size();
+            for (CommunitySubCommentModel data : mData.getComments()) {
+                total += data.getCommentModels().size();
+            }
+            return total;
         }
     }
 }

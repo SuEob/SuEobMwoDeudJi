@@ -239,7 +239,7 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
         mFirestore.collection(firstCP)
                 .document(firstDP)
                 .collection(class_name)
-                .document(mEmail + data.getTimestamp())
+                .document(data.getEmail() + data.getTimestamp())
                 .update("like", data.getLike());
     }
 

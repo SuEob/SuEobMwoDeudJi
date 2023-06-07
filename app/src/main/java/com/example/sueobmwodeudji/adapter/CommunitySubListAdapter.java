@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sueobmwodeudji.CommunitySubPostActivity;
 import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.databinding.ItemCommunityListBinding;
+import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
 import com.example.sueobmwodeudji.model.CommunitySubListModel;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -24,6 +25,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class CommunitySubListAdapter extends RecyclerView.Adapter<CommunitySubListAdapter.CommunitySubListViewHolder> implements EventListener<QuerySnapshot> {
     private final Context context;
@@ -77,25 +79,57 @@ public class CommunitySubListAdapter extends RecyclerView.Adapter<CommunitySubLi
     }
 
     public static class CommunitySubListViewHolder extends RecyclerView.ViewHolder {
-        private final TextView title, content;
+        private final TextView title, content, likeTv, commentTv;
         private final ConstraintLayout layout;
+        CommunitySubListModel mData;
 
         public CommunitySubListViewHolder(View itemView) {
             super(itemView);
             ItemCommunityListBinding binding = ItemCommunityListBinding.bind(itemView);
             title = binding.titleTv;
             content = binding.contentTv;
+            likeTv = binding.likeTv;
+            commentTv = binding.commentTv;
             layout = binding.layout;
         }
         public void onBind(CommunitySubListModel data){
+            mData = data;
+
+            int like_count = likeCounting();
+            int comment_count = commentCounting();
+
+
             title.setText(data.getTitle());
             content.setText(data.getContent());
+            likeTv.setText(like_count + "");
+            commentTv.setText(comment_count + "");
+
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     opcl.onClick(data);
                 }
             });
+        }
+
+        private int likeCounting() {
+            if (mData.getLike() == null) return 0;
+
+            int total = 0;
+            Map<String, Boolean> map = mData.getLike();
+
+            for (String key : map.keySet()) {
+                total += (map.get(key)) ? 1 : 0;
+            }
+
+            return total;
+        }
+        private int commentCounting() {
+            int total = mData.getComments().size();
+            for (CommunitySubCommentModel data : mData.getComments()) {
+                total += data.getCommentModels().size();
+            }
+            return total;
         }
     }
 }

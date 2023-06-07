@@ -54,43 +54,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/account_iv" />
 
-        <LinearLayout
-            android:id="@+id/comment_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/chatings_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
-                android:src="@drawable/chatings"
-                app:layout_constraintRight_toLeftOf="@+id/chatings_iv"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="#8866FF" />
-
-            <ImageView
-                android:id="@+id/ratings_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
-                android:src="@drawable/ratings"
-                app:layout_constraintRight_toLeftOf="@+id/report_iv"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="#FF3B30" />
-
-            <ImageView
-                android:id="@+id/report_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/chatings"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="#8866FF" />
-        </LinearLayout>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="0dp"
