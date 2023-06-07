@@ -73,7 +73,7 @@ public class RatingsFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.tool_bar, menu);
+        //inflater.inflate(R.menu.tool_bar, menu);
     }
 
     @Override

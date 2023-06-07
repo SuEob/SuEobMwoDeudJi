@@ -21,7 +21,15 @@ import com.example.sueobmwodeudji.TimeTableSecondActivity;
 import com.example.sueobmwodeudji.TimeTableThridActivity;
 import com.example.sueobmwodeudji.databinding.FragmentTimeTableBinding;
 import com.example.sueobmwodeudji.dto.CallSchoolData;
+import com.example.sueobmwodeudji.dto.TimeTableDTO;
+import com.example.sueobmwodeudji.ui.dialog_ui.TimeTableClearFragmentDialog;
 import com.example.sueobmwodeudji.ui.dialog_ui.TimeTableFragmentDialog;
+import com.example.sueobmwodeudji.ui.dialog_ui.TimeTableNameFragmentDialog;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -62,7 +70,7 @@ public class TimeTableFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
-        CreateList();
+        //CreateList();
         setTimeTable();
 
         // 학년/반
@@ -77,7 +85,7 @@ public class TimeTableFragment extends Fragment {
             dialog.setChangeName(new TimeTableNameFragmentDialog.ChangeNameInterface() {
                 @Override
                 public void onClick(String name) {
-                    ((MainActivity)getActivity()).getSupportActionBar().setTitle(name);
+                    ((MainActivity) getActivity()).getSupportActionBar().setTitle(name);
                 }
             });
             dialog.show(getChildFragmentManager(), "TAG");
@@ -140,8 +148,8 @@ public class TimeTableFragment extends Fragment {
 
     // TextView[][] timetable -> 시간표 초기화
     private void setTimeTable() {
-        timetable  = new TextView[5][];
-        timetable[0] = new TextView[] { // 월요일
+        timetable = new TextView[5][];
+        timetable[0] = new TextView[]{ // 월요일
                 binding.timeTable.monday1,
                 binding.timeTable.monday2,
                 binding.timeTable.monday3,
@@ -152,7 +160,7 @@ public class TimeTableFragment extends Fragment {
                 binding.timeTable.monday8
         };
 
-        timetable[1] = new TextView[] { // 화요일
+        timetable[1] = new TextView[]{ // 화요일
                 binding.timeTable.tuesday1,
                 binding.timeTable.tuesday2,
                 binding.timeTable.tuesday3,
@@ -163,7 +171,7 @@ public class TimeTableFragment extends Fragment {
                 binding.timeTable.tuesday8
         };
 
-        timetable[2] = new TextView[] { // 수요일
+        timetable[2] = new TextView[]{ // 수요일
                 binding.timeTable.wednesday1,
                 binding.timeTable.wednesday2,
                 binding.timeTable.wednesday3,
@@ -174,7 +182,7 @@ public class TimeTableFragment extends Fragment {
                 binding.timeTable.wednesday8
         };
 
-        timetable[3] = new TextView[] { // 목요일
+        timetable[3] = new TextView[]{ // 목요일
                 binding.timeTable.thursday1,
                 binding.timeTable.thursday2,
                 binding.timeTable.thursday3,
@@ -185,7 +193,7 @@ public class TimeTableFragment extends Fragment {
                 binding.timeTable.thursday8
         };
 
-        timetable[4] = new TextView[] { // 금요일
+        timetable[4] = new TextView[]{ // 금요일
                 binding.timeTable.friday1,
                 binding.timeTable.friday2,
                 binding.timeTable.friday3,
@@ -204,8 +212,8 @@ public class TimeTableFragment extends Fragment {
             List<CallSchoolData> dataList = (List<CallSchoolData>) args.getSerializable(TIMETABLE_DATA);
 
             // TextView[][] timetable -> 시간표에 값 넣기
-            for (int i=0; i<days.length; i++) {
-                for (int j=0; j<dataList.get(i).classCntnt.size(); j++) {
+            for (int i = 0; i < days.length; i++) {
+                for (int j = 0; j < dataList.get(i).classCntnt.size(); j++) {
                     String classContent = dataList.get(i).classCntnt.get(j);
                     timetable[i][j].setText(classContent);
                 }
@@ -243,7 +251,7 @@ public class TimeTableFragment extends Fragment {
                     CallSchoolData schoolData;
 
                     // List<CallSchoolData> 초기화
-                    for (String day:days) {
+                    for (String day : days) {
                         subList = new ArrayList<>();
                         schoolData = new CallSchoolData(day, subList);
                         list.add(schoolData);
@@ -280,21 +288,22 @@ public class TimeTableFragment extends Fragment {
 //                        Log.d("TAG", data.toString());
 //                    }
 //                }
-                    // 빈 값 넣기
-                    for (int i=0; i<5; i++) {
-                        for (int j=0; j<8; j++) {
-                            list.get(i).classCntnt.add("");
-                        }
-                    }
+                // 빈 값 넣기
+//                    for (int i=0; i<5; i++) {
+//                        for (int j=0; j<8; j++) {
+//                            list.get(i).classCntnt.add("");
+//                        }
+//                    }
+//
+//                    list.get(day_of_week).classCntnt.set(period, class_name);
+//
+//                    TimeTableFragment.newInstance(list);
 
-                    list.get(day_of_week).classCntnt.set(period, class_name);
-
-                    TimeTableFragment.newInstance(list);
-
-                    //for (CallSchoolData data : list) {
-                    //    Log.d("TAG", data.toString());
-                    //}
-                }
+                //for (CallSchoolData data : list) {
+                //    Log.d("TAG", data.toString());
+                //}
+//                }
+//            }
             }
         });
         dialog.setDdd_year(2023);
@@ -319,8 +328,8 @@ public class TimeTableFragment extends Fragment {
                     sueobs.add(dto.getWed());
                     sueobs.add(dto.getThu());
                     sueobs.add(dto.getFri());
-                    for (int i=0; i<5; i++) {
-                        for (int k=0; k<8; k++) {
+                    for (int i = 0; i < 5; i++) {
+                        for (int k = 0; k < 8; k++) {
                             timetable[i][k].setText(sueobs.get(i).get(k));
                         }
                     }
