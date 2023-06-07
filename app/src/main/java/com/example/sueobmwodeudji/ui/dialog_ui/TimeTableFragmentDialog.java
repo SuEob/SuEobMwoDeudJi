@@ -132,7 +132,7 @@ public class TimeTableFragmentDialog extends DialogFragment {
                             case 3 : key = "thu"; listt = dto.getThu(); break;
                             case 4 : key = "fri"; listt = dto.getFri(); break;
                         }
-                        listt.set(period_position, sueobName); Log.d("테스트", "들어옴4");
+                        listt.set(period_position, sueobName);
                         ddd.update(key, listt);
                     }
                 });

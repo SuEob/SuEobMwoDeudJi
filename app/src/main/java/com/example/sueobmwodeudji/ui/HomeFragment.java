@@ -29,8 +29,13 @@ import com.example.sueobmwodeudji.adapter.HomePagerAdapter;
 import com.example.sueobmwodeudji.adapter.HomeTimeTableAdapter;
 import com.example.sueobmwodeudji.databinding.FragmentHomeBinding;
 import com.example.sueobmwodeudji.dto.HomeTimeTableData;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -67,10 +72,6 @@ public class HomeFragment extends Fragment {
         HomeTimeTableView();
         HomePostViewPager2();
 
-        // 닉네임
-        String name = SettingsFragment.nameLoad(getContext());
-        binding.infoTv.setText(name);
-
         // 프로필 이미지
         String uri_text = SettingsFragment.imgLoad(getContext());
         Uri uri;
@@ -92,22 +93,26 @@ public class HomeFragment extends Fragment {
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(binding.profileTv); // 이미지를 넣을 뷰
 
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-//        mFirestore.collection("사용자")
-//                .document(user.getEmail())
-//                .get()
-//                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//                    @Override
-//                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-//                        String school_name = documentSnapshot.getString("school_name");
-//                        String school_username = school_name +" / " +  user.getDisplayName();
-//
-//                        binding.infoTv.setText(school_username);
-//                    }
-//                });
-//
-//        binding.infoTv.setText(user.getDisplayName());
+        // 닉네임
+        String name = SettingsFragment.nameLoad(getContext());
+        binding.infoTv.setText(name);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        mFirestore.collection("사용자")
+                .document(user.getEmail())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        String school_name = documentSnapshot.getString("school_name");
+                        String school_username = school_name +" / " +  user.getDisplayName();
+
+                        binding.infoTv.setText(school_username);
+                    }
+                });
+
+        binding.infoTv.setText(user.getDisplayName());
 
     }
 
@@ -202,7 +207,7 @@ public class HomeFragment extends Fragment {
 
         // 첫 번째 페이지 설정
         if (check) {
-            binding.homeSubTitleViewPager.setCurrentItem(1200, false);
+            binding.homeSubTitleViewPager.setCurrentItem(999, false);
             check = false;
         }
 
@@ -214,7 +219,7 @@ public class HomeFragment extends Fragment {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
                 // 첫 번째 페이지 설정 후 다음 페이지 설정
                 if (first && positionOffset == 0 && positionOffsetPixels == 0) {
-                    onPageSelected(1200);
+                    onPageSelected(999);
                     first = false;
                 }
                 Log.d("Tag.onPageScrolled", String.valueOf(position));
