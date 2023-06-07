@@ -67,6 +67,10 @@ public class HomeFragment extends Fragment {
         HomeTimeTableView();
         HomePostViewPager2();
 
+        // 닉네임
+        String name = SettingsFragment.nameLoad(getContext());
+        binding.infoTv.setText(name);
+
         // 프로필 이미지
         String uri_text = SettingsFragment.imgLoad(getContext());
         Uri uri;
@@ -87,10 +91,6 @@ public class HomeFragment extends Fragment {
                 .circleCrop() // 동그랗게 자르기
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(binding.profileTv); // 이미지를 넣을 뷰
-
-        // 닉네임
-        String name = SettingsFragment.nameLoad(getContext());
-        binding.infoTv.setText(name);
 
 //        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 //        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
@@ -143,8 +143,6 @@ public class HomeFragment extends Fragment {
         if (item.getItemId() == R.id.search) {
             Intent intent = new Intent(getActivity(), SearchActivity.class);
             startActivity(intent);
-        } else if (item.getItemId() == R.id.profile) {
-            // 아마 설정창 열결하던가 없앨듯?
         }
         return super.onOptionsItemSelected(item);
     }
@@ -153,9 +151,18 @@ public class HomeFragment extends Fragment {
     private void HomeTimeTableView() {
         List<HomeTimeTableData> list = new ArrayList<>();
 
-        list.add(new HomeTimeTableData("1교시 수학"));
-        list.add(new HomeTimeTableData("2교시 수학"));
-        list.add(new HomeTimeTableData("3교시 수학"));
+        list.add(new HomeTimeTableData("01.01 신정"));
+        list.add(new HomeTimeTableData("01.21~01.23 설날"));
+        list.add(new HomeTimeTableData("01.24 대체공휴일"));
+        list.add(new HomeTimeTableData("03.01 삼일절"));
+        list.add(new HomeTimeTableData("05.05 어린이날"));
+        list.add(new HomeTimeTableData("05.27 부처님오신날"));
+        list.add(new HomeTimeTableData("05.29 대체공휴일"));
+        list.add(new HomeTimeTableData("06.06 현충일"));
+        list.add(new HomeTimeTableData("08.15 광복절"));
+        list.add(new HomeTimeTableData("10.03 개천절"));
+        list.add(new HomeTimeTableData("10.09 한글날"));
+        list.add(new HomeTimeTableData("12.25 크리스마스"));
 
         HomeTimeTableAdapter adapter = new HomeTimeTableAdapter(getContext(), list);
         binding.homeSubTitleViewPager.setAdapter(adapter);
@@ -195,7 +202,7 @@ public class HomeFragment extends Fragment {
 
         // 첫 번째 페이지 설정
         if (check) {
-            binding.homeSubTitleViewPager.setCurrentItem(999, false);
+            binding.homeSubTitleViewPager.setCurrentItem(1200, false);
             check = false;
         }
 
@@ -207,7 +214,7 @@ public class HomeFragment extends Fragment {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
                 // 첫 번째 페이지 설정 후 다음 페이지 설정
                 if (first && positionOffset == 0 && positionOffsetPixels == 0) {
-                    onPageSelected(999);
+                    onPageSelected(1200);
                     first = false;
                 }
                 Log.d("Tag.onPageScrolled", String.valueOf(position));
