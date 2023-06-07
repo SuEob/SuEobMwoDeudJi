@@ -15,7 +15,6 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.sueobmwodeudji.databinding.FragmentTimeTableDialogBinding;
 import com.example.sueobmwodeudji.dto.TimeTableDTO;
-import com.example.sueobmwodeudji.ui.TimeTableFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -94,7 +93,7 @@ public class TimeTableFragmentDialog extends DialogFragment {
         });
 
         // 교시 다이얼로그
-        ArrayAdapter adapter2 = new ArrayAdapter(getContext().getApplicationContext(), android.R.layout.simple_spinner_item, period);
+        ArrayAdapter adapter2 = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, period);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.periodSpin.setAdapter(adapter2);
 

@@ -15,7 +15,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceManager;
 
 import com.example.sueobmwodeudji.LoginActivity;
 import com.example.sueobmwodeudji.MainActivity;
@@ -41,12 +40,10 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         setPreferencesFromResource(R.xml.root_preferences, rootKey);
 
         // 닉네임 설정
-        findPreference("info_name").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+        findPreference("info_name").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
-            public boolean onPreferenceClick(Preference preference) {
-                SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getContext());
-                String name = sp.getString("info_name", "");
-                nameSave(getContext(), name);
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                nameSave(getContext(), (String) newValue);
                 return true;
             }
         });
@@ -104,6 +101,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             }
         });
     }
+
+
 
     // 기본 갤러리에서 이미지 Uri를 받아옴
     @Override

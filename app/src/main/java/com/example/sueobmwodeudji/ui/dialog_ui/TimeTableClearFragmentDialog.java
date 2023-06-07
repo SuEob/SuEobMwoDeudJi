@@ -67,7 +67,7 @@ public class TimeTableClearFragmentDialog extends DialogFragment {
             }
         });
 
-        ArrayAdapter adapter2 = new ArrayAdapter(getContext().getApplicationContext(), android.R.layout.simple_spinner_item, period);
+        ArrayAdapter adapter2 = new ArrayAdapter(getContext(), android.R.layout.simple_spinner_item, period);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.periodSpin.setAdapter(adapter2);
 
