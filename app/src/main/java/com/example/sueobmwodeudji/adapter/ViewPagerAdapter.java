@@ -59,7 +59,6 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
         public void onBind(ArrayList<RatingMyClassData> list, int position) {
             ConstraintLayout[] constraintLayouts = {binding.constraintLayout1, binding.constraintLayout2, binding.constraintLayout3};
             TextView[] class_name = {binding.className1, binding.className2, binding.className3};
-            TextView[] teacher_name = {binding.teacherName1, binding.teacherName2, binding.teacherName3};
             Button[] btn = {binding.btn1,binding.btn2,binding.btn3};
             Log.d("a", position + "");
 
@@ -82,7 +81,7 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
                         context.startActivity(intent);
                     }
                 });
-                teacher_name[i].setText(teacher_str);
+
                 btn[i].setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

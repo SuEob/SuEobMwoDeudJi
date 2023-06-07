@@ -117,6 +117,12 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
         binding.typeTv.setText(data.getType());
         binding.likeTv.setText(like_count + "");
         binding.commentTv.setText(comment_count + "");
+        if(data.getHoney()) {
+            binding.honeyIv.setImageResource(R.drawable.honey_yes);
+        } else {
+            binding.honeyIv.setImageResource(R.drawable.honey_not);
+        }
+
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection("사용자")
                 .document(data.getEmail())

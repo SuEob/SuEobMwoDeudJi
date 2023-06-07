@@ -287,7 +287,6 @@ public class TimeTableFragmentDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
 
-                Log.d("테스트", "들어옴1");
                 String sueobName = binding.nameSueob.getText().toString();
                 ddd.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
@@ -295,7 +294,6 @@ public class TimeTableFragmentDialog extends DialogFragment {
                         TimeTableDTO dto = documentSnapshot.toObject(TimeTableDTO.class);
 
                         String key = "";
-                        Log.d("테스트", "들어옴2");
                         switch (day_of_week_position) {
                             case 0 : key = "mon"; listt = dto.getMon(); break;
                             case 1 : key = "tue"; listt = dto.getTue(); break;
@@ -303,7 +301,7 @@ public class TimeTableFragmentDialog extends DialogFragment {
                             case 3 : key = "thu"; listt = dto.getThu(); break;
                             case 4 : key = "fri"; listt = dto.getFri(); break;
                         }
-                        listt.set(period_position, sueobName); Log.d("테스트", "들어옴4");
+                        listt.set(period_position, sueobName);
                         ddd.update(key, listt);
                     }
                 });

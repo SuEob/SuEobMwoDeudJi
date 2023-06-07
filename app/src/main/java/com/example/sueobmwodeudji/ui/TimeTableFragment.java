@@ -193,9 +193,9 @@ public class TimeTableFragment extends Fragment {
                     List<CallSchoolData> dataList = (List<CallSchoolData>) args.getSerializable(TIMETABLE_DATA);
                     dataList.get(day_of_week).classCntnt.set(period, class_name);
 
-                    for (CallSchoolData data : dataList) {
-                        Log.d("TAG", data.toString());
-                    }
+                    //for (CallSchoolData data : dataList) {
+                    //    Log.d("TAG", data.toString());
+                    //}
 
                 } else { // 시간표가 비어있는 상태에서 추가
                     String[] days = {"Mon", "Tue", "Wed", "Thu", "Fri"}; // 월요일 ~ 금요일
@@ -223,9 +223,9 @@ public class TimeTableFragment extends Fragment {
 
                     TimeTableFragment.newInstance(list);
 
-                    for (CallSchoolData data : list) {
-                        Log.d("TAG", data.toString());
-                    }
+                    //for (CallSchoolData data : list) {
+                    //    Log.d("TAG", data.toString());
+                    //}
                 }
             }
         });
@@ -244,7 +244,6 @@ public class TimeTableFragment extends Fragment {
             @Override
             public void onSuccess(QuerySnapshot value) {
                 if (value.getDocuments().size() != 0) {
-                    Log.d ("ㅂㄷㄷ", "병신");
                     TimeTableDTO dto = value.getDocuments().get(0).toObject(TimeTableDTO.class);
                     ArrayList<ArrayList<String>> sueobs = new ArrayList<>();
                     sueobs.add(dto.getMon());

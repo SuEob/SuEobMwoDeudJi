@@ -79,7 +79,7 @@ public class TimeTableThridActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 yearSelect = position + 2023;
-                Log.d("년도", ""+yearSelect);
+                // Log.d("년도", ""+yearSelect);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) { }
@@ -89,7 +89,7 @@ public class TimeTableThridActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 semesterSelect = position + 1;
-                Log.d("학기",""+semesterSelect);
+                // Log.d("학기",""+semesterSelect);
             }
 
             @Override
@@ -106,7 +106,6 @@ public class TimeTableThridActivity extends AppCompatActivity {
                     list.add("");
                 }
 
-                Log.d ("테이블", "들어옴11");
                 String tableName = binding.nameET.getText().toString();
                 String userID = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
