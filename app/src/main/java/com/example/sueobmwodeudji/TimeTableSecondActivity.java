@@ -83,7 +83,7 @@ public class TimeTableSecondActivity extends AppCompatActivity {
                 // 선택한 시간표를 true로, 나머지 시간표를 false로 변경
                 CollectionReference ccc = db.collection("시간표");
                 Log.d("ㅂㅈㄷㅂㅈㄷ", "들어옴");
-                ccc.whereEqualTo("selected", true).whereEqualTo("email", data.getEmail()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                ccc.whereEqualTo("selected", true).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot value) {
                         ccc.document(data.getEmail() + " " + data.getYear() + " - " + data.getSemester()).update("selected", true);

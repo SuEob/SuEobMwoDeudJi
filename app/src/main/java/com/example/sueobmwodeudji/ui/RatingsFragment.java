@@ -133,7 +133,6 @@ public class RatingsFragment extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot documentSnapshots) {
-                        if(documentSnapshots.isEmpty()) return;
                         TimeTableDTO dto = documentSnapshots.getDocuments().get(0).toObject(TimeTableDTO.class);
 
                         createSueobs(dto);
