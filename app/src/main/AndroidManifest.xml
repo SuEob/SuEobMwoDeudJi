@@ -61,6 +61,7 @@
         <activity android:name=".fb.FbPost" />
         <activity android:name=".fb.FbSueob" />
         <activity android:name=".fb.FbTimeTable" />
+        <activity android:name=".CoachMarkActivity" />
     </application>
 
 </manifest>
