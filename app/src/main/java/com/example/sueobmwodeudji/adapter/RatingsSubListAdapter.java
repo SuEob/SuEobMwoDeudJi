@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -87,6 +88,7 @@ public class RatingsSubListAdapter extends RecyclerView.Adapter<RatingsSubListAd
         private final TextView title;
         private final TextView sub_title, likeTv, commentTv;
         private final ConstraintLayout layout;
+        private final ImageView difficultyIv, typeIv;
 
         RatingsSubListModel mData;
 
@@ -100,9 +102,12 @@ public class RatingsSubListAdapter extends RecyclerView.Adapter<RatingsSubListAd
             likeTv = binding.likeTv;
             commentTv = binding.commentTv;
             layout = binding.layout;
+            difficultyIv = binding.difficultyIv;
+            typeIv = binding.typeIv;
         }
         public void onBind(RatingsSubListModel data){
             mData = data;
+
 
             int like_count = likeCounting();
             int comment_count = commentCounting();
@@ -111,6 +116,19 @@ public class RatingsSubListAdapter extends RecyclerView.Adapter<RatingsSubListAd
             sub_title.setText(data.getContent());
             likeTv.setText(like_count + "");
             commentTv.setText(comment_count + "");
+            switch (data.getDifficulty()) {
+                case "상" : difficultyIv.setImageResource(R.drawable.hard); break;
+                case "중" : difficultyIv.setImageResource(R.drawable.normal); break;
+                case "하" : difficultyIv.setImageResource(R.drawable.easy); break;
+            }
+
+            switch (data.getType()) {
+                case "유인물 위주" : typeIv.setImageResource(R.drawable.with_handouts); break;
+                case "ppt 위주" :   typeIv.setImageResource(R.drawable.with_ppt); break;
+                case "교과서 위주" : typeIv.setImageResource(R.drawable.with_textbook); break;
+                case "기타 방식" :   typeIv.setImageResource(R.drawable.etc); break;
+            }
+
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
