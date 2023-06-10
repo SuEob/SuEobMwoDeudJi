@@ -12,17 +12,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sueobmwodeudji.databinding.ActivityLoginBinding;
+import com.example.sueobmwodeudji.ui.coach_mark.Settings;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-
-import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
@@ -40,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         binding.loginBTN.setOnClickListener(v -> {
             login();
         });
+
 
         binding.registration.setOnClickListener(view -> {
             Intent intent = new Intent(this, RegistrationActivity.class);
@@ -103,10 +99,20 @@ public class LoginActivity extends AppCompatActivity {
 
     private void successLogin() {
         //Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, MainActivity.class);
+
+        boolean first_registration = Settings.coachMarkLoad(this);
+        Log.d("boolean", String.valueOf(first_registration));
+
+        Intent intent;// 기존 Activity 제거
+        if (first_registration) {
+            intent = new Intent(this, CoachMarkActivity.class);
+        } else {
+            intent = new Intent(this, MainActivity.class);
+        }
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // 기존 Activity 제거
         startActivity(intent);
         finish();
+
     }
 
     private void failureLogin() {
