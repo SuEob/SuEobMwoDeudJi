@@ -57,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         mPw = binding.loginPW.getText().toString();
 
         if (isCompleted()) {
+            binding.loginBTN.setClickable(false);
             mAuth.signInWithEmailAndPassword(mId, mPw)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -68,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                binding.loginBTN.setClickable(true);
                                 Toast.makeText(LoginActivity.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
                             }

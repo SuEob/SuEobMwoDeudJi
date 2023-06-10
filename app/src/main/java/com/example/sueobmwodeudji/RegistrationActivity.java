@@ -49,6 +49,7 @@ public class RegistrationActivity extends AppCompatActivity {
 //             school_name = binding.registrationSchool.getText().toString();
 
             if (isCompleted()) {
+                binding.registrationBTN.setClickable(false);
                 createUser();
             }
 
@@ -110,6 +111,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             success();
                         } else {
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            binding.registrationBTN.setClickable(true);
                             Toast.makeText(RegistrationActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
