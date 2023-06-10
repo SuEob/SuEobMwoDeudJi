@@ -29,6 +29,9 @@ import com.example.sueobmwodeudji.databinding.FragmentCommunityBinding;
 import com.example.sueobmwodeudji.dto.RatingMyClassData;
 import com.example.sueobmwodeudji.model.CommunitySubListModel;
 import com.example.sueobmwodeudji.model.CommunitySubRecentListModel;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -40,6 +43,8 @@ import java.util.ArrayList;
 
 public class CommunityFragment extends Fragment {
     private FragmentCommunityBinding binding;
+
+    private String mCollection, mSchool, mEmail;
 
     public static CommunityFragment getInstance() {
         return new CommunityFragment();
@@ -53,14 +58,17 @@ public class CommunityFragment extends Fragment {
         String tool_bar_title = "커뮤니티";
         ((MainActivity)getActivity()).getSupportActionBar().setTitle(tool_bar_title);
 
+        mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+        // DB PATH Setting
+        dbPathSetting();
+
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(binding.getRoot(), savedInstanceState);
-        addCategoryButtonEvent();
-        setRecentListRecyclerView();
         Log.d("afsdsdaf", getActivity().getSupportFragmentManager().getFragments().toString());
         //addSearchViewEvent();
     }
@@ -91,6 +99,25 @@ public class CommunityFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+    private void dbPathSetting() {
+        mCollection = "게시판";
+        readSchool();
+    }
+
+    private void readSchool() {
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        mFirestore.collection("사용자")
+                .document(mEmail)
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        mSchool = documentSnapshot.getString("school_name");
+                        addCategoryButtonEvent();
+                        setRecentListRecyclerView();
+                    }
+                });
+    }
+
     private void addCategoryButtonEvent() {
         Button[] buttons = { binding.class1Btn, binding.class2Btn, binding.class3Btn,
                 binding.gameBtn, binding.bookBtn, binding.anchorBtn};
@@ -104,7 +131,6 @@ public class CommunityFragment extends Fragment {
                     startActivity(intent);
                 }
             });
-
         }
     }
 
@@ -127,8 +153,8 @@ public class CommunityFragment extends Fragment {
         ArrayList<Query> query = new ArrayList<>();
         for (String category : categorys) {
             FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-            query.add(mFirestore.collection("testPost")
-                    .document("first")
+            query.add(mFirestore.collection(mCollection)
+                    .document(mSchool)
                     .collection(category)
                     .orderBy("timestamp", Query.Direction.DESCENDING)
                     .limit(10));

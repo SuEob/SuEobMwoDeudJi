@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -31,9 +32,7 @@ import java.util.Map;
 
 public class CommunitySubFormActivity  extends AppCompatActivity implements View.OnClickListener {
     ActivityCommunitySubFormBinding binding;
-
-    private String firstCP, firstDP, secondCP;
-    private String subject, mName;
+    private String mCollection, subject, mName, mSchool;
     private String mEmail;
 
     private InputMethodManager imm;
@@ -54,14 +53,29 @@ public class CommunitySubFormActivity  extends AppCompatActivity implements View
 
         imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 
-        /********** DB Path Setting **********/
-        firstCP = "testPost";
-        firstDP = "first";
-        secondCP = "1학년 게시판";
+        // DB PATH Setting
+        dbPathSetting();
 
-        showItem();
+
         //createPost();
         setContentView(binding.getRoot());
+    }
+    private void dbPathSetting() {
+        mCollection = "게시판";
+        readSchool();
+    }
+
+    private void readSchool() {
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        mFirestore.collection("사용자")
+                .document(mEmail)
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        mSchool = documentSnapshot.getString("school_name");
+                        showItem();
+                    }
+                });
     }
 
     private void showItem() {
@@ -103,8 +117,8 @@ public class CommunitySubFormActivity  extends AppCompatActivity implements View
 
         //파베 Create
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        mFirestore.collection(firstCP)
-                .document(firstDP)
+        mFirestore.collection(mCollection)
+                .document(mSchool)
                 .collection(subject)
                 .document(mEmail + data.getTimestamp())
                 .set(data).addOnSuccessListener(new OnSuccessListener<Void>() {

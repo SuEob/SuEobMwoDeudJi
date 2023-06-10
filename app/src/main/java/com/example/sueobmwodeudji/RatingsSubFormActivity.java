@@ -31,18 +31,16 @@ import java.util.Map;
 public class RatingsSubFormActivity extends AppCompatActivity implements View.OnClickListener{
     ActivityRatingsSubFormBinding binding;
 
-    private String class_name, teacher_name;
+    private String class_name;
 
-    private String firstCP, firstDP, secondCP;
     private String subject;
-    private String mEmail;
+    private String mCollection, mSchool, mEmail;
     private boolean isHoney = true;
 
     FirebaseFirestore mFirestore;
 
     private InputMethodManager imm;
 
-    private String school;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,19 +49,13 @@ public class RatingsSubFormActivity extends AppCompatActivity implements View.On
         Intent intent = getIntent();
         class_name = intent.getStringExtra("class_name");
         //teacher_name = intent.getStringExtra("teacher_name");
-        secondCP = class_name;
         mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         mFirestore = FirebaseFirestore.getInstance();
 
         imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 
-        /********** DB Path Setting **********/
-        firstCP = "testRating";
-        firstDP = "first";
-        school = "나 고등학교";
-        //secondCP = "수업코드";
-
-        showItem();
+        // DB Path Setting
+        dbPathSetting();
 
         binding.honeyIv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +73,24 @@ public class RatingsSubFormActivity extends AppCompatActivity implements View.On
         });
 
         setContentView(binding.getRoot());
+    }
+
+    private void dbPathSetting() {
+        mCollection = "평가";
+        readSchool();
+    }
+
+    private void readSchool() {
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        mFirestore.collection("사용자")
+                .document(mEmail)
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        mSchool = documentSnapshot.getString("school_name");
+                        showItem();
+                    }
+                });
     }
 
     private void showItem() {
@@ -129,8 +139,8 @@ public class RatingsSubFormActivity extends AppCompatActivity implements View.On
 
 
         //파베 Create
-        mFirestore.collection(firstCP)
-                .document(firstDP)
+        mFirestore.collection(mCollection)
+                .document(mSchool)
                 .collection(class_name)
                 .document(mEmail + data.getTimestamp())
                 .set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -145,7 +155,7 @@ public class RatingsSubFormActivity extends AppCompatActivity implements View.On
     private void addSueob() {
         //파베 수업 목록 추가
         mFirestore.collection("수업")
-                .document(school)
+                .document(mSchool)
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -160,7 +170,7 @@ public class RatingsSubFormActivity extends AppCompatActivity implements View.On
                         map.put("categorys", data);
 
                         mFirestore.collection("수업")
-                                .document(school)
+                                .document(mSchool)
                                 .set(map)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override

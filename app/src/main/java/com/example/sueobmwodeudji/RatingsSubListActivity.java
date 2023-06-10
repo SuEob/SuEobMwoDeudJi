@@ -14,7 +14,10 @@ import com.example.sueobmwodeudji.databinding.ActivityRatingsSubListBinding;
 import com.example.sueobmwodeudji.model.CommunitySubCommentCommentModel;
 import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
 import com.example.sueobmwodeudji.model.RatingsSubListModel;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -25,10 +28,13 @@ import java.util.Map;
 public class RatingsSubListActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivityRatingsSubListBinding binding;
     private String mSubject;
+    private String mCollection, mSchool, mEmail;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityRatingsSubListBinding.inflate(getLayoutInflater());
+
+        mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
         Toolbar toolbar = binding.toolBar.mainToolBar;
         setSupportActionBar(toolbar);
@@ -39,8 +45,26 @@ public class RatingsSubListActivity extends AppCompatActivity implements View.On
 
         binding.fab.setOnClickListener(this);
 
-        //createRating();
-        showItem();
+        // DB PATH Setting
+        dbPathSetting();
+    }
+
+    private void dbPathSetting() {
+        mCollection = "평가";
+        readSchool();
+    }
+
+    private void readSchool() {
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        mFirestore.collection("사용자")
+                .document(mEmail)
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        mSchool = documentSnapshot.getString("school_name");
+                        showItem();
+                    }
+                });
     }
 
     private void showItem(){
@@ -70,8 +94,8 @@ public class RatingsSubListActivity extends AppCompatActivity implements View.On
 
     private Query readPostData(){
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        return mFirestore.collection("testRating")
-                .document("first")
+        return mFirestore.collection(mCollection)
+                .document(mSchool)
                 .collection(mSubject)
                 .orderBy("timestamp",Query.Direction.DESCENDING)
                 .limit(10);
@@ -81,8 +105,8 @@ public class RatingsSubListActivity extends AppCompatActivity implements View.On
         RatingsSubListModel data = createData(docName);
 
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        mFirestore.collection("testRating")
-                .document("first")
+        mFirestore.collection(mCollection)
+                .document(mSchool)
                 .collection("수업코드")
                 .document(docName)
                 .set(data);

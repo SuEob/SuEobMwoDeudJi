@@ -31,6 +31,7 @@ import com.example.sueobmwodeudji.model.RatingsSubListModel;
 import com.example.sueobmwodeudji.model.RatingsSubRecentListModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -44,9 +45,13 @@ import java.util.Map;
 
 public class RatingsFragment extends Fragment {
     private FragmentRatingsBinding binding;
-    private String mEmail;
+
+    private String mCollection, mSchool, mEmail;
 
     private ArrayList<ArrayList<String>> sueobs = new ArrayList<>();
+
+    private FirebaseFirestore mFirestore;
+    private ArrayList<String> categorys;
 
     public static RatingsFragment getInstance() {
         return new RatingsFragment();
@@ -59,8 +64,12 @@ public class RatingsFragment extends Fragment {
         setHasOptionsMenu(true); // Activity 보다 Fragment 우선
         String tool_bar_title = "평가";
         ((MainActivity) getActivity()).getSupportActionBar().setTitle(tool_bar_title);
+        mFirestore = FirebaseFirestore.getInstance();
 
         mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+        // DB PATH Setting
+        dbPathSetting();
 
         return binding.getRoot();
     }
@@ -68,10 +77,6 @@ public class RatingsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(binding.getRoot(), savedInstanceState);
-
-        readTimeTable();
-        //ratingsItemView();
-        setRecentListRecyclerView();
     }
 
     @Override
@@ -99,6 +104,27 @@ public class RatingsFragment extends Fragment {
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void dbPathSetting() {
+        mCollection = "평가";
+        readSchool();
+    }
+
+    private void readSchool() {
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        mFirestore.collection("사용자")
+                .document(mEmail)
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        mSchool = documentSnapshot.getString("school_name");
+                        readTimeTable();
+                        readCategory();
+                        //ratingsItemView();
+                        //setRecentListRecyclerView();
+                    }
+                });
     }
 
     private void ratingsItemView() {
@@ -140,8 +166,6 @@ public class RatingsFragment extends Fragment {
 
                     }
                 });
-
-
         //ArrayList<ArrayList<RatingMyClassData>> listData = new ArrayList<>();
     }
 
@@ -180,6 +204,19 @@ public class RatingsFragment extends Fragment {
         binding.viewPager2.setAdapter(new ViewPagerAdapter(data));
     }
 
+    private void readCategory() {
+        mFirestore.collection("수업")
+                .document(mSchool)
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (getActivity() == null) return;
+                        categorys = (ArrayList<String>) documentSnapshot.get("categorys");
+                        setRecentListRecyclerView();
+                    }
+                });
+    }
+
     private void setRecentListRecyclerView() {
         RatingsSubRecentListAdapter adapter = new RatingsSubRecentListAdapter(getContext(), createRatingsQuery());
         adapter.setOricl(new RatingsSubRecentListAdapter.OnRecentItemClickLintener() {
@@ -195,12 +232,11 @@ public class RatingsFragment extends Fragment {
     }
 
     private ArrayList<Query> createRatingsQuery() {
-        String[] categorys = {"모바일캡스톤", "인공지능", "자료구조"};
         ArrayList<Query> query = new ArrayList<>();
         for (String category : categorys) {
             FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-            query.add(mFirestore.collection("testRating")
-                    .document("first")
+            query.add(mFirestore.collection(mCollection)
+                    .document(mSchool)
                     .collection(category)
                     .orderBy("timestamp", Query.Direction.DESCENDING)
                     .limit(3));

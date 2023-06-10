@@ -15,7 +15,10 @@ import com.example.sueobmwodeudji.databinding.ActivityCommunitySubListBinding;
 import com.example.sueobmwodeudji.model.CommunitySubCommentCommentModel;
 import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
 import com.example.sueobmwodeudji.model.CommunitySubListModel;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -27,19 +30,43 @@ public class CommunitySubListActivity extends AppCompatActivity implements View.
     private ActivityCommunitySubListBinding binding;
     private String subject;
 
+    private String mCollection, mSchool, mEmail;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityCommunitySubListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
         Toolbar toolbar = binding.toolBar.mainToolBar;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
 
+        // DB PATH Setting
+        dbPathSetting();
+
         binding.fab.setOnClickListener(this);
-        showItem();
+    }
+
+    private void dbPathSetting() {
+        mCollection = "게시판";
+        readSchool();
+    }
+
+    private void readSchool() {
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        mFirestore.collection("사용자")
+                .document(mEmail)
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        mSchool = documentSnapshot.getString("school_name");
+                        showItem();
+                    }
+                });
     }
 
     private void showItem(){
@@ -68,8 +95,8 @@ public class CommunitySubListActivity extends AppCompatActivity implements View.
     }
     private Query readPostData(String subject){
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        return mFirestore.collection("testPost")
-                .document("first")
+        return mFirestore.collection(mCollection)
+                .document(mSchool)
                 .collection(subject)
                 .orderBy("timestamp",Query.Direction.DESCENDING)
                 .limit(10);
@@ -92,9 +119,11 @@ public class CommunitySubListActivity extends AppCompatActivity implements View.
         data.setEmail("작성자" + docName);
         data.setTimestamp(Timestamp.now().toDate());
         data.setTitle("글제목" + docName);
+
         Map<String, Boolean> like = new HashMap<>();
         like.put("a",true);
         like.put("b",false);
+
         ArrayList<CommunitySubCommentModel> d = new ArrayList<>();
         ArrayList<CommunitySubCommentCommentModel> dd = new ArrayList<>();
         dd.add(new CommunitySubCommentCommentModel("작성자1","댓글내용1",Timestamp.now().toDate(), like));

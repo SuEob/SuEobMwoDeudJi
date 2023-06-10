@@ -34,16 +34,17 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
     private Intent intent;
     private RatingsSubListModel data;
     private InputMethodManager imm;
-    private String class_name, teacher_name;
+    private String class_name;
 
-    private String firstCP, firstDP, secondCP;
-    private String subject, id;
-    private String mEmail, mName;
+    private String mCollection, mSchool, mEmail;
+    private String mName;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityRatingsSubPostBinding.inflate(getLayoutInflater());
+
+        mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
         intent = getIntent();
         data = (RatingsSubListModel) intent.getSerializableExtra("data");
@@ -59,17 +60,15 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
 
         imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 
-        /********** DB Path Setting **********/
-        firstCP = "testRating";
-        firstDP = "first";
-        //secondCP = "모바일캡스톤조범석";
+        // DB PATH Setting
+        dbPathSetting();
 
         binding.submitBtn.setOnClickListener(this);
         binding.ratingLayout.setOnClickListener(new LikeBtnOnClickListener());
 
         setContentView(binding.getRoot());
 
-        showItem();
+
     }
 
     @Override
@@ -93,6 +92,25 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
             }
         });
         dlg.show();
+    }
+
+
+    private void dbPathSetting() {
+        mCollection = "평가";
+        readSchool();
+    }
+
+    private void readSchool() {
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        mFirestore.collection("사용자")
+                .document(mEmail)
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        mSchool = documentSnapshot.getString("school_name");
+                        showItem();
+                    }
+                });
     }
 
     private void showItem() {
@@ -195,8 +213,8 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
 
     private void deletePost() {
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        mFirestore.collection(firstCP)
-                .document(firstDP)
+        mFirestore.collection(mCollection)
+                .document(mSchool)
                 .collection(class_name)
                 .document(data.getEmail() + data.getTimestamp())
                 .delete()
@@ -210,8 +228,8 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
 
     private DocumentReference readData(){
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        return mFirestore.collection(firstCP)
-                .document(firstDP)
+        return mFirestore.collection(mCollection)
+                .document(mSchool)
                 .collection(class_name)
                 .document(data.getEmail() + data.getTimestamp());
     }
@@ -242,8 +260,8 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
     }
     private void updateLike() {
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        mFirestore.collection(firstCP)
-                .document(firstDP)
+        mFirestore.collection(mCollection)
+                .document(mSchool)
                 .collection(class_name)
                 .document(data.getEmail() + data.getTimestamp())
                 .update("like", data.getLike());
@@ -316,8 +334,8 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
 
     private void updateComment(){
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        mFirestore.collection(firstCP)
-                .document(firstDP)
+        mFirestore.collection(mCollection)
+                .document(mSchool)
                 .collection(class_name)
                 .document(data.getEmail() + data.getTimestamp())
                 .update("comments", data.getComments());

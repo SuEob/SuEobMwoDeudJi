@@ -35,10 +35,10 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
     private CommunitySubListModel data;
 
     private InputMethodManager imm;
-
-    private String firstCP, firstDP, secondCP;
     private String subject, name;
     private String mEmail;
+
+    private String mCollection, mSchool;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,15 +60,11 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
 
         imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 
-        /********** DB Path Setting **********/
-        firstCP = "testPost";
-        firstDP = "first";
-        secondCP = "1학년 대화방";
+        // DB PATH Setting
+        dbPathSetting();
 
         binding.submitBtn.setOnClickListener(this);
         binding.ratingLayout.setOnClickListener(new LikeBtnOnClickListener());
-
-        showItem();
 
         setContentView(binding.getRoot());
     }
@@ -105,6 +101,24 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
         return false;
     }
 
+    private void dbPathSetting() {
+        mCollection = "게시판";
+        readSchool();
+    }
+
+    private void readSchool() {
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        mFirestore.collection("사용자")
+                .document(mEmail)
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        mSchool = documentSnapshot.getString("school_name");
+                        showItem();
+                    }
+                });
+    }
+
     private void showItem() {
         getSupportActionBar().setTitle(data.getCategory());
 
@@ -113,6 +127,7 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
 
         if (data.getEmail().equals(mEmail)) myPost();
     }
+
     private void changeText() {
         int like_count = likeCounting();
         int comment_count = commentCounting();
@@ -134,6 +149,7 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
                     }
                 });
     }
+
     private int likeCounting() {
         if (data.getLike() == null) return 0;
 
@@ -146,6 +162,7 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
 
         return total;
     }
+
     private int commentCounting() {
         int total = data.getComments().size();
         for (CommunitySubCommentModel data : data.getComments()) {
@@ -195,8 +212,8 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
 
     private void deletePost() {
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        mFirestore.collection(firstCP)
-                .document(firstDP)
+        mFirestore.collection(mCollection)
+                .document(mSchool)
                 .collection(subject)
                 .document(data.getEmail() + data.getTimestamp())
                 .delete()
@@ -210,8 +227,8 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
 
     private DocumentReference readData() {
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        return mFirestore.collection(firstCP)
-                .document(firstDP)
+        return mFirestore.collection(mCollection)
+                .document(mSchool)
                 .collection(subject)
                 .document(data.getEmail() + data.getTimestamp());
     }
@@ -267,10 +284,11 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
             updateLike();
         }
     }
+
     private void updateLike() {
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        mFirestore.collection(firstCP)
-                .document(firstDP)
+        mFirestore.collection(mCollection)
+                .document(mSchool)
                 .collection(subject)
                 .document(data.getEmail() + data.getTimestamp())
                 .update("like", data.getLike());
@@ -316,8 +334,8 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
 
     private void updateComment() {
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        mFirestore.collection(firstCP)
-                .document(firstDP)
+        mFirestore.collection(mCollection)
+                .document(mSchool)
                 .collection(subject)
                 .document(data.getEmail() + data.getTimestamp())
                 .update("comments", data.getComments());
