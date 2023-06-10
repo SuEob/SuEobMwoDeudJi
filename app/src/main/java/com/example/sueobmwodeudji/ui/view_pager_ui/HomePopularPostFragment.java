@@ -20,6 +20,7 @@ import com.example.sueobmwodeudji.databinding.FragmentHomeSubPopularPostBinding;
 import com.example.sueobmwodeudji.model.CommunitySubListModel;
 import com.example.sueobmwodeudji.model.HomePopularPostData;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -35,11 +36,18 @@ import java.util.List;
 public class HomePopularPostFragment extends Fragment {
     private FragmentHomeSubPopularPostBinding binding;
 
+    private String mCollection, mSchool, mEmail;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         binding = FragmentHomeSubPopularPostBinding.inflate(inflater, container, false);
+        mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+        // DB PATH Setting
+        dbPathSetting();
+
         return binding.getRoot();
     }
 
@@ -47,8 +55,24 @@ public class HomePopularPostFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(binding.getRoot(), savedInstanceState);
         setHasOptionsMenu(true); // Activity 보다 Fragment 우선
+    }
 
-        HomeViewPager();
+    private void dbPathSetting() {
+        mCollection = "게시판";
+        readSchool();
+    }
+
+    private void readSchool() {
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        mFirestore.collection("사용자")
+                .document(mEmail)
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        mSchool = documentSnapshot.getString("school_name");
+                        HomeViewPager();
+                    }
+                });
     }
 
 
@@ -72,8 +96,8 @@ public class HomePopularPostFragment extends Fragment {
         ArrayList<CollectionReference> colReferences = new ArrayList<>();
         for (String category : categorys) {
             FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-            colReferences.add(mFirestore.collection("testPost")
-                    .document("first")
+            colReferences.add(mFirestore.collection(mCollection)
+                    .document(mSchool)
                     .collection(category));
         }
         return colReferences;

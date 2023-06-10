@@ -20,6 +20,7 @@ import com.example.sueobmwodeudji.model.CommunitySubListModel;
 import com.example.sueobmwodeudji.model.HomePopularRatingsData;
 import com.example.sueobmwodeudji.model.RatingsSubListModel;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -34,11 +35,19 @@ public class HomeRatingFragment extends Fragment {
     private FirebaseFirestore mFirestore;
     private ArrayList<String> categorys;
 
+    private String mCollection, mSchool, mEmail;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         binding = FragmentHomeSubRatingsBinding.inflate(inflater, container, false);
+
+        mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+        // DB PATH Setting
+        dbPathSetting();
+
         return binding.getRoot();
     }
 
@@ -48,8 +57,6 @@ public class HomeRatingFragment extends Fragment {
         setHasOptionsMenu(true); // Activity 보다 Fragment 우선
 
         mFirestore = FirebaseFirestore.getInstance();
-
-        HomeViewPager();
     }
 
     @Override
@@ -58,13 +65,31 @@ public class HomeRatingFragment extends Fragment {
         binding = null;
     }
 
+    private void dbPathSetting() {
+        mCollection = "평가";
+        readSchool();
+    }
+
+    private void readSchool() {
+        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+        mFirestore.collection("사용자")
+                .document(mEmail)
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        mSchool = documentSnapshot.getString("school_name");
+                        HomeViewPager();
+                    }
+                });
+    }
+
     public void HomeViewPager() {
         readCategory();
     }
 
     private void readCategory() {
         mFirestore.collection("수업")
-                .document("가 고등학교")
+                .document(mSchool)
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -94,8 +119,8 @@ public class HomeRatingFragment extends Fragment {
         ArrayList<CollectionReference> colReferences = new ArrayList<>();
         for (String category : categorys) {
             FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-            colReferences.add(mFirestore.collection("testRating")
-                    .document("first")
+            colReferences.add(mFirestore.collection(mCollection)
+                    .document(mSchool)
                     .collection(category));
         }
         return colReferences;

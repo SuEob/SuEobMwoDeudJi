@@ -111,6 +111,7 @@ public class CommunityFragment extends Fragment {
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if(getActivity() == null) return;
                         mSchool = documentSnapshot.getString("school_name");
                         addCategoryButtonEvent();
                         setRecentListRecyclerView();
