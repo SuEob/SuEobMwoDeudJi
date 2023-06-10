@@ -159,7 +159,7 @@ public class RatingsFragment extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot documentSnapshots) {
-                        if(documentSnapshots.isEmpty() || getActivity() == null) return;
+                        if (documentSnapshots.isEmpty() || getActivity() == null) return;
                         TimeTableDTO dto = documentSnapshots.getDocuments().get(0).toObject(TimeTableDTO.class);
 
                         createSueobs(dto);
@@ -192,14 +192,14 @@ public class RatingsFragment extends Fragment {
 
         ArrayList<String> d = new ArrayList<>();
 
-        for(int i = 1; i <= s.size(); i++){
-            d.add((s.get(i-1)));
-            if(i%3 == 0) {
+        for (int i = 1; i <= s.size(); i++) {
+            d.add((s.get(i - 1)));
+            if (i % 3 == 0) {
                 data.add(d);
                 d = new ArrayList<>();
             }
         }
-        if(d.size() != 0) data.add(d);
+        if (d.size() != 0) data.add(d);
 
         binding.viewPager2.setAdapter(new ViewPagerAdapter(data));
     }
@@ -233,14 +233,15 @@ public class RatingsFragment extends Fragment {
 
     private ArrayList<Query> createRatingsQuery() {
         ArrayList<Query> query = new ArrayList<>();
-        for (String category : categorys) {
-            FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-            query.add(mFirestore.collection(mCollection)
-                    .document(mSchool)
-                    .collection(category)
-                    .orderBy("timestamp", Query.Direction.DESCENDING)
-                    .limit(3));
-        }
+        if (categorys != null)
+            for (String category : categorys) {
+                FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+                query.add(mFirestore.collection(mCollection)
+                        .document(mSchool)
+                        .collection(category)
+                        .orderBy("timestamp", Query.Direction.DESCENDING)
+                        .limit(3));
+            }
         return query;
     }
 }

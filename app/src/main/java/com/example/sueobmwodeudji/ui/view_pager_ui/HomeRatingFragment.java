@@ -117,12 +117,13 @@ public class HomeRatingFragment extends Fragment {
 
     private ArrayList<CollectionReference> readData() {
         ArrayList<CollectionReference> colReferences = new ArrayList<>();
-        for (String category : categorys) {
-            FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-            colReferences.add(mFirestore.collection(mCollection)
-                    .document(mSchool)
-                    .collection(category));
-        }
+        if (categorys != null)
+            for (String category : categorys) {
+                FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+                colReferences.add(mFirestore.collection(mCollection)
+                        .document(mSchool)
+                        .collection(category));
+            }
         return colReferences;
     }
 }

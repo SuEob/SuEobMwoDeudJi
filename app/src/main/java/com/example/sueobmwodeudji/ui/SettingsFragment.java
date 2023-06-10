@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
     public static final String LIGHT_MODE = "light";
@@ -100,16 +101,20 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        FirebaseFirestore firebase = FirebaseFirestore.getInstance();
+                        firebase.collection("사용자").document(user.getEmail()).delete();
                         user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
                                     Log.d("유저삭제", "User account deleted.");
+                                    logout();
                                 }
                             }
                         });
-                        logout();
+
                     }
 
                 });
