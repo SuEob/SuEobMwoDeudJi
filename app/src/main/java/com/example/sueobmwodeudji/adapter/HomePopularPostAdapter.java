@@ -1,36 +1,79 @@
 package com.example.sueobmwodeudji.adapter;
 
+import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.databinding.ItemHomePopularPostBinding;
+import com.example.sueobmwodeudji.model.CommunitySubListModel;
 import com.example.sueobmwodeudji.model.HomePopularPostData;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class HomePopularPostAdapter extends RecyclerView.Adapter<HomePopularPostAdapter.HomePopularPostViewHolder> {
-    private List<HomePopularPostData> list;
+    protected final Context context;
+    private ArrayList<CollectionReference> mCols;
+    private ArrayList<CommunitySubListModel> list = new ArrayList<>();
 
-    public HomePopularPostAdapter(List<HomePopularPostData> list) {
-        this.list = list;
+    private static OnPopularPostClickListener opcl;
+
+    public HomePopularPostAdapter(Context context, ArrayList<CollectionReference> collectionReferences) {
+        this.context = context;
+        this.mCols = collectionReferences;
+        sortItem();
+    }
+
+    private void sortItem() {
+        for (CollectionReference col : mCols) {
+            col.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                @Override
+                public void onSuccess(QuerySnapshot documentSnapshots) {
+                    for (DocumentSnapshot doc : documentSnapshots.getDocuments()) {
+                        list.add(doc.toObject(CommunitySubListModel.class));
+                    }
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        list.sort(new Comparator<CommunitySubListModel>() {
+                            @Override
+                            public int compare(CommunitySubListModel o1, CommunitySubListModel o2) {
+                                return o2.getLike().size() - o1.getLike().size();
+                            }
+                        });
+                    }
+                    notifyDataSetChanged();
+                }
+            });
+        }
     }
 
     @NonNull
     @Override
     public HomePopularPostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemHomePopularPostBinding binding = ItemHomePopularPostBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        HomePopularPostViewHolder viewHolder = new HomePopularPostViewHolder(binding);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.item_home_popular_post, parent, false);
+        HomePopularPostViewHolder viewHolder = new HomePopularPostViewHolder(context, view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HomePopularPostAdapter.HomePopularPostViewHolder holder, int position) {
-        holder.postTitle.setText(list.get(position).getPost_title());
-        holder.postDate.setText(list.get(position).getPost_date());
+    public void onBindViewHolder(@NonNull HomePopularPostAdapter.HomePopularPostViewHolder
+                                         holder, int position) {
+        holder.onBind(list.get(position));
     }
 
     @Override
@@ -38,16 +81,41 @@ public class HomePopularPostAdapter extends RecyclerView.Adapter<HomePopularPost
         return list.size();
     }
 
-    public static class HomePopularPostViewHolder extends RecyclerView.ViewHolder {
-        private ItemHomePopularPostBinding binding;
-        public TextView postTitle;
-        public TextView postDate;
+    public void setOpcl(OnPopularPostClickListener opcl) {
+        HomePopularPostAdapter.opcl = opcl;
+    }
 
-        public HomePopularPostViewHolder(@NonNull ItemHomePopularPostBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-            postTitle = binding.homePostTitle;;
-            postDate = binding.homePostDate;;
+    public interface OnPopularPostClickListener {
+        void onClick(CommunitySubListModel data);
+    }
+
+    public static class HomePopularPostViewHolder extends RecyclerView.ViewHolder {
+        private final Context context;
+        public TextView postTitle, postDate,likeTv, commentTv;
+        private ConstraintLayout layout;
+
+        public HomePopularPostViewHolder(Context _context, View itemView) {
+            super(itemView);
+            context = _context;
+            ItemHomePopularPostBinding binding = ItemHomePopularPostBinding.bind(itemView);
+            postTitle = binding.homePostTitle;
+            postDate = binding.homePostDate;
+            likeTv = binding.likeTv;
+            commentTv = binding.commentTv;
+            layout = binding.layout;
+        }
+        public void onBind(CommunitySubListModel data){
+            if(context.getApplicationContext() == null) return;
+            postTitle.setText(data.getTitle());
+            postDate.setText(data.getCategory());
+            likeTv.setText(data.getLike().size() + "");
+            commentTv.setText(data.getComments().size() + "");
+            layout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    opcl.onClick(data);
+                }
+            });
         }
     }
 }

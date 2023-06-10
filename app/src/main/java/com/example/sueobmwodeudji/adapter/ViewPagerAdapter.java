@@ -57,6 +57,8 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
         }
 
         public void onBind(ArrayList<String> list, int position) {
+            if(context.getApplicationContext() == null) return;
+
             ConstraintLayout[] constraintLayouts = {binding.constraintLayout1, binding.constraintLayout2, binding.constraintLayout3};
             TextView[] class_name = {binding.className1, binding.className2, binding.className3};
             Button[] btn = {binding.btn1,binding.btn2,binding.btn3};

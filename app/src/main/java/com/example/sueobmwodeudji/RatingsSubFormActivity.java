@@ -1,5 +1,6 @@
 package com.example.sueobmwodeudji;
 
+import android.app.ActivityManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,9 +20,12 @@ import com.example.sueobmwodeudji.model.RatingsSubListModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 public class RatingsSubFormActivity extends AppCompatActivity implements View.OnClickListener{
@@ -34,7 +38,11 @@ public class RatingsSubFormActivity extends AppCompatActivity implements View.On
     private String mEmail;
     private boolean isHoney = true;
 
+    FirebaseFirestore mFirestore;
+
     private InputMethodManager imm;
+
+    private String school;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,12 +53,14 @@ public class RatingsSubFormActivity extends AppCompatActivity implements View.On
         //teacher_name = intent.getStringExtra("teacher_name");
         secondCP = class_name;
         mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        mFirestore = FirebaseFirestore.getInstance();
 
         imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 
         /********** DB Path Setting **********/
         firstCP = "testRating";
         firstDP = "first";
+        school = "나 고등학교";
         //secondCP = "수업코드";
 
         showItem();
@@ -119,7 +129,6 @@ public class RatingsSubFormActivity extends AppCompatActivity implements View.On
 
 
         //파베 Create
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection(firstCP)
                 .document(firstDP)
                 .collection(class_name)
@@ -127,8 +136,39 @@ public class RatingsSubFormActivity extends AppCompatActivity implements View.On
                 .set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(RatingsSubFormActivity.this, "작성되었습니다.", Toast.LENGTH_SHORT).show();
-                        finish();
+                        //Toast.makeText(RatingsSubFormActivity.this, "작성되었습니다.", Toast.LENGTH_SHORT).show();
+                        addSueob();
+                    }
+                });
+    }
+
+    private void addSueob() {
+        //파베 수업 목록 추가
+        mFirestore.collection("수업")
+                .document(school)
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        ArrayList<String> data = (ArrayList<String>) documentSnapshot.get("categorys");
+                        data = (data != null)? data : new ArrayList<>();
+                        data.add(class_name);
+                        HashSet<String> hs = new HashSet<String>(data);
+                        data.clear();
+                        data.addAll(hs);
+
+                        HashMap<String, ArrayList<String>> map = new HashMap<>();
+                        map.put("categorys", data);
+
+                        mFirestore.collection("수업")
+                                .document(school)
+                                .set(map)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Toast.makeText(RatingsSubFormActivity.this, "작성되었습니다.", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
+                                });
                     }
                 });
     }

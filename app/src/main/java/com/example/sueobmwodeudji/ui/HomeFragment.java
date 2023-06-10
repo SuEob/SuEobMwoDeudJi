@@ -105,6 +105,8 @@ public class HomeFragment extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (getActivity() == null) return;
+
                         String school_name = documentSnapshot.getString("school_name");
                         String school_username = school_name +" / " +  user.getDisplayName();
 

@@ -2,7 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="80dp">
+    android:layout_height="wrap_content"
+    android:id="@+id/layout"
+    android:layout_marginTop="12dp">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/leftGuide"
@@ -19,13 +21,6 @@
         app:layout_constraintGuide_end="10dp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/topGuide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="10dp" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/bottomGuide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,16 +35,15 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/leftGuide"
-        app:layout_constraintTop_toTopOf="@+id/topGuide" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/home_post_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="강의내용"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomGuide"
+        android:text="수업이름"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/home_post_title"
         app:layout_constraintStart_toStartOf="@+id/leftGuide" />
 
     <ImageView
@@ -58,7 +52,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:src="@drawable/ratings"
-        app:layout_constraintBottom_toTopOf="@+id/bottomGuide"
+        app:layout_constraintTop_toTopOf="@+id/home_post_content"
+        app:layout_constraintBottom_toBottomOf="@+id/home_post_content"
         app:layout_constraintEnd_toStartOf="@+id/like_tv"
         app:tint="#FF3B30" />
 
@@ -70,7 +65,8 @@
         android:text="0"
         android:textColor="#FF3B30"
         android:textSize="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomGuide"
+        app:layout_constraintTop_toTopOf="@+id/home_post_content"
+        app:layout_constraintBottom_toBottomOf="@+id/home_post_content"
         app:layout_constraintEnd_toStartOf="@+id/chatings_iv" />
 
     <ImageView
@@ -78,9 +74,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-
         android:src="@drawable/chatings"
-        app:layout_constraintBottom_toTopOf="@+id/bottomGuide"
+        app:layout_constraintTop_toTopOf="@+id/home_post_content"
+        app:layout_constraintBottom_toBottomOf="@+id/home_post_content"
         app:layout_constraintEnd_toStartOf="@+id/comment_tv"
         app:tint="#8866FF" />
 
@@ -91,7 +87,8 @@
         android:text="0"
         android:textColor="#8866FF"
         android:textSize="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomGuide"
+        app:layout_constraintTop_toTopOf="@+id/home_post_content"
+        app:layout_constraintBottom_toBottomOf="@+id/home_post_content"
         app:layout_constraintEnd_toStartOf="@+id/rightGuide"
         />
 

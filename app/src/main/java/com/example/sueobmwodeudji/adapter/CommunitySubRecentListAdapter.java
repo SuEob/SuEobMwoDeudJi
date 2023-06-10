@@ -34,12 +34,6 @@ public class CommunitySubRecentListAdapter extends RecyclerView.Adapter<Communit
     private ArrayList<Query> mQuerys;
     private final ArrayList<CommunitySubListModel> communitySubRecentListModels = new ArrayList<>();
     private static OnRecentItemClickLintener oricl;
-    public void setOricl(OnRecentItemClickLintener onListener) {
-        oricl = onListener;
-    }
-    public interface OnRecentItemClickLintener{
-        void onClick(CommunitySubListModel data);
-    }
 
     public CommunitySubRecentListAdapter(Context context, ArrayList<Query> querys) {
         this.context = context;
@@ -55,11 +49,11 @@ public class CommunitySubRecentListAdapter extends RecyclerView.Adapter<Communit
 
     @NonNull
     @Override
-    public CommunitySubRecentListAdapter.CommunitySubRecentListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CommunitySubRecentListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.item_community_recent_list, parent, false);
 
-        return new CommunitySubRecentListAdapter.CommunitySubRecentListViewHolder(context, view);
+        return new CommunitySubRecentListViewHolder(context, view);
     }
 
     @Override
@@ -92,6 +86,13 @@ public class CommunitySubRecentListAdapter extends RecyclerView.Adapter<Communit
         notifyDataSetChanged();
     }
 
+    public void setOricl(OnRecentItemClickLintener onListener) {
+        oricl = onListener;
+    }
+    public interface OnRecentItemClickLintener{
+        void onClick(CommunitySubListModel data);
+    }
+
     public static class CommunitySubRecentListViewHolder extends RecyclerView.ViewHolder {
         private final Context context;
         private TextView title, nickname, content;
@@ -108,6 +109,7 @@ public class CommunitySubRecentListAdapter extends RecyclerView.Adapter<Communit
         }
 
         public void onBind(CommunitySubListModel data){
+            if(context.getApplicationContext() == null) return;
             title.setText(data.getTitle());
             nickname.setText(data.getCategory());
             content.setText(data.getContent());

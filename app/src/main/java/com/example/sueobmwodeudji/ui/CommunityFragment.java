@@ -2,6 +2,7 @@ package com.example.sueobmwodeudji.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -60,6 +61,7 @@ public class CommunityFragment extends Fragment {
         super.onViewCreated(binding.getRoot(), savedInstanceState);
         addCategoryButtonEvent();
         setRecentListRecyclerView();
+        Log.d("afsdsdaf", getActivity().getSupportFragmentManager().getFragments().toString());
         //addSearchViewEvent();
     }
 

@@ -1,5 +1,8 @@
 package com.example.sueobmwodeudji.ui;
 
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -283,7 +286,7 @@ public class TimeTableFragment extends Fragment {
 //                        Log.d("TAG", data.toString());
 //                    }
 //                }
-    // 빈 값 넣기
+        // 빈 값 넣기
 //                    for (int i=0; i<5; i++) {
 //                        for (int j=0; j<8; j++) {
 //                            list.get(i).classCntnt.add("");
@@ -294,20 +297,17 @@ public class TimeTableFragment extends Fragment {
 //
 //                    TimeTableFragment.newInstance(list);
 
-    //for (CallSchoolData data : list) {
-    //    Log.d("TAG", data.toString());
-    //}
+        //for (CallSchoolData data : list) {
+        //    Log.d("TAG", data.toString());
+        //}
 //                }
 //            }
 //            }
 //        });
-                dialog.setDdd_year(mYear);
+        dialog.setDdd_year(mYear);
         dialog.setDdd_semester(mSemester);
-        dialog.show(
-
-    getChildFragmentManager(), "TAG");
-//
-}
+        dialog.show(getChildFragmentManager(), "TAG");
+    }
 
     public void drowTable() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -317,6 +317,8 @@ public class TimeTableFragment extends Fragment {
 
             @Override
             public void onSuccess(QuerySnapshot value) {
+                if(getActivity() == null) return;
+
                 if (!value.getDocuments().isEmpty()) {
                     TimeTableDTO dto = value.getDocuments().get(0).toObject(TimeTableDTO.class);
                     ArrayList<ArrayList<String>> sueobs = new ArrayList<>();

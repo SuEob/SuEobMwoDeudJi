@@ -111,6 +111,7 @@ public class RatingsSubRecentListAdapter  extends RecyclerView.Adapter<RatingsSu
         }
 
         public void onBind(RatingsSubListModel data){
+            if(context.getApplicationContext() == null) return;
             class_name.setText(data.getTitle());
             //teacher_name.setText(data.getTeacherName());
             content.setText(data.getContent());
