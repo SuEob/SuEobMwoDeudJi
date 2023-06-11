@@ -1,6 +1,5 @@
 package com.example.sueobmwodeudji;
 
-import android.app.ActivityManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,8 +14,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sueobmwodeudji.databinding.ActivityRatingsSubFormBinding;
-import com.example.sueobmwodeudji.model.CommunitySubListModel;
-import com.example.sueobmwodeudji.model.RatingsSubListModel;
+import com.example.sueobmwodeudji.dto.RatingsSubListModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,7 +24,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 
 public class RatingsSubFormActivity extends AppCompatActivity implements View.OnClickListener{
     ActivityRatingsSubFormBinding binding;

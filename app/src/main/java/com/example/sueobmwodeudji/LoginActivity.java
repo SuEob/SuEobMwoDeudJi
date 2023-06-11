@@ -1,7 +1,5 @@
 package com.example.sueobmwodeudji;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sueobmwodeudji.databinding.ActivityLoginBinding;
-import com.example.sueobmwodeudji.ui.coach_mark.Settings;
+import com.example.sueobmwodeudji.fragment.coach_mark.Settings;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

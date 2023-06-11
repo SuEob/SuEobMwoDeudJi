@@ -1,7 +1,6 @@
 package com.example.sueobmwodeudji.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +14,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.R;
-import com.example.sueobmwodeudji.RatingsSubPostActivity;
 import com.example.sueobmwodeudji.databinding.ItemRatingsListBinding;
-import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
-import com.example.sueobmwodeudji.model.CommunitySubListModel;
-import com.example.sueobmwodeudji.model.RatingsSubListModel;
+import com.example.sueobmwodeudji.dto.CommunitySubCommentModel;
+import com.example.sueobmwodeudji.dto.RatingsSubListModel;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -27,7 +24,6 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class RatingsSubListAdapter extends RecyclerView.Adapter<RatingsSubListAdapter.RatingsSubListViewHolder> implements EventListener<QuerySnapshot> {

@@ -17,7 +17,6 @@ import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.RatingsSubListActivity;
 import com.example.sueobmwodeudji.RatingsSubFormActivity;
 import com.example.sueobmwodeudji.databinding.ItemRatingsMyClassListBinding;
-import com.example.sueobmwodeudji.dto.RatingMyClassData;
 
 import java.util.ArrayList;
 

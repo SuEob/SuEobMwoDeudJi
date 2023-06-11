@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.databinding.ItemCommunitySearchListBinding;
-import com.example.sueobmwodeudji.model.CommunitySubListModel;
+import com.example.sueobmwodeudji.dto.CommunitySubListModel;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;

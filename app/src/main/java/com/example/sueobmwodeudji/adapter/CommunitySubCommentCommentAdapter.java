@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.databinding.ItemCommunityCommentCommentBinding;
-import com.example.sueobmwodeudji.model.CommunitySubCommentCommentModel;
+import com.example.sueobmwodeudji.dto.CommunitySubCommentCommentModel;
 
 import java.util.ArrayList;
 

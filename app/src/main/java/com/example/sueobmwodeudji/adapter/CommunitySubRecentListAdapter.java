@@ -1,7 +1,6 @@
 package com.example.sueobmwodeudji.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,21 +12,16 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sueobmwodeudji.CommunitySubPostActivity;
 import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.databinding.ItemCommunityRecentListBinding;
-import com.example.sueobmwodeudji.model.CommunitySubListModel;
-import com.example.sueobmwodeudji.model.CommunitySubRecentListModel;
+import com.example.sueobmwodeudji.dto.CommunitySubListModel;
 import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class CommunitySubRecentListAdapter extends RecyclerView.Adapter<CommunitySubRecentListAdapter.CommunitySubRecentListViewHolder> implements EventListener<QuerySnapshot> {
     protected final Context context;

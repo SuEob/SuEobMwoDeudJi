@@ -1,14 +1,12 @@
 package com.example.sueobmwodeudji.adapter;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.sueobmwodeudji.ui.view_pager_ui.HomePopularPostFragment;
-import com.example.sueobmwodeudji.ui.view_pager_ui.HomeRatingFragment;
+import com.example.sueobmwodeudji.fragment.view_pager.HomePopularPostFragment;
+import com.example.sueobmwodeudji.fragment.view_pager.HomeRatingFragment;
 
 public class HomePagerAdapter extends FragmentStateAdapter {
     private final int selectCnt = 2;
@@ -32,8 +30,8 @@ public class HomePagerAdapter extends FragmentStateAdapter {
     }
 
     private int getRealPosition(int position) {
-        Log.d("position", String.valueOf(position));
-        Log.d("position % selectCnt", String.valueOf(position % selectCnt));
+//        Log.d("position", String.valueOf(position));
+//        Log.d("position % selectCnt", String.valueOf(position % selectCnt));
         return position % selectCnt;
     }
 

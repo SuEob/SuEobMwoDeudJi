@@ -34,35 +34,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="추가하기"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuide"
+        android:layout_margin="8dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/topGuide" />
-
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="제목"
-        android:textSize="30dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/leftGuide"
-        app:layout_constraintTop_toTopOf="@+id/topGuide" />
+        app:layout_constraintTop_toBottomOf="@+id/tool_bar"/>
 
     <EditText
         android:id="@+id/nameET"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
         android:hint="시간표 이름"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="@+id/leftGuide"
-        app:layout_constraintTop_toBottomOf="@id/name" />
+        app:layout_constraintTop_toBottomOf="@+id/tool_bar" />
 
     <TextView
         android:id="@+id/year"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:textColor="@color/black"
         android:text="년도"
         android:textSize="30dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -73,11 +63,12 @@
         android:id="@+id/year_spin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/black"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="48dp"
         android:spinnerMode="dropdown"
-        app:layout_constraintStart_toEndOf="@+id/year"
-        app:layout_constraintTop_toBottomOf="@+id/nameET" />
+        app:layout_constraintLeft_toRightOf="@+id/year"
+        app:layout_constraintTop_toTopOf="@+id/year"
+        app:layout_constraintBottom_toBottomOf="@+id/year" />
 
     <TextView
         android:id="@+id/semester"
@@ -85,6 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
         android:layout_marginEnd="228dp"
+        android:textColor="@color/black"
         android:text="학기"
         android:textSize="30dp"
         app:layout_constraintEnd_toStartOf="@+id/rightGuide"
@@ -97,10 +89,11 @@
         android:id="@+id/semester_spin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/black"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="72dp"
         android:spinnerMode="dropdown"
         app:layout_constraintStart_toEndOf="@+id/semester"
-        app:layout_constraintTop_toBottomOf="@+id/year_spin" />
+        app:layout_constraintTop_toTopOf="@+id/semester"
+        app:layout_constraintBottom_toBottomOf="@+id/semester"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

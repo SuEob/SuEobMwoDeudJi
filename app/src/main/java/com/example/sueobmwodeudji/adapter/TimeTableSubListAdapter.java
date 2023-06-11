@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,8 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.databinding.ItemTimeTableListBinding;
 import com.example.sueobmwodeudji.dto.TimeTableDTO;
-import com.example.sueobmwodeudji.model.CommunitySubListModel;
-import com.example.sueobmwodeudji.model.TimeTableSubFrameModel;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -26,7 +23,6 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TimeTableSubListAdapter extends RecyclerView.Adapter<TimeTableSubListAdapter.TimeTableSubListViewHolder> implements EventListener<QuerySnapshot> {
     private final Context context;

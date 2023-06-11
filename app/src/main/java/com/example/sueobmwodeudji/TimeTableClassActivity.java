@@ -19,7 +19,6 @@ import com.example.sueobmwodeudji.rest_api.Row;
 import com.example.sueobmwodeudji.rest_api.SchoolInfo;
 import com.example.sueobmwodeudji.rest_api.SchoolResponse;
 import com.example.sueobmwodeudji.rest_api.SchoolTimeTable;
-import com.example.sueobmwodeudji.ui.TimeTableFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -53,6 +52,7 @@ public class TimeTableClassActivity extends AppCompatActivity {
 
         // 툴바
         Toolbar toolbar = binding.toolBar.mainToolBar;
+        //toolbar.s
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");

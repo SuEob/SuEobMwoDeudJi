@@ -1,7 +1,6 @@
 package com.example.sueobmwodeudji.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +12,10 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sueobmwodeudji.CommunitySubPostActivity;
 import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.databinding.ItemCommunityListBinding;
-import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
-import com.example.sueobmwodeudji.model.CommunitySubListModel;
+import com.example.sueobmwodeudji.dto.CommunitySubCommentModel;
+import com.example.sueobmwodeudji.dto.CommunitySubListModel;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;

@@ -2,7 +2,6 @@ package com.example.sueobmwodeudji;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -12,19 +11,12 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.sueobmwodeudji.adapter.CommunitySubListAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityCommunitySubListBinding;
-import com.example.sueobmwodeudji.model.CommunitySubCommentCommentModel;
-import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
-import com.example.sueobmwodeudji.model.CommunitySubListModel;
+import com.example.sueobmwodeudji.dto.CommunitySubListModel;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class CommunitySubListActivity extends AppCompatActivity implements View.OnClickListener {
     private ActivityCommunitySubListBinding binding;

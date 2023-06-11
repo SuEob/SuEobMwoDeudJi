@@ -2,8 +2,6 @@ package com.example.sueobmwodeudji;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,20 +10,15 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.sueobmwodeudji.adapter.CommunitySubListAdapter;
 import com.example.sueobmwodeudji.adapter.CommunitySubSearchAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityCommunitySubSearchBinding;
-import com.example.sueobmwodeudji.model.CommunitySubListModel;
-import com.example.sueobmwodeudji.model.CommunitySubSearchModel;
+import com.example.sueobmwodeudji.dto.CommunitySubListModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 
 public class CommunitySubSearchActivity extends AppCompatActivity {
     ActivityCommunitySubSearchBinding binding;

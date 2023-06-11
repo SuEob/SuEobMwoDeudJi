@@ -9,11 +9,11 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.sueobmwodeudji.databinding.ActivityMainBinding;
-import com.example.sueobmwodeudji.ui.CommunityFragment;
-import com.example.sueobmwodeudji.ui.HomeFragment;
-import com.example.sueobmwodeudji.ui.RatingsFragment;
-import com.example.sueobmwodeudji.ui.SettingsFragment;
-import com.example.sueobmwodeudji.ui.TimeTableFragment;
+import com.example.sueobmwodeudji.fragment.CommunityFragment;
+import com.example.sueobmwodeudji.fragment.HomeFragment;
+import com.example.sueobmwodeudji.fragment.RatingsFragment;
+import com.example.sueobmwodeudji.fragment.SettingsFragment;
+import com.example.sueobmwodeudji.fragment.TimeTableFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

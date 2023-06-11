@@ -3,32 +3,23 @@ package com.example.sueobmwodeudji;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sueobmwodeudji.databinding.ActivityCommunitySubFormBinding;
-import com.example.sueobmwodeudji.model.CommunitySubListModel;
-import com.google.android.gms.tasks.OnFailureListener;
+import com.example.sueobmwodeudji.dto.CommunitySubListModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class CommunitySubFormActivity  extends AppCompatActivity implements View.OnClickListener {
     ActivityCommunitySubFormBinding binding;

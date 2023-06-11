@@ -15,9 +15,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.sueobmwodeudji.adapter.CommunitySubCommentAdapter;
 import com.example.sueobmwodeudji.databinding.ActivityRatingsSubPostBinding;
-import com.example.sueobmwodeudji.model.CommunitySubCommentCommentModel;
-import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
-import com.example.sueobmwodeudji.model.RatingsSubListModel;
+import com.example.sueobmwodeudji.dto.CommunitySubCommentCommentModel;
+import com.example.sueobmwodeudji.dto.CommunitySubCommentModel;
+import com.example.sueobmwodeudji.dto.RatingsSubListModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;

@@ -13,17 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.databinding.ItemHomePopularPostBinding;
-import com.example.sueobmwodeudji.model.CommunitySubListModel;
-import com.example.sueobmwodeudji.model.HomePopularPostData;
+import com.example.sueobmwodeudji.dto.CommunitySubListModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 
 public class HomePopularPostAdapter extends RecyclerView.Adapter<HomePopularPostAdapter.HomePopularPostViewHolder> {
     protected final Context context;

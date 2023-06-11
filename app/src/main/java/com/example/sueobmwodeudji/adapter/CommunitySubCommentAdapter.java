@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.databinding.ItemCommunityCommentBinding;
-import com.example.sueobmwodeudji.model.CommunitySubCommentModel;
-import com.example.sueobmwodeudji.model.CommunitySubListModel;
+import com.example.sueobmwodeudji.dto.CommunitySubCommentModel;
+import com.example.sueobmwodeudji.dto.CommunitySubListModel;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;

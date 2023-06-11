@@ -13,9 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.databinding.ItemHomePopularRatingsBinding;
-import com.example.sueobmwodeudji.model.CommunitySubListModel;
-import com.example.sueobmwodeudji.model.HomePopularRatingsData;
-import com.example.sueobmwodeudji.model.RatingsSubListModel;
+import com.example.sueobmwodeudji.dto.RatingsSubListModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -23,7 +21,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 
 public class HomeRatingsPostAdapter extends RecyclerView.Adapter<HomeRatingsPostAdapter.HomeRatingsPostViewHolder> {
     protected final Context context;

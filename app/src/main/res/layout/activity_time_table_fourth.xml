@@ -29,8 +29,8 @@
         android:id="@+id/table_add_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:text="수업 추가"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuide"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/topGuide" />
 

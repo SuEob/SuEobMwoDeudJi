@@ -5,11 +5,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.sueobmwodeudji.ui.coach_mark.Community;
-import com.example.sueobmwodeudji.ui.coach_mark.Home;
-import com.example.sueobmwodeudji.ui.coach_mark.Ratings;
-import com.example.sueobmwodeudji.ui.coach_mark.Settings;
-import com.example.sueobmwodeudji.ui.coach_mark.TimeTable;
+import com.example.sueobmwodeudji.fragment.coach_mark.Community;
+import com.example.sueobmwodeudji.fragment.coach_mark.Home;
+import com.example.sueobmwodeudji.fragment.coach_mark.Ratings;
+import com.example.sueobmwodeudji.fragment.coach_mark.Settings;
+import com.example.sueobmwodeudji.fragment.coach_mark.TimeTable;
 
 public class CoachMarkPagerAdapter extends FragmentStateAdapter {
     private final int selectCnt = 5;

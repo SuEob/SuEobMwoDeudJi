@@ -1,7 +1,6 @@
 package com.example.sueobmwodeudji.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +13,9 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sueobmwodeudji.CommunitySubListActivity;
 import com.example.sueobmwodeudji.R;
-import com.example.sueobmwodeudji.RatingsSubPostActivity;
 import com.example.sueobmwodeudji.databinding.ItemRatingsRecentListBinding;
-import com.example.sueobmwodeudji.model.CommunitySubListModel;
-import com.example.sueobmwodeudji.model.RatingsSubListModel;
-import com.example.sueobmwodeudji.model.RatingsSubRecentListModel;
+import com.example.sueobmwodeudji.dto.RatingsSubListModel;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -28,8 +23,6 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class RatingsSubRecentListAdapter  extends RecyclerView.Adapter<RatingsSubRecentListAdapter.RatingsSubRecentListViewHolder> implements EventListener<QuerySnapshot> {
     protected final Context context;

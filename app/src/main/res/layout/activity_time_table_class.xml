@@ -34,20 +34,20 @@
         android:id="@+id/table_add_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:text="추가하기"
-        app:layout_constraintEnd_toStartOf="@+id/rightGuide"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/topGuide" />
+        app:layout_constraintTop_toBottomOf="@+id/tool_bar" />
 
     <TextView
         android:id="@+id/grade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:textColor="@color/black"
         android:text="학년"
         android:textSize="30dp"
         app:layout_constraintStart_toStartOf="@+id/leftGuide"
-        app:layout_constraintTop_toTopOf="@+id/topGuide" />
+        app:layout_constraintTop_toBottomOf="@+id/tool_bar" />
 
     <Spinner
         android:id="@+id/grade_spin"
@@ -56,14 +56,16 @@
         android:layout_marginStart="52dp"
         android:layout_marginTop="16dp"
         android:hint=""
+        android:backgroundTint="@color/black"
         app:layout_constraintStart_toEndOf="@+id/grade"
-        app:layout_constraintTop_toTopOf="@+id/topGuide" />
+        app:layout_constraintTop_toBottomOf="@+id/tool_bar" />
 
     <TextView
         android:id="@+id/className"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
+        android:textColor="@color/black"
         android:text="반"
         android:textSize="30dp"
         app:layout_constraintStart_toStartOf="@+id/leftGuide"
@@ -73,7 +75,7 @@
         android:id="@+id/class_name_spin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:backgroundTint="@color/black"
         android:layout_marginStart="80dp"
         android:layout_marginTop="72dp"
         android:hint=""
