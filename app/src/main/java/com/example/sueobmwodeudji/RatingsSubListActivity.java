@@ -29,11 +29,12 @@ public class RatingsSubListActivity extends AppCompatActivity implements View.On
     private ActivityRatingsSubListBinding binding;
     private String mSubject;
     private String mCollection, mSchool, mEmail;
+    FirebaseFirestore mFirestore;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityRatingsSubListBinding.inflate(getLayoutInflater());
-
+        mFirestore = FirebaseFirestore.getInstance();
         mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
         Toolbar toolbar = binding.toolBar.mainToolBar;
@@ -55,7 +56,6 @@ public class RatingsSubListActivity extends AppCompatActivity implements View.On
     }
 
     private void readSchool() {
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection("사용자")
                 .document(mEmail)
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -93,7 +93,6 @@ public class RatingsSubListActivity extends AppCompatActivity implements View.On
     }
 
     private Query readPostData(){
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         return mFirestore.collection(mCollection)
                 .document(mSchool)
                 .collection(mSubject)
@@ -104,7 +103,6 @@ public class RatingsSubListActivity extends AppCompatActivity implements View.On
         String docName = "4";
         RatingsSubListModel data = createData(docName);
 
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection(mCollection)
                 .document(mSchool)
                 .collection("수업코드")

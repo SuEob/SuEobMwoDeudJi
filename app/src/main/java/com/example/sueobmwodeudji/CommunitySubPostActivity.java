@@ -40,16 +40,19 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
 
     private String mCollection, mSchool;
 
+    private FirebaseFirestore mFirestore;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityCommunitySubPostBinding.inflate(getLayoutInflater());
+        mFirestore = FirebaseFirestore.getInstance();
+        mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
 
         intent = getIntent();
         data = (CommunitySubListModel) intent.getSerializableExtra("data");
         subject = intent.getStringExtra("subject");
-        mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
 
         //Log.d("fsadfasdfsd", data.getComments().toString());
 
@@ -107,7 +110,6 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
     }
 
     private void readSchool() {
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection("사용자")
                 .document(mEmail)
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -138,7 +140,6 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
         binding.likeTv.setText(like_count + "");
         binding.commentTv.setText(comment_count + "");
 
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection("사용자")
                 .document(data.getEmail())
                 .get()
@@ -179,7 +180,7 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
                 binding.commentEt.setHint("대댓글을 입력하세요.");
                 binding.commentEt.setText(null);
                 binding.submitBtn.setOnClickListener(new CocomentSubmitBtnClickListener(positon));
-                //imm.showSoftInput(binding.commentEt, 0);
+                imm.showSoftInput(binding.commentEt, 0);
             }
         });
         binding.recyclerView.setAdapter(adapter);
@@ -211,7 +212,6 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
     }
 
     private void deletePost() {
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection(mCollection)
                 .document(mSchool)
                 .collection(subject)
@@ -226,7 +226,6 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
     }
 
     private DocumentReference readData() {
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         return mFirestore.collection(mCollection)
                 .document(mSchool)
                 .collection(subject)
@@ -286,7 +285,6 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
     }
 
     private void updateLike() {
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection(mCollection)
                 .document(mSchool)
                 .collection(subject)
@@ -333,7 +331,6 @@ public class CommunitySubPostActivity extends AppCompatActivity implements View.
     }
 
     private void updateComment() {
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection(mCollection)
                 .document(mSchool)
                 .collection(subject)

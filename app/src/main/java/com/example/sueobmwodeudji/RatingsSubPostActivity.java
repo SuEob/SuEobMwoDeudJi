@@ -38,12 +38,12 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
 
     private String mCollection, mSchool, mEmail;
     private String mName;
-
+    private FirebaseFirestore mFirestore;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityRatingsSubPostBinding.inflate(getLayoutInflater());
-
+        mFirestore = FirebaseFirestore.getInstance();
         mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
         intent = getIntent();
@@ -67,8 +67,6 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
         binding.ratingLayout.setOnClickListener(new LikeBtnOnClickListener());
 
         setContentView(binding.getRoot());
-
-
     }
 
     @Override
@@ -101,7 +99,6 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
     }
 
     private void readSchool() {
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection("사용자")
                 .document(mEmail)
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -141,7 +138,7 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
             binding.honeyIv.setImageResource(R.drawable.honey_not);
         }
 
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+
         mFirestore.collection("사용자")
                 .document(data.getEmail())
                 .get()
@@ -180,7 +177,7 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
                 binding.commentEt.setHint("대댓글을 입력하세요.");
                 binding.commentEt.setText(null);
                 binding.submitBtn.setOnClickListener(new CocomentSubmitBtnClickListener(positon));
-                //imm.showSoftInput(binding.commentEt, 0);
+                imm.showSoftInput(binding.commentEt, 0);
             }
         });
         binding.recyclerView.setAdapter(adapter);
@@ -212,7 +209,6 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
     }
 
     private void deletePost() {
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection(mCollection)
                 .document(mSchool)
                 .collection(class_name)
@@ -227,7 +223,6 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
     }
 
     private DocumentReference readData(){
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         return mFirestore.collection(mCollection)
                 .document(mSchool)
                 .collection(class_name)
@@ -259,7 +254,6 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
         }
     }
     private void updateLike() {
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection(mCollection)
                 .document(mSchool)
                 .collection(class_name)
@@ -333,7 +327,6 @@ public class RatingsSubPostActivity extends AppCompatActivity implements View.On
     }
 
     private void updateComment(){
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection(mCollection)
                 .document(mSchool)
                 .collection(class_name)

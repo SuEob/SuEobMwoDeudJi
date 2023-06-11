@@ -32,12 +32,13 @@ public class CommunitySubSearchActivity extends AppCompatActivity {
     String search_text, search_word;
 
     private String mCollection, mSchool, mEmail;
+    FirebaseFirestore mFirestore;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityCommunitySubSearchBinding.inflate(getLayoutInflater());
-
+        mFirestore = FirebaseFirestore.getInstance();
         mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
         setContentView(binding.getRoot());
@@ -46,9 +47,6 @@ public class CommunitySubSearchActivity extends AppCompatActivity {
 
         // DB PATH Setting
         dbPathSetting();
-
-
-
     }
 
     private void dbPathSetting() {
@@ -57,7 +55,6 @@ public class CommunitySubSearchActivity extends AppCompatActivity {
     }
 
     private void readSchool() {
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection("사용자")
                 .document(mEmail)
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -92,7 +89,6 @@ public class CommunitySubSearchActivity extends AppCompatActivity {
         String[] categorys = {"1학년 대화방", "2학년 대화방", "3학년 대화방", "게임 게시판", "공부 게시판", "운동 게시판"};
         ArrayList<Query> query = new ArrayList<>();
         for (String category : categorys) {
-            FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
             query.add(mFirestore.collection("testPost")
                     .document("first")
                     .collection(category)

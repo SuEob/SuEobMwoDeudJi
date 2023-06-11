@@ -36,16 +36,18 @@ public class CommunitySubFormActivity  extends AppCompatActivity implements View
     private String mEmail;
 
     private InputMethodManager imm;
+    private FirebaseFirestore mFirestore;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityCommunitySubFormBinding.inflate(getLayoutInflater());
+        mFirestore = FirebaseFirestore.getInstance();
+        mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        mName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
 
         Intent intent = getIntent();
         subject = intent.getStringExtra("subject");
-        mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-        mName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
 
         //id = "test";
 
@@ -66,7 +68,6 @@ public class CommunitySubFormActivity  extends AppCompatActivity implements View
     }
 
     private void readSchool() {
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection("사용자")
                 .document(mEmail)
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -116,7 +117,6 @@ public class CommunitySubFormActivity  extends AppCompatActivity implements View
         data.setCategory(subject);
 
         //파베 Create
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection(mCollection)
                 .document(mSchool)
                 .collection(subject)

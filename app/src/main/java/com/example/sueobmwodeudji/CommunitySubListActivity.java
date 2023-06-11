@@ -31,14 +31,15 @@ public class CommunitySubListActivity extends AppCompatActivity implements View.
     private String subject;
 
     private String mCollection, mSchool, mEmail;
+    private FirebaseFirestore mFirestore;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityCommunitySubListBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
+        mFirestore = FirebaseFirestore.getInstance();
         mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        setContentView(binding.getRoot());
 
         Toolbar toolbar = binding.toolBar.mainToolBar;
         setSupportActionBar(toolbar);
@@ -57,7 +58,6 @@ public class CommunitySubListActivity extends AppCompatActivity implements View.
     }
 
     private void readSchool() {
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         mFirestore.collection("사용자")
                 .document(mEmail)
                 .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -94,45 +94,11 @@ public class CommunitySubListActivity extends AppCompatActivity implements View.
 //        binding.recyclerView.setAdapter(adapter);
     }
     private Query readPostData(String subject){
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         return mFirestore.collection(mCollection)
                 .document(mSchool)
                 .collection(subject)
                 .orderBy("timestamp",Query.Direction.DESCENDING)
                 .limit(10);
-    }
-
-    private void createPost(){
-        String docName = "1";
-        CommunitySubListModel data = createData(docName);
-
-        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
-        mFirestore.collection("게시글")
-                .document("첫 고등학교")
-                .collection("2학년 게시판")
-                .document(docName)
-                .set(data);
-    }
-    private CommunitySubListModel createData(String docName){
-        CommunitySubListModel data = new CommunitySubListModel();
-        data.setContent("글내용" + docName);
-        data.setEmail("작성자" + docName);
-        data.setTimestamp(Timestamp.now().toDate());
-        data.setTitle("글제목" + docName);
-
-        Map<String, Boolean> like = new HashMap<>();
-        like.put("a",true);
-        like.put("b",false);
-
-        ArrayList<CommunitySubCommentModel> d = new ArrayList<>();
-        ArrayList<CommunitySubCommentCommentModel> dd = new ArrayList<>();
-        dd.add(new CommunitySubCommentCommentModel("작성자1","댓글내용1",Timestamp.now().toDate(), like));
-        dd.add(new CommunitySubCommentCommentModel("작성자2","댓글내용2",Timestamp.now().toDate(), like));
-        d.add(new CommunitySubCommentModel("작성자1","댓글내용1",Timestamp.now().toDate(), like, dd));
-        d.add(new CommunitySubCommentModel("작성자2","댓글내용2",Timestamp.now().toDate(), like, dd));
-        data.setComments(d);
-
-        return data;
     }
 
     @Override
@@ -149,6 +115,39 @@ public class CommunitySubListActivity extends AppCompatActivity implements View.
         }
         return super.onOptionsItemSelected(item);
     }
+
+    //    private void createPost(){
+//        String docName = "1";
+//        CommunitySubListModel data = createData(docName);
+//
+//        FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+//        mFirestore.collection("게시글")
+//                .document("첫 고등학교")
+//                .collection("2학년 게시판")
+//                .document(docName)
+//                .set(data);
+//    }
+//    private CommunitySubListModel createData(String docName){
+//        CommunitySubListModel data = new CommunitySubListModel();
+//        data.setContent("글내용" + docName);
+//        data.setEmail("작성자" + docName);
+//        data.setTimestamp(Timestamp.now().toDate());
+//        data.setTitle("글제목" + docName);
+//
+//        Map<String, Boolean> like = new HashMap<>();
+//        like.put("a",true);
+//        like.put("b",false);
+//
+//        ArrayList<CommunitySubCommentModel> d = new ArrayList<>();
+//        ArrayList<CommunitySubCommentCommentModel> dd = new ArrayList<>();
+//        dd.add(new CommunitySubCommentCommentModel("작성자1","댓글내용1",Timestamp.now().toDate(), like));
+//        dd.add(new CommunitySubCommentCommentModel("작성자2","댓글내용2",Timestamp.now().toDate(), like));
+//        d.add(new CommunitySubCommentModel("작성자1","댓글내용1",Timestamp.now().toDate(), like, dd));
+//        d.add(new CommunitySubCommentModel("작성자2","댓글내용2",Timestamp.now().toDate(), like, dd));
+//        data.setComments(d);
+//
+//        return data;
+//    }
 
 //    private void deleteData(){
 //        String docName = "3";
