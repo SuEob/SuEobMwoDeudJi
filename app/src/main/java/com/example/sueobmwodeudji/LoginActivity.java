@@ -64,13 +64,13 @@ public class LoginActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
-                                Log.d(TAG, "signInWithEmail:success");
+                                //Log.d(TAG, "signInWithEmail:success");
                                 successLogin();
                             } else {
                                 // If sign in fails, display a message to the user.
-                                Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                //Log.w(TAG, "signInWithEmail:failure", task.getException());
                                 binding.loginBTN.setClickable(true);
-                                Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                Toast.makeText(LoginActivity.this, "로그인에 실패했습니다.",
                                         Toast.LENGTH_SHORT).show();
                             }
                         }

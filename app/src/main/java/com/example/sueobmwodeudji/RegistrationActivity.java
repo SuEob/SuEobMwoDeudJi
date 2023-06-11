@@ -112,7 +112,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         } else {
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             binding.registrationBTN.setClickable(true);
-                            Toast.makeText(RegistrationActivity.this, "Authentication failed.",
+                            Toast.makeText(RegistrationActivity.this, "계정 생성에 실패하였습니다.",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
