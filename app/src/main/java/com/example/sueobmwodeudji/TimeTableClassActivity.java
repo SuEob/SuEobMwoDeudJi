@@ -82,7 +82,7 @@ public class TimeTableClassActivity extends AppCompatActivity {
         binding.tableAddBtn.setOnClickListener(v -> {
             ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setMessage("Loading TimeTable..");
-            progressDialog.setCancelable(true);
+            progressDialog.setCancelable(false);
             progressDialog.setProgressStyle(android.R.style.Widget_ProgressBar_Horizontal);
             progressDialog.show();
 
