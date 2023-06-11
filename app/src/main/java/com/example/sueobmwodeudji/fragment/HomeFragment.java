@@ -29,6 +29,7 @@ import com.example.sueobmwodeudji.adapter.HomePagerAdapter;
 import com.example.sueobmwodeudji.adapter.HomeTimeTableAdapter;
 import com.example.sueobmwodeudji.databinding.FragmentHomeBinding;
 import com.example.sueobmwodeudji.dto.HomeTimeTableData;
+import com.example.sueobmwodeudji.fragment.view_pager.HomeRatingFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -224,7 +225,7 @@ public class HomeFragment extends Fragment {
                     onPageSelected(999);
                     first = false;
                 }
-                Log.d("Tag.onPageScrolled", String.valueOf(position));
+                //Log.d("Tag.onPageScrolled", String.valueOf(position));
             }
 
             // 새 페이지가 선택될 때 호출
@@ -234,7 +235,7 @@ public class HomeFragment extends Fragment {
                 currentItemIndex = position;
                 handler.removeCallbacks(runnable);
                 handler.postDelayed(runnable, 4000);
-                Log.d("Tag.onPageSelected", String.valueOf(position));
+                //Log.d("Tag.onPageSelected", String.valueOf(position));
             }
 
             // 스크롤 상태가 변경될 때 호출

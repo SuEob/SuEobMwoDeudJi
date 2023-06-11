@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.databinding.ItemHomePopularPostBinding;
+import com.example.sueobmwodeudji.dto.CommunitySubCommentModel;
 import com.example.sueobmwodeudji.dto.CommunitySubListModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
@@ -21,6 +22,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Map;
 
 public class HomePopularPostAdapter extends RecyclerView.Adapter<HomePopularPostAdapter.HomePopularPostViewHolder> {
     protected final Context context;
@@ -105,14 +107,34 @@ public class HomePopularPostAdapter extends RecyclerView.Adapter<HomePopularPost
             if(context.getApplicationContext() == null) return;
             postTitle.setText(data.getTitle());
             postDate.setText(data.getCategory());
-            likeTv.setText(data.getLike().size() + "");
-            commentTv.setText(data.getComments().size() + "");
+            likeTv.setText(likeCounting(data.getLike()) + "");
+            commentTv.setText(commentCounting(data.getComments()) + "");
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     opcl.onClick(data);
                 }
             });
+        }
+
+        private int likeCounting(Map<String, Boolean> comment) {
+            if (comment == null) return 0;
+
+            int total = 0;
+
+            for (String key : comment.keySet()) {
+                total += (comment.get(key)) ? 1 : 0;
+            }
+
+            return total;
+        }
+
+        private int commentCounting(ArrayList<CommunitySubCommentModel> commentModels) {
+            int total = commentModels.size();
+            for (CommunitySubCommentModel data : commentModels) {
+                total += data.getCommentModels().size();
+            }
+            return total;
         }
     }
 }

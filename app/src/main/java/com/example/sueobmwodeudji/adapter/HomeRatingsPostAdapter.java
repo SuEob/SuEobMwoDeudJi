@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sueobmwodeudji.R;
 import com.example.sueobmwodeudji.databinding.ItemHomePopularRatingsBinding;
+import com.example.sueobmwodeudji.dto.CommunitySubCommentModel;
 import com.example.sueobmwodeudji.dto.RatingsSubListModel;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
@@ -21,6 +22,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Map;
 
 public class HomeRatingsPostAdapter extends RecyclerView.Adapter<HomeRatingsPostAdapter.HomeRatingsPostViewHolder> {
     protected final Context context;
@@ -86,7 +88,7 @@ public class HomeRatingsPostAdapter extends RecyclerView.Adapter<HomeRatingsPost
         private final Context context;
         public TextView postTitle;
         private ConstraintLayout layout;
-        public TextView postContent;
+        public TextView postContent,likeTv, commentTv;
 
         public HomeRatingsPostViewHolder(Context _context, View itemView) {
             super(itemView);
@@ -94,6 +96,8 @@ public class HomeRatingsPostAdapter extends RecyclerView.Adapter<HomeRatingsPost
             context = _context;
             postTitle = binding.homePostTitle;
             postContent = binding.homePostContent;
+            likeTv = binding.likeTv;
+            commentTv = binding.commentTv;
             layout = binding.layout;
         }
 
@@ -101,12 +105,33 @@ public class HomeRatingsPostAdapter extends RecyclerView.Adapter<HomeRatingsPost
             if(context.getApplicationContext() == null) return;
             postTitle.setText(data.getTitle());
             postContent.setText(data.getClassName());
+            likeTv.setText(likeCounting(data.getLike()) + "");
+            commentTv.setText(commentCounting(data.getComments()) + "");
             layout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     orcl.onClick(data);
                 }
             });
+        }
+        private int likeCounting(Map<String, Boolean> comment) {
+            if (comment == null) return 0;
+
+            int total = 0;
+
+            for (String key : comment.keySet()) {
+                total += (comment.get(key)) ? 1 : 0;
+            }
+
+            return total;
+        }
+
+        private int commentCounting(ArrayList<CommunitySubCommentModel> commentModels) {
+            int total = commentModels.size();
+            for (CommunitySubCommentModel data : commentModels) {
+                total += data.getCommentModels().size();
+            }
+            return total;
         }
     }
 }
